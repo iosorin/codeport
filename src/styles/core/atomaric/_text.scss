@@ -1,0 +1,21 @@
+.text {
+    &-justify {
+        text-align: justify !important;
+    }
+
+    &-left {
+        text-align: left !important;
+    }
+
+    &-right {
+        text-align: right !important;
+    }
+
+    &-center {
+        text-align: center !important;
+    }
+
+    &-grey {
+        color: $text-grey;
+    }
+}

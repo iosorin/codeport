@@ -1,0 +1,95 @@
+/* font */
+$sans-serif: 'Lato', sans-serif;
+$sans-accent: monospace; // accent font-family
+
+/* colors */
+$darken-0: #06000a;
+$darken-1: #171717;
+$darken-2: #212121;
+$black: $darken-2;
+$light: #f2f5f9;
+$blue: #5b3dfb; // #0b0cef;
+$violet: #6534ff;
+$orange: #d9793c;
+$yellow: #f7b81a;
+$green: #00e676;
+
+$primary: $green;
+$success: $green;
+
+$text: white;
+$text-grey: lighten($black, 20%);
+
+/* container */
+$padding: 20px;
+$radius: 5px;
+$shadow: 0 3px 10px -3px rgba(black, 0.6);
+$shadow-1: 0 3px 10px -3px rgba(black, 0.4);
+$shadow-2: 0 3px 8px -3px rgba(black, 0.2);
+
+/* easing */
+$ease-1: ease-out;
+$ease-2: cubic-bezier(0.22, 1, 0.36, 1); // nice
+$ease-3: cubic-bezier(0.22, 0.61, 0.36, 1);
+$tr: 0.22s $ease-1;
+
+/* button */
+$button-primary-background: $primary;
+$button-secondary-background: darken($light, 2%);
+$button-secondary-color: $darken-1;
+$button-font-family: $sans-accent;
+$button-transition: $tr;
+$button-shadow: $shadow;
+$button-radius: 3rem;
+
+/* input, select */
+$input-tr: $tr;
+$input-margin: 8px 0;
+$input-radius: 3px;
+$input-border: none;
+$input-padding-x: 15px;
+$input-padding-y: 9px;
+$input-padding: $input-padding-y $input-padding-x;
+$input-background: #eee;
+$input-color: $black;
+$input-hover-background: darken($input-background, 5%);
+
+/* range */
+$range-color: $darken-2;
+
+/* backdrop */
+$backdrop-background: rgba(black, 0.4);
+
+/* dialog */
+$dialog-minwidth: 350px;
+$dialog-padding: 18px;
+$dialog-radius: 4px;
+$dialog-background: white;
+$dialog-shadow: 1px 6px 6px 3px rgba(black, 0.5);
+
+/* drawer */
+$drawer-width: 500px;
+$drawer-radius: 4px 0 0 4px;
+$drawer-padding: 25px;
+$drawer-background: white;
+$drawer-color: inherit;
+
+/* sidebar */
+$sidebar-width: 55px;
+$sidebar-logo-size: 20px;
+$sidebar-icon-size: 27px;
+$sidebar-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+$sidebar-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+/* features */
+$editor-default-background: lighten($black, 1%);
+$editor-status-bar-background: rgba(30, 30, 30, 0.2);
+$editor-status-bar-justify: flex-start;
+$editor-status-bar-opacity: 0.5;
+$editor-status-bar-padding: 7px 20px;
+$call-panel-default-background: $black;
+$call-panel-width: 430px;
+$call-video-height: 200px;
+$call-panel-padding: 0 0 12px 25px;
+$call-panel-gap: 0;
+$call-panel-transition: 0.4s width;

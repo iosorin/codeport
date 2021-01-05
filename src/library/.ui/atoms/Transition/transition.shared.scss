@@ -1,0 +1,139 @@
+$d: 0ms;
+
+$fade-ease: $ease-3;
+
+$zoom-scale: 0.75;
+$zoom-ease: $ease-2;
+
+$sfu-translate: 15px;
+$sfu-ease: $ease-1;
+
+$drawer-translate: $drawer-width;
+$drawer-ease: $ease-3;
+
+.fade {
+    &-enter,
+    &-appear {
+        opacity: 0;
+    }
+
+    &-enter-active,
+    &-appear-active {
+        opacity: 1;
+        transition: opacity $d $fade-ease;
+    }
+
+    &-exit {
+        opacity: 1;
+    }
+
+    // /* fires as element leaves the DOM*/
+    &-exit-active {
+        opacity: 0;
+        transition: opacity $d $fade-ease;
+    }
+
+    &-exit-done {
+        opacity: 0;
+    }
+}
+
+.zoom {
+    &-enter,
+    &-appear {
+        opacity: 0;
+        transform: perspective(1000px) translate3d(0, 0, -200px);
+    }
+
+    &-enter-active,
+    &-appear-active {
+        opacity: 1;
+        transform: perspective(1000px) translate3d(0, 0, 0px);
+        transition: all $d $zoom-ease;
+    }
+
+    &-exit {
+        opacity: 1;
+        transform: perspective(1000px) translate3d(0, 0, 0px);
+    }
+
+    // /* fires as element leaves the DOM*/
+    &-exit-active {
+        opacity: 0;
+        transform: perspective(1000px) translate3d(0, 0, -200px);
+        transition: all $d $zoom-ease;
+    }
+
+    &-exit-done {
+        opacity: 0;
+        transform: perspective(1000px) translate3d(0, 0, -200px);
+    }
+}
+
+.slide-fade-up {
+    &-enter,
+    &-appear {
+        transform: translateY($sfu-translate);
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    &-enter-active,
+    &-appear-active {
+        transition: all $d $sfu-ease;
+        transition-delay: 0.1s;
+        transform: translateY(0px);
+        position: relative;
+        opacity: 1;
+    }
+
+    &-enter-done {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    &-exit {
+        transform: translateY(0px);
+        pointer-events: none;
+        opacity: 1;
+    }
+
+    &-exit-active {
+        transition: all $d $sfu-ease;
+        transform: translateY($sfu-translate);
+        position: relative;
+        opacity: 0;
+    }
+
+    &-exit-done {
+        opacity: 0;
+    }
+}
+
+.slide-in-left {
+    &-enter,
+    &-appear {
+        transform: translateX($drawer-translate);
+        opacity: 0;
+    }
+
+    &-enter-active,
+    &-appear-active,
+    &-enter-done,
+    &-exit {
+        transition: all $d $drawer-ease;
+        transition-delay: 0.1s;
+        transform: translateX(0px);
+        opacity: 1;
+    }
+
+    &-exit-active {
+        transition: all $d $drawer-ease;
+        transform: translateX($drawer-translate);
+        opacity: 0;
+    }
+
+    &-exit-done {
+        opacity: 0;
+    }
+}

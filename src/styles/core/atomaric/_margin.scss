@@ -1,0 +1,32 @@
+$spacesides: (top, bottom, left, right, x, y, all);
+$spaceamounts: (
+    0: 0,
+    xs: 6px,
+    1: 10px,
+    2: 20px,
+    auto: auto,
+);
+
+@each $side in $spacesides {
+    @each $key, $value in $spaceamounts {
+        @if $side == all {
+            .ma-#{$key} {
+                margin: #{$value} #{$value} !important;
+            }
+        } @else if $side == x {
+            .mx-#{$key} {
+                margin-left: #{$value} !important;
+                margin-right: #{$value} !important;
+            }
+        } @else if $side == y {
+            .my-#{$key} {
+                margin-top: #{$value} !important;
+                margin-bottom: #{$value} !important;
+            }
+        } @else {
+            .m#{str-slice($side, 0, 1)}-#{$key} {
+                margin-#{$side}: #{$value} !important;
+            }
+        }
+    }
+}

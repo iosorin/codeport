@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "./build",
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": false,
+        "noImplicitAny": true,
+        "allowJs": false,
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "paths": {
+            "@/*": ["src/*"],
+
+            "@media/*": ["src/media/*"],
+            "@styles/*": ["src/styles/*"],
+
+            "@ui/*": ["src/library/.ui/*"],
+            "@ui": ["src/library/.ui"],
+
+            "@hooks": ["src/library/hooks"],
+            "@services": ["src/library/services"],
+
+            "@layouts/*": ["src/layouts/*"],
+            "@layouts": ["src/layouts"]
+        }
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["./dist", "node_modules", "./config"]
+}

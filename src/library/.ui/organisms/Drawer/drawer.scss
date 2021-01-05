@@ -1,0 +1,45 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.drawer {
+    width: $drawer-width;
+    border-radius: $drawer-radius;
+    background: $drawer-background;
+    color: $drawer-color;
+    padding: $drawer-padding;
+    box-shadow: $dialog-shadow;
+    height: 100%;
+    font-size: 40px;
+
+    @include scrollable;
+}
+
+.title {
+    margin-right: 25px;
+    letter-spacing: 0.3px;
+    font-size: 20px;
+    line-height: 1;
+    font-family: $sans-accent;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.close {
+    color: $drawer-color;
+    background: none;
+    position: absolute;
+    padding: 5px 10px;
+    margin-right: -10px;
+    right: 0;
+    display: flex;
+}
