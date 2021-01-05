@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import { Activity, AtSign, Bell, Book, Calendar, LogIn, Video } from 'react-feather';
+import { useCore } from '@/core';
 import { Tooltip, Logo } from '@ui';
 import { ROUTES } from '@/router';
 import { uuid } from '@/library/utils';
 import styles from './sidebar.scss';
-import { useCore } from '@/core';
 
 export type Props = {
     className?: string;

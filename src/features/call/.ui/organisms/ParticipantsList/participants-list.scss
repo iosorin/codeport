@@ -1,9 +1,0 @@
-.list {
-    flex: 1;
-    @include scrollable;
-    padding-right: 10px;
-    margin-left: 10px;
-    width: calc(100% + 10px);
-    margin-bottom: 36px;
-    border-radius: $radius;
-}

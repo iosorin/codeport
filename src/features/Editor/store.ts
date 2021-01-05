@@ -1,5 +1,5 @@
-import { SocketService } from '@/library/services';
-import { autorun, makeAutoObservable, observable } from 'mobx';
+import { autorun, makeAutoObservable } from 'mobx';
+import { SocketService } from '@services';
 import { DEFAULT_SETTINGS, DEFAULT_VALUE, ExtendedEditorConfig, CODEPORT_THEME } from './constants';
 
 class EditorStore {
@@ -14,7 +14,7 @@ class EditorStore {
     settingsIsOpen = false;
 
     constructor() {
-        makeAutoObservable(this, { socket: false, settings: observable.ref });
+        makeAutoObservable(this, { socket: false });
 
         autorun(() => {
             if (this.roomID) {
