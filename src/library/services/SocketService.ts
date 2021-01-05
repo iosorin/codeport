@@ -1,37 +1,48 @@
 import io from 'socket.io-client';
 
-export enum Listen {
+// todo: share events types across server and client repos
+enum Emit {
     'connection',
-    'client:room-full',
-    'client:users-present-in-room',
-    'client:user-joined',
-    'client:receiving-returned-signal',
-    'client:user-left',
-}
-
-export enum Emit {
     'check-room',
     'join-room',
+    'disconnect',
+    'disconnect-user',
+    'editor-value',
+    'editor-settings',
     'sending-signal',
     'returning-signal',
-    'disconnect-user',
+    'constraints',
 }
 
-type SocketOrNull = SocketIOClient.Socket | null;
+enum Listen {
+    'client:room-full',
+    'client:room-empty',
+    'client:users-present-in-room',
+    'client:user-joined',
+    'client:user-left',
+    'client:editor-value',
+    'client:editor-settings',
+    'client:receiving-returned-signal',
+    'client:constraints',
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Fn = (e: any) => void;
+type Sk = SocketIOClient.Socket | null;
 
 export interface SocketServiceInterface {
-    socket: SocketOrNull;
+    socket: Sk;
     init(): SocketService;
-    on(event: keyof typeof Listen, e?: any): SocketService;
-    once(event: keyof typeof Listen, e?: any): SocketService;
-    emit(event: keyof typeof Emit, e?: any): SocketService;
+    on(event: keyof typeof Listen, fn: Fn): SocketService;
+    once(event: keyof typeof Listen, fn: Fn): SocketService;
+    emit(event: keyof typeof Emit, payload?: unknown): SocketService;
     disconnect(): void;
 }
 
 export class SocketService implements SocketServiceInterface {
     private static instance: SocketService;
 
-    public socket: SocketOrNull = null;
+    public socket: Sk = null;
 
     constructor() {
         if (SocketService.instance) {
@@ -55,20 +66,20 @@ export class SocketService implements SocketServiceInterface {
         return this;
     };
 
-    public on = (event: any /* keyof typeof Listen */, e?: any) => {
-        this.socket?.on(event, e);
+    public on = (event: keyof typeof Listen, fn: Fn) => {
+        this.socket?.on(event, fn);
 
         return this;
     };
 
-    public once = (event: any /* keyof typeof Listen */, e?: any) => {
-        this.socket?.once(event, e);
+    public once = (event: keyof typeof Listen, fn: Fn) => {
+        this.socket?.once(event, fn);
 
         return this;
     };
 
-    public emit = (event: any /* keyof typeof Emit */, e?: any) => {
-        this.socket?.emit(event, e);
+    public emit = (event: keyof typeof Emit, payload?: unknown) => {
+        this.socket?.emit(event, payload);
 
         return this;
     };

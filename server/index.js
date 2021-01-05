@@ -15,7 +15,6 @@ io.on('connection', (socket) => {
 
     /* todo 1:1 */
     socket.on('check-room', (roomID) => {
-        console.log('check-room', users[roomID] && users[roomID].length);
         if (users[roomID]) {
             if (users[roomID].length === 4) {
                 socket.emit('client:room-full');
@@ -114,8 +113,6 @@ io.on('connection', (socket) => {
         if (length <= 1) {
             socket.broadcast.emit('client:room-empty');
         }
-
-        console.log('disconnect', length);
     }
 });
 
