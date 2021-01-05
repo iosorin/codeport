@@ -1,0 +1,96 @@
+$color: $light;
+$thumbColor: $range-color;
+$activeColor: $range-color;
+$trackHeight: 5px;
+$thumbHeight: 12px;
+$progressPercent: 50%;
+
+@mixin thumb {
+    appearance: none;
+    width: $thumbHeight;
+    height: $thumbHeight;
+    background-color: $thumbColor;
+    border-radius: $thumbHeight / 2;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    margin-top: (($thumbHeight - $trackHeight) / 2) * -1;
+    position: relative;
+    cursor: pointer;
+}
+
+@mixin track {
+    height: $trackHeight;
+    background: $color; /* fallback */
+    background: linear-gradient(
+        90deg,
+        $activeColor var(--progressPercent, 0%),
+        $color var(--progressPercent, 0%)
+    );
+    border-radius: $trackHeight / 2;
+}
+
+@mixin progress {
+    height: $trackHeight;
+    background-color: $activeColor;
+    border-radius: (($trackHeight / 2) 0 0 $trackHeight) / 2;
+}
+
+.range {
+    height: $thumbHeight + 2px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        @include unselectable;
+        opacity: 0.6;
+    }
+
+    /* Thumb */
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        @include thumb;
+    }
+    &::-moz-range-thumb {
+        -moz-appearance: none;
+
+        @include thumb;
+    }
+    &::-ms-thumb {
+        -ms-appearance: none;
+        @include thumb;
+    }
+
+    /* Track */
+    &::-webkit-slider-runnable-track {
+        @include track;
+    }
+    &::-moz-range-track {
+        @include track;
+    }
+    &::-ms-track {
+        @include track;
+    }
+
+    /* Progress */
+    &::-moz-range-progress {
+        @include progress;
+    }
+    &::-ms-fill-lower {
+        @include progress;
+    }
+}
+
+.container {
+    margin: $input-margin;
+    clear: both;
+    padding: 1px;
+    overflow: auto;
+}
+
+.value {
+    margin: -4px 10px 0 0;
+    font-size: 12px;
+    width: 28px;
+}

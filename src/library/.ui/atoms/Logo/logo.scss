@@ -1,0 +1,21 @@
+.logo {
+    color: white;
+    display: flex;
+    align-items: center;
+
+    svg {
+        fill: currentColor;
+        fill-rule: evenodd;
+        will-change: opacity;
+        width: 27px;
+        height: 27px;
+    }
+
+    span {
+        font-size: 25px;
+        margin-left: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        word-spacing: 5px;
+    }
+}

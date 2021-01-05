@@ -1,0 +1,25 @@
+.overflow {
+    overflow: hidden;
+}
+
+.pointer {
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.pointerless {
+    pointer-events: none !important;
+}
+
+.invisible {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.scrollable {
+    @include scrollable;
+}
+
+.unselectable {
+    @include unselectable;
+}

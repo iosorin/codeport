@@ -1,0 +1,15 @@
+.container {
+    position: relative;
+    margin: $input-margin;
+    width: 100%;
+
+    input {
+        @include input;
+
+        &[type='number']::-webkit-outer-spin-button,
+        &[type='number']::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}

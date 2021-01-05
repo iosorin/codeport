@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.editor {
+    width: 100%;
+    transition: $tr width;
+}

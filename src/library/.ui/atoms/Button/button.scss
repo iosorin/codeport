@@ -1,0 +1,92 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-radius: $button-radius;
+    font-family: $button-font-family;
+    transition: $button-transition;
+    box-shadow: none;
+
+    &:hover:not(:active) {
+        box-shadow: $button-shadow;
+    }
+
+    &.primary {
+        color: white;
+        background-color: $button-primary-background;
+    }
+
+    &.secondary {
+        color: $button-secondary-color;
+        background-color: $button-secondary-background;
+    }
+
+    &.success {
+        color: white;
+        background: $success;
+    }
+
+    &.small {
+        font-size: 12px;
+        letter-spacing: normal;
+        height: 30px;
+        padding: 0 16px;
+
+        &.rounded {
+            width: 33px;
+            height: 33px;
+            padding: 5px;
+        }
+    }
+
+    &.medium {
+        font-size: 15.5px;
+        height: 38px;
+        padding: 0 26px;
+
+        &.rounded {
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+        }
+    }
+
+    &.large {
+        font-size: 18px;
+        height: 42px;
+        padding: 0 28px 1px;
+
+        &.rounded {
+            width: 53px;
+            height: 52px;
+            padding: 0;
+        }
+    }
+
+    &.rounded {
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+
+        &.secondary:not(:hover) {
+            background: transparent;
+            color: inherit;
+            border: 1px solid;
+        }
+    }
+
+    &:not(.rounded) {
+        svg {
+            margin-left: 5px;
+        }
+    }
+
+    svg {
+        max-width: 16px;
+        max-height: 16px;
+    }
+}
