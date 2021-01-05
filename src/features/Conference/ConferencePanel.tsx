@@ -39,7 +39,7 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
             <ConferenceLimitDialog close={goHome} isVisible={store.limitExceed} />
 
             {store.streamError ? (
-                <DevicesErrorText error={store.streamError} />
+                <DevicesErrorText />
             ) : (
                 <>
                     <ParticipantStream

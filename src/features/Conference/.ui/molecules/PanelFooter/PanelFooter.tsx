@@ -22,6 +22,7 @@ export const PanelFooter: FC<Props> = ({ length, leave, refresh }) => {
                 <Button size="small" onClick={leave}>
                     Leave
                 </Button>
+
                 <RefreshCcw onClick={refresh} size="14" className={styles.refresh} />
             </div>
         </div>

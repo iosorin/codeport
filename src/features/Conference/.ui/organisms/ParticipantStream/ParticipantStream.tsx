@@ -26,21 +26,23 @@ export const ParticipantStream: FC<Props> = observer(
     }) => {
         const el = useRef<HTMLVideoElement>(null);
 
-        const [isActive, setIsActive] = useState(false);
+        const [streamID, setStreamID] = useState('');
 
         useEffect(() => {
-            if (!el.current) return;
+            const set = (stream: MediaStream) => {
+                if (!el.current) return;
 
-            setIsActive(!!stream || !!peer);
+                el.current.srcObject = stream;
+
+                setStreamID(stream.id);
+            };
 
             if (stream) {
-                el.current.srcObject = stream;
+                set(stream);
             }
 
             if (peer) {
-                peer.peer.on('stream', (stream) => {
-                    el.current!.srcObject = stream;
-                });
+                peer.peer.on('stream', set);
 
                 return () => peer?.peer.destroy();
             }
@@ -52,23 +54,23 @@ export const ParticipantStream: FC<Props> = observer(
                 <div className={styles.controls}>
                     <span
                         className={`${styles.control} ${constraints.audio ? '' : styles.muted}`}
-                        onClick={() => toggleConstraint('audio')}
+                        onClick={() => stream && toggleConstraint('audio')}
                     >
                         {constraints.audio ? <Mic /> : <MicOff />}
                     </span>
 
                     <span
                         className={`${styles.control} ${constraints.video ? '' : styles.muted}`}
-                        onClick={() => toggleConstraint('video')}
+                        onClick={() => stream && toggleConstraint('video')}
                     >
                         {constraints.video ? <Video /> : <VideoOff />}
                     </span>
 
-                    <span className={`${styles.status} ${isActive ? styles.active : ''}`}></span>
+                    <span className={`${styles.status} ${streamID ? styles.active : ''}`}></span>
                 </div>
 
                 {/* preview */}
-                <Transition in={!isActive || loading || !constraints.video} duration="400">
+                <Transition in={!streamID || loading || !constraints.video} duration="400">
                     <div className={styles.preview}>
                         {!constraints.video ? (
                             <span className="slide-in-blurred-top">👨‍🚀</span>
@@ -78,8 +80,8 @@ export const ParticipantStream: FC<Props> = observer(
                     </div>
                 </Transition>
 
-                {/* muted={isCurrentUser} */}
-                <video ref={el} autoPlay muted playsInline />
+                {/* video ref */}
+                <video ref={el} autoPlay muted={isCurrentUser} playsInline />
             </div>
         );
     }

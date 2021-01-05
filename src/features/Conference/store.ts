@@ -58,13 +58,34 @@ class ConferenceStore {
         this.roomID = value;
     };
 
+    setStream = (stream: MediaStream | undefined) => {
+        this.stream = stream;
+    };
+
+    setStreamError = (error: unknown) => {
+        this.streamError = error;
+    };
+
+    setLoading = (loading = false) => {
+        this.isLoading = loading;
+    };
+
+    setPeers = (peers: PeerItem[]) => {
+        this.peers = peers;
+    };
+
     joinRoom = () => {
-        this.getStream(true).then(() => {
-            this.socket.emit('join-room', {
-                roomID: this.roomID,
-                constraints: this.constraints,
-            });
-        });
+        this.setLoading(true);
+
+        this.getStream()
+            .then(() => {
+                this.socket.emit('join-room', {
+                    roomID: this.roomID,
+                    constraints: this.constraints,
+                });
+            })
+            .catch(this.setStreamError)
+            .finally(this.setLoading);
     };
 
     leaveRoom = () => {
@@ -72,36 +93,18 @@ class ConferenceStore {
         this.stream?.getTracks().forEach((track) => track.stop());
     };
 
-    setStream = (stream: MediaStream | undefined) => {
-        this.stream = stream;
-    };
+    getStream = async () => {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
 
-    getStream = async (getBothTracks = false) => {
-        this.isLoading = true;
+        stream.getTracks().forEach((track) => {
+            Object.keys(this.constraints).forEach((kind) => {
+                if (track.kind === kind) {
+                    track.enabled = this.constraints[kind as 'audio' | 'video'];
+                }
+            });
+        });
 
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia(
-                getBothTracks ? { audio: true, video: true } : this.constraints
-            );
-
-            if (getBothTracks) {
-                stream.getTracks().forEach((track) => {
-                    Object.keys(this.constraints).forEach((kind) => {
-                        if (track.kind === kind) {
-                            track.enabled = this.constraints[kind as 'audio' | 'video'];
-                        }
-                    });
-                });
-            }
-
-            this.setStream(stream);
-        } catch (err) {
-            if (Object.values(this.constraints).some((isOn) => isOn)) {
-                this.streamError = err;
-            }
-        } finally {
-            this.isLoading = false;
-        }
+        this.setStream(stream);
     };
 
     toggleConstraint = (kind: 'audio' | 'video') => {
@@ -117,10 +120,6 @@ class ConferenceStore {
             roomID: this.roomID,
             constraints: this.constraints,
         });
-    };
-
-    setPeers = (peers: PeerItem[]) => {
-        this.peers = peers;
     };
 
     createPeer = (userToSignal: string, caller: User) => {
