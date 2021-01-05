@@ -8,6 +8,7 @@ type Props = {
     toggleSettings: (show: boolean) => void;
     setSettings: (settings: ExtendedEditorConfig) => void;
 };
+
 export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
     return (
         <Dialog close={() => toggleSettings(false)} isVisible={isOpen} title="Editor Settings">

@@ -17,9 +17,7 @@ export const Home: FC = observer(() => {
         if (uuid) {
             socket.emit('check-room', uuid);
 
-            return () => {
-                socket.emit('disconnect-user');
-            };
+            return () => socket.emit('disconnect-user');
         }
 
         return () => {};

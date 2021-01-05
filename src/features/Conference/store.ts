@@ -1,6 +1,6 @@
-import { makeAutoObservable, reaction, toJS } from 'mobx';
 import Peer from 'simple-peer';
-import { SocketService } from '@/library/services';
+import { makeAutoObservable, reaction } from 'mobx';
+import { SocketService } from '@services';
 
 export type PeerItem = {
     peerID: string;

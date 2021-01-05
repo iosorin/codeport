@@ -1,6 +1,6 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure, makeAutoObservable } from 'mobx';
-import { SocketService } from './library/services/SocketService';
+import { SocketService } from '@services';
 
 configure({
     enforceActions: 'observed',
