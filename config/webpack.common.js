@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: paths.dist,
         filename: '[name].[fullhash].bundle.js',
-        publicPath: dotenv.BASE_URL || '',
+        publicPath: dotenv.BASE_URL || '/',
     },
     module: {
         strictExportPresence: true,

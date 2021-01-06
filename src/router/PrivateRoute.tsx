@@ -10,9 +10,9 @@ export const PrivateRoute: FC<NestedRouteProps> = ({
 }) => {
     const { requiresAuth, title } = meta;
 
-    /* todo - fix */
+    // todo - fix
     const isAuthentificated = true;
-    const showRouteComponent = !requiresAuth || (requiresAuth && isAuthentificated);
+    const showRouteComponent = requiresAuth ? isAuthentificated : true;
 
     useDocumentTitle(title);
 

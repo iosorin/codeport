@@ -24,6 +24,8 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
 
     useEffect(() => {
         store.setRoomID(roomID);
+
+        return store.leaveRoom;
     }, [roomID]);
 
     const goHome = () => {
@@ -51,10 +53,10 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
                     />
 
                     {!store.limitExceed && <ParticipantsList peers={store.peers} />}
-
-                    <PanelFooter leave={goHome} length={store.peers.length + 1} refresh={refresh} />
                 </>
             )}
+
+            <PanelFooter leave={goHome} length={store.peers.length + 1} refresh={refresh} />
         </div>
     );
 });
