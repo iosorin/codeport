@@ -7,7 +7,7 @@ export const DevicesErrorText: FC = () => {
         <div className={styles.text}>
             <Slash />
 
-            <h4 className="mt-2">
+            <h4 className="my-2">
                 Check your camera <br />
                 and microphone{' '}
                 <a

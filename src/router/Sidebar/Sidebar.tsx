@@ -1,36 +1,38 @@
 import React, { FC } from 'react';
-import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import { Activity, AtSign, Bell, Book, Calendar, LogIn, Video } from 'react-feather';
-import { useCore } from '@/core';
 import { Tooltip, Logo } from '@ui';
 import { ROUTES } from '@/router';
-import { uuid } from '@/library/utils';
 import styles from './sidebar.scss';
 
 export type Props = {
     className?: string;
+    isVisible: boolean;
 };
 
-export const Sidebar: FC<Props> = observer(({ className = '' }) => {
-    const { ui } = useCore();
-
+export const Sidebar: FC<Props> = ({ className = '', isVisible }) => {
     return (
-        <div
-            className={`${styles.sidebar} ${ui.sidebarIsVisible ? '' : styles.hidden} ${className}`}
-        >
-            <NavLink to={ROUTES.HOME.path}>
+        <div className={`${styles.sidebar} ${isVisible ? '' : styles.hidden} ${className}`}>
+            <NavLink exact={ROUTES.HOME.exact} to={ROUTES.HOME.path}>
                 <Logo className={styles.logo} short />
             </NavLink>
 
             <div className={styles.ul}>
-                <NavLink to={`/${uuid()}`} activeClassName={styles.active}>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.CONFERENCE.exact}
+                    to={ROUTES.CONFERENCE.pathFn()}
+                >
                     <Tooltip content={ROUTES.CONFERENCE.link}>
                         <Video />
                     </Tooltip>
                 </NavLink>
 
-                <NavLink activeClassName={styles.active} to={ROUTES.ACTIVITY.path}>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.ACTIVITY.exact}
+                    to={ROUTES.ACTIVITY.path}
+                >
                     <Tooltip content={ROUTES.ACTIVITY.link}>
                         <Activity />
                     </Tooltip>
@@ -46,7 +48,11 @@ export const Sidebar: FC<Props> = observer(({ className = '' }) => {
             </div>
 
             <div className={styles.ul}>
-                <NavLink activeClassName={styles.active} to={ROUTES.RESOURCES.path}>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.RESOURCES.exact}
+                    to={ROUTES.RESOURCES.path}
+                >
                     <Tooltip content={ROUTES.RESOURCES.title}>
                         <Book />
                     </Tooltip>
@@ -66,4 +72,4 @@ export const Sidebar: FC<Props> = observer(({ className = '' }) => {
             </div>
         </div>
     );
-});
+};
