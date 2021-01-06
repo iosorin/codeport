@@ -17,8 +17,6 @@ export const useHotkey = (
 
         (when ? listen : clear)();
 
-        return () => {
-            clear();
-        };
+        return clear;
     }, [handler, key, when]);
 };
