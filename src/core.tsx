@@ -1,6 +1,7 @@
 import React, { createContext, FC, useContext } from 'react';
-import { configure, makeAutoObservable } from 'mobx';
+import { configure } from 'mobx';
 import { SocketService } from '@services';
+import { UIStore } from '@/stores/UI';
 
 configure({
     enforceActions: 'observed',
@@ -10,40 +11,18 @@ configure({
     disableErrorBoundaries: false,
 });
 
-/* UIStore */
-class UIStore {
-    conferencePanelIsVisible = false;
-
-    constructor() {
-        makeAutoObservable(this);
-    }
-
-    get sidebarIsVisible() {
-        return !this.conferencePanelIsVisible;
-    }
-
-    toggleConferencePanel = (show = !this.conferencePanelIsVisible) => {
-        this.conferencePanelIsVisible = show;
-    };
-}
-
 /* Core */
-class Core {
-    ui = new UIStore();
+const Core = {
+    ui: new UIStore(),
+    socket: SocketService.getInstance(),
+};
 
-    socket = SocketService.getInstance();
-
-    constructor() {
-        makeAutoObservable(this);
-    }
-}
-
-const CoreContext = createContext(new Core());
+const CoreContext = createContext(Core);
 
 export const useCore = () => {
     return useContext(CoreContext);
 };
 
 export const CoreProvider: FC = ({ children }) => {
-    return <CoreContext.Provider value={new Core()}>{children}</CoreContext.Provider>;
+    return <CoreContext.Provider value={Core}>{children}</CoreContext.Provider>;
 };

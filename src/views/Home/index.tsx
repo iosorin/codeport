@@ -8,9 +8,9 @@ import { useCore } from '@/core';
 import { observer } from 'mobx-react-lite';
 
 export const Home: FC = observer((props) => {
-    const { ui, socket } = useCore();
-    const { uuid } = useParams<{ uuid: string }>();
     const history = useHistory();
+    const { uuid } = useParams<{ uuid: string }>();
+    const { ui, socket } = useCore();
 
     useEffect(() => {
         ui.toggleConferencePanel(!!uuid);
