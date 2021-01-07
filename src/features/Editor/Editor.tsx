@@ -9,12 +9,15 @@ import { Settings, StatusBar } from './.ui';
 import store from './store';
 import styles from './styles/editor.scss';
 import './styles/codemirror.shared.scss';
+import { useHotkey } from '@/library/hooks';
 
 type Props = {
     roomID: string;
 };
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
+    useHotkey('ctrl+p', () => store.toggleSettings());
+
     useEffect(() => {
         store.setRoomID(roomID);
     }, [roomID]);
@@ -40,7 +43,11 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                     toggleSettings={store.toggleSettings}
                 />
 
-                <StatusBar settings={store.settings} toggleSettings={store.toggleSettings} />
+                <StatusBar
+                    compileCode={store.compileCode}
+                    settings={store.settings}
+                    toggleSettings={store.toggleSettings}
+                />
             </div>
         </>
     );

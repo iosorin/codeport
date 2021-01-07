@@ -7,13 +7,21 @@ export const useHotkey = (
 ): void => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
-            if (e.key.toLocaleLowerCase() === key) {
+            const { altKey } = e;
+            const ctrlKey = e.ctrlKey || e.metaKey;
+
+            const prefix = `${ctrlKey ? 'ctrl+' : ''}${altKey ? 'alt+' : ''}`;
+            const keyCode = `${prefix}${e.key.toLocaleLowerCase()}`;
+
+            if (keyCode === key) {
+                e.preventDefault();
+
                 handler(e);
             }
         };
 
-        const listen = () => document.addEventListener('keyup', handle);
-        const clear = () => document.removeEventListener('keyup', handle);
+        const listen = () => document.addEventListener('keydown', handle);
+        const clear = () => document.removeEventListener('keydown', handle);
 
         (when ? listen : clear)();
 

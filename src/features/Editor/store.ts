@@ -1,3 +1,4 @@
+import { API } from './api';
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
 import { DEFAULT_SETTINGS, DEFAULT_VALUE, ExtendedEditorConfig, CODEPORT_THEME } from './constants';
@@ -56,6 +57,10 @@ class EditorStore {
 
         // eslint-disable-next-line no-underscore-dangle
         this._setSettings(updated);
+    };
+
+    compileCode = () => {
+        API.compile(this.value, this.settings.mode);
     };
 
     bindEvents = () => {
