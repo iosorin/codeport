@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 export const useHotkey = (
     key = 'escape',
     handler: (e: KeyboardEvent) => void,
-    when = true
+    when = true,
+    useKeyup = false
 ): void => {
     useEffect(() => {
         const handle = (e: KeyboardEvent) => {
@@ -20,11 +21,13 @@ export const useHotkey = (
             }
         };
 
-        const listen = () => document.addEventListener('keyup', handle);
-        const clear = () => document.removeEventListener('keyup', handle);
+        const type = useKeyup ? 'keyup' : 'keydown';
+
+        const listen = () => document.addEventListener(type, handle);
+        const clear = () => document.removeEventListener(type, handle);
 
         (when ? listen : clear)();
 
         return clear;
-    }, [handler, key, when]);
+    }, [handler, key, when, useKeyup]);
 };

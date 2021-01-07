@@ -13,7 +13,7 @@ class EditorStore {
 
     settingsIsVisible = false;
 
-    compilerIsVisible = false;
+    compilerIsVisible = true;
 
     constructor() {
         makeAutoObservable(this, { socket: false });

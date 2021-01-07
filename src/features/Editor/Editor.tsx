@@ -18,7 +18,7 @@ type Props = {
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
     useHotkey('ctrl+p', () => store.toggleSettings());
-    useHotkey('ctrl+.', () => store.toggleCompiler());
+    useHotkey('ctrl+.', () => store.toggleCompiler(), true, true);
 
     useEffect(() => {
         store.setRoomID(roomID);
@@ -37,8 +37,20 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
         <div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
             <Codemirror onChange={onChange} options={store.settings} value={store.value} />
 
+            <Settings
+                isOpen={store.settingsIsVisible}
+                setSettings={store.setSettings}
+                settings={store.settings}
+                toggleSettings={store.toggleSettings}
+            />
+
             <div className={`${styles.Bar} ${store.compilerIsVisible ? styles.active : ''}`}>
-                <Compiler isVisible={store.compilerIsVisible} />
+                <Compiler
+                    className={store.compilerIsVisible ? '' : 'hidden'}
+                    code={store.value}
+                    language={store.settings.mode}
+                    setEditorValue={store.setValue}
+                />
 
                 <StatusBar
                     compilerIsVisible={store.compilerIsVisible}
@@ -47,13 +59,6 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                     toggleSettings={store.toggleSettings}
                 />
             </div>
-
-            <Settings
-                isOpen={store.settingsIsVisible}
-                setSettings={store.setSettings}
-                settings={store.settings}
-                toggleSettings={store.toggleSettings}
-            />
         </div>
     );
 });

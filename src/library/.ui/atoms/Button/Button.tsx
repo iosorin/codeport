@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { Loader } from '../Loader';
 
 import styles from './button.scss';
 
@@ -9,7 +10,8 @@ export type Props = {
     background?: string;
     size?: 'small' | 'medium' | 'large';
     rounded?: boolean;
-
+    loading?: boolean;
+    disabled?: boolean;
     className?: string;
     style?: CSSProperties;
     onClick?: () => void;
@@ -20,6 +22,8 @@ export const Button: React.FC<Props> = ({
     size = 'medium',
     label,
     rounded,
+    loading,
+    disabled,
     success,
     children,
     background,
@@ -35,16 +39,21 @@ export const Button: React.FC<Props> = ({
         classlist.push(styles.rounded);
     }
 
+    const content = (
+        <>
+            {label && <span>{label}</span>}
+            {children}
+        </>
+    );
     return (
         <button
             className={classlist.join(' ')}
             onClick={onClick}
             style={{ backgroundColor: background, ...style }}
             type="button"
+            disabled={disabled}
         >
-            {label && <span>{label}</span>}
-
-            {children}
+            {loading ? <Loader type="spinner" dur="0.8s" /> : content}
         </button>
     );
 };

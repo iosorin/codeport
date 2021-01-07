@@ -13,6 +13,12 @@
         box-shadow: $button-shadow;
     }
 
+    &:disabled {
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.5;
+    }
+
     &.primary {
         color: white;
         background-color: $button-primary-background;
@@ -21,18 +27,21 @@
     &.secondary {
         color: $button-secondary-color;
         background-color: $button-secondary-background;
+        &:hover:not(:active) {
+            box-shadow: $button-secondary-shadow;
+        }
     }
 
     &.success {
-        color: white;
+        // color: white;
         background: $success;
     }
 
     &.small {
-        font-size: 12px;
-        letter-spacing: normal;
+        font-size: 13px;
+        letter-spacing: 0.1px;
         height: 30px;
-        padding: 0 16px;
+        padding: 0 18px 1px;
 
         &.rounded {
             width: 33px;
@@ -42,9 +51,9 @@
     }
 
     &.medium {
-        font-size: 15.5px;
-        height: 38px;
-        padding: 0 26px;
+        font-size: 16px;
+        height: 35px;
+        padding: 0 20px;
 
         &.rounded {
             width: 40px;
@@ -81,12 +90,16 @@
 
     &:not(.rounded) {
         svg {
-            margin-left: 5px;
+            margin-top: 1px;
+
+            & + span {
+                margin-right: 9px;
+            }
         }
     }
 
-    svg {
-        max-width: 16px;
-        max-height: 16px;
-    }
+    // svg {
+    //     max-width: 16px;
+    //     max-height: 16px;
+    // }
 }

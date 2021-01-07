@@ -16,9 +16,17 @@
     background: $editor-bar-background;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
+    display: flex;
+    flex-direction: column;
 
     &.active {
         position: relative;
+        height: 300px;
+
+        > div:first-child {
+            flex: 1;
+            border-bottom: 1px solid rgba(#aaa, 0.05);
+        }
     }
 }
 
