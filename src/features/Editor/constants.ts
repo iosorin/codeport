@@ -23,14 +23,18 @@ export const DEFAULT_THEME = CODEPORT_THEME;
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
-    'typescript-jsx',
+    'typescript',
     'javascript',
-    'python',
-    'java',
-    'php',
-    'c++',
     'c#',
+    'c++',
+    'java',
+    'python',
+    'php',
+    'clojure',
+    'ruby',
+    'go',
     'swift',
+    'lua',
     'html',
 ];
 

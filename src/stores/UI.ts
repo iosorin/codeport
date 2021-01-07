@@ -4,7 +4,6 @@ export class UIStore {
     conferencePanelIsVisible = false;
 
     constructor() {
-        console.log('UIStore');
         makeAutoObservable(this);
     }
 

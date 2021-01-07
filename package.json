@@ -39,6 +39,7 @@
     "dependencies": {
         "@reduxjs/toolkit": "^1.4.0",
         "@uiw/react-codemirror": "^3.0.1",
+        "axios": "^0.21.1",
         "codemirror": "^5.58.2",
         "express": "^4.17.1",
         "mobx": "^6.0.4",

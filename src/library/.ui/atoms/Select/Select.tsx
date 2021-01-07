@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, HTMLProps, useState } from 'react';
 import { ChevronDown } from 'react-feather';
 import { useOutsideClick } from '@hooks';
 
@@ -11,10 +11,11 @@ export type Props = {
     label?: string;
     value?: ValueType;
     options: OptionType[];
+    tabIndex?: number | undefined;
     onChange: (value: ValueType) => void;
 };
 
-export const Select: FC<Props> = ({ label, value = '', options = [], onChange }) => {
+export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const selectHandler = (selected: ValueType) => {
@@ -33,7 +34,11 @@ export const Select: FC<Props> = ({ label, value = '', options = [], onChange })
     };
 
     return (
-        <div ref={ref} className={`${styles.select} ${isOpen ? styles.isOpen : ''}`}>
+        <div
+            ref={ref}
+            className={`${styles.select} ${isOpen ? styles.isOpen : ''}`}
+            tabIndex={tabIndex}
+        >
             {label ? <div className="label">{label}</div> : null}
             <div className={styles.value} onClick={() => setIsOpen(!isOpen)}>
                 <span>{getTitle(value)}</span>

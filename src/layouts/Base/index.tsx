@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Observer } from 'mobx-react-lite';
+import { Sidebar } from '@/router/Sidebar';
 import { BlankLayout } from '@layouts';
 import { useCore } from '@/core';
 import styles from './styles.scss';

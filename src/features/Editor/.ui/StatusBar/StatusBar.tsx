@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
-import { Settings } from 'react-feather';
+import { Play, Settings } from 'react-feather';
 import styles from './status-bar.scss';
 import { ExtendedEditorConfig } from '../../constants';
 
 type Props = {
     settings: ExtendedEditorConfig;
     toggleSettings: (show: boolean) => void;
+    compileCode: () => void;
 };
 
-export const StatusBar: FC<Props> = ({ settings, toggleSettings }) => {
+export const StatusBar: FC<Props> = ({ settings, toggleSettings, compileCode }) => {
     return (
         <div className={styles.container}>
             <span>{settings.mode}</span>
@@ -16,6 +17,8 @@ export const StatusBar: FC<Props> = ({ settings, toggleSettings }) => {
             <span>{settings.tabSize}px</span>
 
             <Settings size="15" onClick={() => toggleSettings(true)} />
+
+            <Play size="15" onClick={compileCode} className="ml-auto" />
         </div>
     );
 };
