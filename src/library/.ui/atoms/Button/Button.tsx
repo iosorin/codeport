@@ -23,7 +23,7 @@ export const Button: React.FC<Props> = ({
     success,
     children,
     background,
-    className,
+    className = '',
     style,
     onClick,
 }) => {

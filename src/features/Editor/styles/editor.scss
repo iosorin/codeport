@@ -4,6 +4,22 @@
     height: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+}
+
+.Bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    background: $editor-bar-background;
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+
+    &.active {
+        position: relative;
+    }
 }
 
 .loading {

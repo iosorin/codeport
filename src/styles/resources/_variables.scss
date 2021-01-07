@@ -14,7 +14,7 @@ $orange: #d9793c;
 $yellow: #f7b81a;
 $green: #00e676;
 
-$primary: $green;
+$primary: $blue;
 $success: $green;
 
 $text: white;
@@ -81,12 +81,14 @@ $sidebar-icon-size: 27px;
 $sidebar-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
 $sidebar-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.3);
 
-/* features */
+/* editor */
 $editor-default-background: lighten($black, 1%);
-$editor-status-bar-background: rgba(30, 30, 30, 0.2);
+$editor-bar-background: rgba($black, 0.3);
 $editor-status-bar-justify: flex-start;
 $editor-status-bar-opacity: 0.5;
 $editor-status-bar-padding: 7px 20px;
+
+/* conference */
 $call-panel-default-background: $black;
 $call-panel-width: 430px;
 $call-video-height: 200px;

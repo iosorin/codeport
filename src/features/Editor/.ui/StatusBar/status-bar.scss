@@ -1,14 +1,11 @@
 .container {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: $editor-status-bar-padding;
     display: flex;
     align-items: center;
+    width: 100%;
     justify-content: $editor-status-bar-justify;
-    background: $editor-status-bar-background;
-    z-index: 10;
+    // background: $editor-status-bar-background;
+    padding: $editor-status-bar-padding;
+    border-top: 1px solid transparent;
 
     span {
         font-size: 12px;
@@ -26,6 +23,19 @@
 
         &:not(:hover) {
             opacity: $editor-status-bar-opacity;
+        }
+
+        // chevron
+        &:last-child {
+            margin-left: auto;
+        }
+    }
+
+    &.active {
+        border-color: rgba(#aaa, 0.05);
+
+        svg:last-child {
+            transform: rotate(-180deg);
         }
     }
 }

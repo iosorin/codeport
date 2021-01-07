@@ -1,6 +1,5 @@
-import { API } from './api';
 import { autorun, makeAutoObservable } from 'mobx';
-import { SocketService } from '@services';
+import { SocketService } from '@/services';
 import { DEFAULT_SETTINGS, DEFAULT_VALUE, ExtendedEditorConfig, CODEPORT_THEME } from './constants';
 
 class EditorStore {
@@ -12,7 +11,9 @@ class EditorStore {
 
     settings = DEFAULT_SETTINGS;
 
-    settingsIsOpen = false;
+    settingsIsVisible = false;
+
+    compilerIsVisible = false;
 
     constructor() {
         makeAutoObservable(this, { socket: false });
@@ -36,8 +37,12 @@ class EditorStore {
         this.roomID = value;
     };
 
-    toggleSettings = (show = !this.settingsIsOpen) => {
-        this.settingsIsOpen = show;
+    toggleSettings = (show = !this.settingsIsVisible) => {
+        this.settingsIsVisible = show;
+    };
+
+    toggleCompiler = (show = !this.compilerIsVisible) => {
+        this.compilerIsVisible = show;
     };
 
     _setSettings = (updated: ExtendedEditorConfig) => {
@@ -57,10 +62,6 @@ class EditorStore {
 
         // eslint-disable-next-line no-underscore-dangle
         this._setSettings(updated);
-    };
-
-    compileCode = () => {
-        API.compile(this.value, this.settings.mode);
     };
 
     bindEvents = () => {

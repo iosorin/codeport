@@ -1,11 +1,31 @@
 import { EditorConfiguration } from 'codemirror';
 
 /* default editor value */
-export const DEFAULT_VALUE = `// 1. Implement a binary search algorithm.
-class BinarySearch {
-    constructor(public sorted: number[]) {}
+// export const DEFAULT_VALUE = `// 1. Implement a binary search algorithm.
+// class BinarySearch {
+//     constructor(public sorted: number[]) {}
 
-    indexOf(n: number): number {}
+//     indexOf(n: number): number {}
+// }`;
+
+export const DEFAULT_VALUE = `// Rextester.Program.Main is the entry point for your code. Don't change it.
+// Microsoft (R) Visual C# Compiler version 2.9.0.63208 (958f2354)
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
+namespace Rextester
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            //Your code goes here
+            Console.WriteLine("Hello, world!");
+        }
+    }
 }`;
 
 /* default color theme */
@@ -19,7 +39,7 @@ export const THEMES = [
     'monokai',
     'material',
 ];
-export const DEFAULT_THEME = CODEPORT_THEME;
+export const DEFAULT_THEME = 'darcula';
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
@@ -39,7 +59,7 @@ export const MODES = [
 ];
 
 /* default language font-size */
-export const DEFAULT_MODE = MODES[0];
+export const DEFAULT_MODE = MODES[2];
 
 /* default font-size (px) */
 export const DEFAULT_FZ = 18;
