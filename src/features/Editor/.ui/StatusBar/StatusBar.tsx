@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ChevronDown, ChevronUp, Settings } from 'react-feather';
+import { ArrowUpLeft, Settings } from 'react-feather';
 import styles from './status-bar.scss';
 import { ExtendedEditorConfig } from '../../constants';
 import { Tooltip } from '@/library/.ui';
@@ -27,8 +27,13 @@ export const StatusBar: FC<Props> = ({
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>
 
-            <Settings size="15" onClick={() => toggleSettings(true)} />
-            <ChevronUp size="15" onClick={() => toggleCompiler()} className="chevron" />
+            <Tooltip content="settings [ctrl+p]" className={styles.icon} center>
+                <Settings size="15" onClick={() => toggleSettings(true)} />
+            </Tooltip>
+
+            <Tooltip content="compiler [ctrl+.]" className={styles.icon} center>
+                <ArrowUpLeft size="16" onClick={() => toggleCompiler()} className="chevron" />
+            </Tooltip>
         </div>
     );
 };

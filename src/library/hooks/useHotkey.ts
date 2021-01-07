@@ -20,8 +20,8 @@ export const useHotkey = (
             }
         };
 
-        const listen = () => document.addEventListener('keydown', handle);
-        const clear = () => document.removeEventListener('keydown', handle);
+        const listen = () => document.addEventListener('keyup', handle);
+        const clear = () => document.removeEventListener('keyup', handle);
 
         (when ? listen : clear)();
 

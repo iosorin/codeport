@@ -16,13 +16,16 @@
         font-family: $sans-accent;
     }
 
-    svg {
-        cursor: pointer;
+    .icon {
         margin-left: 4px;
-        transition: $tr;
+        cursor: pointer;
 
-        &:not(:hover) {
-            opacity: $editor-status-bar-opacity;
+        svg {
+            transition: $tr;
+
+            &:not(:hover) {
+                opacity: $editor-status-bar-opacity;
+            }
         }
 
         // chevron
@@ -34,8 +37,8 @@
     &.active {
         border-color: rgba(#aaa, 0.05);
 
-        svg:last-child {
-            transform: rotate(-180deg);
+        .icon:last-child svg {
+            opacity: 1;
         }
     }
 }

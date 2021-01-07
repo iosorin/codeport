@@ -59,10 +59,18 @@ $background: black;
         }
     }
 
+    &.center {
+        &::before {
+            left: 0;
+            transform: translateX(-40%);
+            bottom: 85%;
+        }
+    }
+
     &.bottom {
         // &:after,
         &:before {
-            top: 115%;
+            top: 100%;
             bottom: auto;
         }
 

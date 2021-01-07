@@ -5,6 +5,7 @@ import styles from './tooltip.scss';
 export type Props = {
     content?: string;
     left?: boolean;
+    center?: boolean;
     bottom?: boolean;
     error?: boolean;
     className?: string;
@@ -14,6 +15,7 @@ export type Props = {
 export const Tooltip: FC<Props> = ({
     content,
     left,
+    center,
     bottom,
     error,
     className = '',
@@ -23,6 +25,7 @@ export const Tooltip: FC<Props> = ({
     let classlist = [styles.tooltip, className];
 
     if (left) classlist.push(styles.left);
+    if (center) classlist.push(styles.center);
     if (bottom) classlist.push(styles.bottom);
     if (error) classlist.push(styles.error);
 
