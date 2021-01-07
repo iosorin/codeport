@@ -27,7 +27,7 @@
             "@ui": ["src/library/.ui"],
 
             "@hooks": ["src/library/hooks"],
-            "@services": ["src/library/services"],
+            "@services": ["src/services"],
 
             "@layouts/*": ["src/layouts/*"],
             "@layouts": ["src/layouts"]

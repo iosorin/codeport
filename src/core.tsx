@@ -1,6 +1,6 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
-import { SocketService } from '@services';
+import { SocketService } from '@/services';
 import { UIStore } from '@/stores/UI';
 
 configure({

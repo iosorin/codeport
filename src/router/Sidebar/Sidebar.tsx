@@ -38,13 +38,25 @@ export const Sidebar: FC<Props> = ({ className = '', isVisible }) => {
                     </Tooltip>
                 </NavLink>
 
-                <Tooltip content="Schedule">
-                    <Calendar />
-                </Tooltip>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.ACTIVITY.exact}
+                    to={ROUTES.ACTIVITY.path}
+                >
+                    <Tooltip content="Schedule">
+                        <Calendar />
+                    </Tooltip>
+                </NavLink>
 
-                <Tooltip content="Notifications">
-                    <Bell />
-                </Tooltip>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.ACTIVITY.exact}
+                    to={ROUTES.ACTIVITY.path}
+                >
+                    <Tooltip content="Notifications">
+                        <Bell />
+                    </Tooltip>
+                </NavLink>
             </div>
 
             <div className={styles.ul}>

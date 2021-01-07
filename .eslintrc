@@ -100,7 +100,8 @@
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-shadow": "off",
-        "@typescript-eslint/ban-ts-comment": "warn"
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/no-namespace": "off"
     },
     "settings": {
         "react": {

@@ -5,19 +5,19 @@ $background: black;
     cursor: pointer;
     z-index: 10;
 
-    &:before,
-    &:after {
+    // &:after ,
+    &:before {
         visibility: hidden;
         opacity: 0;
         pointer-events: none;
         transition: all 0.5s ease;
         position: absolute;
-        bottom: 115%;
+        bottom: 60%;
     }
 
     &:before {
         content: attr(data-tooltip);
-        left: 0;
+        left: 60%;
         margin-bottom: 5px;
         padding: 4px 6px 6px;
         width: max-content;
@@ -30,21 +30,21 @@ $background: black;
         max-width: 150px;
     }
 
-    &:after {
-        content: '';
-        left: 50%;
-        width: 0;
-        border-top: 5px solid $background;
-        border-right: 5px solid transparent;
-        border-left: 5px solid transparent;
-        font-size: 0;
-        line-height: 0;
-        transform: translateX(-35%);
-    }
+    // &:after {
+    //     content: '';
+    //     left: 50%;
+    //     width: 0;
+    //     border-top: 5px solid $background;
+    //     border-right: 5px solid transparent;
+    //     border-left: 5px solid transparent;
+    //     font-size: 0;
+    //     line-height: 0;
+    //     transform: translateX(-35%);
+    // }
 
     &:hover {
-        &:before,
-        &:after {
+        // &:after,
+        &:before {
             visibility: visible;
             opacity: 1;
         }
@@ -54,19 +54,21 @@ $background: black;
         &::before {
             left: auto;
             right: 0;
+            bottom: 0;
+            margin-right: 120%;
         }
     }
 
     &.bottom {
-        &::before,
-        &::after {
+        // &:after,
+        &:before {
             top: 115%;
             bottom: auto;
         }
 
-        &::after {
-            transform: translateX(-35%) translateY(-100%) rotate(-180deg);
-        }
+        // &::after {
+        //     transform: translateX(-35%) translateY(-100%) rotate(-180deg);
+        // }
     }
 
     &.error {
