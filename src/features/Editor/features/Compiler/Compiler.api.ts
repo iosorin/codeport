@@ -1,36 +1,43 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import * as ts from 'typescript';
 import { api } from '@/services/api';
-
-const languagesCode = {
-    'c#': 1,
-    'c++': 27,
-    java: 4,
-    python: 24,
-    php: 8,
-    ruby: 12,
-    lua: 14,
-    javascript: 17,
-    go: 20,
-    swift: 37,
-    clojure: 47,
-};
-
-export type AllowedLanguage = keyof typeof languagesCode;
+import { languages } from './languages';
 
 type CompileResponse = {
-    Errors: string | null;
-    Files: string | null;
-    NotLoggedIn: boolean;
+    Errors?: string | null;
+    Files?: string | null;
+    NotLoggedIn?: boolean;
     Result: string | null;
-    Stats: string;
-    Warnings: string | null;
+    Stats?: string;
+    Warnings?: string | null;
 };
 
 export const API = {
-    compile: async (code: string, language: AllowedLanguage): Promise<CompileResponse> => {
+    compile: async (Program: string, language: string): Promise<CompileResponse> => {
+        const choice = languages[language as keyof typeof languages];
+
+        if (!choice) throw new Error('language invalid');
+
+        Program = Program.replace(
+            /(namespace|class) Entry/g,
+            (_, keyword) => `${keyword} Rextester`
+        ); // ooops
+
+        if (language === 'typescript') {
+            const result = ts.transpileModule(Program, {
+                compilerOptions: { module: ts.ModuleKind.CommonJS },
+            });
+
+            console.log('test', result.outputText);
+
+            return { Result: 'bla' };
+        }
+
         return api
             .post('https://rextester.com/rundotnet/api', {
-                Program: code,
-                LanguageChoice: languagesCode[language],
+                Program,
+                LanguageChoice: choice.key,
+                CompilerArgs: choice.args || '',
             })
             .then((res) => res.data);
     },

@@ -35,8 +35,6 @@
     }
 
     &.active {
-        border-color: rgba(#aaa, 0.05);
-
         .icon:last-child svg {
             opacity: 1;
         }

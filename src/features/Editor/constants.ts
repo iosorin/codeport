@@ -7,6 +7,14 @@ class BinarySearch {
 
     indexOf(n: number): number {}
 }`;
+export const DEFAULT_VALUE1 = `/**
+* We declare a package-level function main which returns Unit and takes
+* an Array of strings as a parameter. Note that semicolons are optional.
+*/
+
+fun main(args: Array<String>) {
+   println("Hello, world!")
+}`;
 
 /* default color theme */
 export const CODEPORT_THEME = 'codeport';
@@ -23,23 +31,25 @@ export const DEFAULT_THEME = CODEPORT_THEME;
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
-    'typescript',
     'javascript',
+    'typescript',
+    'jsx',
+    'java',
+    'php',
     'c#',
     'c++',
-    'java',
     'python',
-    'php',
     'clojure',
-    'ruby',
-    'go',
+    'kotlin',
     'swift',
+    'go',
+    'ruby',
     'lua',
     'html',
 ];
 
 /* default language font-size */
-export const DEFAULT_MODE = MODES[0];
+export const DEFAULT_MODE = 'typescript';
 
 /* default font-size (px) */
 export const DEFAULT_FZ = 18;
@@ -59,4 +69,7 @@ export const DEFAULT_SETTINGS: ExtendedEditorConfig = {
     smartIndent: true,
     autoCloseTags: true,
     autofocus: true,
+    autoCloseBrackets: true,
+    autocorrect: true,
+    autocapitalize: true,
 };

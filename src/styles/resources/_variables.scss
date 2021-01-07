@@ -3,7 +3,7 @@ $sans-serif: 'Lato', sans-serif;
 $sans-accent: monospace; // accent font-family
 
 /* colors */
-$darken-0: #06000a;
+$darken-0: #141414;
 $darken-1: #171717;
 $darken-2: #212121;
 $black: $darken-2;
@@ -11,10 +11,10 @@ $light: #f2f5f9;
 $blue: #5b3dfb; // #0b0cef;
 $violet: #6534ff;
 $orange: #d9793c;
-$yellow: #f7b81a;
+$yellow: #e8f535;
 $green: #00e676;
 
-$primary: $blue;
+$primary: $violet;
 $success: $green;
 
 $text: white;
@@ -24,6 +24,7 @@ $text-grey: lighten($black, 20%);
 $padding: 20px;
 $radius: 5px;
 $shadow: 0 3px 10px -3px rgba(black, 0.6);
+$shadow-light: 0 3px 8px 0px rgba(white, 0.5);
 $shadow-1: 0 3px 10px -3px rgba(black, 0.4);
 $shadow-2: 0 3px 8px -3px rgba(black, 0.2);
 
@@ -35,10 +36,11 @@ $tr: 0.22s $ease-1;
 
 /* button */
 $button-primary-background: $primary;
-$button-secondary-background: darken($light, 2%);
-$button-secondary-color: $darken-1;
+$button-secondary-background: $darken-1;
+$button-secondary-color: white;
+$button-secondary-shadow: $shadow;
 $button-font-family: $sans-accent;
-$button-transition: $tr;
+$button-transition: 0.2s $ease-1;
 $button-shadow: $shadow;
 $button-radius: 3rem;
 
@@ -86,7 +88,8 @@ $editor-default-background: lighten($black, 1%);
 $editor-bar-background: rgba($black, 0.3);
 $editor-status-bar-justify: flex-start;
 $editor-status-bar-opacity: 0.5;
-$editor-status-bar-padding: 6px 20px;
+$editor-status-bar-padding: 6px 15px;
+$editor-compiler-fz: 12px;
 
 /* conference */
 $call-panel-default-background: $black;

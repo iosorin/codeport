@@ -22,6 +22,11 @@ export default {
                 type: 'boolean',
             },
         },
+        loading: {
+            control: {
+                type: 'boolean',
+            },
+        },
     },
 } as Meta;
 
@@ -58,6 +63,12 @@ Small.args = {
 
 export const Rounded: Story<Props> = () => (
     <Button rounded>
+        <Home />
+    </Button>
+);
+
+export const Loading: Story<Props> = () => (
+    <Button loading>
         <Home />
     </Button>
 );
