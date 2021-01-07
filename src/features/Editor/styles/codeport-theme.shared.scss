@@ -53,10 +53,10 @@
         color: #666666;
     }
     span.cm-atom {
-        color: #ae81ff;
+        color: #bd9bfa;
     }
     span.cm-number {
-        color: #ae81ff;
+        color: #bd9bfa;
     }
 
     span.cm-comment.cm-attribute {
@@ -74,31 +74,37 @@
 
     span.cm-property,
     span.cm-attribute {
-        color: #9ccc7a;
+        color: #e6db74;
     }
     span.cm-keyword {
-        color: #e6737c;
+        // color: #e6737c;
+        color: #ffeb3b;
     }
     span.cm-builtin {
         color: #66d9ef;
     }
-    span.cm-string {
-        color: #e6db74;
+    span.cm-string,
+    span.cm-string-2 {
+        color: #9ccc7a;
     }
 
-    span.cm-variable {
-        color: #f8f8f2;
-    }
+    span.cm-variable,
     span.cm-variable-2 {
-        color: #6897bb;
+        color: #9e9e9e;
     }
+    // span.cm-variable-2 {
+    //     color: #6897bb;
+    // }
     span.cm-variable-3,
     span.cm-type {
-        color: #73b2e6;
+        color: #9e9e9e;
     }
     span.cm-def {
-        color: #e6bf73;
-        font-style: italic;
+        // color: #ff9800;
+        // color: #b97acc;
+        // color: #9e9e9e;
+        color: #73b2e6;
+        // font-style: italic;
     }
     span.cm-bracket {
         color: #f8f8f2;
