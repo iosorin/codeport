@@ -39,6 +39,12 @@ export const API = {
                 LanguageChoice: choice.key,
                 CompilerArgs: choice.args || '',
             })
-            .then((res) => res.data);
+            .then((res) => {
+                if (res.data.Errors) {
+                    res.data.Errors = res.data.Errors.replace(/'Rextester'/, "'Entry'");
+                }
+
+                return res.data;
+            });
     },
 };
