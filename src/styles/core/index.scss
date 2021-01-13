@@ -1,6 +1,7 @@
 @import 'reset';
 @import 'atomaric';
 @import 'typography';
+@import 'typography';
 
 body {
     min-height: 100vh;
@@ -32,6 +33,21 @@ article > * + * {
     background: $primary;
     color: rgba(black, 0.7);
     color: white;
+}
+
+.pointer {
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.hoverable {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity $tr;
+
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .hidden {

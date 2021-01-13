@@ -7,7 +7,7 @@ import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/keymap/sublime';
 import { Settings, StatusBar } from './.ui';
-import { Compiler } from './features/Compiler';
+import { Console } from './features/Console';
 import store from './store';
 import styles from './styles/editor.scss';
 import './styles/codemirror.shared.scss';
@@ -18,7 +18,7 @@ type Props = {
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
     useHotkey('ctrl+p', () => store.toggleSettings());
-    useHotkey('ctrl+.', () => store.toggleCompiler(), true, true);
+    useHotkey('ctrl+.', () => store.toggleConsole(), true, true);
 
     useEffect(() => {
         store.setRoomID(roomID);
@@ -44,18 +44,19 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                 toggleSettings={store.toggleSettings}
             />
 
-            <div className={`${styles.Bar} ${store.compilerIsVisible ? styles.active : ''}`}>
-                <Compiler
-                    className={store.compilerIsVisible ? '' : 'hidden'}
+            <div className={`${styles.Bar} ${store.consoleIsVisible ? styles.active : ''}`}>
+                <Console
+                    className={store.consoleIsVisible ? '' : 'hidden'}
                     code={store.value}
                     language={store.settings.mode}
                     setEditorValue={store.setValue}
+                    toggleConsole={store.toggleConsole}
                 />
 
                 <StatusBar
-                    compilerIsVisible={store.compilerIsVisible}
+                    consoleIsVisible={store.consoleIsVisible}
                     settings={store.settings}
-                    toggleCompiler={store.toggleCompiler}
+                    toggleConsole={store.toggleConsole}
                     toggleSettings={store.toggleSettings}
                 />
             </div>

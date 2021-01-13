@@ -35,9 +35,8 @@ export const Button: React.FC<Props> = ({
     const mode = success ? styles.success : primary ? styles.primary : styles.secondary;
     const classlist = [styles.button, styles[size], mode, className];
 
-    if (rounded) {
-        classlist.push(styles.rounded);
-    }
+    if (rounded) classlist.push(styles.rounded);
+    if (loading) classlist.push(styles.loading);
 
     const content = (
         <>

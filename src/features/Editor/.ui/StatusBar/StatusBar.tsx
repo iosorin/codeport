@@ -8,31 +8,31 @@ type Props = {
     settings: ExtendedEditorConfig;
     className?: string;
     toggleSettings: (show?: boolean) => void;
-    toggleCompiler: (show?: boolean) => void;
-    compilerIsVisible?: boolean;
+    toggleConsole: (show?: boolean) => void;
+    consoleIsVisible?: boolean;
 };
 
 export const StatusBar: FC<Props> = ({
     settings,
-    compilerIsVisible,
+    consoleIsVisible,
     className = '',
     toggleSettings,
-    toggleCompiler,
+    toggleConsole,
 }) => {
     return (
         <div
-            className={`${styles.container} ${className} ${compilerIsVisible ? styles.active : ''}`}
+            className={`${styles.container} ${className} ${consoleIsVisible ? styles.active : ''}`}
         >
             <span>{settings.mode}</span>
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>
 
-            <Tooltip content="settings [ctrl+p]" className={styles.icon} center>
+            <Tooltip content="Settings [ctrl+p]" className={styles.icon} center>
                 <Settings size="15" onClick={() => toggleSettings(true)} />
             </Tooltip>
 
-            <Tooltip content="compiler [ctrl+.]" className={styles.icon} center>
-                <ArrowUpLeft size="16" onClick={() => toggleCompiler()} className="chevron" />
+            <Tooltip content="Console [ctrl+.]" className={styles.icon} center>
+                <ArrowUpLeft size="16" onClick={() => toggleConsole()} className="chevron" />
             </Tooltip>
         </div>
     );
