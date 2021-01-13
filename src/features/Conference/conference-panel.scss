@@ -6,22 +6,4 @@
     background: $call-panel-default-background;
     border-radius: $radius;
     position: relative;
-
-    width: 0;
-    transition: $call-panel-transition;
-
-    > * {
-        opacity: 0;
-        transition: $tr;
-    }
-
-    &.visible {
-        width: $call-panel-width;
-        padding: $call-panel-padding;
-        margin-left: $call-panel-gap;
-
-        > * {
-            opacity: 1;
-        }
-    }
 }

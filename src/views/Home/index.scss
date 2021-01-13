@@ -4,6 +4,28 @@
 }
 
 .editor {
-    width: 100%;
+    flex: 1;
+    // width: calc(#{100% - $call-panel-width});
     transition: $tr width;
+}
+
+.conference {
+    width: 0;
+    flex: 0 1 $call-panel-width;
+    transition: $call-panel-transition;
+
+    > * {
+        opacity: 0;
+        transition: $tr;
+    }
+
+    &.visible {
+        width: 100%;
+        padding: $call-panel-padding;
+        margin-left: $call-panel-gap;
+
+        > * {
+            opacity: 1;
+        }
+    }
 }

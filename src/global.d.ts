@@ -11,6 +11,8 @@ declare namespace NodeJS {
     }
 }
 
+declare module 'monaco-themes/themes/themelist';
+
 declare module '*.jpg' {
     const src: string;
     export default src;

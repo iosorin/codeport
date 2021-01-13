@@ -1,6 +1,7 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@/services';
-import { DEFAULT_SETTINGS, DEFAULT_VALUE, ExtendedEditorConfig, CODEPORT_THEME } from './constants';
+import { DEFAULT_SETTINGS, DEFAULT_VALUE, EditorSettings } from './constants';
+import { defineTheme } from './store.effect';
 
 class EditorStore {
     roomID = '';
@@ -13,7 +14,7 @@ class EditorStore {
 
     settingsIsVisible = false;
 
-    consoleIsVisible = true;
+    consoleIsVisible = false;
 
     constructor() {
         makeAutoObservable(this, { socket: false });
@@ -45,15 +46,15 @@ class EditorStore {
         this.consoleIsVisible = show;
     };
 
-    _setSettings = (updated: ExtendedEditorConfig) => {
+    _setSettings = (updated: EditorSettings) => {
         this.settings = { ...this.settings, ...updated };
     };
 
-    setSettings = async (updated: ExtendedEditorConfig = {}, fromOrigin = true) => {
+    setSettings = async (updated: EditorSettings = {}, fromOrigin = true) => {
         const { theme } = updated;
 
-        if (theme && theme !== CODEPORT_THEME) {
-            await import(`codemirror/theme/${theme}.css`);
+        if (theme) {
+            await defineTheme(theme);
         }
 
         if (fromOrigin) {
@@ -74,10 +75,14 @@ class EditorStore {
             this.setValue(newValue);
         });
 
-        this.socket.on('client:editor-settings', (newSettings: ExtendedEditorConfig) => {
+        this.socket.on('client:editor-settings', (newSettings: EditorSettings) => {
             this.setSettings(newSettings, false);
         });
     };
 }
 
-export default new EditorStore();
+const editorStore = new EditorStore();
+
+export type IEditorStore = typeof editorStore;
+
+export default editorStore;

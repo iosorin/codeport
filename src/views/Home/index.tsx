@@ -40,7 +40,13 @@ export const Home: FC = observer((props) => {
                     <Editor roomID={uuid} />
                 </div>
 
-                <ConferencePanel isVisible={ui.conferencePanelIsVisible} roomID={uuid} />
+                <div
+                    className={`${styles.conference} ${
+                        ui.conferencePanelIsVisible ? styles.visible : ''
+                    }`}
+                >
+                    <ConferencePanel roomID={uuid} />
+                </div>
             </div>
         </BaseLayout>
     );

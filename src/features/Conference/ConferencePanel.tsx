@@ -16,10 +16,10 @@ import styles from './conference-panel.scss';
 
 type Props = {
     roomID: string | undefined;
-    isVisible: boolean;
+    className?: string;
 };
 
-export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) => {
+export const ConferencePanel: FC<Props> = observer(({ roomID = '', className = '' }) => {
     const history = useHistory();
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
     };
 
     return (
-        <div className={`${styles.panel} ${isVisible ? styles.visible : null}`}>
+        <div className={`${styles.panel} ${className}`}>
             <ConferenceLimitDialog close={goHome} isVisible={store.limitExceed} />
 
             {store.streamError ? (

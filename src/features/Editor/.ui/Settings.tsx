@@ -1,30 +1,33 @@
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Select, Input, Dialog } from '@ui';
-import { ExtendedEditorConfig, MODES, THEMES } from '../constants';
+import { MODES, THEMES } from '../constants';
+import { IEditorStore } from '../store';
 
 type Props = {
-    settings: ExtendedEditorConfig;
-    isOpen: boolean;
-    toggleSettings: (show: boolean) => void;
-    setSettings: (settings: ExtendedEditorConfig) => void;
+    store: IEditorStore;
 };
 
-export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
+export const Settings: FC<Props> = observer(({ store }) => {
     return (
-        <Dialog close={() => toggleSettings(false)} isVisible={isOpen} title="Editor Settings">
+        <Dialog
+            close={() => store.toggleSettings(false)}
+            isVisible={store.settingsIsVisible}
+            title="Editor Settings"
+        >
             <div className="flex-col">
                 <Select
                     label="Color Theme:"
-                    onChange={(theme: string) => setSettings({ theme })}
+                    onChange={(theme) => store.setSettings({ theme })}
                     options={THEMES}
-                    value={settings.theme}
+                    value={store.settings.theme}
                 />
 
                 <Select
                     label="Language Mode:"
-                    onChange={(mode: string) => setSettings({ mode })}
+                    onChange={(language) => store.setSettings({ language })}
                     options={MODES}
-                    value={settings.mode}
+                    value={store.settings.language}
                 />
 
                 <Input
@@ -33,10 +36,10 @@ export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSetti
                     max="50"
                     min="12"
                     onChange={(e: { currentTarget: { value: string | number } }) =>
-                        setSettings({ fontSize: +e.currentTarget.value })
+                        store.setSettings({ fontSize: +e.currentTarget.value })
                     }
                     type="number"
-                    value={settings.fontSize}
+                    value={store.settings.fontSize}
                 />
 
                 <Input
@@ -45,15 +48,15 @@ export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSetti
                     max="10"
                     min="1"
                     onChange={(e: { currentTarget: { value: string | number } }) =>
-                        setSettings({
+                        store.setSettings({
                             tabSize: +e.currentTarget.value,
                             indentUnit: +e.currentTarget.value,
                         })
                     }
                     type="number"
-                    value={settings.tabSize}
+                    value={store.settings.tabSize}
                 />
             </div>
         </Dialog>
     );
-};
+});

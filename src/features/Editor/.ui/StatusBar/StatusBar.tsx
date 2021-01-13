@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { ArrowUpLeft, Settings } from 'react-feather';
 import styles from './status-bar.scss';
-import { ExtendedEditorConfig } from '../../constants';
+import { EditorSettings } from '../../constants';
 import { Tooltip } from '@/library/.ui';
 
 type Props = {
-    settings: ExtendedEditorConfig;
+    settings: EditorSettings;
     className?: string;
     toggleSettings: (show?: boolean) => void;
     toggleConsole: (show?: boolean) => void;
@@ -23,7 +23,7 @@ export const StatusBar: FC<Props> = ({
         <div
             className={`${styles.container} ${className} ${consoleIsVisible ? styles.active : ''}`}
         >
-            <span>{settings.mode}</span>
+            <span>{settings.language}</span>
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>
 
