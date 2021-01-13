@@ -13,9 +13,13 @@
         box-shadow: $button-shadow;
     }
 
-    &:disabled {
+    &:disabled,
+    &.loading {
         pointer-events: none;
         user-select: none;
+    }
+
+    &:disabled {
         opacity: 0.5;
     }
 
@@ -47,6 +51,11 @@
             width: 33px;
             height: 33px;
             padding: 5px;
+        }
+
+        svg {
+            max-width: 16px;
+            max-height: 16px;
         }
     }
 

@@ -1,7 +1,8 @@
 import { EditorConfiguration } from 'codemirror';
 
 /* default editor value */
-export const DEFAULT_VALUE = `// 1. Implement a binary search algorithm.
+export const DEFAULT_VALUE = `console.log(Math.random())`;
+export const DEFAULT_VALUE0 = `// 1. Implement a binary search algorithm.
 class BinarySearch {
     constructor(public sorted: number[]) {}
 
@@ -27,13 +28,11 @@ export const THEMES = [
     'monokai',
     'material',
 ];
-export const DEFAULT_THEME = CODEPORT_THEME;
+export const DEFAULT_THEME = 'darcula';
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
     'javascript',
-    'typescript',
-    'jsx',
     'java',
     'php',
     'c#',
@@ -46,10 +45,12 @@ export const MODES = [
     'ruby',
     'lua',
     'html',
+    'typescript',
+    'jsx',
 ];
 
 /* default language font-size */
-export const DEFAULT_MODE = 'typescript';
+export const DEFAULT_MODE = 'javascript';
 
 /* default font-size (px) */
 export const DEFAULT_FZ = 18;

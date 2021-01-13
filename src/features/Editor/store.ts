@@ -13,7 +13,7 @@ class EditorStore {
 
     settingsIsVisible = false;
 
-    compilerIsVisible = true;
+    consoleIsVisible = true;
 
     constructor() {
         makeAutoObservable(this, { socket: false });
@@ -41,8 +41,8 @@ class EditorStore {
         this.settingsIsVisible = show;
     };
 
-    toggleCompiler = (show = !this.compilerIsVisible) => {
-        this.compilerIsVisible = show;
+    toggleConsole = (show = !this.consoleIsVisible) => {
+        this.consoleIsVisible = show;
     };
 
     _setSettings = (updated: ExtendedEditorConfig) => {

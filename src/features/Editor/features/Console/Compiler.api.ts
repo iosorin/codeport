@@ -1,5 +1,4 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import * as ts from 'typescript';
 import { api } from '@/services/api';
 import { languages } from './languages';
 
@@ -12,6 +11,7 @@ type CompileResponse = {
     Warnings?: string | null;
 };
 
+// https://www.hackerearth.com/ru/docs/wiki/developers/v3/
 export const API = {
     compile: async (Program: string, language: string): Promise<CompileResponse> => {
         const choice = languages[language as keyof typeof languages];
@@ -22,16 +22,6 @@ export const API = {
             /(namespace|class) Entry/g,
             (_, keyword) => `${keyword} Rextester`
         ); // ooops
-
-        if (language === 'typescript') {
-            const result = ts.transpileModule(Program, {
-                compilerOptions: { module: ts.ModuleKind.CommonJS },
-            });
-
-            console.log('test', result.outputText);
-
-            return { Result: 'bla' };
-        }
 
         return api
             .post('https://rextester.com/rundotnet/api', {

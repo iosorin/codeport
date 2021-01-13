@@ -10,3 +10,10 @@ export const randomEmojiHero = () => {
 export const uuid = () => {
     return Date.now().toString(36);
 };
+
+// export const exposeErrorTitle = (error:unknown) => {
+//     return JSON.stringify(error.stack, (a,b) => {
+//         console.log(a,b)
+//         return
+//     })
+// }
