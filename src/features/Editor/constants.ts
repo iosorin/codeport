@@ -1,12 +1,11 @@
-import { EditorConfiguration } from 'codemirror';
-
 /* default editor value */
-export const DEFAULT_VALUE = `console.log(Math.random())`;
-export const DEFAULT_VALUE0 = `// 1. Implement a binary search algorithm.
+export const DEFAULT_VALUE2 = `console.log(Math.random())`;
+export const DEFAULT_VALUE3 = `// Welcome to codeport.com 👨‍🚀`;
+export const DEFAULT_VALUE = `// 1. Implement a binary search algorithm.
 class BinarySearch {
-    constructor(public sorted: number[]) {}
+    constructor(sorted) {}
 
-    indexOf(n: number): number {}
+    indexOf(number) {}
 }`;
 export const DEFAULT_VALUE1 = `/**
 * We declare a package-level function main which returns Unit and takes
@@ -18,17 +17,15 @@ fun main(args: Array<String>) {
 }`;
 
 /* default color theme */
-export const CODEPORT_THEME = 'codeport';
+export const CODEPORT_THEME = 'vs-dark';
 export const THEMES = [
-    CODEPORT_THEME,
-    'darcula',
-    'dracula',
-    'shadowfox',
-    'ayu-mirage',
     'monokai',
-    'material',
+    'idlefingers',
+    'pastels-on-dark',
+    'tomorrow-night-eighties',
+    'vs-dark',
 ];
-export const DEFAULT_THEME = 'darcula';
+export const DEFAULT_THEME = 'tomorrow-night-eighties';
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
@@ -44,21 +41,23 @@ export const MODES = [
     'go',
     'ruby',
     'lua',
-    'html',
     'typescript',
     'jsx',
+    'html',
 ];
 
 /* default language font-size */
-export const DEFAULT_MODE = 'javascript';
+export const DEFAULT_LANG = 'javascript';
 
 /* default font-size (px) */
 export const DEFAULT_FZ = 18;
 
 /* default settings */
-export type ExtendedEditorConfig = EditorConfiguration & { fontSize?: number };
-export const DEFAULT_SETTINGS: ExtendedEditorConfig = {
-    mode: DEFAULT_MODE,
+export type EditorSettings = any & {
+    fontSize?: number;
+};
+export const DEFAULT_SETTINGS: EditorSettings = {
+    language: DEFAULT_LANG,
     theme: DEFAULT_THEME,
     tabSize: 4,
     indentUnit: 4,

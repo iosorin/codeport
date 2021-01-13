@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -31,6 +32,37 @@ module.exports = {
         plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },
     plugins: [
+        new MonacoWebpackPlugin({
+            // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+            languages: dotenv.LANGUAGES.split(', '),
+            features: [
+                'anchorSelect',
+                'bracketMatching',
+                'caretOperations',
+                'clipboard',
+                'codeAction',
+                'codelens',
+                'colorDetector',
+                'comment',
+                'coreCommands',
+                'cursorUndo',
+                'fontZoom',
+                'format',
+                'inPlaceReplace',
+                'indentation',
+                'inspectTokens',
+                'linesOperations',
+                'multicursor',
+                'onTypeRename',
+                'quickCommand',
+                'rename',
+                'smartSelect',
+                'suggest',
+                'unusualLineTerminators',
+                'wordOperations',
+                'wordPartOperations',
+            ],
+        }),
         new webpack.DefinePlugin({ 'process.env': JSON.stringify(dotenv) }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
