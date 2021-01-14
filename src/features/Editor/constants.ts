@@ -6,7 +6,12 @@ class BinarySearch {
     constructor(sorted) {}
 
     indexOf(number) {}
-}`;
+};
+
+const instance = new BinarySearch([1, 2, 3, 4, 5, 6]);
+
+console.log(instance.indexOf(5));`;
+
 export const DEFAULT_VALUE1 = `/**
 * We declare a package-level function main which returns Unit and takes
 * an Array of strings as a parameter. Note that semicolons are optional.
@@ -25,7 +30,7 @@ export const THEMES = [
     'tomorrow-night-eighties',
     'vs-dark',
 ];
-export const DEFAULT_THEME = 'tomorrow-night-eighties';
+export const DEFAULT_THEME = 'idlefingers';
 
 /* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
 export const MODES = [
