@@ -1,6 +1,7 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@/services';
-import { DEFAULT_SETTINGS, DEFAULT_VALUE, ExtendedEditorConfig, CODEPORT_THEME } from './constants';
+import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettings } from './constants';
+import { API } from './editor.api';
 
 class EditorStore {
     roomID = '';
@@ -13,7 +14,7 @@ class EditorStore {
 
     settingsIsVisible = false;
 
-    consoleIsVisible = true;
+    consoleIsVisible = false;
 
     constructor() {
         makeAutoObservable(this, { socket: false });
@@ -23,13 +24,31 @@ class EditorStore {
                 this.bindEvents();
             }
         });
+
+        this.init();
     }
 
-    setValue = (newValue: string, fromOrigin = false) => {
-        this.value = newValue;
+    init() {
+        const { value, settings } = API;
 
-        if (this.roomID && fromOrigin) {
-            this.socket.emit('editor-value', this.value);
+        if (value) {
+            this.setValue(value, false);
+        }
+
+        if (settings) {
+            this.setSettings(settings, false);
+        }
+    }
+
+    setValue = (value: string, fromOrigin = false) => {
+        this.value = value;
+
+        if (fromOrigin) {
+            API.value = value;
+
+            if (this.roomID) {
+                this.socket.emit('editor-value', value);
+            }
         }
     };
 
@@ -45,23 +64,24 @@ class EditorStore {
         this.consoleIsVisible = show;
     };
 
-    _setSettings = (updated: ExtendedEditorConfig) => {
-        this.settings = { ...this.settings, ...updated };
+    _setSettings = (settings: EditorSettings) => {
+        this.settings = { ...this.settings, ...settings };
     };
 
-    setSettings = async (updated: ExtendedEditorConfig = {}, fromOrigin = true) => {
-        const { theme } = updated;
+    setSettings = async (settings: EditorSettings = {}, fromOrigin = true) => {
+        const { theme } = settings;
 
         if (theme && theme !== CODEPORT_THEME) {
             await import(`codemirror/theme/${theme}.css`);
         }
 
         if (fromOrigin) {
-            this.socket.emit('editor-settings', updated);
+            this.socket.emit('editor-settings', settings);
+
+            API.settings = settings;
         }
 
-        // eslint-disable-next-line no-underscore-dangle
-        this._setSettings(updated);
+        this._setSettings(settings);
     };
 
     bindEvents = () => {
@@ -74,7 +94,7 @@ class EditorStore {
             this.setValue(newValue);
         });
 
-        this.socket.on('client:editor-settings', (newSettings: ExtendedEditorConfig) => {
+        this.socket.on('client:editor-settings', (newSettings: EditorSettings) => {
             this.setSettings(newSettings, false);
         });
     };

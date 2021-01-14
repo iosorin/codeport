@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { ArrowUpLeft, Settings } from 'react-feather';
 import styles from './status-bar.scss';
-import { ExtendedEditorConfig } from '../../constants';
+import { EditorSettings } from '../../constants';
 import { Tooltip } from '@/library/.ui';
+import { HOTKEYS } from '@/library/constants';
 
 type Props = {
-    settings: ExtendedEditorConfig;
+    settings: EditorSettings;
     className?: string;
     toggleSettings: (show?: boolean) => void;
     toggleConsole: (show?: boolean) => void;
@@ -27,11 +28,11 @@ export const StatusBar: FC<Props> = ({
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>
 
-            <Tooltip content="Settings [ctrl+p]" className={styles.icon} center>
+            <Tooltip content={HOTKEYS.TOGGLE_EDITOR_SETTINGS.label} className={styles.icon} center>
                 <Settings size="15" onClick={() => toggleSettings(true)} />
             </Tooltip>
 
-            <Tooltip content="Console [ctrl+.]" className={styles.icon} center>
+            <Tooltip content={HOTKEYS.TOGGLE_EDITOR_CONSOLE.label} className={styles.icon} center>
                 <ArrowUpLeft size="16" onClick={() => toggleConsole()} className="chevron" />
             </Tooltip>
         </div>

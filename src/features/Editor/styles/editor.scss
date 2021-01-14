@@ -18,6 +18,7 @@
     border-bottom-right-radius: $radius;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 
     &.active {
         position: relative;
@@ -28,14 +29,4 @@
             border-bottom: 1px solid rgba(#aaa, 0.05);
         }
     }
-}
-
-.loading {
-    @include cover;
-    z-index: 1;
-    background: $black;
-    opacity: 0.8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

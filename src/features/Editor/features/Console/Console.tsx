@@ -25,7 +25,7 @@ export const Console: FC<Props> = observer(
         }, [language, setEditorValue]);
 
         return (
-            <div className={`${styles.Compiler} ${className}`}>
+            <div className={`${styles.Console} ${className}`}>
                 <div className="flex flex-between">
                     <div className={styles.Title}>Console</div>
 

@@ -1,4 +1,4 @@
-import { API } from './Compiler.api';
+import { API } from './console.api';
 import { makeAutoObservable } from 'mobx';
 import { languages } from './languages';
 

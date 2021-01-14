@@ -14,7 +14,7 @@ export const PanelFooter: FC<Props> = ({ length, leave, refresh }) => {
 
     return (
         <div className={styles.footer}>
-            <h4>
+            <h4 className={styles.participants}>
                 Participants: {length}/{max}
             </h4>
 
