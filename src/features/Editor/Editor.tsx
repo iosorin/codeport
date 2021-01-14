@@ -11,14 +11,16 @@ import { Console } from './features/Console';
 import store from './store';
 import styles from './styles/editor.scss';
 import './styles/codemirror.shared.scss';
+import { HOTKEYS } from '@/library/constants';
 
 type Props = {
     roomID: string;
 };
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
-    useHotkey('ctrl+p', () => store.toggleSettings());
-    useHotkey('ctrl+.', () => store.toggleConsole(), true, true);
+    useHotkey('ctrl+s', (e) => e.preventDefault());
+    useHotkey(HOTKEYS.TOGGLE_EDITOR_SETTINGS.key, () => store.toggleSettings());
+    useHotkey(HOTKEYS.TOGGLE_EDITOR_CONSOLE.key, () => store.toggleConsole(), true, true);
 
     useEffect(() => {
         store.setRoomID(roomID);

@@ -83,18 +83,23 @@ $sidebar-icon-size: 27px;
 $sidebar-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
 $sidebar-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.3);
 
+/* FEATURES */
+$small-footer-padding-x: 12px;
+
 /* editor */
 $editor-default-background: lighten($black, 1%);
 $editor-bar-background: rgba($black, 0.3);
 $editor-status-bar-justify: flex-start;
 $editor-status-bar-opacity: 0.5;
-$editor-status-bar-padding: 6px 15px;
-$editor-compiler-fz: 12px;
+$editor-status-bar-padding: 10px $small-footer-padding-x;
+$editor-console-padding: 4px $small-footer-padding-x;
+$editor-console-fz: 12px;
 
 /* conference */
 $call-panel-default-background: $black;
 $call-panel-width: 430px;
 $call-video-height: 200px;
 $call-panel-padding: 0 0 12px 25px;
+$call-panel-footer-padding: 5px $small-footer-padding-x;
 $call-panel-gap: 0;
 $call-panel-transition: 0.4s width;

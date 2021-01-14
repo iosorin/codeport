@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 3px 12px;
+    padding: $call-panel-footer-padding;
     z-index: 1;
 
     button {
@@ -26,11 +26,12 @@
         }
     }
 
-    h4 {
-        margin-bottom: 4px;
-        letter-spacing: 0.6px;
-        font-size: 13px;
+    .participants {
+        margin-bottom: 5px;
+        letter-spacing: 0.5px;
         font-weight: normal;
+        font-size: 13px;
+        cursor: default;
     }
 }
 

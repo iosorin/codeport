@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { Select, Input, Dialog } from '@ui';
-import { ExtendedEditorConfig, MODES, THEMES } from '../constants';
+import { EditorSettings, MODES, THEMES } from '../constants';
 
 type Props = {
-    settings: ExtendedEditorConfig;
+    settings: EditorSettings;
     isOpen: boolean;
     toggleSettings: (show: boolean) => void;
-    setSettings: (settings: ExtendedEditorConfig) => void;
+    setSettings: (settings: EditorSettings) => void;
 };
 
 export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
