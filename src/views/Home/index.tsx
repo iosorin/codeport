@@ -36,16 +36,15 @@ export const Home: FC = observer((props) => {
     return (
         <BaseLayout>
             <div className={styles.container}>
-                <div className={styles.editor}>
-                    <Editor roomID={uuid} />
-                </div>
-
                 <div
                     className={`${styles.conference} ${
                         ui.conferencePanelIsVisible ? styles.visible : ''
                     }`}
                 >
                     <ConferencePanel roomID={uuid} />
+                </div>
+                <div className={styles.editor}>
+                    <Editor resizeContainer={ui.conferencePanelIsVisible} roomID={uuid} />
                 </div>
             </div>
         </BaseLayout>

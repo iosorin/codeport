@@ -51,6 +51,7 @@ module.exports = {
                 'inPlaceReplace',
                 'indentation',
                 'inspectTokens',
+                'hover',
                 'linesOperations',
                 'multicursor',
                 'onTypeRename',

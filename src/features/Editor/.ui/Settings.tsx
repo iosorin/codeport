@@ -44,13 +44,12 @@ export const Settings: FC<Props> = observer(({ store }) => {
 
                 <Input
                     append="px"
-                    label="Tab Width:"
+                    label="Tab size:"
                     max="10"
                     min="1"
                     onChange={(e: { currentTarget: { value: string | number } }) =>
                         store.setSettings({
                             tabSize: +e.currentTarget.value,
-                            indentUnit: +e.currentTarget.value,
                         })
                     }
                     type="number"
