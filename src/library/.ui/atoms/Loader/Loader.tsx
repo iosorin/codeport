@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
-import { Transition } from '../Transition';
 
-import styles from './loader.scss';
-
-type Props = {
+export type Props = {
     dur?: string;
     size?: string | number;
     color?: string;

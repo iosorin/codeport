@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-
-import styles from './styles.scss';
+import styles from './blank-layout.scss';
 
 export const BlankLayout: FC = ({ children }) => {
     return (

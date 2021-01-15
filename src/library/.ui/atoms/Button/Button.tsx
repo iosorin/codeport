@@ -7,6 +7,7 @@ export type Props = {
     label?: string;
     primary?: boolean;
     success?: boolean;
+    hover?: boolean;
     background?: string;
     size?: 'small' | 'medium' | 'large';
     rounded?: boolean;
@@ -22,6 +23,7 @@ export const Button: React.FC<Props> = ({
     size = 'medium',
     label,
     rounded,
+    hover,
     loading,
     disabled,
     success,
@@ -35,6 +37,7 @@ export const Button: React.FC<Props> = ({
     const mode = success ? styles.success : primary ? styles.primary : styles.secondary;
     const classlist = [styles.button, styles[size], mode, className];
 
+    if (hover) classlist.push(styles.hover);
     if (rounded) classlist.push(styles.rounded);
     if (loading) classlist.push(styles.loading);
 

@@ -21,7 +21,7 @@ export const ConferenceLimitDialog: FC<Props> = ({ isVisible, close }) => {
         >
             <div className="flex flex-column">
                 <h3>
-                    This meeting room has reached <br />
+                    This conference room has reached <br />
                     the maximum number of participants
                 </h3>
 

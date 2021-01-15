@@ -5,6 +5,7 @@ import { Exception } from '@/views/Exception';
 import { RouteComponentProps } from 'react-router-dom';
 import { uuid } from '@/library/utils';
 import { Notifications } from '@/views/Notifications';
+import { Schedule } from '@/views/Schedule';
 
 /* types */
 type MetaProps = {
@@ -33,6 +34,7 @@ export const ROUTES = {
         exact: true,
     },
     ACTIVITY: { title: 'Activity', link: 'Activity', path: '/activity', exact: true },
+    SCHEDULE: { title: 'Schedule', link: 'Schedule', path: '/schedule', exact: true },
     NOTIFICATIONS: {
         title: 'Notifications',
         link: 'Notifications',
@@ -72,6 +74,15 @@ export const paths: Array<NestedRouteProps> = [
         exact: ROUTES.ACTIVITY.exact,
         meta: {
             title: ROUTES.ACTIVITY.title,
+            requiresAuth: true,
+        },
+    },
+    {
+        path: ROUTES.SCHEDULE.path,
+        component: Schedule,
+        exact: ROUTES.SCHEDULE.exact,
+        meta: {
+            title: ROUTES.SCHEDULE.title,
             requiresAuth: true,
         },
     },

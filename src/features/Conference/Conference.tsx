@@ -1,25 +1,22 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
-
 import {
-    PanelFooter,
+    Footer,
     DevicesErrorText,
     ParticipantsList,
     ParticipantStream,
     ConferenceLimitDialog,
 } from './.ui';
-
 import store from './store';
-
-import styles from './conference-panel.scss';
+import styles from './conference.scss';
 
 type Props = {
+    mode?: 'list' | 'grid';
     roomID: string | undefined;
-    isVisible: boolean;
 };
 
-export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) => {
+export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) => {
     const history = useHistory();
 
     useEffect(() => {
@@ -37,7 +34,7 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
     };
 
     return (
-        <div className={`${styles.panel} ${isVisible ? styles.visible : null}`}>
+        <div className={`${styles.panel} ${styles[mode]}`}>
             <ConferenceLimitDialog close={goHome} isVisible={store.limitExceed} />
 
             {store.streamError ? (
@@ -56,7 +53,7 @@ export const ConferencePanel: FC<Props> = observer(({ roomID = '', isVisible }) 
                 </>
             )}
 
-            <PanelFooter leave={goHome} length={store.peers.length + 1} refresh={refresh} />
+            <Footer leave={goHome} length={store.peers.length + 1} refresh={refresh} />
         </div>
     );
 });
