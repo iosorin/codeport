@@ -34,7 +34,7 @@ export const Home: FC = observer((props) => {
     }, [socket, ui, uuid, history, props]);
 
     return (
-        <BaseLayout>
+        <BaseLayout wide>
             <div className={styles.container}>
                 <div className={styles.editor}>
                     <Editor roomID={uuid} />

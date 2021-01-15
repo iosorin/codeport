@@ -44,7 +44,11 @@ export const Sidebar: FC<Props> = ({ className = '', isVisible }) => {
                     </Tooltip>
                 </NavLink>
 
-                <NavLink to={ROUTES.HOME.path}>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.NOTIFICATIONS.exact}
+                    to={ROUTES.NOTIFICATIONS.path}
+                >
                     <Tooltip content="Notifications">
                         <Bell />
                     </Tooltip>
@@ -62,9 +66,11 @@ export const Sidebar: FC<Props> = ({ className = '', isVisible }) => {
                     </Tooltip>
                 </NavLink>
 
-                <Tooltip content="Get In Touch (@osorina)">
-                    <AtSign />
-                </Tooltip>
+                <a href="mailto:official.osorina@gmail.com">
+                    <Tooltip content="Get In Touch (@osorina)">
+                        <AtSign />
+                    </Tooltip>
+                </a>
 
                 <Tooltip content="Sign In">
                     <LogIn />
