@@ -12,11 +12,6 @@
     button {
         margin-right: -14px;
 
-        &:not(:hover) {
-            color: white;
-            background: transparent;
-        }
-
         &:not(:last-child) {
             margin-right: 5px;
         }

@@ -1,1 +1,1 @@
-export { ConferencePanel } from './ConferencePanel';
+export { Conference } from './Conference';

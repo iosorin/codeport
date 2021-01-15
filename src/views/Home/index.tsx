@@ -1,11 +1,11 @@
 import React, { FC, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useHistory, useParams } from 'react-router-dom';
 import { BaseLayout } from '@layouts';
 import { Editor } from '@/features/Editor';
-import { ConferencePanel } from '@/features/Conference';
-import styles from './index.scss';
+import { Conference } from '@/features/Conference';
 import { useCore } from '@/core';
-import { observer } from 'mobx-react-lite';
+import styles from './home.scss';
 
 export const Home: FC = observer((props) => {
     const history = useHistory();
@@ -40,7 +40,13 @@ export const Home: FC = observer((props) => {
                     <Editor roomID={uuid} />
                 </div>
 
-                <ConferencePanel isVisible={ui.conferencePanelIsVisible} roomID={uuid} />
+                <div
+                    className={`${styles.conference} ${
+                        ui.conferencePanelIsVisible ? styles.visible : ''
+                    }`}
+                >
+                    <Conference roomID={uuid} />
+                </div>
             </div>
         </BaseLayout>
     );

@@ -2,7 +2,9 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { Block, Props } from '.';
-
+// title
+// icon
+// small
 export default {
     title: 'Atoms/Block',
     component: Block,
@@ -18,6 +20,12 @@ export default {
             control: {
                 type: 'inline-radio',
                 options: ['light', 'dark', 'primary', 'success'],
+            },
+        },
+
+        stretch: {
+            control: {
+                type: 'boolean',
             },
         },
     },

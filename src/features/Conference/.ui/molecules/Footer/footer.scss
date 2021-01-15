@@ -9,13 +9,6 @@
     padding: $call-panel-footer-padding;
     z-index: 1;
 
-    button {
-        &:not(:hover) {
-            color: white;
-            background: transparent;
-        }
-    }
-
     .refresh {
         cursor: pointer;
         margin: 0 12px;

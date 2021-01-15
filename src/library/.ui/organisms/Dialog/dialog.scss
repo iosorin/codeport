@@ -18,7 +18,8 @@
     }
 
     &.large {
-        padding: calc(#{$dialog-padding} + 10px);
+        min-width: $dialog-minwidth * 1.2;
+        padding: $dialog-padding * 1.2;
 
         .title {
             font-size: 19px;
@@ -58,4 +59,6 @@
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
 }

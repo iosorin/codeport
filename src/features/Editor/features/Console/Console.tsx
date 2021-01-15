@@ -72,6 +72,7 @@ export const Console: FC<Props> = observer(
                     <div className={styles.Version}>{store.languageInfo.version}</div>
 
                     <Button
+                        hover
                         loading={store.loading}
                         onClick={() => store.execute(code, language)}
                         size="small"

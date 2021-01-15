@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Button } from '@ui';
-import styles from './panel-footer.scss';
 import { RefreshCcw } from 'react-feather';
+import { Button } from '@ui';
+import styles from './footer.scss';
 
 type Props = {
     length: number;
@@ -9,7 +9,7 @@ type Props = {
     refresh: () => void;
 };
 
-export const PanelFooter: FC<Props> = ({ length, leave, refresh }) => {
+export const Footer: FC<Props> = ({ length, leave, refresh }) => {
     const max = process.env.MAX_PEERS || 4;
 
     return (
@@ -19,7 +19,7 @@ export const PanelFooter: FC<Props> = ({ length, leave, refresh }) => {
             </h4>
 
             <div className="flex-center">
-                <Button size="small" onClick={leave}>
+                <Button size="small" onClick={leave} hover>
                     Leave
                 </Button>
 

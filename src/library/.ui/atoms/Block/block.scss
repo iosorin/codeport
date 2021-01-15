@@ -1,13 +1,35 @@
 .block {
-    width: $block-width;
-    font-size: $block-fz;
-    font-family: $block-ff;
-    line-height: 1.4;
     border-radius: $radius;
-    transition: box-shadow $tr;
+    transition: $tr;
 
     &:hover {
         box-shadow: $shadow;
+    }
+
+    &.styled {
+        width: $block-width;
+        font-size: $block-fz;
+        font-family: $block-ff;
+        line-height: 1.4;
+    }
+
+    &.square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: $block-width / 2;
+        height: $block-width / 2;
+    }
+
+    &.outline {
+        border: 1px solid;
+        &:not(:hover) {
+            background: transparent;
+        }
+        &:hover {
+            border-color: transparent;
+        }
     }
 
     &.stretch {
@@ -19,10 +41,23 @@
         padding: 10px;
     }
     &.medium {
-        padding: 15px;
+        padding: 20px;
     }
     &.large {
-        padding: 20px;
+        padding: 30px;
+        width: $block-width * 1.5;
+        font-size: 1.1em;
+        display: flex;
+        flex-direction: column;
+        .header {
+            margin-bottom: 17px;
+        }
+        .footer {
+            margin-top: auto;
+            span {
+                font-size: 1.2em;
+            }
+        }
     }
 
     // background
@@ -53,10 +88,15 @@
 
     span,
     small {
-        margin-top: 14px;
+        margin-top: 16px;
     }
 }
 
-.title {
-    margin-bottom: 10px;
+.header {
+    margin-bottom: 12px;
+    align-items: center;
+    display: flex;
+    button {
+        margin-left: auto;
+    }
 }

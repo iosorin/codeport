@@ -1,6 +1,7 @@
 .button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     line-height: 1;
     font-weight: 600;
     letter-spacing: 0.2px;
@@ -9,8 +10,11 @@
     transition: $button-transition;
     box-shadow: none;
 
-    &:hover:not(:active) {
-        box-shadow: $button-shadow;
+    &.primary,
+    &.secondary {
+        &:hover:not(:active) {
+            box-shadow: $button-shadow;
+        }
     }
 
     &:disabled,
@@ -26,19 +30,33 @@
     &.primary {
         color: white;
         background-color: $button-primary-background;
+        &.hover:not(:hover) {
+            background-color: $button-secondary-background !important;
+        }
     }
 
     &.secondary {
         color: $button-secondary-color;
         background-color: $button-secondary-background;
-        &:hover:not(:active) {
-            box-shadow: $button-secondary-shadow;
-        }
     }
 
     &.success {
         // color: white;
         background: $success;
+        color: white;
+        &.hover:not(:hover) {
+            background-color: $button-secondary-background !important;
+        }
+        &:hover:not(:active) {
+            box-shadow: $shadow-1;
+        }
+    }
+
+    &.hover {
+        &:not(:hover) {
+            // color: white;
+            background: transparent;
+        }
     }
 
     &.small {
@@ -60,8 +78,8 @@
     }
 
     &.medium {
-        font-size: 16px;
-        height: 35px;
+        font-size: 15px;
+        height: 36px;
         padding: 0 20px;
 
         &.rounded {
@@ -73,8 +91,8 @@
 
     &.large {
         font-size: 18px;
-        height: 42px;
-        padding: 0 28px 1px;
+        height: 50px;
+        padding: 0 30px;
 
         &.rounded {
             width: 53px;
@@ -88,12 +106,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
+        color: inherit;
+        box-shadow: none !important;
 
-        &.secondary:not(:hover) {
+        &.secondary:hover {
+            border: 2px solid;
+        }
+
+        &.hover {
             background: transparent;
-            color: inherit;
-            border: 1px solid;
         }
     }
 
