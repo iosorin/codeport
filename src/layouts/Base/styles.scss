@@ -1,5 +1,15 @@
 .content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    padding: $padding;
+    padding: $padding * 1.5 $padding * 2;
+
+    &.wide {
+        padding: $padding;
+    }
+
+    h1 {
+        margin-bottom: 0.45em;
+    }
 }

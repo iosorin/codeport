@@ -31,7 +31,7 @@ export const ConferenceLimitDialog: FC<Props> = ({ isVisible, close }) => {
                     </span>
                 </div>
 
-                <div className="buttons-row flex-center mt-2">
+                <div className="flex-center mt-2">
                     <div className="slide-in-elliptic">
                         <Button onClick={close}>Got it</Button>
                     </div>

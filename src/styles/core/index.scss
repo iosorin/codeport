@@ -1,6 +1,6 @@
 @import 'reset';
+@import 'mods';
 @import 'atomaric';
-@import 'typography';
 @import 'typography';
 
 body {
@@ -8,11 +8,6 @@ body {
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     overflow: hidden;
-}
-
-a:not([class]) {
-    color: white;
-    text-decoration-skip-ink: auto;
 }
 
 input {
@@ -35,25 +30,6 @@ article > * + * {
     color: white;
 }
 
-.pointer {
-    cursor: pointer;
-    pointer-events: all;
-}
-
-.hoverable {
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity $tr;
-
-    &:hover {
-        opacity: 1;
-    }
-}
-
-.hidden {
-    display: none;
-}
-
 .label {
     font-size: 14px;
     font-weight: 600;
@@ -72,24 +48,15 @@ article > * + * {
     transform: translateY(50%);
 }
 
-.input-row,
-.buttons-row {
+.list {
     display: flex;
-    margin: $input-margin;
-}
 
-.input-row {
-    flex-direction: column;
-}
+    & > * {
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
 
-.buttons-row {
-    align-items: center;
-    margin-top: 12px;
-
-    & > button,
-    & > div {
-        &:not(:last-child) {
-            margin-right: 15px;
-        }
+    &-vertical {
+        flex-direction: column;
     }
 }

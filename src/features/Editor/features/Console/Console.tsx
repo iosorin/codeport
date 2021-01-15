@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button } from '@/library/.ui';
+import { Button } from '@ui';
 import store from './store';
 import styles from './console.scss';
 import { IFrame } from './IFrame';

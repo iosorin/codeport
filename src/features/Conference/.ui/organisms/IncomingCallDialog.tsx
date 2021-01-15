@@ -28,7 +28,7 @@ export const IncomingCallDialog: FC<Props> = ({ isVisible, close, accept }) => {
                     </span>
                 </div>
 
-                <div className="buttons-row flex-center mt-2">
+                <div className="list flex-center mt-2">
                     <div className="slide-in-elliptic">
                         <Button
                             className="pulsate"

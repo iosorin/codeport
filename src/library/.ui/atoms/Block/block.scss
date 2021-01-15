@@ -1,0 +1,62 @@
+.block {
+    width: $block-width;
+    font-size: $block-fz;
+    font-family: $block-ff;
+    line-height: 1.4;
+    border-radius: $radius;
+    transition: box-shadow $tr;
+
+    &:hover {
+        box-shadow: $shadow;
+    }
+
+    &.stretch {
+        width: 100%;
+    }
+
+    // size
+    &.small {
+        padding: 10px;
+    }
+    &.medium {
+        padding: 15px;
+    }
+    &.large {
+        padding: 20px;
+    }
+
+    // background
+    &.light {
+        background: white;
+        color: $black;
+        &:hover {
+            box-shadow: $shadow-light;
+        }
+        a {
+            color: $black;
+        }
+    }
+    &.dark {
+        background: darken($black, 5%);
+    }
+    &.primary {
+        background: $block-primary;
+    }
+    &.success {
+        background: $success;
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+
+    span,
+    small {
+        margin-top: 14px;
+    }
+}
+
+.title {
+    margin-bottom: 10px;
+}

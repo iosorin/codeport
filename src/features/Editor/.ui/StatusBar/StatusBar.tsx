@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ArrowUpLeft, Settings } from 'react-feather';
 import styles from './status-bar.scss';
 import { EditorSettings } from '../../constants';
-import { Tooltip } from '@/library/.ui';
+import { Tooltip } from '@ui';
 import { HOTKEYS } from '@/library/constants';
 
 type Props = {
