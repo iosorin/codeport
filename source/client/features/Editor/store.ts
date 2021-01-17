@@ -1,0 +1,103 @@
+import { autorun, makeAutoObservable } from 'mobx';
+import { SocketService } from '@services';
+import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettings } from './constants';
+import { API } from './editor.api';
+
+class EditorStore {
+    roomID = '';
+
+    socket = SocketService.getInstance();
+
+    value = DEFAULT_VALUE;
+
+    settings = DEFAULT_SETTINGS;
+
+    settingsIsVisible = false;
+
+    consoleIsVisible = false;
+
+    constructor() {
+        makeAutoObservable(this, { socket: false });
+
+        autorun(() => {
+            if (this.roomID) {
+                this.bindEvents();
+            }
+        });
+
+        this.init();
+    }
+
+    init() {
+        const { value, settings } = API;
+
+        if (value) {
+            this.setValue(value, false);
+        }
+
+        if (settings) {
+            this.setSettings(settings, false);
+        }
+    }
+
+    setValue = (value: string, fromOrigin = false) => {
+        this.value = value;
+
+        if (fromOrigin) {
+            API.value = value;
+
+            if (this.roomID) {
+                this.socket.emit('editor-value', value);
+            }
+        }
+    };
+
+    setRoomID = (value: string) => {
+        this.roomID = value;
+    };
+
+    toggleSettings = (show = !this.settingsIsVisible) => {
+        this.settingsIsVisible = show;
+    };
+
+    toggleConsole = (show = !this.consoleIsVisible) => {
+        this.consoleIsVisible = show;
+    };
+
+    _setSettings = (settings: EditorSettings) => {
+        this.settings = { ...this.settings, ...settings };
+    };
+
+    setSettings = async (settings: EditorSettings = {}, fromOrigin = true) => {
+        const { theme } = settings;
+
+        if (theme && theme !== CODEPORT_THEME) {
+            await import(`codemirror/theme/${theme}.css`);
+        }
+
+        if (fromOrigin) {
+            this.socket.emit('editor-settings', settings);
+
+            API.settings = settings;
+        }
+
+        this._setSettings(settings);
+    };
+
+    bindEvents = () => {
+        this.socket.on('client:user-joined', () => {
+            this.socket.emit('editor-value', this.value);
+            this.socket.emit('editor-settings', this.settings);
+        });
+
+        this.socket.on('client:editor-value', (newValue: string) => {
+            this.setValue(newValue);
+        });
+
+        this.socket.on('client:editor-settings', (newSettings: EditorSettings) => {
+            this.setSettings(newSettings, false);
+        });
+    };
+}
+
+export default new EditorStore();

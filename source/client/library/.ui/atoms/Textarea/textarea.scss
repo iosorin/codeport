@@ -1,0 +1,13 @@
+.container {
+    position: relative;
+    margin: $input-margin;
+    width: 100%;
+    display: block;
+
+    textarea {
+        width: 100%;
+        resize: none;
+        @include input;
+        @include scrollable;
+    }
+}

@@ -10,14 +10,6 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const generateScopedName = require('./helpers/generateScopedName');
 
-const disableReactDevtools = `
-<script>
-if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
-}
-</script>
-`;
-
 const coreCssRegex = [paths.styles, /\.shared.(css|scss)$/, /node_modules/];
 
 module.exports = merge(common, {
@@ -71,7 +63,6 @@ function plugins() {
             template: paths.public + '/template.html',
             favicon: paths.public + '/favicon.ico',
             hash: true,
-            disableReactDevtools,
         }),
         new webpack.SourceMapDevToolPlugin({
             exclude: ['/node_modules/'],

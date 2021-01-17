@@ -1,11 +1,5 @@
 {
-    "restartable": "rs",
-    "verbose": false,
-    "events": {
-        "restart": "echo restart"
-    },
-    "exec": "node server",
-    "watch": ["server/*.js", ".env", ".env.*"],
-    "ext": "js, json",
-    "legacy-watch": false
+    "watch": ["server/", ".env"],
+    "ext": "ts",
+    "exec": "cross-env NODE_ENV=development node --inspect -r ts-node/register ./source/server/index.ts"
 }
