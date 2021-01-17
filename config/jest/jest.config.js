@@ -5,9 +5,9 @@ module.exports = {
 
     testEnvironment: 'jsdom',
 
-    // The root of your source code, typically /src
+    // The root of your source code, typically src
     // `<rootDir>` is a token Jest substitutes
-    roots: ['<rootDir>/src'],
+    roots: ['<rootDir>/source/client'],
 
     // Jest transformations -- this adds support for TypeScript
     // using ts-jest
@@ -30,15 +30,16 @@ module.exports = {
     setupFilesAfterEnv: ['@testing-library/jest-dom'],
 
     moduleNameMapper: {
-        '@/(.*)$': '<rootDir>/src/$1',
-        '@media/(.*)$': '<rootDir>/src/media/$1',
-        '@styles/(.*)$': '<rootDir>/src/styles/$1',
-        '@ui/(.*)$': '<rootDir>/src/library/.ui/$1',
-        '@ui(.*)$': '<rootDir>/src/library/.ui',
-        '@hooks(.*)$': '<rootDir>/src/library/hooks',
-        '@services(.*)$': '<rootDir>/src/library/services',
-        '@layouts/(.*)$': '<rootDir>/src/layouts/$1',
-        '@layouts(.*)$': '<rootDir>/src/layouts',
+        '@/(.*)$': '<rootDir>/source/client/$1',
+        '@media/(.*)$': '<rootDir>/source/client/media/$1',
+        '@styles/(.*)$': '<rootDir>/source/client/styles/$1',
+        '@ui/(.*)$': '<rootDir>/source/client/library/.ui/$1',
+        '@ui(.*)$': '<rootDir>/source/client/library/.ui',
+        '@hooks(.*)$': '<rootDir>/source/client/library/hooks',
+        '@services(.*)$': '<rootDir>/source/client/library/services',
+        '@layouts/(.*)$': '<rootDir>/source/client/layouts/$1',
+        '@layouts(.*)$': '<rootDir>/source/client/layouts',
+        'types/(.*)$': '<rootDir>/source/types/$1',
     },
 
     // Test spec file resolution pattern

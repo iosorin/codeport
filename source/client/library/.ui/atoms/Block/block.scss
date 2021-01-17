@@ -1,0 +1,119 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius;
+    transition: $tr;
+
+    &:hover {
+        box-shadow: $shadow;
+    }
+
+    &.styled {
+        font-size: $block-fz;
+        font-family: $block-ff;
+        line-height: 1.4;
+    }
+
+    &.square {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 100%;
+    }
+
+    &.outline {
+        border: 1px solid;
+        &:not(:hover) {
+            background: transparent;
+        }
+        &:hover {
+            border-color: transparent;
+        }
+    }
+
+    &.stretch {
+        width: 100%;
+    }
+
+    // size
+    &.small {
+        padding: 14px 17px;
+        &.styled {
+            font-size: $block-fz / 1.1;
+        }
+
+        .header {
+            margin-bottom: 7px;
+        }
+        .footer {
+            span,
+            small {
+                margin-top: 10px;
+            }
+        }
+    }
+    &.medium {
+        padding: 22px 25px;
+    }
+    &.large {
+        padding: 22px 25px;
+        font-size: 1.1em;
+    }
+
+    // background
+    &.light {
+        background: white;
+        &:hover {
+            box-shadow: $shadow-light;
+        }
+    }
+    &.dark {
+        background: darken($black, 5%);
+    }
+    &.primary {
+        background: $block-primary;
+    }
+    &.success {
+        background: $success;
+    }
+    &.yellow {
+        background: $yellow;
+    }
+
+    &.light,
+    &.yellow {
+        color: $black;
+        a {
+            color: $black;
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    span {
+        font-size: 1.2em;
+    }
+    span,
+    small {
+        margin-top: 25px;
+    }
+}
+
+.header {
+    margin-bottom: 20px;
+    margin-bottom: 12px;
+    align-items: center;
+    display: flex;
+    > div {
+        margin-left: auto;
+        display: flex;
+        button + button {
+            margin-left: 5px;
+        }
+    }
+}
