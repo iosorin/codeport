@@ -4,7 +4,7 @@ import { date } from '@/library/utils';
 import { ScheduleEvent } from 'types';
 
 type Props = {
-    event: ScheduleEvent | null;
+    event: ScheduleEvent | null | undefined;
     isOpen: boolean;
     closeDialog: () => void;
     onSubmit: () => void;

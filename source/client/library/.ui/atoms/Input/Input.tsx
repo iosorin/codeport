@@ -8,12 +8,12 @@ type OwnProps = {
 
 type Props = OwnProps & HTMLProps<HTMLInputElement>;
 
-export const Input: FC<Props> = ({ type = 'text', label, append, ...props }) => {
+export const Input: FC<Props> = ({ type = 'text', value, label, append, ...props }) => {
     return (
         <div className={styles.container}>
             {label ? <div className="label">{label}</div> : null}
 
-            <input {...props} type={type} />
+            <input {...props} type={type} value={value || ''} />
 
             {append ? <div className="append">{append}</div> : null}
         </div>
