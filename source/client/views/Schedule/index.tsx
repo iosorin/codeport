@@ -7,13 +7,15 @@ import { useApi } from '@/core';
 import { ScheduleEvent } from 'types';
 
 // title, date, stack, salary, contacts, additional
+type ScheduleEventOrNull = ScheduleEvent | null | undefined;
 
 export const Schedule: FC = () => {
     const api = useApi();
 
     const [loading, setLoading] = useState(true);
+
+    const [activeEvent, setActiveEvent] = useState<ScheduleEventOrNull>();
     const [scheduleList, setScheduleList] = useState<ScheduleEvent[]>([]);
-    const [activeEvent, setActiveEvent] = useState<ScheduleEvent | null>(null);
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
     useEffect(() => {
@@ -25,12 +27,13 @@ export const Schedule: FC = () => {
             .finally(() => setTimeout(() => setLoading(false), 300));
     }, [api.schedule]);
 
-    const openDialog = () => setDialogIsOpen(true);
-    const closeDialog = () => setDialogIsOpen(false);
-
-    const editEvent = (event: ScheduleEvent) => {
+    const openDialog = (event: ScheduleEventOrNull = null) => {
         setActiveEvent(event);
-        openDialog();
+        setDialogIsOpen(true);
+    };
+    const closeDialog = () => {
+        setActiveEvent(null);
+        setDialogIsOpen(false);
     };
 
     return (
@@ -43,7 +46,12 @@ export const Schedule: FC = () => {
                 <div className="container">
                     <h3 className="text-grey">The list of scheduled conferences is empty.</h3>
 
-                    <Button background="primary" className="mt-2" onClick={openDialog} size="large">
+                    <Button
+                        background="primary"
+                        className="mt-2"
+                        onClick={() => openDialog()}
+                        size="large"
+                    >
                         Schedule a new conference
                     </Button>
                 </div>
@@ -58,13 +66,13 @@ export const Schedule: FC = () => {
                                 background="dark"
                                 controlsInBottom
                                 icon="🐱‍"
-                                onEdit={() => editEvent(event)}
+                                onEdit={() => openDialog(event)}
                                 onRemove={console.log}
                                 styled
                                 title={event.title}
                             >
                                 <p>
-                                    <b>Date:</b> {new Date(event.date).toLocaleString()}
+                                    <b>Date:</b> <u>{new Date(event.date).toLocaleString()}</u>
                                 </p>
 
                                 {event.stack && (
@@ -95,7 +103,7 @@ export const Schedule: FC = () => {
                     <Button
                         background="light"
                         className="mt-auto ml-auto"
-                        onClick={openDialog}
+                        onClick={() => openDialog()}
                         rounded
                         size="large"
                     >
