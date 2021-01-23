@@ -3,7 +3,7 @@ import http from 'http';
 import socketIO from 'socket.io';
 import paths from '../../config/paths';
 import { User } from 'types';
-
+import { router } from './router';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -25,6 +25,7 @@ class App {
         const app = express();
 
         app.use(express.static(paths.dist));
+        app.use('/api', router);
 
         this.port = port;
 

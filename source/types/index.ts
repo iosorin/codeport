@@ -5,3 +5,13 @@ export type User = {
         video: boolean;
     };
 };
+
+export type ScheduleEvent = {
+    id: number;
+    date: number;
+    title: string;
+    stack: string;
+    salary: string;
+    contacts: string;
+    additional: string;
+};

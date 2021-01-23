@@ -1,17 +1,22 @@
-let list = [
-    { id: 1, name: 'AWS', status: 'working' },
-    { id: 2, name: 'Google Cloud', status: 'working' },
-    { id: 3, name: 'Yandex Cloud', status: 'working' },
-    { id: 4, name: 'Microsoft', status: 'pending' },
+import { ScheduleEvent } from 'types';
+
+let list: ScheduleEvent[] = [
+    {
+        id: 0,
+        date: 1611411691902,
+        title: 'SFXDX, Kaliningrad',
+        stack: 'react, typescript, mobx, unit-tests',
+        salary: 'from 70 000 after taxes',
+        contacts: 'https://t.me/someone',
+        additional: 'full time, remote working',
+    },
 ];
 
-export const getAll = (req, res) => {
-    res.json(list);
-};
+export const get = (_, res) => res.json(list);
 
 export const create = (req, res) => {
     const newScheduleEvent = {
-        id: Date.now().toString(),
+        id: Date.now(),
         ...req.body,
     };
 
