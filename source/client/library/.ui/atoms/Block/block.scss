@@ -91,29 +91,31 @@
     }
 }
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-    span {
-        font-size: 1.2em;
-    }
-    span,
-    small {
-        margin-top: 25px;
-    }
-}
-
 .header {
     margin-bottom: 20px;
     margin-bottom: 12px;
     align-items: center;
     display: flex;
-    > div {
-        margin-left: auto;
-        display: flex;
-        button + button {
-            margin-left: 5px;
-        }
+}
+
+.content {
+    margin-bottom: 25px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    span {
+        font-size: 1.2em;
+    }
+}
+
+.controls {
+    margin-left: auto;
+    display: flex;
+    button + button {
+        margin-left: 5px;
     }
 }

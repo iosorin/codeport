@@ -5,13 +5,15 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use((config) => {
-    const form = new FormData();
+    if (config.data) {
+        const form = new FormData();
 
-    Object.keys(config.data).forEach((key) => {
-        form.append(key, config.data[key]);
-    });
+        Object.keys(config.data).forEach((key) => {
+            form.append(key, config.data[key]);
+        });
 
-    config.data = form;
+        config.data = form;
+    }
 
     return config;
 });

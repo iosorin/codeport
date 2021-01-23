@@ -13,6 +13,7 @@ export type Props = {
     square?: boolean;
     outline?: boolean;
     styled?: boolean;
+    controlsInBottom?: boolean;
     onEdit?: () => void;
     onRemove?: () => void;
 };
@@ -27,6 +28,7 @@ export const Block: FC<Props> = ({
     square,
     outline,
     styled,
+    controlsInBottom,
     onEdit,
     onRemove,
     children,
@@ -38,47 +40,53 @@ export const Block: FC<Props> = ({
     if (square) classlist.push(styles.square);
     if (outline) classlist.push(styles.outline);
 
+    const controls = (
+        <div className={styles.controls}>
+            {onEdit && (
+                <Button
+                    rounded
+                    outline
+                    hover
+                    size="small"
+                    onClick={onEdit}
+                    color={background === 'light' ? 'black' : 'white'}
+                >
+                    <Edit3 size="15" />
+                </Button>
+            )}
+
+            {onRemove && (
+                <Button
+                    rounded
+                    outline
+                    hover
+                    size="small"
+                    onClick={onRemove}
+                    color={background === 'light' ? 'black' : 'white'}
+                >
+                    <X size="17" />
+                </Button>
+            )}
+        </div>
+    );
+
     return (
         <div className={classlist.join(' ')}>
             {(title || onEdit || onRemove) && (
                 <div className={styles.header}>
                     {title && <h3>{title}</h3>}
 
-                    <div>
-                        {onEdit && (
-                            <Button
-                                rounded
-                                outline
-                                hover
-                                size="small"
-                                onClick={onEdit}
-                                color={background === 'light' ? 'black' : 'white'}
-                            >
-                                <Edit3 size="15" />
-                            </Button>
-                        )}
-
-                        {onRemove && (
-                            <Button
-                                rounded
-                                outline
-                                hover
-                                size="small"
-                                onClick={onRemove}
-                                color={background === 'light' ? 'black' : 'white'}
-                            >
-                                <X size="17" />
-                            </Button>
-                        )}
-                    </div>
+                    {!controlsInBottom && controls}
                 </div>
             )}
 
-            {children}
+            <div className={styles.content}>{children}</div>
 
             <div className={styles.footer}>
                 {icon && <span>{icon}</span>}
                 {small && <small>{small}</small>}
+
+                {controlsInBottom && controls}
             </div>
         </div>
     );

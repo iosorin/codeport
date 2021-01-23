@@ -1,35 +1,45 @@
 import React, { FC, useEffect, useState } from 'react';
 import { BaseLayout } from '@layouts';
-import { Block, Button } from '@/library/.ui';
+import { Block, Button, Loader, Transition } from '@/library/.ui';
 import { ScheduleDialog } from './ScheduleDialog';
 import { Plus } from 'react-feather';
 import { useApi } from '@/core';
+import { ScheduleEvent } from 'types';
 
-// title, date, stack, salary, work_format, contacts
+// title, date, stack, salary, contacts, additional
 
 export const Schedule: FC = () => {
     const api = useApi();
 
-    const [scheduleList, setScheduleList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [scheduleList, setScheduleList] = useState<ScheduleEvent[]>([]);
+    const [activeEvent, setActiveEvent] = useState<ScheduleEvent | null>(null);
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
     useEffect(() => {
-        console.log('useEffect');
-        api.schedule.getAll().then(setScheduleList);
-    }, [api.schedule]);
+        setLoading(true);
 
-    useEffect(() => {
-        console.log(scheduleList);
-    }, [scheduleList]);
+        api.schedule
+            .getAll()
+            .then(setScheduleList)
+            .finally(() => setTimeout(() => setLoading(false), 300));
+    }, [api.schedule]);
 
     const openDialog = () => setDialogIsOpen(true);
     const closeDialog = () => setDialogIsOpen(false);
+
+    const editEvent = (event: ScheduleEvent) => {
+        setActiveEvent(event);
+        openDialog();
+    };
 
     return (
         <BaseLayout>
             <h1>Schedule</h1>
 
-            {false ? (
+            {loading && <Loader />}
+
+            <Transition in={!scheduleList.length && !loading}>
                 <div className="container">
                     <h3 className="text-grey">The list of scheduled conferences is empty.</h3>
 
@@ -37,55 +47,49 @@ export const Schedule: FC = () => {
                         Schedule a new conference
                     </Button>
                 </div>
-            ) : (
-                <>
+            </Transition>
+
+            <Transition in={scheduleList.length && !loading}>
+                <div className="container">
                     <div className="grid flex-1 scrollable">
-                        <Block
-                            background="dark"
-                            icon="🐱‍"
-                            onEdit={openDialog}
-                            onRemove={console.log}
-                            small="Jun 4 2020 at 5:35 am"
-                            styled
-                            title="SFXDX, Kaliningrad"
-                        >
-                            <p>
-                                <b>Stack:</b> react, typescript, mobx, unit-tests
-                            </p>
-                            <p>
-                                <b>Salary:</b> from 70 000 after taxes
-                            </p>
-                            <p>
-                                <b>Contacts:</b> https://t.me/someone
-                            </p>
-                            <p className="scrollable" style={{ maxHeight: '100px' }}>
-                                <b>Additional:</b> Full time, remote working
-                            </p>
-                        </Block>
+                        {scheduleList.map((event) => (
+                            <Block
+                                key={event.id}
+                                background="dark"
+                                controlsInBottom
+                                icon="🐱‍"
+                                onEdit={() => editEvent(event)}
+                                onRemove={console.log}
+                                styled
+                                title={event.title}
+                            >
+                                <p>
+                                    <b>Date:</b> {new Date(event.date).toLocaleString()}
+                                </p>
 
-                        <Block
-                            background="dark"
-                            icon="🐱‍"
-                            onEdit={openDialog}
-                            onRemove={console.log}
-                            small="Jun 4 2020 at 5:35 am"
-                            styled
-                            title="SFXDX, Kaliningrad"
-                        >
-                            <p>
-                                <b>Stack:</b> react, typescript, mobx, unit-tests
-                            </p>
-                            <p>
-                                <b>Salary:</b> from 70 000 after taxes
-                            </p>
+                                {event.stack && (
+                                    <p>
+                                        <b>Stack:</b> {event.stack}
+                                    </p>
+                                )}
 
-                            <p>
-                                <b>Contacts:</b> https://t.me/someone
-                            </p>
-                            <p className="scrollable" style={{ maxHeight: '100px' }}>
-                                <b>Additional:</b> Full time, remote working
-                            </p>
-                        </Block>
+                                {event.salary && (
+                                    <p>
+                                        <b>Salary:</b> {event.salary}
+                                    </p>
+                                )}
+                                {event.contacts && (
+                                    <p>
+                                        <b>Contacts:</b> {event.contacts}
+                                    </p>
+                                )}
+                                {event.additional && (
+                                    <p className="scrollable" style={{ maxHeight: '100px' }}>
+                                        <b>Additional:</b> {event.additional}
+                                    </p>
+                                )}
+                            </Block>
+                        ))}
                     </div>
 
                     <Button
@@ -97,11 +101,12 @@ export const Schedule: FC = () => {
                     >
                         <Plus />
                     </Button>
-                </>
-            )}
+                </div>
+            </Transition>
 
             <ScheduleDialog
                 closeDialog={closeDialog}
+                event={activeEvent}
                 isOpen={dialogIsOpen}
                 onSubmit={console.log}
             />

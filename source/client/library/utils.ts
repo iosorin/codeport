@@ -11,6 +11,18 @@ export const uuid = () => {
     return Date.now().toString(36);
 };
 
+export const date = {
+    input(d: Date | number | undefined, type = 'datetime-local'): string {
+        if (!d) return '';
+
+        const date = new Date(d);
+
+        const stop = type === 'datetime-local' ? 16 : 10;
+
+        return date.toISOString().substring(0, stop);
+    },
+};
+
 export const ls = (key: string, payload?: any, merge?: boolean) => {
     // @ts-ignore
     const data = JSON.parse(window.localStorage.getItem(key));

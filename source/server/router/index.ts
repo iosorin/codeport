@@ -1,9 +1,8 @@
 import express from 'express';
-
-import scheduleRoutes from './schedule';
+import schedule from './schedule';
 
 const router = express.Router();
 
-router.use('/schedule', scheduleRoutes);
+router.use('/schedule', schedule);
 
 export { router };

@@ -7,7 +7,7 @@ export const DEFAULT_DURATION = 300;
 
 export type Props = {
     type?: Transition;
-    in: boolean | undefined;
+    in: boolean | undefined | number;
     duration?: number | string;
     className?: string;
     children: ReactElement;
@@ -28,7 +28,7 @@ export const Transition: FC<Props> = ({
         <CSSTransition
             appear
             classNames={type}
-            in={inProp}
+            in={!!inProp}
             mountOnEnter
             nodeRef={ref}
             timeout={+duration}

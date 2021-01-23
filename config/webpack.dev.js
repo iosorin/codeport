@@ -38,7 +38,6 @@ module.exports = merge(common, {
             },
             '/api': {
                 target: 'http://localhost:' + process.env.SERVER_PORT,
-                pathRewrite: { '^/api': '' },
             },
         },
     },
