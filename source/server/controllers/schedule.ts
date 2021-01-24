@@ -1,8 +1,8 @@
-import { ScheduleEvent } from 'types';
+import { ScheduleEventStrict } from 'types';
 
-let list: ScheduleEvent[] = [
+let list: ScheduleEventStrict[] = [
     {
-        id: 0,
+        id: 1,
         date: 1611411691902,
         title: 'SFXDX, Kaliningrad',
         stack: 'react, typescript, mobx, unit-tests',
@@ -12,21 +12,37 @@ let list: ScheduleEvent[] = [
     },
 ];
 
+const ScheduleEvent = {
+    date: 0,
+    title: '',
+    stack: '',
+    salary: '',
+    contacts: '',
+    additional: '',
+};
+
 export const get = (_, res) => res.json(list);
 
 export const create = (req, res) => {
-    const newScheduleEvent = {
-        id: Date.now(),
-        ...req.body,
-    };
+    list.push({ ...ScheduleEvent, ...req.body, id: Date.now() });
 
-    list.push(newScheduleEvent);
+    res.status(201).json(list);
+};
 
-    res.status(201).json(newScheduleEvent);
+export const update = (req, res) => {
+    list = list.map((event) => {
+        if (event.id === req.body?.id) {
+            return { ...event, ...req.body };
+        }
+
+        return event;
+    });
+
+    res.status(200).json(list);
 };
 
 export const remove = (req, res) => {
     list = list.filter((s) => s.id != req.params.id);
 
-    res.json({ message: 'schedule event has been removed' });
+    res.json(list);
 };

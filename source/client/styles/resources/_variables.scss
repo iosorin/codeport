@@ -1,6 +1,6 @@
 /* font */
-$sans-serif: sans-serif; // 'Lato',
-$sans-accent: monospace; // accent font-family
+$sans-serif: sans-serif; // accent font-family
+$sans-accent: 'Fira Code'; // 'Lato',
 $font-size: 15px;
 
 /* colors */
@@ -49,9 +49,10 @@ $button-radius: 3rem;
 
 /* input, select */
 $input-tr: $tr;
-$input-margin: 8px 0;
-$input-radius: 3px;
+$input-fz: 0.85em;
+$input-margin: 0.5em 0;
 $input-border: none;
+$input-radius: 3px;
 $input-padding-x: 15px;
 $input-padding-y: 9px;
 $input-padding: $input-padding-y $input-padding-x;
@@ -66,7 +67,7 @@ $range-color: $darken-2;
 $backdrop-background: rgba(black, 0.4);
 
 /* dialog */
-$dialog-minwidth: 350px;
+$dialog-minwidth: 375px;
 $dialog-padding: 20px;
 $dialog-radius: 4px;
 $dialog-background: white;

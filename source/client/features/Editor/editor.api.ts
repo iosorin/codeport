@@ -4,7 +4,7 @@ import { EditorSettings } from './constants';
 const lsdb = debounce(ls, 300);
 const title = process.env.TITLE;
 
-export const API = {
+export const api = {
     get value(): string {
         return ls(`${title}-editor-value`);
     },

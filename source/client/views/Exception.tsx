@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BaseLayout } from '@layouts';
 
-export const Exception = (): JSX.Element => {
+export const ExceptionView = (): JSX.Element => {
     return (
         <BaseLayout>
             <div className="flex-center flex-column" style={{ width: '100%', height: '100%' }}>

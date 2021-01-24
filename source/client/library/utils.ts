@@ -44,15 +44,13 @@ export const ls = (key: string, payload?: any, merge?: boolean) => {
 //     }, tm);
 // };
 
-export const debounce = (fn = (e: any) => {}, wait = 300) => {
+export const debounce = (fn, wait = 300) => {
     let timeout: any;
 
-    return function (...args: any) {
+    return function (this: any, ...args: any) {
         const later = () => {
             clearTimeout(timeout);
 
-            // eslint-disable-next-line
-            // @ts-ignore
             fn.apply(this, args);
         };
 
@@ -61,6 +59,45 @@ export const debounce = (fn = (e: any) => {}, wait = 300) => {
         timeout = setTimeout(later, wait);
     };
 };
+
+export function throttle(func, wait = 300) {
+    let isThrottled = false;
+    let savedArgs;
+    let savedThis;
+
+    function wrapper(this: any, ...args) {
+        if (isThrottled) {
+            savedArgs = args;
+            savedThis = this;
+
+            return;
+        }
+
+        func.apply(this, args);
+
+        isThrottled = true;
+
+        setTimeout(function () {
+            isThrottled = false;
+            if (savedArgs) {
+                wrapper.apply(savedThis, savedArgs);
+                // eslint-disable-next-line no-multi-assign
+                savedArgs = savedThis = null;
+            }
+        }, wait);
+    }
+
+    return wrapper;
+}
+
+export const delay = (fn, wait = 300) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(fn);
+        }, wait);
+    });
+};
+
 // export const exposeErrorTitle = (error:unknown) => {
 //     return JSON.stringify(error.stack, (a,b) => {
 //         console.log(a,b)

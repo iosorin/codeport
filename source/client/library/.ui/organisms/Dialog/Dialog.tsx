@@ -12,7 +12,7 @@ export type Props = {
     closeIcon?: boolean;
     persistent?: boolean;
     centered?: boolean;
-    size?: 'normal' | 'large';
+    size?: 'small' | 'normal' | 'large';
     transition?: Transition;
     close: () => void;
 };

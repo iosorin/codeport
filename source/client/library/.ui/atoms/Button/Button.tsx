@@ -54,7 +54,7 @@ export const Button: React.FC<Props> = ({
             type="button"
             disabled={disabled}
         >
-            {loading ? <Loader type="spinner" dur="0.8s" /> : content}
+            {loading ? <Loader type="dots" dur="1s" /> : content}
         </button>
     );
 };

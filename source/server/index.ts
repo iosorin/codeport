@@ -25,6 +25,10 @@ class App {
         const app = express();
 
         app.use(express.static(paths.dist));
+
+        app.use(express.urlencoded({ extended: true }));
+        app.use(express.json());
+
         app.use('/api', router);
 
         this.port = port;

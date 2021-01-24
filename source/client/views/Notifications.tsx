@@ -4,7 +4,7 @@ import { Info } from 'react-feather';
 import { BaseLayout } from '@layouts';
 import { Block, Button } from '@ui';
 
-export const Notifications: FC = () => {
+export const NotificationsView: FC = () => {
     return (
         <BaseLayout>
             <h1>Notifications</h1>

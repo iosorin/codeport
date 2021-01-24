@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BaseLayout } from '@layouts';
 import { Block } from '@ui';
 
-export const Resources: FC = () => {
+export const ResourcesView: FC = () => {
     return (
         <BaseLayout>
             <h1>Essential Resources</h1>
