@@ -1,3 +1,4 @@
+// @import 'fonts';
 @import 'reset';
 @import 'mods';
 @import 'atomaric';
@@ -34,8 +35,8 @@ article > * + * {
     flex: 1;
     width: 100%;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+    // align-items: flex-start;
     flex-direction: column;
 }
 

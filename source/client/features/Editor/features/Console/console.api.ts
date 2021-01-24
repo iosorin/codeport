@@ -12,7 +12,7 @@ type CompileResponse = {
 };
 
 // https://www.hackerearth.com/ru/docs/wiki/developers/v3/
-export const ConsoleModuleApi = {
+export const api = {
     compile: async (Program: string, language: string): Promise<CompileResponse> => {
         const choice = languages[language as keyof typeof languages];
 

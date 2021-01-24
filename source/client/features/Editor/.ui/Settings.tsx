@@ -11,7 +11,12 @@ type Props = {
 
 export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
     return (
-        <Dialog close={() => toggleSettings(false)} isVisible={isOpen} title="Editor Settings">
+        <Dialog
+            close={() => toggleSettings(false)}
+            isVisible={isOpen}
+            title="Editor Settings"
+            size="small"
+        >
             <Select
                 label="Theme"
                 onChange={(theme: string) => setSettings({ theme })}

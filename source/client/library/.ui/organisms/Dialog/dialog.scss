@@ -9,6 +9,14 @@
     background: $dialog-background;
     box-shadow: $dialog-shadow;
 
+    &.small {
+        min-width: $dialog-minwidth / 1.2;
+
+        .title {
+            font-size: 15px;
+        }
+    }
+
     &.normal {
         padding: $dialog-padding;
 
@@ -18,7 +26,6 @@
     }
 
     &.large {
-        min-width: $dialog-minwidth * 1.2;
         padding: $dialog-padding * 1.2;
 
         .title {
@@ -39,14 +46,13 @@
 
 .title {
     margin-top: -3px;
-    letter-spacing: 0.3px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     position: relative;
 }
 

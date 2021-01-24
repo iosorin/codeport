@@ -1,7 +1,7 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
 import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettings } from './constants';
-import { API } from './editor.api';
+import { api } from './editor.api';
 
 class EditorStore {
     roomID = '';
@@ -29,7 +29,7 @@ class EditorStore {
     }
 
     init() {
-        const { value, settings } = API;
+        const { value, settings } = api;
 
         if (value) {
             this.setValue(value, false);
@@ -44,7 +44,7 @@ class EditorStore {
         this.value = value;
 
         if (fromOrigin) {
-            API.value = value;
+            api.value = value;
 
             if (this.roomID) {
                 this.socket.emit('editor-value', value);
@@ -56,12 +56,12 @@ class EditorStore {
         this.roomID = value;
     };
 
-    toggleSettings = (show = !this.settingsIsVisible) => {
-        this.settingsIsVisible = show;
+    toggleSettings = (visible = !this.settingsIsVisible) => {
+        this.settingsIsVisible = visible;
     };
 
-    toggleConsole = (show = !this.consoleIsVisible) => {
-        this.consoleIsVisible = show;
+    toggleConsole = (visible = !this.consoleIsVisible) => {
+        this.consoleIsVisible = visible;
     };
 
     _setSettings = (settings: EditorSettings) => {
@@ -78,7 +78,7 @@ class EditorStore {
         if (fromOrigin) {
             this.socket.emit('editor-settings', settings);
 
-            API.settings = settings;
+            api.settings = settings;
         }
 
         this._setSettings(settings);

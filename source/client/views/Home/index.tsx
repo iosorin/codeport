@@ -7,7 +7,7 @@ import { Conference } from '@/features/Conference';
 import { useCore } from '@/core';
 import styles from './home.scss';
 
-export const Home: FC = observer((props) => {
+export const HomeView: FC = observer((props) => {
     const history = useHistory();
     const { uuid } = useParams<{ uuid: string }>();
     const { ui, socket } = useCore();

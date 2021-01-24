@@ -7,6 +7,16 @@ export type User = {
 };
 
 export type ScheduleEvent = {
+    id?: number;
+    date?: number;
+    title?: string;
+    stack?: string;
+    salary?: string;
+    contacts?: string;
+    additional?: string;
+};
+
+export type ScheduleEventStrict = {
     id: number;
     date: number;
     title: string;

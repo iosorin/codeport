@@ -16,6 +16,8 @@
 
 @mixin input {
     color: $input-color;
+    font-size: $input-fz;
+    font-weight: 500;
     background: $input-background;
     border: $input-border;
     border-radius: $input-radius;

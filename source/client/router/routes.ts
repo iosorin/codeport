@@ -1,11 +1,11 @@
-import { Home } from '@/views/Home';
-import { Activity } from '@/views/Activity';
-import { Resources } from '@/views/Resourses';
-import { Exception } from '@/views/Exception';
+import { HomeView } from '@/views/Home';
+import { ActivityView } from '@/views/Activity';
+import { ResourcesView } from '@/views/Resourses';
+import { ExceptionView } from '@/views/Exception';
 import { RouteComponentProps } from 'react-router-dom';
 import { uuid } from '@/library/utils';
-import { Notifications } from '@/views/Notifications';
-import { Schedule } from '@/views/Schedule';
+import { NotificationsView } from '@/views/Notifications';
+import { ScheduleView } from '@/views/Schedule';
 
 /* types */
 type MetaProps = {
@@ -54,7 +54,7 @@ export const ROUTES = {
 export const paths: Array<NestedRouteProps> = [
     {
         path: ROUTES.HOME.path,
-        component: Home,
+        component: HomeView,
         exact: ROUTES.HOME.exact,
         meta: {
             title: ROUTES.HOME.title,
@@ -62,7 +62,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.CONFERENCE.path,
-        component: Home,
+        component: HomeView,
         exact: ROUTES.CONFERENCE.exact,
         meta: {
             title: ROUTES.CONFERENCE.title,
@@ -70,7 +70,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.ACTIVITY.path,
-        component: Activity,
+        component: ActivityView,
         exact: ROUTES.ACTIVITY.exact,
         meta: {
             title: ROUTES.ACTIVITY.title,
@@ -79,7 +79,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.SCHEDULE.path,
-        component: Schedule,
+        component: ScheduleView,
         exact: ROUTES.SCHEDULE.exact,
         meta: {
             title: ROUTES.SCHEDULE.title,
@@ -88,7 +88,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.NOTIFICATIONS.path,
-        component: Notifications,
+        component: NotificationsView,
         exact: ROUTES.NOTIFICATIONS.exact,
         meta: {
             title: ROUTES.NOTIFICATIONS.title,
@@ -97,7 +97,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.RESOURCES.path,
-        component: Resources,
+        component: ResourcesView,
         exact: ROUTES.RESOURCES.exact,
         meta: {
             title: ROUTES.RESOURCES.title,
@@ -105,7 +105,7 @@ export const paths: Array<NestedRouteProps> = [
     },
     {
         path: ROUTES.EXCEPTION.path,
-        component: Exception,
+        component: ExceptionView,
         meta: {
             title: ROUTES.EXCEPTION.title,
         },

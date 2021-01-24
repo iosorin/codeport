@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ConsoleModuleApi } from './console.api';
+import { api } from './console.api';
 import { languages } from './languages';
 
 type ContentItem = {
@@ -73,20 +73,18 @@ class CompilerStore {
         } else {
             this.setLoading(true);
 
-            setTimeout(() => {
-                ConsoleModuleApi.compile(code, language)
-                    .then((data) => {
-                        if (data.Result) {
-                            this.addResult(data.Result);
-                        }
+            api.compile(code, language)
+                .then((data) => {
+                    if (data.Result) {
+                        this.addResult(data.Result);
+                    }
 
-                        if (data.Errors) {
-                            this.addResult(data.Errors, true);
-                        }
-                    })
-                    .catch(() => this.addResult('unknown error try again later', true))
-                    .finally(this.setLoading);
-            }, 200);
+                    if (data.Errors) {
+                        this.addResult(data.Errors, true);
+                    }
+                })
+                .catch(() => this.addResult('unknown error try again later', true))
+                .finally(this.setLoading);
         }
     };
 }
