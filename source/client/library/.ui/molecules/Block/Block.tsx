@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Edit2, Edit3, X } from 'react-feather';
-import { Button } from '../Button';
+import { Edit3, X } from 'react-feather';
+import { Button } from '../../atoms';
 import styles from './block.scss';
 
 export type Props = {
     title?: string;
     icon?: string;
-    small?: string;
+    small?: string | number;
     size?: 'small' | 'medium' | 'large';
     background?: 'light' | 'dark' | 'primary' | 'success' | 'yellow';
     stretch?: boolean;
@@ -14,6 +14,7 @@ export type Props = {
     outline?: boolean;
     styled?: boolean;
     controlsInBottom?: boolean;
+    height?: string;
     onEdit?: () => void;
     onRemove?: () => void;
 };
@@ -22,6 +23,7 @@ export const Block: FC<Props> = ({
     title,
     size = 'medium',
     background = 'dark',
+    height: minHeight = '',
     icon,
     small,
     stretch,
@@ -71,7 +73,7 @@ export const Block: FC<Props> = ({
     );
 
     return (
-        <div className={classlist.join(' ')}>
+        <div className={classlist.join(' ')} style={{ minHeight }}>
             {(title || onEdit || onRemove) && (
                 <div className={styles.header}>
                     {title && <h3>{title}</h3>}

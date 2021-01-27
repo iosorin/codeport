@@ -1,4 +1,6 @@
-export const randomEmojiHero = () => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export const emojiHero = () => {
     // prettier-ignore
     const emojis = [
         '💃','👻','🎅','👩‍🚀','👨‍🚀','🐱‍🏍','🐱‍💻','🐱‍👓','🐱‍🚀','🦸‍♂️','🦸‍♀️','🧚‍♂️','🧚‍♀️'
@@ -9,18 +11,6 @@ export const randomEmojiHero = () => {
 
 export const uuid = () => {
     return Date.now().toString(36);
-};
-
-export const date = {
-    input(d: Date | number | undefined, type = 'datetime-local'): string {
-        if (!d) return '';
-
-        const date = new Date(d);
-
-        const stop = type === 'datetime-local' ? 16 : 10;
-
-        return date.toISOString().substring(0, stop);
-    },
 };
 
 export const ls = (key: string, payload?: any, merge?: boolean) => {
@@ -38,69 +28,93 @@ export const ls = (key: string, payload?: any, merge?: boolean) => {
     return data;
 };
 
-// export const debounce = (cb = () => {}, tm = 300) => {
-//     setTimeout(() => {
-//         cb();
-//     }, tm);
-// };
+export const debounce = <F extends (...args: any[]) => any>(func: F, wait = 300) => {
+    let timeout = 0;
 
-export const debounce = (fn, wait = 300) => {
-    let timeout: any;
+    return (...args: Parameters<F>): Promise<ReturnType<F>> =>
+        new Promise((resolve) => {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
 
-    return function (this: any, ...args: any) {
-        const later = () => {
-            clearTimeout(timeout);
-
-            fn.apply(this, args);
-        };
-
-        clearTimeout(timeout);
-
-        timeout = setTimeout(later, wait);
-    };
+            timeout = window.setTimeout(() => resolve(func(...args)), wait);
+        });
 };
 
-export function throttle(func, wait = 300) {
-    let isThrottled = false;
-    let savedArgs;
-    let savedThis;
+export const sortByProp = (source: any[], prop: string, up = false) => {
+    return source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
+};
 
-    function wrapper(this: any, ...args) {
-        if (isThrottled) {
-            savedArgs = args;
-            savedThis = this;
+export const date = {
+    input: (d: Date | number | undefined, type = 'datetime-local'): string | number => {
+        if (!d) return '';
 
-            return;
+        const date = new Date(d);
+
+        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+
+        const lastChar = type === 'datetime-local' ? 16 : 10;
+
+        return date.toISOString().substring(0, lastChar);
+    },
+
+    match: (d1: Date | number, d2: Date | number = Date.now()): boolean => {
+        d1 = new Date(d1);
+        d2 = new Date(d2);
+
+        return (
+            d1.getDate() === d2.getDate() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getFullYear() === d2.getFullYear()
+        );
+    },
+
+    diff: (start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
+        const diff = start - end;
+        const date = new Date(diff);
+
+        const months = { value: date.getUTCMonth(), prefix: 'm' };
+        const days = { value: date.getUTCDate() - 1, prefix: 'd' };
+        const hours = { value: date.getUTCHours(), prefix: 'hr' };
+        const minutes = { value: date.getUTCMinutes(), prefix: 'min' };
+
+        if (diff < 0 || days.value > maxNearestDays) return 0;
+
+        return [months, days, hours, minutes]
+            .map((d) => (d.value ? `${d.value} ${d.prefix}` : null))
+            .filter((d) => d)
+            .join(', ');
+    },
+
+    addDays: (days: number, date = new Date()) => {
+        return date.setDate(date.getDate() + days);
+    },
+
+    getDates: (start: Date, end: Date) => {
+        const dates = [];
+        const currentDate = start;
+
+        while (currentDate <= end) {
+            dates.push(currentDate.getTime());
+
+            date.addDays(1, currentDate);
         }
 
-        func.apply(this, args);
+        return dates;
+    },
 
-        isThrottled = true;
+    when: (d: Date | number | undefined, showTime = true) => {
+        if (!d) return;
 
-        setTimeout(function () {
-            isThrottled = false;
-            if (savedArgs) {
-                wrapper.apply(savedThis, savedArgs);
-                // eslint-disable-next-line no-multi-assign
-                savedArgs = savedThis = null;
-            }
-        }, wait);
-    }
+        const options = showTime
+            ? {
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+              }
+            : { month: 'long', day: 'numeric' };
 
-    return wrapper;
-}
-
-export const delay = (fn, wait = 300) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(fn);
-        }, wait);
-    });
+        return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
+    },
 };
-
-// export const exposeErrorTitle = (error:unknown) => {
-//     return JSON.stringify(error.stack, (a,b) => {
-//         console.log(a,b)
-//         return
-//     })
-// }

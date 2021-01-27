@@ -82,6 +82,7 @@
         "react/sort-prop-types": "error",
         "react/require-extension": "off",
         "react/wrap-multilines": "off",
+        "react/no-array-index-key": "warn",
 
         /* jsx */
         "react/jsx-boolean-value": "error",

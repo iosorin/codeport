@@ -1,10 +1,9 @@
-import { delay } from '@/library/utils';
 import { makeAutoObservable } from 'mobx';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
+import { date, debounce } from '@/library/utils';
 import { api } from './schedule.api';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
-// type ScheduleEvent = { [key in keyof ScheduleEvent]?: any } | ScheduleEventOrNull;
 
 class ScheduleStore {
     events: ScheduleEventStrict[] = [];
@@ -15,6 +14,14 @@ class ScheduleStore {
 
     constructor() {
         makeAutoObservable(this);
+    }
+
+    get sorted() {
+        return [...this.events].sort((a, b) => a.date - b.date);
+    }
+
+    get todayEvents() {
+        return this.events.filter((event) => date.match(event.date));
     }
 
     toggleDialog = (visible = !this.dialogIsVisible) => {
@@ -38,11 +45,13 @@ class ScheduleStore {
     };
 
     createEvent = (event: ScheduleEvent) => {
-        return delay(api.create(event).then(this.setEvents));
+        if (!event.date) event.date = Date.now();
+
+        return api.create(event).then(debounce(this.setEvents));
     };
 
     updateEvent = (event: ScheduleEvent) => {
-        return delay(api.update(event).then(this.setEvents));
+        return api.update(event).then(debounce(this.setEvents));
     };
 
     removeEvent = (event: ScheduleEventStrict) => {

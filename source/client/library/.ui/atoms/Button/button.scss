@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     line-height: 1;
-    font-weight: 600;
-    letter-spacing: 0.2px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
     border-radius: $button-radius;
     font-family: $button-font-family;
     transition: $button-transition;
@@ -48,6 +48,7 @@
         letter-spacing: 0.1px;
         height: 30px;
         padding: 0 18px 1px;
+        font-weight: 600;
 
         &.rounded {
             width: 30px;
@@ -72,7 +73,7 @@
         }
     }
     &.large {
-        font-size: 18px;
+        font-size: 17px;
         height: 50px;
         padding: 0 30px;
 
@@ -85,17 +86,15 @@
 
     // view
     &:not(.hover):hover:not(:active) {
-        transform: scale(1.025);
+        transform: scale(1.02);
     }
 
-    &:disabled,
     &.loading {
-        pointer-events: none;
-        user-select: none;
+        @include unselectable;
     }
 
     &:disabled {
-        opacity: 0.5;
+        @include disabled;
     }
 
     &.hover {

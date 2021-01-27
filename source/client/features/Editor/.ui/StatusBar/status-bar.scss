@@ -7,12 +7,12 @@
     padding: $editor-status-bar-padding;
 
     span {
-        font-size: 12px;
+        font-size: 0.6em;
         line-height: 1;
         margin-right: 15px;
         letter-spacing: 0.3px;
         opacity: $editor-status-bar-opacity;
-        font-family: $sans-accent;
+        font-family: $editor-status-bar-ff;
     }
 
     .icon {

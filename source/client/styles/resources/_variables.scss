@@ -1,13 +1,15 @@
 /* font */
-$sans-serif: sans-serif; // accent font-family
+$sans-serif: 'Lato', sans-serif; // accent font-family
 $sans-accent: 'Fira Code'; // 'Lato',
-$font-size: 15px;
+$font-size: 14px;
 
 /* colors */
 $darken-0: #141414;
 $darken-1: #171717;
-$darken-2: #212121;
+$darken-2: #202020;
 $black: $darken-2;
+$black-darken: darken($black, 5%);
+$black-lighten: lighten($black, 5%);
 $light: #f2f5f9;
 $blue: #5b3dfb; // #0b0cef;
 $violet: #7445ff;
@@ -22,7 +24,10 @@ $text: white;
 $text-grey: lighten($black, 20%);
 
 /* container */
-$padding: 20px;
+$padding-x: 15px;
+$padding-y: 9px;
+$padding: $padding-y $padding-x;
+$padding-l: 20px;
 $radius: 5px;
 $shadow: 0 3px 10px -3px rgba(black, 0.7);
 $shadow-light: 0 3px 8px 0px rgba(white, 0.4);
@@ -36,14 +41,14 @@ $ease-3: cubic-bezier(0.22, 0.61, 0.36, 1);
 $tr: 0.22s $ease-1;
 
 /* $block */
-$block-fz: 0.8em;
-$block-ff: $sans-accent;
+$block-fz: 0.9em;
+$block-ff: $sans-serif;
 $block-primary: $orange;
 
 /* button */
 $button-primary-background: $primary;
 $button-secondary-background: black;
-$button-font-family: $sans-accent;
+$button-font-family: $sans-serif;
 $button-transition: $tr;
 $button-radius: 3rem;
 
@@ -53,11 +58,9 @@ $input-fz: 0.85em;
 $input-margin: 0.5em 0;
 $input-border: none;
 $input-radius: 3px;
-$input-padding-x: 15px;
-$input-padding-y: 9px;
-$input-padding: $input-padding-y $input-padding-x;
 $input-background: #eee;
 $input-color: $black;
+$input-padding: $padding;
 $input-hover-background: darken($input-background, 5%);
 
 /* range */
@@ -79,6 +82,7 @@ $drawer-radius: 4px 0 0 4px;
 $drawer-padding: 25px;
 $drawer-background: white;
 $drawer-color: inherit;
+$drawer-title-ff: $sans-accent;
 
 /* sidebar */
 $sidebar-width: 55px;
@@ -93,11 +97,12 @@ $small-footer-padding-x: 12px;
 /* editor */
 $editor-default-background: lighten($black, 1%);
 $editor-bar-background: rgba($black, 0.3);
+$editor-status-bar-ff: $sans-serif;
 $editor-status-bar-justify: flex-start;
 $editor-status-bar-opacity: 0.5;
 $editor-status-bar-padding: 10px $small-footer-padding-x;
 $editor-console-padding: 4px $small-footer-padding-x;
-$editor-console-fz: 12px;
+$editor-console-fz: 0.75em;
 
 /* conference */
 $call-panel-default-background: $black;

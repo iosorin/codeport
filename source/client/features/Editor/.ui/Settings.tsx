@@ -44,6 +44,7 @@ export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSetti
             />
 
             <Input
+                append="px"
                 label="Spaces"
                 max="10"
                 min="1"

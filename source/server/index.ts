@@ -1,10 +1,12 @@
 import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
-import paths from '../../config/paths';
 import { User } from 'types';
 import { router } from './router';
 import * as dotenv from 'dotenv';
+
+// @ts-ignore
+import paths from '../../config/paths';
 
 dotenv.config();
 
@@ -111,7 +113,7 @@ class App {
                 }
             });
 
-            const share = (event, payload, includeSender = false) => {
+            const share = (event: string, payload: any, includeSender = false) => {
                 const roomID = this.socketToRoom[socket.id];
 
                 if (this.users[roomID]) {

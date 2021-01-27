@@ -19,13 +19,17 @@
     font-size: $input-fz;
     font-weight: 500;
     background: $input-background;
+    padding: $input-padding;
     border: $input-border;
     border-radius: $input-radius;
-    padding: $input-padding;
     transition: $input-tr;
 
     &:hover:not(:focus) {
         background: $input-hover-background;
+    }
+    &::selection {
+        background: darken($input-background, 5);
+        color: $input-color;
     }
 }
 
@@ -58,7 +62,12 @@
     user-select: none;
 }
 
-@mixin scrollable($color: rgba(90, 90, 90, 0.2), $width: 4px, $offset: 0) {
+@mixin disabled {
+    opacity: 0.5;
+    @include unselectable;
+}
+
+@mixin scrollable($width: 4px, $color: rgba(90, 90, 90, 0.2), $offset: 0) {
     overflow-x: hidden;
 
     &::-webkit-scrollbar {

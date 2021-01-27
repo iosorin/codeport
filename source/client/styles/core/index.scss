@@ -31,12 +31,19 @@ article > * + * {
     color: white;
 }
 
+[contentEditable] {
+    transition: 0.1s;
+    &:hover {
+        background: rgba(white, 0.01);
+    }
+}
+
 .container {
     flex: 1;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
-    // align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -44,15 +51,20 @@ article > * + * {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    width: 92%;
+    width: 100%;
 
     & > * {
-        flex: 0 1 calc(33% - 20px);
+        flex: 0 1 calc(30% - 20px);
         margin-right: 20px;
         margin-bottom: 20px;
     }
 
-    &-50 {
+    &--25 {
+        & > * {
+            flex: 0 1 calc(25% - 20px);
+        }
+    }
+    &--50 {
         & > * {
             flex: 0 1 calc(50% - 20px);
         }
@@ -74,24 +86,3 @@ article > * + * {
         }
     }
 }
-
-//   .list,
-// .grid {
-//     display: flex;
-
-//     & > * {
-//         margin-bottom: 18px;
-//     }
-// }
-
-// .list {
-//     flex-direction: column;
-// }
-
-// .grid {
-//     flex-wrap: wrap;
-//     align-items: flex-start;
-//     & > * {
-//         margin-right: 18px;
-//     }
-// }

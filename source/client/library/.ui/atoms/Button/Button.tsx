@@ -4,6 +4,7 @@ import { Loader } from '../Loader';
 import styles from './button.scss';
 
 export type Props = {
+    type?: 'button' | 'submit';
     label?: string;
     hover?: boolean;
     background?: 'primary' | 'secondary' | 'success' | 'light';
@@ -19,6 +20,7 @@ export type Props = {
 };
 
 export const Button: React.FC<Props> = ({
+    type = 'button',
     size = 'medium',
     background = 'secondary',
     color = 'white',
@@ -51,7 +53,7 @@ export const Button: React.FC<Props> = ({
             className={classlist.join(' ')}
             onClick={onClick}
             style={{ backgroundColor: background, ...style }}
-            type="button"
+            type={type}
             disabled={disabled}
         >
             {loading ? <Loader type="dots" dur="1s" /> : content}

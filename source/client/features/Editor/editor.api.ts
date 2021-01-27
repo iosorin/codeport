@@ -1,7 +1,7 @@
 import { debounce, ls } from '@/library/utils';
 import { EditorSettings } from './constants';
 
-const lsdb = debounce(ls, 300);
+const dbLs = debounce(ls, 300);
 const title = process.env.TITLE;
 
 export const api = {
@@ -10,7 +10,7 @@ export const api = {
     },
 
     set value(value: string) {
-        lsdb(`${title}-editor-value`, value);
+        dbLs(`${title}-editor-value`, value);
     },
 
     get settings() {
@@ -18,6 +18,6 @@ export const api = {
     },
 
     set settings(settings: EditorSettings) {
-        lsdb(`${title}-editor-settings`, settings, true);
+        dbLs(`${title}-editor-settings`, settings, true);
     },
 };
