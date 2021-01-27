@@ -19,7 +19,7 @@
     }
 
     &-vscrollbar {
-        @include scrollable();
+        @include scrollable;
     }
 
     &-line {

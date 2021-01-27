@@ -1,4 +1,5 @@
-import { ScheduleEventStrict } from 'types';
+import { Response, Request } from 'express';
+import { ScheduleEvent, ScheduleEventStrict } from 'types';
 
 let list: ScheduleEventStrict[] = [
     {
@@ -12,7 +13,7 @@ let list: ScheduleEventStrict[] = [
     },
 ];
 
-const ScheduleEvent = {
+const template = {
     date: 0,
     title: '',
     stack: '',
@@ -21,15 +22,15 @@ const ScheduleEvent = {
     additional: '',
 };
 
-export const get = (_, res) => res.json(list);
+export const get = (_: Request, res: Response) => res.json(list);
 
-export const create = (req, res) => {
-    list.push({ ...ScheduleEvent, ...req.body, id: Date.now() });
+export const create = (req: Request<null, null, ScheduleEvent>, res: Response) => {
+    list.push({ ...template, ...req.body, id: Date.now() });
 
-    res.status(201).json(list);
+    return res.status(201).json(list);
 };
 
-export const update = (req, res) => {
+export const update = (req: Request<null, null, ScheduleEventStrict>, res: Response) => {
     list = list.map((event) => {
         if (event.id === req.body?.id) {
             return { ...event, ...req.body };
@@ -38,11 +39,11 @@ export const update = (req, res) => {
         return event;
     });
 
-    res.status(200).json(list);
+    return res.status(200).json(list);
 };
 
-export const remove = (req, res) => {
-    list = list.filter((s) => s.id != req.params.id);
+export const remove = (req: Request<{ id: string }>, res: Response) => {
+    list = list.filter((s) => s.id.toString() !== req.params.id);
 
-    res.json(list);
+    return res.json(list);
 };

@@ -7,7 +7,7 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "allowJs": false,
         "target": "es5",
         "module": "commonjs",
@@ -37,5 +37,5 @@
         }
     },
     "include": ["./source/**/*"],
-    "exclude": ["./dist", "./build", "node_modules", "./config/**"]
+    "exclude": ["dist", "build", "node_modules", "config"]
 }

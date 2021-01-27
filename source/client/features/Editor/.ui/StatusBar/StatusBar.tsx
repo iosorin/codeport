@@ -26,7 +26,7 @@ export const StatusBar: FC<Props> = ({
         >
             <span>{settings.mode}</span>
             <span>{settings.fontSize}px</span>
-            <span>{settings.tabSize}sp</span>
+            <span>{settings.tabSize}px</span>
 
             <Tooltip content={HOTKEYS.TOGGLE_EDITOR_SETTINGS.label} className={styles.icon} center>
                 <Settings size="15" onClick={() => toggleSettings(true)} />

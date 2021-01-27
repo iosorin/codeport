@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import styles from './tooltip.scss';
 
 export type Props = {
-    content?: string;
+    content?: string | number;
     left?: boolean;
     center?: boolean;
     bottom?: boolean;

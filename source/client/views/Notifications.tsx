@@ -37,7 +37,7 @@ export const NotificationsView: FC = () => {
                     </Block>
 
                     <Block
-                        background="primary"
+                        background="yellow"
                         icon="👨‍🚀"
                         size="small"
                         small="Start date - Jun 4 2020 at 5:35 am"
@@ -47,15 +47,6 @@ export const NotificationsView: FC = () => {
                         <Link to="/activity">View details</Link>
                     </Block>
                 </div>
-
-                <Button
-                    background="light"
-                    className="mt-auto ml-auto flex-auto"
-                    rounded
-                    size="large"
-                >
-                    <Info size="35" />
-                </Button>
             </>
         </BaseLayout>
     );

@@ -1,5 +1,6 @@
-export { Block } from './Block';
+export { Backdrop } from './Backdrop';
 export { Button } from './Button';
+export { EventDetails } from './EventDetails';
 export { Input } from './Input/Input';
 export { Loader } from './Loader';
 export { Logo } from './Logo';

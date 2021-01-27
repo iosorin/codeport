@@ -1,6 +1,5 @@
 import React, { CSSProperties, FC, MouseEvent } from 'react';
-import { Transition } from '@ui';
-
+import { Transition } from '../Transition';
 import styles from './backdrop.scss';
 
 export const DEFAULT_MS = 380;
