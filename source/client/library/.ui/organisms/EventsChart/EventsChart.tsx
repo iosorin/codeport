@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import {
     CartesianGrid,
     Legend,
@@ -11,17 +11,17 @@ import {
 import { date } from '@/library/utils';
 
 type Item = {
-    date: Date;
+    date: Date | string | number;
     [key: string]: any;
 };
 
 type Props = {
     size?: number;
-    source: Item[];
+    events: Item[];
     height?: string | number;
 };
 
-export const Stats: FC<Props> = ({ size = 15, height = 250, source }) => {
+export const EventsChart: FC<Props> = ({ size = 15, height = 250, events: source }) => {
     const data = useMemo(() => {
         const end = new Date();
         const start = new Date(new Date().setDate(end.getDate() - size));

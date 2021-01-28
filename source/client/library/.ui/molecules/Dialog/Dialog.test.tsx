@@ -1,6 +1,5 @@
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-
 import { Dialog } from '.';
 
 const text = 'dialog content';
@@ -17,7 +16,7 @@ jest.mock('react-transition-group/CSSTransition', () => {
 
 const dialog = (isVisible: boolean) => {
     return (
-        <Dialog hide={() => {}} isVisible={isVisible} persistent title={title}>
+        <Dialog close={() => {}} isVisible={isVisible} persistent title={title}>
             {text}
         </Dialog>
     );

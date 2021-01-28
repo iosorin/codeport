@@ -1,0 +1,56 @@
+.colors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+
+    &.outer {
+        padding: 1rem 1.2rem;
+        background: white;
+        border-radius: $radius;
+        box-shadow: $shadow-2;
+        justify-content: flex-start;
+        width: 400px;
+    }
+
+    .color {
+        cursor: pointer;
+        flex: 0 0 auto;
+        margin-bottom: 0.5rem;
+        transition: transform $tr;
+
+        &:not(:last-child) {
+            margin-right: 0.4rem;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &.active {
+            transform: scale(1.25);
+        }
+    }
+}
+
+.color {
+    position: relative;
+    display: inline-block;
+    border: $border;
+    border-radius: 50%;
+
+    &.small {
+        width: 8px;
+        height: 8px;
+    }
+
+    &.medium {
+        width: 17px;
+        height: 17px;
+    }
+
+    &.large {
+        width: 20px;
+        height: 20px;
+    }
+}

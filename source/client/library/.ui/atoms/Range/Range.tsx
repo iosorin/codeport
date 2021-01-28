@@ -2,26 +2,26 @@ import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
 
 import styles from './range.scss';
 
-type ValueType = number;
-
 export type Props = {
-    value: ValueType;
+    value: number | undefined;
     min?: string | number;
     max?: string | number;
     step?: string | number;
     label?: string;
     disabled?: boolean;
+    dark?: boolean;
     units?: string;
-    onChange: (e: ValueType) => void;
+    onChange: (e: number) => void;
 };
 
 export const Range: FC<Props> = ({
-    value,
+    value = 0,
     units = 'px',
     min = 5,
     max = 10,
     step = 1,
     label,
+    dark,
     onChange,
     disabled,
 }) => {
@@ -40,17 +40,20 @@ export const Range: FC<Props> = ({
         };
 
         changeHandler();
-    }, [value, max, min, onChange]);
+    }, [value]);
 
     return (
-        <div className={styles.container}>
-            {label ? <div className="label">{label}</div> : null}
+        <div className={`${styles.container} ${dark ? styles.dark : ''}`}>
+            {label ? <div className="label mb-0">{label}</div> : null}
 
-            <div className="flex-center">
-                <b className={styles.value}>
-                    {value}
-                    {units}
-                </b>
+            <div className="flex-row-reverse align-center">
+                <small className={styles.value}>
+                    <b>
+                        {value}
+                        {units}
+                    </b>
+                </small>
+
                 <input
                     ref={range}
                     className={styles.range}

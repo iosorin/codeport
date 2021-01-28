@@ -7,21 +7,33 @@ export type User = {
 };
 
 export type ScheduleEvent = {
-    id?: number;
+    id?: string | number;
     date?: number;
     title?: string;
     stack?: string;
     salary?: string;
     contacts?: string;
     additional?: string;
+    color?: string;
+
+    rating?: number;
+    snippets?: string[];
+    time?: number;
 };
 
 export type ScheduleEventStrict = {
-    id: number;
+    id: string | number;
     date: number;
     title: string;
     stack: string;
     salary: string;
     contacts: string;
     additional: string;
+    color: string;
+};
+
+export type CompletedScheduleEvent = ScheduleEventStrict & {
+    rating: number;
+    snippets: string[];
+    time: number; // min.
 };

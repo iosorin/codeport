@@ -14,11 +14,11 @@ export const Footer: FC<Props> = ({ length, leave, refresh }) => {
 
     return (
         <div className={styles.footer}>
-            <h4 className={styles.participants}>
+            <div className={`h4 flex-auto ${styles.participants}`}>
                 Participants: {length}/{max}
-            </h4>
+            </div>
 
-            <div className="flex-center">
+            <div className="flex-end">
                 <Button size="small" onClick={leave} hover>
                     Leave
                 </Button>

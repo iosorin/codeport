@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Info } from 'react-feather';
 import { BaseLayout } from '@layouts';
-import { Block, Button } from '@ui';
+import { Block } from '@ui';
 
 export const NotificationsView: FC = () => {
     return (
@@ -12,6 +11,7 @@ export const NotificationsView: FC = () => {
             <>
                 <div className="grid grid-y scrollable" style={{ width: '45%' }}>
                     <Block
+                        background="black"
                         icon="🚀"
                         size="small"
                         small="Jun 4 2020 at 5:35 am"
@@ -25,6 +25,7 @@ export const NotificationsView: FC = () => {
                     </Block>
 
                     <Block
+                        background="black"
                         icon="💃"
                         size="small"
                         small="Jun 4 2020 at 5:35 am"

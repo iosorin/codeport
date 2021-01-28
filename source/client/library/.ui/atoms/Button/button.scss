@@ -2,52 +2,59 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
+    line-height: 0;
     font-weight: 500;
     letter-spacing: 0.3px;
     border-radius: $button-radius;
     font-family: $button-font-family;
-    transition: $button-transition;
+    transition: box-shadow $tr;
 
-    // color
+    // state ------------------------------------------------------------
+    &.loading {
+        @include unselectable;
+
+        svg {
+            @include center;
+        }
+    }
+
+    &:disabled {
+        @include disabled;
+    }
+
+    // color, hover -----------------------------------------------------
     &.white {
         color: white;
     }
+
     &.black {
         color: $black;
     }
 
-    // background
+    // background -------------------------------------------------------
     &.primary {
         background-color: $button-primary-background;
     }
+
     &.secondary {
         background-color: $button-secondary-background;
     }
+
     &.success {
         background-color: $success;
     }
+
     &.light {
-        background-color: $light !important;
         color: $black;
-        &.hover:hover {
-            background-color: $button-secondary-background !important;
-            color: white;
-        }
-    }
-    &.primary,
-    &.success {
-        &.hover:not(:hover) {
-            background-color: $button-secondary-background !important;
-        }
+        background-color: $light;
     }
 
-    // size
+    // size -------------------------------------------------------------
     &.small {
-        font-size: 13px;
+        font-size: 0.8rem;
         letter-spacing: 0.1px;
-        height: 30px;
-        padding: 0 18px 1px;
+        height: 1.9rem;
+        padding: 0 20px 0.5px;
         font-weight: 600;
 
         &.rounded {
@@ -57,14 +64,16 @@
         }
 
         svg {
-            max-width: 16px;
-            max-height: 16px;
+            max-width: 1rem;
+            max-height: 1rem;
         }
     }
+
     &.medium {
-        font-size: 15px;
-        height: 36px;
-        padding: 0 20px;
+        font-size: 0.85rem;
+        height: 2.1rem;
+        padding: 0 1.6rem 0;
+        font-weight: 600;
 
         &.rounded {
             width: 40px;
@@ -72,10 +81,11 @@
             padding: 8px;
         }
     }
+
     &.large {
-        font-size: 17px;
-        height: 50px;
-        padding: 0 30px;
+        font-size: 1.1rem;
+        height: 3.1rem;
+        padding: 0 2rem;
 
         &.rounded {
             width: 53px;
@@ -84,43 +94,15 @@
         }
     }
 
-    // view
-    &:not(.hover):hover:not(:active) {
-        transform: scale(1.02);
-    }
-
-    &.loading {
-        @include unselectable;
-    }
-
-    &:disabled {
-        @include disabled;
-    }
-
-    &.hover {
-        &:not(:hover) {
-            background-color: transparent;
-        }
-    }
-
+    // rounded ----------------------------------------------------------
     &.rounded {
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        &.outline {
-            border: 2px solid transparent;
-            &:hover {
-                border: 2px solid;
-                transform: none !important;
-            }
-        }
 
         &.hover {
             background-color: transparent;
-        }
-        &:not(.hover):hover:not(:active) {
-            transform: scale(1.05);
         }
 
         svg {
@@ -137,6 +119,70 @@
             & + span {
                 margin-right: 9px;
             }
+        }
+    }
+
+    // hover ------------------------------------------------------------
+    &.zoom {
+        &.medium,
+        &.large,
+        &.rounded {
+            &:not(.hover) {
+                transition: transform 0.35s ease;
+                backface-visibility: hidden;
+            }
+        }
+
+        &.large {
+            &:not(.hover) {
+                &:hover:not(:active) {
+                    transform: scale(1.02);
+                }
+            }
+        }
+
+        &.rounded,
+        &.medium {
+            &:not(.hover) {
+                &:hover:not(:active) {
+                    transform: scale(1.055);
+                }
+            }
+        }
+    }
+
+    &.rounded {
+        &.outline {
+            transition: $tr;
+            border: 2px solid transparent;
+            &:not(:hover) {
+                background: transparent !important;
+            }
+            &:hover:not(:active) {
+                border: 2px solid;
+            }
+        }
+    }
+
+    &.hover {
+        transition: background-color $tr;
+
+        &:hover:not(:active) {
+            background-color: $primary;
+        }
+    }
+
+    &.shadow-light {
+        transition: box-shadow $tr;
+        &:hover:not(:active) {
+            box-shadow: $shadow-light;
+        }
+    }
+
+    &.shadow-dark {
+        transition: box-shadow $tr;
+        &:hover:not(:active) {
+            box-shadow: $shadow-2;
         }
     }
 }

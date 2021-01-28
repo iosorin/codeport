@@ -1,95 +1,104 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { Edit3, X } from 'react-feather';
 import { Button } from '../../atoms';
 import styles from './block.scss';
 
 export type Props = {
     title?: string;
-    icon?: string;
+    icon?: string | JSX.Element;
     small?: string | number;
     size?: 'small' | 'medium' | 'large';
-    background?: 'light' | 'dark' | 'primary' | 'success' | 'yellow';
-    stretch?: boolean;
-    square?: boolean;
-    outline?: boolean;
+    background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
+    customBackground?: string;
+    flex?: boolean;
+    hover?: boolean;
     styled?: boolean;
     controlsInBottom?: boolean;
     height?: string;
     onEdit?: () => void;
     onRemove?: () => void;
+    onClick?: () => void;
 };
 
-export const Block: FC<Props> = ({
-    title,
-    size = 'medium',
-    background = 'dark',
-    height: minHeight = '',
-    icon,
-    small,
-    stretch,
-    square,
-    outline,
-    styled,
-    controlsInBottom,
-    onEdit,
-    onRemove,
-    children,
-}) => {
-    const classlist = [styles.block, styles[size], styles[background]];
+export const Block: FC<Props> = memo(
+    ({
+        title,
+        size = 'medium',
+        customBackground,
+        background = 'dark',
+        height: minHeight = '',
+        icon,
+        small,
+        flex,
+        hover,
+        styled,
+        controlsInBottom,
+        onEdit,
+        onRemove,
+        onClick,
+        children,
+    }) => {
+        const classlist = [styles.block, styles[size], styles[background]];
 
-    if (styled) classlist.push(styles.styled);
-    if (stretch) classlist.push(styles.stretch);
-    if (square) classlist.push(styles.square);
-    if (outline) classlist.push(styles.outline);
+        if (flex) classlist.push(styles.flex);
+        if (hover || onClick) classlist.push(styles.hover);
+        if (styled) classlist.push(styles.styled);
 
-    const controls = (
-        <div className={styles.controls}>
-            {onEdit && (
-                <Button
-                    rounded
-                    outline
-                    hover
-                    size="small"
-                    onClick={onEdit}
-                    color={background === 'light' ? 'black' : 'white'}
-                >
-                    <Edit3 size="15" />
-                </Button>
-            )}
+        const controls = (
+            <div className={styles.controls}>
+                {onEdit && (
+                    <Button
+                        rounded
+                        outline
+                        hover
+                        size="small"
+                        onClick={onEdit}
+                        color={background === ('light' || 'yellow') ? 'black' : 'white'}
+                    >
+                        <Edit3 size="15" />
+                    </Button>
+                )}
 
-            {onRemove && (
-                <Button
-                    rounded
-                    outline
-                    hover
-                    size="small"
-                    onClick={onRemove}
-                    color={background === 'light' ? 'black' : 'white'}
-                >
-                    <X size="17" />
-                </Button>
-            )}
-        </div>
-    );
-
-    return (
-        <div className={classlist.join(' ')} style={{ minHeight }}>
-            {(title || onEdit || onRemove) && (
-                <div className={styles.header}>
-                    {title && <h3>{title}</h3>}
-
-                    {!controlsInBottom && controls}
-                </div>
-            )}
-
-            <div className={styles.content}>{children}</div>
-
-            <div className={styles.footer}>
-                {icon && <span>{icon}</span>}
-                {small && <small>{small}</small>}
-
-                {controlsInBottom && controls}
+                {onRemove && (
+                    <Button
+                        rounded
+                        outline
+                        hover
+                        size="small"
+                        onClick={onRemove}
+                        color={background === ('light' || 'yellow') ? 'black' : 'white'}
+                    >
+                        <X size="17" />
+                    </Button>
+                )}
             </div>
-        </div>
-    );
-};
+        );
+
+        return (
+            <div
+                className={classlist.join(' ')}
+                style={{ minHeight, background: customBackground || '' }}
+                onClick={onClick}
+            >
+                {(title || onEdit || onRemove) && (
+                    <div className={styles.header}>
+                        {title && <h3>{title}</h3>}
+
+                        {!controlsInBottom && controls}
+                    </div>
+                )}
+
+                <div className={styles.content}>{children}</div>
+
+                {(icon || small || controlsInBottom) && (
+                    <div className={styles.footer}>
+                        {icon && <span>{icon}</span>}
+                        {small && <small>{small}</small>}
+
+                        {controlsInBottom && controls}
+                    </div>
+                )}
+            </div>
+        );
+    }
+);

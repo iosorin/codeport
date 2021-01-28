@@ -7,10 +7,10 @@
     padding: $editor-status-bar-padding;
 
     span {
-        font-size: 0.6em;
+        font-size: 0.75rem;
         line-height: 1;
         margin-right: 15px;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.4px;
         opacity: $editor-status-bar-opacity;
         font-family: $editor-status-bar-ff;
     }

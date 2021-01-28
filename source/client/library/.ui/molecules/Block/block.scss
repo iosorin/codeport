@@ -3,55 +3,11 @@
     display: flex;
     flex-direction: column;
     border-radius: $radius;
-    transition: $tr;
 
     &:hover {
-        box-shadow: $shadow;
         .controls {
             opacity: 1;
         }
-    }
-
-    &.styled {
-        font-size: $block-fz;
-        font-family: $block-ff;
-        line-height: 1.4;
-    }
-
-    &.square {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        padding-top: 100%;
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 0;
-        }
-        .footer {
-            margin-top: initial;
-        }
-    }
-
-    &.outline {
-        border: 1px solid;
-
-        &:not(:hover) {
-            background: transparent;
-        }
-
-        &:hover {
-            border-color: transparent;
-        }
-    }
-
-    &.stretch {
-        width: 100%;
     }
 
     // size
@@ -71,31 +27,55 @@
             }
         }
     }
+
     &.medium {
         padding: 20px 25px;
     }
+
     &.large {
         padding: 22px 25px;
         font-size: $block-fz * 1.1;
     }
 
-    // background
-    &.light {
-        background: white;
+    // border, background
+    &.none {
+        border: 1px solid;
+    }
 
-        &:hover {
-            box-shadow: $shadow-light;
+    &.hover {
+        transition: border 0.3s $ease-1;
+        background: $light !important;
+        position: relative;
+        cursor: pointer;
+        border: 2px solid;
+
+        &:not(:hover) {
+            border-color: transparent;
         }
     }
 
-    &.dark {
+    &.light {
+        background: $light;
+    }
+
+    &.grey {
+        background: $grey;
+        border-color: $grey;
+    }
+
+    &.black {
         background: $black-darken;
         border-color: $black-darken;
     }
 
+    &.dark {
+        background: $black;
+        border-color: $black;
+    }
+
     &.primary {
-        background: $block-primary;
-        border-color: $block-primary;
+        background: $primary;
+        border-color: $primary;
     }
 
     &.success {
@@ -108,24 +88,62 @@
         border-color: $yellow;
     }
 
+    // fix text color
+    &.dark,
+    &.black {
+        &:not(.hover) {
+            color: white;
+        }
+    }
+
     &.light,
-    &.yellow {
-        color: $black;
-        a {
+    &.yellow,
+    &.grey {
+        &:not(.hover) {
             color: $black;
+            a {
+                color: $black;
+            }
+        }
+    }
+
+    &.styled {
+        font-size: $block-fz;
+        font-family: $block-ff;
+        line-height: 1.4;
+    }
+
+    &.flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        .content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .footer {
+            margin-top: initial;
         }
     }
 }
 
 .header {
-    margin-bottom: 20px;
-    margin-bottom: 10px;
-    align-items: center;
     display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 1;
 }
 
 .content {
-    margin-bottom: 25px;
 }
 
 .footer {
@@ -133,14 +151,22 @@
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
+    position: relative;
     span {
-        font-size: 1.2em;
+        font-size: 1.4rem;
+    }
+
+    .controls {
+        top: auto;
+        bottom: 0;
     }
 }
 
 .controls {
+    position: absolute;
+    right: 0;
+    top: 0px;
     display: flex;
-    margin-left: auto;
     opacity: 0;
     transition: opacity $tr;
 

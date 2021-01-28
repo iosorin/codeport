@@ -1,11 +1,12 @@
 export { Backdrop } from './Backdrop';
 export { Button } from './Button';
-export { EventDetails } from './EventDetails';
+export { Colors, Color } from './Colors';
 export { Input } from './Input/Input';
 export { Loader } from './Loader';
 export { Logo } from './Logo';
 export { Range } from './Range';
 export { Select } from './Select';
-export { Textarea } from './Textarea/Textarea';
+export { Tabs } from './Tabs';
+export { Textarea } from './Textarea';
 export { Tooltip } from './Tooltip';
 export { Transition } from './Transition';
