@@ -14,7 +14,7 @@ export const api = {
         return http.put('/api/schedule', event).then((res) => res.data);
     },
 
-    delete: async (id: number): Promise<ScheduleEventStrict[]> => {
+    delete: async (id: string | number): Promise<ScheduleEventStrict[]> => {
         return http.delete(`/api/schedule/${id}`).then((res) => res.data);
     },
 };

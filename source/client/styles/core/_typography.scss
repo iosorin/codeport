@@ -5,9 +5,14 @@ body {
 }
 
 // :not([class])
-a {
+a,
+.link {
     color: white;
-    text-decoration-skip-ink: auto;
+    text-decoration: underline;
+}
+
+.link {
+    cursor: pointer;
 }
 
 h1,

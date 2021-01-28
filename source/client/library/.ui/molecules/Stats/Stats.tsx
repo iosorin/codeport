@@ -11,7 +11,7 @@ import {
 import { date } from '@/library/utils';
 
 type Item = {
-    date: Date;
+    date: Date | string | number;
     [key: string]: any;
 };
 
