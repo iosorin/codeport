@@ -4,12 +4,11 @@ $sans-accent: 'Fira Code'; // 'Lato',
 $font-size: 14px;
 
 /* colors */
-$darken-0: #141414;
-$darken-1: #171717;
-$darken-2: #202020;
-$black: $darken-2;
-$black-darken: darken($black, 5%);
+
+$black: #202020;
 $black-lighten: lighten($black, 5%);
+$black-darken: darken($black, 5%);
+
 $light: #f2f5f9;
 $blue: #5b3dfb; // #0b0cef;
 $violet: #7445ff;
@@ -17,7 +16,7 @@ $orange: #fb5d2b;
 $yellow: #ffeb3b;
 $green: #00e676;
 
-$primary: $violet;
+$primary: $orange;
 $success: $green;
 
 $text: white;
@@ -64,7 +63,7 @@ $input-padding: $padding;
 $input-hover-background: darken($input-background, 5%);
 
 /* range */
-$range-color: $darken-2;
+$range-color: $black;
 
 /* backdrop */
 $backdrop-background: rgba(black, 0.4);

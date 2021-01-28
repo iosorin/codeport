@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'react-feather';
 import { useHotkey } from '@hooks';
@@ -12,7 +12,7 @@ export type Props = {
     closeIcon?: boolean;
     persistent?: boolean;
     centered?: boolean;
-    size?: 'small' | 'normal' | 'large';
+    size?: 'small' | 'normal' | 'large' | 'fullscreen';
     transition?: Transition;
     close: () => void;
 };

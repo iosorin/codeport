@@ -25,12 +25,22 @@
         }
     }
 
-    &.large {
+    &.large,
+    &.fullscreen {
         padding: $dialog-padding * 1.2;
 
         .title {
             font-size: 19px;
         }
+    }
+
+    &.large {
+        min-width: $dialog-minwidth * 1.2;
+    }
+
+    &.fullscreen {
+        min-width: 75vw;
+        min-height: 75vh;
     }
 
     &.centered {

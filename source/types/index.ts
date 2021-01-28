@@ -7,7 +7,7 @@ export type User = {
 };
 
 export type ScheduleEvent = {
-    id?: number;
+    id?: string | number;
     date?: number;
     title?: string;
     stack?: string;
@@ -17,7 +17,7 @@ export type ScheduleEvent = {
 };
 
 export type ScheduleEventStrict = {
-    id: number;
+    id: string | number;
     date: number;
     title: string;
     stack: string;

@@ -15,7 +15,6 @@ export const ConferenceLimitDialog: FC<Props> = ({ isVisible, close }) => {
             close={close}
             isVisible={isVisible}
             persistent
-            size="large"
             title="Oops..."
             transition="slide-in-left"
         >

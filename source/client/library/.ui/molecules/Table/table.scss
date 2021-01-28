@@ -28,6 +28,36 @@
         }
     }
 
+    &.clickable {
+        tbody {
+            tr {
+                cursor: pointer;
+                transition: $tr;
+            }
+        }
+
+        &.light,
+        &.none {
+            tbody {
+                tr {
+                    &:hover {
+                        background: lighten($black-lighten, 3%);
+                    }
+                }
+            }
+        }
+
+        &.dark {
+            tbody {
+                tr {
+                    &:hover {
+                        background: lighten($black-darken, 3%);
+                    }
+                }
+            }
+        }
+    }
+
     caption {
         text-align: left;
         margin-bottom: 10px;
