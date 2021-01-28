@@ -2,52 +2,95 @@
     text-align: left;
     border-radius: $radius;
     overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0 0.8rem;
 
     &.none {
         background: none;
     }
 
     &.light {
-        background: $black-lighten;
-
-        tr,
-        th,
         td {
-            border: 1px solid lighten($black-lighten, 3%);
+            background: $black-lighten;
         }
     }
 
     &.dark {
         color: white;
-        background: $black-darken;
 
-        tr,
-        th,
         td {
-            border: 1px solid $black;
+            background: $black-darken;
+        }
+    }
+
+    &.clickable {
+        tr {
+            cursor: pointer;
+        }
+
+        td {
+            transition: background $tr;
+        }
+
+        &.light,
+        &.none {
+            tr:hover td {
+                background: lighten($black-lighten, 2%);
+            }
+        }
+
+        &.dark {
+            tr:hover td {
+                background: $black-darken;
+            }
         }
     }
 
     caption {
         text-align: left;
         margin-bottom: 10px;
-        font-size: 1.2em;
+        font-size: 1.2rem;
     }
 
-    th {
-        letter-spacing: 0.5px;
-        text-transform: capitalize;
-    }
-
-    tr,
     th,
     td {
         position: relative;
-        padding: $padding-y * 1.5 $padding-x * 1.5;
+        padding: 0 $padding-x * 2;
+        &:first-child,
+        &:last-child {
+            border-radius: $radius * 1.5;
+            overflow: hidden;
+        }
+        &:first-child {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &:last-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
     }
 
-    .num {
-        width: 35px;
+    td {
+        max-width: 200px;
+        vertical-align: middle;
+        line-height: 0;
+        height: 50px;
+        line-height: 50px;
+        @include text-truncate;
+    }
+
+    th {
+        color: $text-grey;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        padding-bottom: 5px;
+    }
+
+    .num,
+    .color {
+        width: 40px;
         text-align: right;
         padding-right: 0;
         padding-left: 0;
@@ -59,11 +102,8 @@
 
     .sort {
         cursor: pointer;
-        position: absolute;
-        right: $padding-x * 1.5;
-        top: 50%;
-        transform: translateY(-50%);
-        line-height: 0;
+        @include cover;
+        text-align: right;
         opacity: 0.5;
         transition: opacity $tr;
 
@@ -71,9 +111,17 @@
         &.current {
             opacity: 1;
         }
-
-        &.up {
-            transform: translateY(-50%) rotate(180deg);
+        svg {
+            margin-top: 2px;
         }
+        &.up {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    input {
+        max-height: 35px;
     }
 }

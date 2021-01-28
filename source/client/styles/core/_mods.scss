@@ -12,8 +12,7 @@
 }
 
 .invisible {
-    visibility: hidden;
-    opacity: 0;
+    @include invisible;
 }
 
 .scrollable {
@@ -22,6 +21,19 @@
 
 .unselectable {
     @include unselectable;
+}
+
+.hover {
+    .hover-target {
+        opacity: 0;
+        transition: opacity $tr;
+    }
+
+    &:hover {
+        .hover-target {
+            opacity: 1;
+        }
+    }
 }
 
 .hoverable {

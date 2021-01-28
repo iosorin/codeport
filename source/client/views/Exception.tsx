@@ -5,7 +5,7 @@ import { BaseLayout } from '@layouts';
 export const ExceptionView = (): JSX.Element => {
     return (
         <BaseLayout>
-            <div className="flex-center flex-column" style={{ width: '100%', height: '100%' }}>
+            <div className="flex-col flex-center" style={{ width: '100%', height: '100%' }}>
                 <h1 className="text-center mb-2">Page Not Found</h1>
                 <Link to="/">back home</Link>
             </div>

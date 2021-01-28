@@ -6,7 +6,7 @@ import { Logo } from '@ui';
 export const Landing: FC = () => {
     return (
         <BaseLayout>
-            <div className="flex-center flex-column text-center" style={{ height: '100%' }}>
+            <div className="flex-col flex-center text-center" style={{ height: '100%' }}>
                 <Logo />
 
                 <img alt="hero" src={Human} style={{ margin: '15px 0 60px' }} />

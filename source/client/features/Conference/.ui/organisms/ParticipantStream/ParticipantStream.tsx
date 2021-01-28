@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import SimplePeer from 'simple-peer';
 import { observer } from 'mobx-react-lite';
 import { Mic, MicOff, Video, VideoOff } from 'react-feather';
 import { Loader, Transition } from '@ui';

@@ -22,15 +22,15 @@ export const Schedule: FC = observer(() => {
 
     return (
         <>
-            {store.events.length ? (
+            {store.empty ? (
+                <ScheduleListEmpty openDialog={() => openDialog()} />
+            ) : (
                 <ScheduleList
                     events={store.sorted}
                     openDialog={openDialog}
                     removeEvent={store.removeEvent}
                     todayEvents={store.todayEvents}
                 />
-            ) : (
-                <ScheduleListEmpty openDialog={() => openDialog()} />
             )}
 
             <ScheduleDialog closeDialog={closeDialog} store={store} />

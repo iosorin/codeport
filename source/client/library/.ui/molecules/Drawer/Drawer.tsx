@@ -1,41 +1,31 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'react-feather';
-import { useHotkey } from '@hooks';
 import { Backdrop, Transition } from '@ui';
-
-import styles from './dialog.scss';
+import styles from './drawer.scss';
 
 export type Props = {
     isVisible: boolean;
     title?: string | boolean;
     closeIcon?: boolean;
     persistent?: boolean;
-    centered?: boolean;
-    size?: 'small' | 'normal' | 'large';
-    transition?: Transition;
-    close: () => void;
+    hide: () => void;
 };
 
-export const Dialog: FC<Props> = ({
+export const Drawer: FC<Props> = ({
     isVisible,
     children,
-    title,
+    title = 'Drawer',
     closeIcon = true,
     persistent,
-    centered,
-    size = 'normal',
-    transition = 'zoom',
-    close,
+    hide = () => {},
 }) => {
-    useHotkey('escape', close, isVisible);
-
-    const dialog = () => {
+    const drawer = () => {
         return (
             <>
                 <Backdrop
                     isVisible={isVisible}
-                    onClick={() => !persistent && close()}
+                    onClick={() => !persistent && hide()}
                     style={{ zIndex: 10 }}
                 />
 
@@ -47,12 +37,8 @@ export const Dialog: FC<Props> = ({
                     style={{ zIndex: 10 }}
                     tabIndex={-1}
                 >
-                    <Transition duration={450} in={isVisible} type={transition}>
-                        <div
-                            className={`${styles.dialog} ${centered ? styles.centered : ''} ${
-                                styles[size]
-                            }`}
-                        >
+                    <Transition duration={400} in={isVisible} type="slide-in-left">
+                        <div className={styles.drawer}>
                             <div className={styles.header}>
                                 {title ? <h4 className={styles.title}>{title}</h4> : null}
 
@@ -61,10 +47,10 @@ export const Dialog: FC<Props> = ({
                                         aria-label="Close"
                                         className={styles.close}
                                         data-dismiss="modal"
-                                        onClick={close}
+                                        onClick={hide}
                                         type="button"
                                     >
-                                        <X size="18" />
+                                        <X size="19" />
                                     </button>
                                 ) : null}
                             </div>
@@ -77,5 +63,5 @@ export const Dialog: FC<Props> = ({
         );
     };
 
-    return createPortal(dialog(), document.body);
+    return createPortal(drawer(), document.body);
 };

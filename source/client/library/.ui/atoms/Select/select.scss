@@ -36,9 +36,11 @@
     .option {
         cursor: pointer;
         border-radius: 0;
+        font-weight: normal;
 
         &.active {
             background: $input-hover-background;
+            font-weight: $input-weight;
         }
     }
 

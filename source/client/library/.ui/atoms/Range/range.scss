@@ -1,9 +1,28 @@
 $color: $light;
-$thumbColor: $range-color;
-$activeColor: $range-color;
-$trackHeight: 5px;
-$thumbHeight: 12px;
+$thumbColor: $light;
+$activeColor: $green;
+$trackColor: $grey;
+$thumbHeight: 16px;
+$trackHeight: 6px;
 $progressPercent: 50%;
+
+.container {
+    width: 100%;
+    position: relative;
+    margin: $input-margin;
+
+    &.dark {
+        .range {
+            @include dark;
+        }
+    }
+}
+
+.value {
+    font-size: $input-fz;
+    width: 60px;
+    text-align: right;
+}
 
 @mixin thumb {
     appearance: none;
@@ -24,7 +43,7 @@ $progressPercent: 50%;
     background: linear-gradient(
         90deg,
         $activeColor var(--progressPercent, 0%),
-        $color var(--progressPercent, 0%)
+        $trackColor var(--progressPercent, 0%)
     );
     border-radius: $trackHeight / 2;
 }
@@ -37,6 +56,11 @@ $progressPercent: 50%;
 
 .range {
     height: $thumbHeight + 2px;
+    border: $input-border;
+    border-radius: $input-radius;
+    transition: $input-tr;
+    padding: $padding-y * 2 0;
+    background: transparent;
 
     &:focus {
         outline: none;
@@ -79,17 +103,4 @@ $progressPercent: 50%;
     &::-ms-fill-lower {
         @include progress;
     }
-}
-
-.container {
-    margin: $input-margin;
-    clear: both;
-    padding: 1px;
-    overflow: auto;
-}
-
-.value {
-    margin: -4px 10px 0 0;
-    font-size: 12px;
-    width: 28px;
 }

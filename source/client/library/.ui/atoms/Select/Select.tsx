@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { ChevronDown } from 'react-feather';
 import { useOutsideClick } from '@hooks';
 

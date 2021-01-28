@@ -10,7 +10,7 @@ export const emojiHero = () => {
 };
 
 export const uuid = () => {
-    return Date.now().toString(36);
+    return Date.now().toString(36) + Math.random().toString(36).substring(10);
 };
 
 export const ls = (key: string, payload?: any, merge?: boolean) => {
@@ -45,6 +45,20 @@ export const sortByProp = (source: any[], prop: string, up = false) => {
     return source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
 };
 
+export const groupByProp = (source: any[], prop: string) => {
+    if (!source?.length) return [];
+
+    return source.reduce((total, entry) => {
+        if (!total[entry[prop]]) {
+            total[entry[prop]] = [];
+        }
+
+        total[entry[prop]].push(entry);
+
+        return total;
+    }, {});
+};
+
 export const date = {
     input: (d: Date | number | undefined, type = 'datetime-local'): string | number => {
         if (!d) return '';
@@ -58,7 +72,7 @@ export const date = {
         return date.toISOString().substring(0, lastChar);
     },
 
-    match: (d1: Date | number, d2: Date | number = Date.now()): boolean => {
+    match: (d1: Date | number | string, d2: Date | number | string = Date.now()): boolean => {
         d1 = new Date(d1);
         d2 = new Date(d2);
 
@@ -104,7 +118,7 @@ export const date = {
     },
 
     when: (d: Date | number | undefined, showTime = true) => {
-        if (!d) return;
+        if (!d) return '';
 
         const options = showTime
             ? {
