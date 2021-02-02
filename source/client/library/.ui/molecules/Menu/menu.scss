@@ -1,0 +1,53 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+}
+
+.content {
+    z-index: 99;
+    position: fixed;
+    margin-top: 8px;
+    margin-left: -40px;
+    border-radius: $radius;
+    overflow: hidden;
+    @include invisible;
+
+    &.visible {
+        @include invisible(1);
+    }
+}
+
+.option {
+    $hover: $light;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: black;
+    background: #fff;
+    padding: $padding;
+    transition: background $tr;
+    cursor: pointer;
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $hover;
+    }
+
+    &:hover {
+        background: $hover;
+    }
+
+    svg {
+        margin-left: 18px;
+    }
+}

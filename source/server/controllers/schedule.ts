@@ -10,6 +10,7 @@ let list: ScheduleEventStrict[] = [
         salary: 'from 70 000 after taxes',
         contacts: 'https://t.me/someone',
         additional: 'full time, remote working',
+        color: '#ff6150',
     },
 ];
 
@@ -20,6 +21,7 @@ const template = {
     salary: '',
     contacts: '',
     additional: '',
+    color: '#ff6150',
 };
 
 export const get = (_: Request, res: Response) => res.json(list);

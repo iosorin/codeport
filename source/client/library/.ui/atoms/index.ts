@@ -1,6 +1,6 @@
 export { Backdrop } from './Backdrop';
 export { Button } from './Button';
-export { EventDetails } from './EventDetails';
+export { Colors, Color } from './Colors';
 export { Input } from './Input/Input';
 export { Loader } from './Loader';
 export { Logo } from './Logo';

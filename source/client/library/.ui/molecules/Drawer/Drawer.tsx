@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'react-feather';
 import { Backdrop, Transition } from '@ui';
-
 import styles from './drawer.scss';
 
 export type Props = {

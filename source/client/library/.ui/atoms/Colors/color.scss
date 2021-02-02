@@ -1,0 +1,35 @@
+.color {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    border: $border;
+    border-radius: 50%;
+    transition: transform $tr;
+
+    &.small {
+        width: 8px;
+        height: 8px;
+    }
+    &.medium {
+        width: 20px;
+        height: 20px;
+    }
+    &.large {
+        width: 26px;
+        height: 26px;
+    }
+
+    &.selectable {
+        &:hover:not(.active) {
+            transform: scale(1.1);
+        }
+    }
+
+    &.active {
+        border: 2px solid rgba(white, 0.8);
+    }
+
+    & + .color {
+        margin-left: 10px;
+    }
+}

@@ -1,7 +1,9 @@
 import { date, groupByProp, sortByProp } from '@/library/utils';
-import { ChevronDown } from 'react-feather';
+import { ChevronDown, Edit3, Eye, MoreHorizontal, Trash } from 'react-feather';
 import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react';
 import styles from './table.scss';
+import { Color } from '../..';
+import { Menu } from '../Menu';
 
 type Item = {
     [key: string]: string | number | Date | JSX.Element | any[];
@@ -10,28 +12,39 @@ type Item = {
 type Props = {
     caption?: string;
     num?: string;
+    color?: string;
     source: Item[];
     labels?: string[];
     sortable?: string[];
     background?: 'light' | 'dark' | 'none';
     groupBy?: string;
-    trClick?: (item?: any) => void;
+    onTrClick?: (item?: any) => void;
+    onEdit?: (item?: any) => void;
+    onDelete?: (item?: any) => void;
+    onDetails?: (item?: any) => void;
+    prefixes: { [key: string]: string };
 };
 
-export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
+export const Table: FC<Props> = ({
     num,
+    color,
     caption,
     source: origin,
     labels: originLabels,
     sortable,
     background = 'none',
     groupBy,
-    trClick,
-    ...props
+    onTrClick,
+    onEdit,
+    onDelete,
+    onDetails,
+    prefixes,
 }) => {
     const [source, setSource] = useState(origin);
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
+
+    const showMenu = !!(onEdit || onDelete || onDetails);
 
     useEffect(() => {
         if (!originLabels) {
@@ -94,11 +107,26 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
         );
     };
 
+    const renderMenu = (item: Item) => {
+        return (
+            showMenu && (
+                <td style={{ textAlign: 'center' }}>
+                    <Menu
+                        onEdit={onEdit ? () => onEdit(item) : false}
+                        onDelete={onDelete ? () => onDelete(item) : false}
+                        onDetails={onDetails ? () => onDetails(item) : false}
+                    />
+                </td>
+            )
+        );
+    };
+
     const renderThead = () => {
         return (
             <thead>
                 <tr>
                     {num && <th className={styles.num}>{num}</th>}
+                    {color && <th className={styles.color}></th>}
 
                     {labels?.map((label) => {
                         if (label === 'id') return;
@@ -111,6 +139,8 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
                             </th>
                         );
                     })}
+
+                    {showMenu && <th></th>}
                 </tr>
             </thead>
         );
@@ -118,18 +148,23 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
 
     const renderTd = (key: string | boolean, item: Item, index: number) => {
         let value = item[key as string];
+        const prefix = prefixes[key as keyof typeof prefixes];
 
-        if (!key || key === 'id' || !item || !value || Array.isArray(value)) {
-            return (
-                <td key={index}>
-                    <span className="text-grey">-</span>;
-                </td>
-            );
+        if (!key || key === 'id' || !item || !value) {
+            return <td key={index}></td>;
+        }
+
+        if (Array.isArray(value)) {
+            value = value.length;
         }
 
         if (value instanceof Date || key === 'date') {
             //@ts-ignore
             value = date.when(value);
+        }
+
+        if (prefix) {
+            value += prefix;
         }
 
         return <td key={index}>{value}</td>;
@@ -140,12 +175,23 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
             <tbody>
                 {source.map((item, itemIndex) => {
                     return (
-                        <tr key={(item.id as string) || itemIndex} onClick={() => trClick?.(item)}>
+                        <tr
+                            key={(item.id as string) || itemIndex}
+                            onClick={() => onTrClick?.(item)}
+                        >
                             {num && <td className={styles.num}>{itemIndex + 1}</td>}
+
+                            {color && (
+                                <td className={styles.color}>
+                                    <Color color={item[color] as string} size="small" />
+                                </td>
+                            )}
 
                             {labels?.map((label, index) => {
                                 return renderTd(label, item, index);
                             })}
+
+                            {renderMenu(item)}
                         </tr>
                     );
                 })}
@@ -153,7 +199,7 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
         );
     };
 
-    const renderGroupedTbodys = () => {
+    const renderGroupedTbody = () => {
         return Object.keys(source).map((groupByValue) => {
             // @ts-ignore
             const items: Item[] = source[groupByValue as keyof typeof source];
@@ -164,12 +210,17 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
                 <tbody>
                     {items.map((item, itemIndex) => {
                         return (
-                            <tr>
+                            <tr
+                                key={(item.id as string) || itemIndex}
+                                onClick={() => onTrClick?.(item)}
+                            >
                                 {labels?.map((label, index) => {
                                     const renderLabel = label === groupBy ? itemIndex === 0 : true;
 
                                     return renderTd(renderLabel && label, item, index);
                                 })}
+
+                                {renderMenu(item)}
                             </tr>
                         );
                     })}
@@ -180,14 +231,13 @@ export const Table: FC<HTMLProps<HTMLTableElement> & Props> = ({
 
     return (
         <table
-            className={`${styles.table} ${styles[background]} ${trClick ? styles.clickable : ''}`}
-            {...props}
+            className={`${styles.table} ${styles[background]} ${onTrClick ? styles.clickable : ''}`}
         >
             {caption && <caption>{caption}</caption>}
 
             {renderThead()}
 
-            {groupBy ? renderGroupedTbodys() : renderTbody()}
+            {groupBy ? renderGroupedTbody() : renderTbody()}
         </table>
     );
 };

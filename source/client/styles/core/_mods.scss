@@ -12,8 +12,7 @@
 }
 
 .invisible {
-    visibility: hidden;
-    opacity: 0;
+    @include invisible;
 }
 
 .scrollable {
@@ -24,7 +23,7 @@
     @include unselectable;
 }
 
-.hoverable {
+.hover {
     cursor: pointer;
     opacity: 0.7;
     transition: opacity $tr;

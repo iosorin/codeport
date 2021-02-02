@@ -21,7 +21,7 @@ export const IncomingCallDialog: FC<Props> = ({ isVisible, close, accept }) => {
             title="Incoming video call"
             transition="slide-in-left"
         >
-            <div className="flex flex-column">
+            <div className="flex-col">
                 <div className="my-1" style={{ fontSize: 80 }}>
                     <span aria-label="caller image" role="img">
                         👩‍🚀

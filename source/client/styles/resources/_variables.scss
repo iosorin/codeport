@@ -7,16 +7,16 @@ $font-size: 14px;
 
 $black: #202020;
 $black-lighten: lighten($black, 5%);
-$black-darken: darken($black, 5%);
-
+$black-darken: darken($black, 4%);
 $light: #f2f5f9;
-$blue: #5b3dfb; // #0b0cef;
-$violet: #7445ff;
+
+$blue: #2d49e9; // #0b0cef;
+$violet: #3777ff;
 $orange: #fb5d2b;
 $yellow: #ffeb3b;
 $green: #00e676;
 
-$primary: $orange;
+$primary: $yellow;
 $success: $green;
 
 $text: white;
@@ -32,6 +32,8 @@ $shadow: 0 3px 10px -3px rgba(black, 0.7);
 $shadow-light: 0 3px 8px 0px rgba(white, 0.4);
 $shadow-1: 0 3px 10px -3px rgba(black, 0.4);
 $shadow-2: 0 3px 8px -3px rgba(black, 0.2);
+$border: 1px solid rgba(white, 0.05);
+$border-dark: 1px solid rgba(black, 0.05);
 
 /* easing */
 $ease-1: ease-out;
@@ -48,7 +50,7 @@ $block-primary: $orange;
 $button-primary-background: $primary;
 $button-secondary-background: black;
 $button-font-family: $sans-serif;
-$button-transition: $tr;
+$button-transition: transform 0.35s ease;
 $button-radius: 3rem;
 
 /* input, select */
@@ -69,7 +71,7 @@ $range-color: $black;
 $backdrop-background: rgba(black, 0.4);
 
 /* dialog */
-$dialog-minwidth: 375px;
+$dialog-width: 375px;
 $dialog-padding: 20px;
 $dialog-radius: 4px;
 $dialog-background: white;

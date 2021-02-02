@@ -1,6 +1,5 @@
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-
 import { Dialog } from '.';
 
 const text = 'dialog content';

@@ -1,0 +1,111 @@
+.table {
+    text-align: left;
+    border-radius: $radius;
+    overflow: hidden;
+
+    &.none {
+        background: none;
+    }
+
+    &.light {
+        background: $black-lighten;
+
+        tr,
+        th,
+        td {
+            border: 1px solid lighten($black-lighten, 3%);
+        }
+    }
+
+    &.dark {
+        color: white;
+        background: $black-darken;
+
+        tr,
+        th,
+        td {
+            border: 1px solid $black;
+        }
+    }
+
+    &.clickable {
+        tbody {
+            tr {
+                cursor: pointer;
+                transition: $tr;
+            }
+        }
+
+        &.light,
+        &.none {
+            tbody {
+                tr {
+                    &:hover {
+                        background: lighten($black-lighten, 2%);
+                    }
+                }
+            }
+        }
+
+        &.dark {
+            tbody {
+                tr {
+                    &:hover {
+                        background: $black-darken;
+                    }
+                }
+            }
+        }
+    }
+
+    caption {
+        text-align: left;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+
+    th {
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        user-select: none;
+    }
+
+    tr,
+    th,
+    td {
+        position: relative;
+        padding: $padding-y * 1.5 $padding-x * 1.5;
+    }
+
+    .num,
+    .color {
+        width: 35px;
+        text-align: right;
+        padding-right: 0;
+        padding-left: 0;
+        border-right: none !important;
+        + * {
+            border-left: none !important;
+        }
+    }
+
+    .sort {
+        cursor: pointer;
+        position: absolute;
+        right: $padding-x * 1.5;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 0;
+        opacity: 0.5;
+        transition: opacity $tr;
+
+        &:hover:not(:active),
+        &.current {
+            opacity: 1;
+        }
+
+        &.up {
+            transform: translateY(-50%) rotate(180deg);
+        }
+    }
+}

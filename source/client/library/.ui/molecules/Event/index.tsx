@@ -3,53 +3,54 @@ import { ScheduleEvent } from 'types';
 import { date } from '@/library/utils';
 
 type Props = {
-    event: ScheduleEvent;
+    details: ScheduleEvent;
     showEmpty?: boolean;
     inline?: boolean;
 };
 
-export const EventDetails: FC<Props> = ({ event, showEmpty, inline }) => {
+export const Event: FC<Props> = ({ details, showEmpty, inline }) => {
     const Tagname = inline ? 'span' : 'p';
 
     const empty = <span className="text-grey">-</span>;
 
-    const details = [
+    const map = [
         {
             label: 'Date',
-            value: date.when(event.date),
+            value: date.when(details.date),
         },
         {
             label: 'Stack',
-            value: event.stack,
+            value: details.stack,
         },
         {
             label: 'Salary',
-            value: event.salary,
+            value: details.salary,
         },
         {
             label: 'Contacts',
-            value: event.contacts,
+            value: details.contacts,
         },
     ];
 
     return (
         <>
-            {details.map((detail) => {
+            {map.map((detail, index) => {
                 const show = showEmpty || detail.value;
 
                 return (
                     show && (
-                        <Tagname>
-                            <b>{detail.label}:</b> {detail.value || (showEmpty && empty)}
-                            {inline && '; '}
+                        <Tagname key={index}>
+                            {inline ? detail.label : <b>{detail.label}</b>}:&nbsp;
+                            {detail.value || (showEmpty && empty)}
+                            {inline && ';'}&nbsp;
                         </Tagname>
                     )
                 );
             })}
 
-            {(showEmpty || event.additional) && (
+            {!inline && (showEmpty || details.additional) && (
                 <Tagname className="scrollable" style={{ maxHeight: '90px' }}>
-                    <b>Additional:&nbsp;</b> {event.additional || empty}
+                    <b>Additional</b>:&nbsp; {details.additional || empty}
                 </Tagname>
             )}
         </>
