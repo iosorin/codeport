@@ -1,7 +1,7 @@
-import { Button } from '@ui';
-import { observer } from 'mobx-react-lite';
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Plus } from 'react-feather';
+import { Button } from '@ui';
 import { ScheduleEventStrict } from 'types';
 import { ScheduleEventCard } from '../organisms';
 import { ScheduleNotification } from '../molecules';
@@ -31,7 +31,7 @@ export const ScheduleList: FC<Props> = observer(
                 </div>
 
                 <Button
-                    background="primary"
+                    background="light"
                     className="mt-auto ml-auto"
                     onClick={() => openDialog()}
                     rounded

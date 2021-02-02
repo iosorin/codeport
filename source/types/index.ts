@@ -14,6 +14,7 @@ export type ScheduleEvent = {
     salary?: string;
     contacts?: string;
     additional?: string;
+    color?: string;
 };
 
 export type ScheduleEventStrict = {
@@ -24,4 +25,11 @@ export type ScheduleEventStrict = {
     salary: string;
     contacts: string;
     additional: string;
+    color: string;
+};
+
+export type CompletedScheduleEvent = ScheduleEventStrict & {
+    rating: number;
+    snippets: string[];
+    time: number; // min.
 };

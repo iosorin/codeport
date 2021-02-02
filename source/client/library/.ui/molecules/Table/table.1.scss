@@ -33,17 +33,21 @@
 
         &.light,
         &.none {
-            td {
-                &:hover {
-                    background: lighten($black-lighten, 2%);
+            tbody {
+                tr {
+                    &:hover {
+                        background: lighten($black-lighten, 2%);
+                    }
                 }
             }
         }
 
         &.dark {
-            td {
-                &:hover {
-                    background: $black-darken;
+            tbody {
+                tr {
+                    &:hover {
+                        background: $black-darken;
+                    }
                 }
             }
         }
@@ -88,7 +92,7 @@
         color: $text-grey;
         letter-spacing: 0.5px;
         text-transform: capitalize;
-        padding-bottom: 5px;
+        padding-bottom: $padding-y;
     }
 
     .num,
@@ -105,22 +109,23 @@
 
     .sort {
         cursor: pointer;
-        @include cover;
-        text-align: right;
+        display: inline;
+        margin-left: 6px;
         opacity: 0.5;
         transition: opacity $tr;
+        position: absolute;
+        right: $padding-x * 2;
+        top: 35%;
+        transform: translateY(-50%);
+        line-height: 0;
 
         &:hover:not(:active),
         &.current {
             opacity: 1;
         }
-        svg {
-            margin-top: 2px;
-        }
+
         &.up {
-            svg {
-                transform: rotate(180deg);
-            }
+            transform: translateY(-50%) rotate(180deg);
         }
     }
 }

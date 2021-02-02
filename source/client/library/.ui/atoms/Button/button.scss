@@ -19,6 +19,7 @@
 
     // background
     &.primary {
+        color: $black;
         background-color: $button-primary-background;
     }
     &.secondary {
@@ -86,7 +87,7 @@
 
     // view
     &:not(.hover):hover:not(:active) {
-        transform: scale(1.02);
+        transform: scale(1.05);
     }
 
     &.loading {

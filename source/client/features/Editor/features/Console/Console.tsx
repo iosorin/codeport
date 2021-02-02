@@ -26,13 +26,13 @@ export const Console: FC<Props> = observer(
 
         return (
             <div className={`${styles.Console} ${className}`}>
-                <div className="flex flex-between">
+                <div className="flex-between">
                     <div className={styles.Title}>Console</div>
 
-                    <div className="hoverable" onClick={() => store.setResults([])}>
+                    <div className="hover" onClick={() => store.setResults([])}>
                         clear
                     </div>
-                    <X className="hoverable" onClick={() => toggleConsole(false)} size="16" />
+                    <X className="hover" onClick={() => toggleConsole(false)} size="16" />
                 </div>
 
                 <div className={styles.Content}>
@@ -68,7 +68,7 @@ export const Console: FC<Props> = observer(
                     )}
                 </div>
 
-                <div className="flex flex-between mb-xs">
+                <div className="flex-between mb-xs">
                     <div className={styles.Version}>{store.languageInfo.version}</div>
 
                     <Button

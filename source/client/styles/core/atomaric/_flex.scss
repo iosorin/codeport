@@ -10,11 +10,6 @@
         flex: 0 0 auto;
     }
 
-    &-col {
-        display: flex;
-        flex-direction: column;
-    }
-
     /* alignment */
     &-start {
         display: flex;
@@ -47,9 +42,14 @@
     }
 
     /* direction */
-    &-column {
+    &-col {
         display: flex;
         flex-direction: column !important;
+    }
+
+    &-col-reverse {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 

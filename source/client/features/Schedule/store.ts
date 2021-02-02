@@ -16,6 +16,10 @@ class ScheduleStore {
         makeAutoObservable(this);
     }
 
+    get empty() {
+        return !this.events.length;
+    }
+
     get sorted() {
         return [...this.events].sort((a, b) => a.date - b.date);
     }
