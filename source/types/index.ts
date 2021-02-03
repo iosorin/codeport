@@ -15,6 +15,10 @@ export type ScheduleEvent = {
     contacts?: string;
     additional?: string;
     color?: string;
+
+    rating?: number | string;
+    snippets?: string[];
+    time?: number;
 };
 
 export type ScheduleEventStrict = {
@@ -29,7 +33,7 @@ export type ScheduleEventStrict = {
 };
 
 export type CompletedScheduleEvent = ScheduleEventStrict & {
-    rating: number;
+    rating: number | string;
     snippets: string[];
     time: number; // min.
 };

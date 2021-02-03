@@ -24,6 +24,19 @@
 }
 
 .hover {
+    .hover-target {
+        opacity: 0;
+        transition: opacity $tr;
+    }
+
+    &:hover {
+        .hover-target {
+            opacity: 1;
+        }
+    }
+}
+
+.hoverable {
     cursor: pointer;
     opacity: 0.7;
     transition: opacity $tr;

@@ -14,7 +14,6 @@
 .content {
     z-index: 99;
     position: fixed;
-    margin-top: 8px;
     margin-left: -40px;
     border-radius: $radius;
     overflow: hidden;
@@ -31,7 +30,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.9em;
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
     line-height: 1.5;
     color: black;
     background: #fff;

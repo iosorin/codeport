@@ -10,4 +10,10 @@
         @include input;
         @include scrollable;
     }
+
+    &.dark {
+        textarea {
+            @include dark;
+        }
+    }
 }

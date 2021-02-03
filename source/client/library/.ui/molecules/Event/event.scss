@@ -1,0 +1,6 @@
+p {
+    max-width: 400px;
+    & + p {
+        margin-top: 1.2rem !important;
+    }
+}

@@ -59,6 +59,19 @@
         background: $black;
     }
 
+    &.hover {
+        border: none;
+        transition: background $tr;
+        background: rgba($black-lighten, 0.2);
+        position: relative;
+        cursor: pointer;
+        border: $border;
+
+        &:not(:hover) {
+            border-color: transparent;
+        }
+    }
+
     &.primary {
         background: $block-primary;
         border-color: $block-primary;
@@ -82,29 +95,10 @@
         }
     }
 
-    // other
-    &.hover {
-        transition: box-shadow $tr;
-
-        &:not(.light):hover {
-            box-shadow: $shadow;
-        }
-
-        &.light {
-            &:hover {
-                box-shadow: $shadow-light;
-            }
-        }
-    }
-
     &.styled {
         font-size: $block-fz;
         font-family: $block-ff;
         line-height: 1.4;
-    }
-
-    &.stretch {
-        width: 100%;
     }
 
     &.flex {
@@ -131,34 +125,31 @@
 
     &.empty {
         position: relative;
+        background: $black;
         @include disabled;
 
-        &::before {
-            $s: 10px;
+        // &::before {
+        //     $s: 10px;
 
-            content: '';
-            position: absolute;
-            width: calc(100% - #{$s * 2});
-            height: calc(100% - #{$s * 2});
-            left: $s;
-            top: $s;
-            // border: 1px dashed $black-lighten;
-            border-radius: $radius;
-        }
+        //     content: '';
+        //     position: absolute;
+        //     width: calc(100% - #{$s * 2});
+        //     height: calc(100% - #{$s * 2});
+        //     left: $s;
+        //     top: $s;
+        //     border: 1px dashed $black-lighten;
+        //     border-radius: $radius;
+        // }
     }
 }
 
 .header {
-    margin-bottom: 20px;
-    margin-bottom: 10px;
-    align-items: center;
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .content {
-    & + .footer {
-        margin-top: 25px;
-    }
 }
 
 .footer {
@@ -166,14 +157,22 @@
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
+    position: relative;
     span {
-        font-size: 1.2em;
+        font-size: 1.4rem;
+    }
+
+    .controls {
+        top: auto;
+        bottom: 0;
     }
 }
 
 .controls {
+    position: absolute;
+    right: 0;
+    top: 0px;
     display: flex;
-    margin-left: auto;
     opacity: 0;
     transition: opacity $tr;
 

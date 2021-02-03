@@ -5,30 +5,30 @@ import styles from './block.scss';
 
 export type Props = {
     title?: string;
-    icon?: string;
+    icon?: string | JSX.Element;
     small?: string | number;
     size?: 'small' | 'medium' | 'large';
     background?: 'light' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
-    stretch?: boolean;
+    customBackground?: string;
     flex?: boolean;
     hover?: boolean;
     styled?: boolean;
     empty?: boolean;
     controlsInBottom?: boolean;
     height?: string;
-    onEdit?: () => void;
-    onRemove?: () => void;
+    onEdit?: false | (() => void);
+    onRemove?: false | (() => void);
 };
 
 export const Block: FC<Props> = memo(
     ({
         title,
         size = 'medium',
-        background = 'none',
+        customBackground,
+        background = 'dark',
         height: minHeight = '',
         icon,
         small,
-        stretch,
         flex,
         hover,
         styled,
@@ -41,10 +41,9 @@ export const Block: FC<Props> = memo(
         const classlist = [styles.block, styles[size], styles[background]];
 
         if (flex) classlist.push(styles.flex);
-        if (empty) classlist.push(styles.empty);
         if (hover) classlist.push(styles.hover);
+        if (empty) classlist.push(styles.empty);
         if (styled) classlist.push(styles.styled);
-        if (stretch) classlist.push(styles.stretch);
 
         const controls = (
             <div className={styles.controls}>
@@ -55,7 +54,7 @@ export const Block: FC<Props> = memo(
                         hover
                         size="small"
                         onClick={onEdit}
-                        color={background === 'light' ? 'black' : 'white'}
+                        color={background === ('light' || 'yellow') ? 'black' : 'white'}
                     >
                         <Edit3 size="15" />
                     </Button>
@@ -68,7 +67,7 @@ export const Block: FC<Props> = memo(
                         hover
                         size="small"
                         onClick={onRemove}
-                        color={background === 'light' ? 'black' : 'white'}
+                        color={background === ('light' || 'yellow') ? 'black' : 'white'}
                     >
                         <X size="17" />
                     </Button>
@@ -77,7 +76,10 @@ export const Block: FC<Props> = memo(
         );
 
         return (
-            <div className={classlist.join(' ')} style={{ minHeight }}>
+            <div
+                className={classlist.join(' ')}
+                style={{ minHeight, background: customBackground || '' }}
+            >
                 {(title || onEdit || onRemove) && (
                     <div className={styles.header}>
                         {title && <h3>{title}</h3>}

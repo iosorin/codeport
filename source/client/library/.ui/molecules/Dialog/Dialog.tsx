@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'react-feather';
 import { useHotkey } from '@hooks';
@@ -7,26 +7,28 @@ import styles from './dialog.scss';
 
 export type Props = {
     isVisible: boolean;
-    title?: string | boolean;
+    title?: string | boolean | JSX.Element;
     closeIcon?: boolean;
     persistent?: boolean;
     centered?: boolean;
     size?: 'small' | 'normal' | 'large' | 'fullscreen';
     transition?: Transition;
     dark?: boolean;
+    style?: CSSProperties;
     close: () => void;
 };
 
 export const Dialog: FC<Props> = ({
     isVisible,
     children,
-    title,
+    title = null,
     closeIcon = true,
     persistent,
     centered,
     size = 'normal',
     transition = 'zoom',
     dark,
+    style = {},
     close,
 }) => {
     useHotkey('escape', close, isVisible);
@@ -50,12 +52,17 @@ export const Dialog: FC<Props> = ({
                 >
                     <Transition duration={450} in={isVisible} type={transition}>
                         <div
+                            style={{ ...style }}
                             className={`${styles.dialog} ${dark ? styles.dark : ''} ${
                                 centered ? styles.centered : ''
                             } ${styles[size]}`}
                         >
                             <div className={styles.header}>
-                                {title ? <div className={`h4 ${styles.title}`}>{title}</div> : null}
+                                {typeof title === 'string' ? (
+                                    <div className={`h4 ${styles.title}`}>{title}</div>
+                                ) : (
+                                    title
+                                )}
 
                                 {closeIcon ? (
                                     <button

@@ -33,7 +33,7 @@ export const ScheduleDialog: FC<Props> = observer(({ store, closeDialog }) => {
     };
 
     return (
-        <Dialog close={closeDialog} isVisible={store.dialogIsVisible} title="Schedule event">
+        <Dialog close={closeDialog} isVisible={store.dialogIsVisible} title="Schedule Event">
             <form onSubmit={submitHandler}>
                 <div className="flex-col">
                     <Input

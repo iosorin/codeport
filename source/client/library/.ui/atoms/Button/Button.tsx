@@ -6,10 +6,11 @@ import styles from './button.scss';
 export type Props = {
     type?: 'button' | 'submit';
     label?: string;
-    hover?: boolean;
-    background?: 'primary' | 'secondary' | 'success' | 'light';
     size?: 'small' | 'medium' | 'large';
     color?: 'white' | 'black';
+    hover?: boolean;
+    background?: 'primary' | 'secondary' | 'success' | 'light';
+    shadow?: 'dark' | 'light';
     rounded?: boolean;
     outline?: boolean;
     loading?: boolean;
@@ -24,6 +25,7 @@ export const Button: React.FC<Props> = ({
     size = 'medium',
     background = 'secondary',
     color = 'white',
+    shadow,
     label,
     rounded,
     outline,
@@ -38,6 +40,7 @@ export const Button: React.FC<Props> = ({
     const classlist = [styles.button, styles[size], styles[background], styles[color], className];
 
     if (hover) classlist.push(styles.hover);
+    if (shadow) classlist.push(styles[`shadow-${shadow}`]);
     if (rounded) classlist.push(styles.rounded);
     if (outline) classlist.push(styles.outline);
     if (loading) classlist.push(styles.loading);
@@ -56,7 +59,7 @@ export const Button: React.FC<Props> = ({
             type={type}
             disabled={disabled}
         >
-            {loading ? <Loader type="dots" dur="1s" /> : content}
+            {loading ? <Loader type="dots" dur="1s" /> : <span>{content}</span>}
         </button>
     );
 };

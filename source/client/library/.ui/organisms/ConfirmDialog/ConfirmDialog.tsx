@@ -30,7 +30,7 @@ export const ConfirmDialog: FC<Props> = ({
                 {children}
 
                 <div className="list flex-center mt-2">
-                    <Button onClick={confirm} background="secondary" loading={loading}>
+                    <Button onClick={confirm} background="success" loading={loading}>
                         Confirm
                     </Button>
 
