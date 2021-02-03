@@ -1,33 +1,63 @@
 import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { CompletedScheduleEvent } from 'types';
-import { Block, Button, Color, Colors, Dialog, Event, Input, Textarea } from '@/library/.ui';
+import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { Block, Button, Color, Colors, Dialog, Event, Input, Textarea, Range } from '@/library/.ui';
 import styles from './activity-details.scss';
-import { ArrowLeft, ArrowRight, Check, Edit, Edit3 } from 'react-feather';
+import { ArrowLeft, ArrowRight, Check } from 'react-feather';
 import { date } from '@/library/utils';
 
 type Props = {
     isVisible: boolean;
     details: CompletedScheduleEvent | null;
+    setDetails: (details: ScheduleEvent) => void;
     close: () => void;
 };
 
-export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details }) => {
+export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details, setDetails }) => {
     const [edit, setedit] = useState(false);
     const [titleEdit, settitleEdit] = useState(false);
     const [ratingEdit, setratingEdit] = useState(false);
 
     if (!details) return null;
 
-    const rating =
-        typeof details.rating === 'number' ? `${details.rating} / 10` : `${details.rating}`;
+    const rating = () => {
+        const rating = typeof details.rating === 'number' ? details.rating : 0;
+
+        return ratingEdit ? (
+            <div className="flex-start flex-50">
+                <Range
+                    dark
+                    max={10}
+                    min={0}
+                    onChange={(rating) => setDetails({ rating })}
+                    step={0.1}
+                    units=" / 10"
+                    value={details.rating}
+                />
+
+                <div className="pointer ml-2" onClick={() => setratingEdit(false)}>
+                    <Check size="18" />
+                </div>
+            </div>
+        ) : (
+            <div onClick={() => !ratingEdit && setratingEdit(true)}>
+                <Block hover size="small">
+                    {rating}
+                </Block>
+            </div>
+        );
+    };
 
     const title = (
         <>
             {titleEdit ? (
                 <div className="flex-col flex-50">
                     <div className="flex-start flex-1">
-                        <Input dark onChange={console.log} value={details.title} />
+                        <Input
+                            dark
+                            onChange={(e) => setDetails({ title: e.currentTarget.value })}
+                            value={details.title}
+                        />
 
                         <div className="pointer ml-2" onClick={() => settitleEdit(false)}>
                             <Check size="18" />
@@ -35,12 +65,15 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
                     </div>
 
                     <div className="ml-xs mt-xs">
-                        <Colors active={details.color} onChange={console.log} />
+                        <Colors
+                            active={details.color}
+                            onChange={(color) => setDetails({ color })}
+                        />
                     </div>
                 </div>
             ) : (
                 <div onClick={() => !titleEdit && settitleEdit(true)}>
-                    <Block hover>
+                    <Block hover size="small">
                         <div className="flex-start">
                             <Color color={details.color} />
 
@@ -57,7 +90,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
             <Input
                 dark
                 label="Stack"
-                onChange={console.log}
+                onChange={(e) => setDetails({ stack: e.currentTarget.value })}
                 placeholder="react, typescript, mobx, unit-tests"
                 value={details.stack}
             />
@@ -65,7 +98,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
             <Input
                 dark
                 label="Salary"
-                onChange={console.log}
+                onChange={(e) => setDetails({ salary: e.currentTarget.value })}
                 placeholder="from 70 000 after taxes"
                 value={details.salary}
             />
@@ -73,7 +106,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
             <Input
                 dark
                 label="Contacts"
-                onChange={console.log}
+                onChange={(e) => setDetails({ contacts: e.currentTarget.value })}
                 placeholder="https://t.me/someone"
                 value={details.contacts}
             />
@@ -81,7 +114,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
             <Textarea
                 dark
                 label="Additional"
-                onChange={console.log}
+                onChange={(e) => setDetails({ additional: e.currentTarget.value })}
                 placeholder="location, work format"
                 value={details.additional}
             />
@@ -123,7 +156,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
             <div className={`flex-col ${styles.container}`}>
                 <div className="flex mb-xs">
                     <div className="flex-col flex-1 mr-2" onClick={() => !edit && setedit(true)}>
-                        <Block controlsInBottom height="315px" hover>
+                        <Block controlsInBottom height="315px" hover size="small">
                             {edit ? (
                                 form()
                             ) : (
@@ -148,23 +181,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
                 </div>
 
                 <div className="flex-between mt-2">
-                    {ratingEdit ? (
-                        <div className="flex-start flex-50">
-                            <Input
-                                dark
-                                type="number"
-                                value={typeof details.rating === 'number' ? details.rating : 0}
-                            />
-
-                            <div className="pointer ml-2" onClick={() => setratingEdit(false)}>
-                                <Check size="18" />
-                            </div>
-                        </div>
-                    ) : (
-                        <div onClick={() => !ratingEdit && setratingEdit(true)}>
-                            <Block hover>{rating}</Block>
-                        </div>
-                    )}
+                    {rating()}
 
                     <div className="flex-col text-right">
                         <div className="h2">{details.time} min.</div>

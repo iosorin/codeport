@@ -11,6 +11,7 @@ export type Props = {
     step?: string | number;
     label?: string;
     disabled?: boolean;
+    dark?: boolean;
     units?: string;
     onChange: (e: ValueType) => void;
 };
@@ -22,6 +23,7 @@ export const Range: FC<Props> = ({
     max = 10,
     step = 1,
     label,
+    dark,
     onChange,
     disabled,
 }) => {
@@ -40,13 +42,13 @@ export const Range: FC<Props> = ({
         };
 
         changeHandler();
-    }, [value, max, min, onChange]);
+    }, [value]);
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${dark ? styles.dark : ''}`}>
             {label ? <div className="label">{label}</div> : null}
 
-            <div className="flex-center">
+            <div className="flex-col align-start">
                 <b className={styles.value}>
                     {value}
                     {units}
