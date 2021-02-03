@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
-import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { ScheduleEvent } from 'types';
 import { date } from '@/library/utils';
-import './event.scss';
+import styles from './event.scss';
 
 type Props = {
     details: ScheduleEvent;
-    showRating?: boolean;
-    showDate?: boolean;
+    rating?: boolean;
+    date?: boolean;
     showEmpty?: boolean;
+    accent?: boolean;
 };
 
-export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmpty }) => {
+export const Event: FC<Props> = ({ details, date: showDate = true, rating, showEmpty, accent }) => {
     const empty = <span className="text-grey">-</span>;
 
     const map = [
@@ -33,10 +34,10 @@ export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmp
         },
     ];
 
-    if (showRating && details.rating) {
+    if (rating && typeof details.rating === 'number') {
         map.push({
             label: 'Rating',
-            value: details.rating.toString(),
+            value: details.rating.toString() + ' / 10',
         });
     }
 
@@ -48,17 +49,17 @@ export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmp
     }
 
     return (
-        <>
+        <div className={accent ? styles.accent : ''}>
             {map.map((detail, index) => {
                 return (
                     (showEmpty || detail.value) && (
                         <p key={index}>
-                            <b>{detail.label}</b>: <br />
-                            {detail.value || (showEmpty && empty)}
+                            <b>{detail.label}:</b> <br />
+                            <span>{detail.value || (showEmpty && empty)}</span>
                         </p>
                     )
                 );
             })}
-        </>
+        </div>
     );
 };

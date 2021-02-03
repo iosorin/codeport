@@ -19,7 +19,15 @@
         @include text-truncate;
     }
 
+    &-bold {
+        font-weight: bold;
+    }
+
     &-grey {
         color: $text-grey;
+    }
+
+    &-accent {
+        font-family: $sans-accent;
     }
 }

@@ -46,6 +46,23 @@ article > * + * {
     flex-direction: column;
 }
 
+hr {
+    display: block;
+    border: none;
+    width: 100%;
+    height: 1px;
+    background: $grey;
+
+    &.dark {
+        background: $black-lighten;
+    }
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
 .grid {
     display: flex;
     flex-wrap: wrap;

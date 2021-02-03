@@ -1,0 +1,50 @@
+.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+
+    &.left {
+        justify-content: flex-start;
+    }
+    &.center {
+        justify-content: center;
+    }
+
+    &.end {
+        justify-content: flex-end;
+    }
+
+    &.dark {
+        .tab {
+            background: $light;
+            color: $black;
+
+            &.active {
+                background: $black;
+                color: $light;
+            }
+        }
+    }
+}
+
+.tab {
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    font-size: 0.8rem;
+    background: $grey;
+    line-height: 1;
+    position: relative;
+
+    &.active {
+        color: $light;
+        background: $black;
+    }
+
+    & + .tab {
+        margin-left: 0.7rem;
+    }
+}

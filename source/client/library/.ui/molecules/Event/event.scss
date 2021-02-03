@@ -1,6 +1,32 @@
 p {
     max-width: 400px;
     & + p {
-        margin-top: 1.2rem !important;
+        margin-top: 1rem !important;
     }
+}
+
+.accent {
+    font-family: $sans-accent;
+    p {
+        font-size: 0.8rem;
+
+        // & + p {
+        // margin-top: 0.9rem !important;
+        // }
+    }
+
+    // b {
+    // background: $black;
+    // border-radius: $radius;
+    // padding: 2px 15px;
+    // display: inline-block;
+    // }
+
+    // span {
+    // background: $black;
+    // border-radius: $radius;
+    // padding: 2px 15px;
+    // margin-top: 5px;
+    // display: inline-block;
+    // }
 }
