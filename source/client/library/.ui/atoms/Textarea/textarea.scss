@@ -2,7 +2,8 @@
     position: relative;
     margin: $input-margin;
     width: 100%;
-    display: block;
+    display: flex;
+    flex-direction: column;
 
     textarea {
         width: 100%;

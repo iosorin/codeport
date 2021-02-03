@@ -8,15 +8,18 @@ $font-size: 14px;
 $black: #202020;
 $black-lighten: lighten($black, 5%);
 $black-darken: darken($black, 4%);
-$light: #f2f5f9;
+$light: #f6f6f6;
 
-$blue: #2d49e9; // #0b0cef;
-$violet: #3777ff;
-$orange: #fb5d2b;
 $yellow: #ffeb3b;
+$orange: #ff4d2c;
+$red: #f83429;
+$violet: #ae81ff;
+$blue: #4971ff;
 $green: #00e676;
+$grey: #ededed;
 
-$primary: $yellow;
+$primary: $blue;
+$secondary: $yellow;
 $success: $green;
 
 $text: white;
@@ -33,7 +36,7 @@ $shadow-light: 0 3px 8px 0px rgba(white, 0.3);
 $shadow-1: 0 3px 10px -3px rgba(black, 0.4);
 $shadow-2: 0 3px 8px -3px rgba(black, 0.3);
 $border: 2px solid rgba(white, 0.02);
-$border-dark: 1px solid rgba(black, 0.05);
+$border-dark: 1px solid $grey;
 
 /* easing */
 $ease-1: ease-out;
@@ -44,11 +47,10 @@ $tr: 0.22s $ease-1;
 /* $block */
 $block-fz: 0.9em;
 $block-ff: $sans-serif;
-$block-primary: $orange;
 
 /* button */
 $button-primary-background: $primary;
-$button-secondary-background: black;
+$button-secondary-background: $secondary;
 $button-font-family: $sans-serif;
 $button-radius: 3rem;
 
@@ -58,9 +60,10 @@ $input-fz: 0.825rem;
 $input-margin: 0.5em 0;
 $input-border: none;
 $input-radius: 3px;
-$input-background: #eee;
+$input-background: $grey;
 $input-color: $black;
 $input-padding: $padding;
+$input-weight: 500;
 $input-hover-background: darken($input-background, 5%);
 
 /* range */

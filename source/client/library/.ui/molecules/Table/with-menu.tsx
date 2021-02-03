@@ -1,11 +1,11 @@
 import { date, groupByProp, sortByProp } from '@/library/utils';
-import { ChevronDown, Edit3, Eye, Minus, Trash, X } from 'react-feather';
+import { ChevronDown, Edit3, Eye, MoreHorizontal, Trash } from 'react-feather';
 import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react';
 import styles from './table.scss';
-import { Color, Input } from '../..';
+import { Color } from '../..';
+import { Menu } from '../Menu';
 
 type Item = {
-    id: string | number;
     [key: string]: string | number | Date | JSX.Element | any[];
 };
 
@@ -16,11 +16,13 @@ type Props = {
     source: Item[];
     labels?: string[];
     sortable?: string[];
-    prefixes?: { [key: string]: string };
     background?: 'light' | 'dark' | 'none';
     groupBy?: string;
     onTrClick?: (item?: any) => void;
+    onEdit?: (item?: any) => void;
     onDelete?: (item?: any) => void;
+    onDetails?: (item?: any) => void;
+    prefixes: { [key: string]: string };
 };
 
 export const Table: FC<Props> = ({
@@ -33,16 +35,16 @@ export const Table: FC<Props> = ({
     background = 'none',
     groupBy,
     onTrClick,
+    onEdit,
     onDelete,
+    onDetails,
     prefixes,
 }) => {
-    const [, forceUpdate] = useState(0);
-
     const [source, setSource] = useState(origin);
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
 
-    const showDeleteIcon = !!onDelete;
+    const showMenu = !!(onEdit || onDelete || onDetails);
 
     useEffect(() => {
         if (!originLabels) {
@@ -105,17 +107,16 @@ export const Table: FC<Props> = ({
         );
     };
 
-    const renderDeleteIcon = (item: Item) => {
+    const renderMenu = (item: Item) => {
         return (
-            showDeleteIcon && (
-                <td
-                    className="text-center"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        onDelete!(item);
-                    }}
-                >
-                    <Trash className="hoverable" size="14" />
+            showMenu && (
+                <td>
+                    <Menu
+                        showOnHover
+                        onEdit={onEdit && (() => onEdit(item))}
+                        onDelete={onDelete && (() => onDelete(item))}
+                        onDetails={onDetails && (() => onDetails(item))}
+                    />
                 </td>
             )
         );
@@ -140,7 +141,7 @@ export const Table: FC<Props> = ({
                         );
                     })}
 
-                    {showDeleteIcon && <th></th>}
+                    {showMenu && <th></th>}
                 </tr>
             </thead>
         );
@@ -148,12 +149,11 @@ export const Table: FC<Props> = ({
 
     const renderTd = (key: string | boolean, item: Item, index: number) => {
         let value = item[key as string];
+        const prefix = prefixes[key as keyof typeof prefixes];
 
         if (!key || typeof value === 'undefined' || key === 'id' || !item) {
             return <td key={index}></td>;
         }
-
-        const prefix = prefixes?.[key as keyof typeof prefixes];
 
         if (Array.isArray(value)) {
             value = value.length;
@@ -168,7 +168,7 @@ export const Table: FC<Props> = ({
             value += prefix;
         }
 
-        return <td key={`${item.id}-${key}`}>{value}</td>;
+        return <td key={index}>{value}</td>;
     };
 
     const renderTbody = () => {
@@ -192,7 +192,7 @@ export const Table: FC<Props> = ({
                                 return renderTd(label, item, index);
                             })}
 
-                            {renderDeleteIcon(item)}
+                            {renderMenu(item)}
                         </tr>
                     );
                 })}
@@ -221,7 +221,7 @@ export const Table: FC<Props> = ({
                                     return renderTd(renderLabel && label, item, index);
                                 })}
 
-                                {renderDeleteIcon(item)}
+                                {renderMenu(item)}
                             </tr>
                         );
                     })}

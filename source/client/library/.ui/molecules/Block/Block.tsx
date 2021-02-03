@@ -8,16 +8,16 @@ export type Props = {
     icon?: string | JSX.Element;
     small?: string | number;
     size?: 'small' | 'medium' | 'large';
-    background?: 'light' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
+    background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
     customBackground?: string;
     flex?: boolean;
     hover?: boolean;
     styled?: boolean;
-    empty?: boolean;
     controlsInBottom?: boolean;
     height?: string;
-    onEdit?: false | (() => void);
-    onRemove?: false | (() => void);
+    onEdit?: () => void;
+    onRemove?: () => void;
+    onClick?: () => void;
 };
 
 export const Block: FC<Props> = memo(
@@ -32,17 +32,16 @@ export const Block: FC<Props> = memo(
         flex,
         hover,
         styled,
-        empty,
         controlsInBottom,
         onEdit,
         onRemove,
+        onClick,
         children,
     }) => {
         const classlist = [styles.block, styles[size], styles[background]];
 
         if (flex) classlist.push(styles.flex);
-        if (hover) classlist.push(styles.hover);
-        if (empty) classlist.push(styles.empty);
+        if (hover || onClick) classlist.push(styles.hover);
         if (styled) classlist.push(styles.styled);
 
         const controls = (
@@ -79,6 +78,7 @@ export const Block: FC<Props> = memo(
             <div
                 className={classlist.join(' ')}
                 style={{ minHeight, background: customBackground || '' }}
+                onClick={onClick}
             >
                 {(title || onEdit || onRemove) && (
                     <div className={styles.header}>

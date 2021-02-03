@@ -37,44 +37,45 @@
         font-size: $block-fz * 1.1;
     }
 
-    // background
+    // border, background
     &.none {
-        border: 1px solid $black;
-    }
-
-    &.light {
-        background: white;
-    }
-
-    &.dark,
-    &.black {
-        border-color: $black-darken;
-        color: white;
-    }
-    &.black {
-        background: $black-darken;
-    }
-
-    &.dark {
-        background: $black;
+        border: 1px solid;
     }
 
     &.hover {
-        border: none;
-        transition: background $tr;
-        background: rgba($black-lighten, 0.2);
+        transition: border 0.3s $ease-1;
+        background: $light !important;
         position: relative;
         cursor: pointer;
-        border: $border;
+        border: 2px solid;
 
         &:not(:hover) {
             border-color: transparent;
         }
     }
 
+    &.light {
+        background: $light;
+    }
+
+    &.grey {
+        background: $grey;
+        border-color: $grey;
+    }
+
+    &.black {
+        background: $black-darken;
+        border-color: $black-darken;
+    }
+
+    &.dark {
+        background: $black;
+        border-color: $black;
+    }
+
     &.primary {
-        background: $block-primary;
-        border-color: $block-primary;
+        background: $primary;
+        border-color: $primary;
     }
 
     &.success {
@@ -87,11 +88,22 @@
         border-color: $yellow;
     }
 
+    // fix text color
+    &.dark,
+    &.black {
+        &:not(.hover) {
+            color: white;
+        }
+    }
+
     &.light,
-    &.yellow {
-        color: $black;
-        a {
+    &.yellow,
+    &.grey {
+        &:not(.hover) {
             color: $black;
+            a {
+                color: $black;
+            }
         }
     }
 
@@ -122,31 +134,13 @@
             margin-top: initial;
         }
     }
-
-    &.empty {
-        position: relative;
-        background: $black;
-        @include disabled;
-
-        // &::before {
-        //     $s: 10px;
-
-        //     content: '';
-        //     position: absolute;
-        //     width: calc(100% - #{$s * 2});
-        //     height: calc(100% - #{$s * 2});
-        //     left: $s;
-        //     top: $s;
-        //     border: 1px dashed $black-lighten;
-        //     border-radius: $radius;
-        // }
-    }
 }
 
 .header {
     display: flex;
     align-items: center;
     position: relative;
+    line-height: 1;
 }
 
 .content {

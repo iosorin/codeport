@@ -36,6 +36,7 @@ export const ScheduleList: FC<Props> = observer(
                     onClick={() => openDialog()}
                     rounded
                     size="large"
+                    zoom
                 >
                     <Plus />
                 </Button>

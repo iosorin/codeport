@@ -1,8 +1,9 @@
 import { uuid } from '@/library/utils';
 import { makeAutoObservable } from 'mobx';
-import { CompletedScheduleEvent } from 'types';
+import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
+export type EventWithID = ScheduleEvent & { id: string | number };
 
 class ActivityStore {
     events: CompletedScheduleEvent[] = [
@@ -10,7 +11,7 @@ class ActivityStore {
             id: uuid(),
             title: 'Ресторан Сервис Инфо',
             date: 1611196124940,
-            rating: 'not rated',
+            rating: 0.0,
             snippets: ['1221'],
             stack: 'react, jest, docker, ant-design, full time, remote working',
             salary: 'from 80 000',
@@ -60,21 +61,51 @@ class ActivityStore {
         );
     }
 
-    toggleDialog = (event: CompletedScheduleEvent | null) => {
-        this.setDialogEvent(event);
-
-        this.dialogIsVisible = !!event;
-    };
-
-    toggleConfirmDialog = (event: CompletedScheduleEvent | null) => {
-        this.setDialogEvent(event);
-
-        this.confirmDialogIsVisible = !!event;
+    setEvents = (events: CompletedScheduleEvent[]) => {
+        this.events = events;
     };
 
     setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
         this.dialogEvent = dialogEvent;
     };
+
+    removeEvent = (id: string | number) => {
+        this.setEvents(this.events.filter((event) => event.id !== id));
+    };
+
+    toggleDialog = (event?: CompletedScheduleEvent | null) => {
+        this.setDialogEvent(event);
+
+        this.dialogIsVisible = !!event;
+    };
+
+    toggleConfirmDialog = (event?: CompletedScheduleEvent | null) => {
+        this.setDialogEvent(event);
+
+        this.confirmDialogIsVisible = !!event;
+    };
+
+    updateDialogEvent = (updated: ScheduleEvent) => {
+        if (!this.dialogEvent) return;
+
+        this.setDialogEvent({ ...this.dialogEvent, ...updated });
+    };
+
+    updateEvent = (updated: EventWithID) => {
+        this.setEvents(
+            this.events.map((event) => {
+                if (event.id === updated.id) {
+                    return { ...event, ...updated };
+                }
+
+                return event;
+            })
+        );
+    };
 }
 
-export default new ActivityStore();
+const store = new ActivityStore();
+
+export type Store = typeof store;
+
+export default store;

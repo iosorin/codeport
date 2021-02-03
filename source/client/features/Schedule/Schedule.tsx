@@ -22,7 +22,7 @@ export const Schedule: FC = observer(() => {
 
     return (
         <>
-            {!store.empty ? (
+            {store.empty ? (
                 <ScheduleListEmpty openDialog={() => openDialog()} />
             ) : (
                 <ScheduleList

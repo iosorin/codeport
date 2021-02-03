@@ -48,13 +48,18 @@
 
     &.fullscreen {
         width: 75vw;
-        padding: $dialog-padding * 1.6;
+        padding: 2rem 2rem 1.3rem;
 
         .header {
-            padding-bottom: 30px;
+            padding-bottom: 20px;
         }
         .title {
             font-size: 1.3rem;
+        }
+
+        hr {
+            margin-left: -2rem;
+            width: calc(100% + 4rem);
         }
     }
 
@@ -78,17 +83,17 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-bottom: 8px;
+    align-items: flex-start;
     position: relative;
+    line-height: 1;
 }
 
 .close {
     background: none;
-    position: absolute;
     padding: 10px;
+    margin-left: auto;
     margin-right: -10px;
-    right: 0;
+    margin-top: -10px;
 }
 
 .content {

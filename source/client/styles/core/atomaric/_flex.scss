@@ -61,6 +61,11 @@
         display: flex;
         flex-direction: column-reverse;
     }
+
+    &-row-reverse {
+        display: flex;
+        flex-direction: row-reverse;
+    }
 }
 
 .justify-between {
@@ -69,6 +74,9 @@
 
 .align-start {
     align-items: flex-start !important;
+}
+.align-center {
+    align-items: center !important;
 }
 .align-end {
     align-items: flex-end !important;
