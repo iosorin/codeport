@@ -1,5 +1,18 @@
+.colors {
+    .color {
+        cursor: pointer;
+
+        &:hover:not(.active) {
+            transform: scale(1.1);
+        }
+
+        & + .color {
+            margin-left: 10px;
+        }
+    }
+}
+
 .color {
-    cursor: pointer;
     position: relative;
     display: inline-block;
     border: $border;
@@ -11,25 +24,15 @@
         height: 8px;
     }
     &.medium {
-        width: 20px;
-        height: 20px;
+        width: 10px;
+        height: 10px;
     }
     &.large {
-        width: 26px;
-        height: 26px;
-    }
-
-    &.selectable {
-        &:hover:not(.active) {
-            transform: scale(1.1);
-        }
+        width: 20px;
+        height: 20px;
     }
 
     &.active {
         border: 2px solid rgba(white, 0.8);
-    }
-
-    & + .color {
-        margin-left: 10px;
     }
 }

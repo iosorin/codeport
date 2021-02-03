@@ -29,10 +29,10 @@ export const Console: FC<Props> = observer(
                 <div className="flex-between">
                     <div className={styles.Title}>Console</div>
 
-                    <div className="hover" onClick={() => store.setResults([])}>
+                    <div className="hoverable" onClick={() => store.setResults([])}>
                         clear
                     </div>
-                    <X className="hover" onClick={() => toggleConsole(false)} size="16" />
+                    <X className="hoverable" onClick={() => toggleConsole(false)} size="16" />
                 </div>
 
                 <div className={styles.Content}>

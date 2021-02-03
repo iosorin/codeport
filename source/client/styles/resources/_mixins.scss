@@ -32,6 +32,15 @@
     }
 }
 
+@mixin dark {
+    color: white;
+    background: $black;
+
+    &:hover {
+        background: $black-lighten;
+    }
+}
+
 @mixin invisible($opacity: 0) {
     transition: opacity $tr;
     @if $opacity == 0 {

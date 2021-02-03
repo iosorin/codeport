@@ -12,4 +12,10 @@
             margin: 0;
         }
     }
+
+    &.dark {
+        input {
+            @include dark;
+        }
+    }
 }
