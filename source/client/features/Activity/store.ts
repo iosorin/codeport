@@ -1,6 +1,6 @@
 import { uuid } from '@/library/utils';
 import { makeAutoObservable } from 'mobx';
-import { CompletedScheduleEvent } from 'types';
+import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
 
@@ -10,7 +10,7 @@ class ActivityStore {
             id: uuid(),
             title: 'Ресторан Сервис Инфо',
             date: 1611196124940,
-            rating: 'not rated',
+            rating: 0.0,
             snippets: ['1221'],
             stack: 'react, jest, docker, ant-design, full time, remote working',
             salary: 'from 80 000',
@@ -70,6 +70,12 @@ class ActivityStore {
         this.setDialogEvent(event);
 
         this.confirmDialogIsVisible = !!event;
+    };
+
+    updateDialogEvent = (updated: ScheduleEvent) => {
+        if (!this.dialogEvent) return;
+
+        this.setDialogEvent({ ...this.dialogEvent, ...updated });
     };
 
     setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {

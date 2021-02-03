@@ -59,6 +59,7 @@ export const Activity = observer(() => {
                                 close={() => store.toggleDialog(null)}
                                 details={store.dialogEvent}
                                 isVisible={store.dialogIsVisible}
+                                setDetails={store.updateDialogEvent}
                             />
 
                             <ConfirmDialog

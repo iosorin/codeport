@@ -150,7 +150,7 @@ export const Table: FC<Props> = ({
         let value = item[key as string];
         const prefix = prefixes[key as keyof typeof prefixes];
 
-        if (!key || key === 'id' || !item || !value) {
+        if (!key || typeof value === 'undefined' || key === 'id' || !item) {
             return <td key={index}></td>;
         }
 
