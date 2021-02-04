@@ -7,7 +7,7 @@ import styles from './dialog.scss';
 
 export type Props = {
     isVisible: boolean;
-    title?: string | boolean | JSX.Element;
+    title?: string | boolean | JSX.Element | null;
     closeIcon?: boolean;
     persistent?: boolean;
     centered?: boolean;
