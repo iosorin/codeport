@@ -1,12 +1,12 @@
 import { date, groupByProp, sortByProp } from '@/library/utils';
-import { ChevronDown, Edit3, Eye, Minus, Trash, X } from 'react-feather';
+import { ChevronDown, Edit3, Eye, MoreHorizontal, Trash } from 'react-feather';
 import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react';
 import styles from './table.scss';
-import { Color, Input } from '../..';
+import { Color } from '../..';
+import { Menu } from '../Menu';
 
 type Item = {
     [key: string]: string | number | Date | JSX.Element | any[];
-    id: string | number;
 };
 
 type Props = {
@@ -16,13 +16,13 @@ type Props = {
     source: Item[];
     labels?: string[];
     sortable?: string[];
-    edit?: (result: Item) => void;
-    editable?: { [key: string]: 'text' | 'number' };
-    prefixes?: { [key: string]: string };
     background?: 'light' | 'dark' | 'none';
     groupBy?: string;
     onTrClick?: (item?: any) => void;
+    onEdit?: (item?: any) => void;
     onDelete?: (item?: any) => void;
+    onDetails?: (item?: any) => void;
+    prefixes: { [key: string]: string };
 };
 
 export const Table: FC<Props> = ({
@@ -32,22 +32,19 @@ export const Table: FC<Props> = ({
     source: origin,
     labels: originLabels,
     sortable,
-    editable = {},
-    edit,
     background = 'none',
     groupBy,
     onTrClick,
+    onEdit,
     onDelete,
+    onDetails,
     prefixes,
 }) => {
-    const [, forceUpdate] = useState(0);
-
     const [source, setSource] = useState(origin);
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
-    const editableMap = useRef<Map<string, boolean>>(new Map());
 
-    const showDeleteIcon = !!onDelete;
+    const showMenu = !!(onEdit || onDelete || onDetails);
 
     useEffect(() => {
         if (!originLabels) {
@@ -57,12 +54,6 @@ export const Table: FC<Props> = ({
         sortable?.forEach((label) => {
             sortedMap.current.set(label, 'inactive');
         });
-
-        if (Object.keys(editable).length) {
-            Object.keys(editable).forEach((key) => {
-                editableMap.current.set(key, false);
-            });
-        }
 
         if (groupBy) {
             groupSource();
@@ -116,17 +107,16 @@ export const Table: FC<Props> = ({
         );
     };
 
-    const renderDeleteIcon = (item: Item) => {
+    const renderMenu = (item: Item) => {
         return (
-            showDeleteIcon && (
-                <td
-                    className="text-center"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        onDelete!(item);
-                    }}
-                >
-                    <Trash className="hoverable" size="14" />
+            showMenu && (
+                <td>
+                    <Menu
+                        showOnHover
+                        onEdit={onEdit && (() => onEdit(item))}
+                        onDelete={onDelete && (() => onDelete(item))}
+                        onDetails={onDetails && (() => onDetails(item))}
+                    />
                 </td>
             )
         );
@@ -151,7 +141,7 @@ export const Table: FC<Props> = ({
                         );
                     })}
 
-                    {showDeleteIcon && <th></th>}
+                    {showMenu && <th></th>}
                 </tr>
             </thead>
         );
@@ -159,17 +149,10 @@ export const Table: FC<Props> = ({
 
     const renderTd = (key: string | boolean, item: Item, index: number) => {
         let value = item[key as string];
+        const prefix = prefixes[key as keyof typeof prefixes];
 
         if (!key || typeof value === 'undefined' || key === 'id' || !item) {
             return <td key={index}></td>;
-        }
-
-        const valuePrefix = prefixes?.[key as keyof typeof prefixes];
-        const editType = editable?.[key as keyof typeof editable];
-        const showEditInput = editableMap.current.get(key as string);
-
-        if (showEditInput) {
-            console.log('showEditInput', showEditInput, key);
         }
 
         if (Array.isArray(value)) {
@@ -181,39 +164,11 @@ export const Table: FC<Props> = ({
             value = date.when(value);
         }
 
-        if (valuePrefix) {
-            value += valuePrefix;
+        if (prefix) {
+            value += prefix;
         }
 
-        return (
-            <td
-                key={index}
-                onClick={(e) => {
-                    if (showEditInput || !editType) return;
-                    e.stopPropagation();
-                    editableMap.current.set(key as string, true);
-                    forceUpdate((n) => n + 1);
-                }}
-            >
-                {showEditInput ? (
-                    <Input
-                        value={value as string | number}
-                        onChange={(e) => {
-                            edit?.({ [key as string]: e.currentTarget.value, id: item.id });
-                        }}
-                        type={editType}
-                        dark
-                        onClick={(e) => e.stopPropagation()}
-                        onBlur={() => {
-                            editableMap.current.set(key as string, false);
-                            forceUpdate((n) => n + 1);
-                        }}
-                    />
-                ) : (
-                    value
-                )}
-            </td>
-        );
+        return <td key={index}>{value}</td>;
     };
 
     const renderTbody = () => {
@@ -237,7 +192,7 @@ export const Table: FC<Props> = ({
                                 return renderTd(label, item, index);
                             })}
 
-                            {renderDeleteIcon(item)}
+                            {renderMenu(item)}
                         </tr>
                     );
                 })}
@@ -266,7 +221,7 @@ export const Table: FC<Props> = ({
                                     return renderTd(renderLabel && label, item, index);
                                 })}
 
-                                {renderDeleteIcon(item)}
+                                {renderMenu(item)}
                             </tr>
                         );
                     })}

@@ -3,6 +3,7 @@ import { makeAutoObservable } from 'mobx';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
+export type EventWithID = ScheduleEvent & { id: string | number };
 
 class ActivityStore {
     events: CompletedScheduleEvent[] = [
@@ -60,6 +61,18 @@ class ActivityStore {
         );
     }
 
+    setEvents = (events: CompletedScheduleEvent[]) => {
+        this.events = events;
+    };
+
+    setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
+        this.dialogEvent = dialogEvent;
+    };
+
+    removeEvent = (id: string | number) => {
+        this.setEvents(this.events.filter((event) => event.id !== id));
+    };
+
     toggleDialog = (event: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
@@ -78,9 +91,21 @@ class ActivityStore {
         this.setDialogEvent({ ...this.dialogEvent, ...updated });
     };
 
-    setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
-        this.dialogEvent = dialogEvent;
+    updateEvent = (updated: EventWithID) => {
+        this.setEvents(
+            this.events.map((event) => {
+                if (event.id === updated.id) {
+                    return { ...event, ...updated };
+                }
+
+                return event;
+            })
+        );
     };
 }
 
-export default new ActivityStore();
+const store = new ActivityStore();
+
+export type Store = typeof store;
+
+export default store;

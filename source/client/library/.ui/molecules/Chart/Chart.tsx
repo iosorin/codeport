@@ -21,7 +21,7 @@ type Props = {
     height?: string | number;
 };
 
-export const Stats: FC<Props> = ({ size = 15, height = 250, source }) => {
+export const Chart: FC<Props> = ({ size = 15, height = 250, source }) => {
     const data = useMemo(() => {
         const end = new Date();
         const start = new Date(new Date().setDate(end.getDate() - size));

@@ -7,20 +7,32 @@ type Props = {
     onEdit?: false | (() => void);
     onDelete?: false | (() => void);
     onDetails?: false | (() => void);
+    showOnHover?: boolean;
 };
 
-export const Menu: FC<Props> = ({ onEdit, onDelete, onDetails, children }) => {
+export const Menu: FC<Props> = ({ onEdit, onDelete, onDetails, showOnHover, children }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [ref] = useOutsideClick(() => setIsVisible(false));
 
-    const handle = (action: () => void) => {
+    const handleTriggerClick = (event: any) => {
+        if (showOnHover) return;
+
+        event.stopPropagation();
+
+        setIsVisible(!isVisible);
+    };
+
+    const handleActionClick = (action: () => void) => {
         setIsVisible(false);
         action();
     };
 
     return (
-        <div className={styles.container} ref={ref}>
-            <div className={styles.trigger} onClick={() => setIsVisible(!isVisible)}>
+        <div
+            className={`hoverable ${styles.container} ${showOnHover ? styles.hover : ''}`}
+            ref={ref}
+        >
+            <div className={styles.trigger} onClick={handleTriggerClick}>
                 <MoreHorizontal size="15" />
             </div>
 
@@ -28,17 +40,17 @@ export const Menu: FC<Props> = ({ onEdit, onDelete, onDetails, children }) => {
                 {children}
 
                 {onEdit && (
-                    <div className={styles.option} onClick={() => handle(onEdit)}>
+                    <div className={styles.option} onClick={() => handleActionClick(onEdit)}>
                         Edit <Edit size="14" />
                     </div>
                 )}
                 {onDetails && (
-                    <div className={styles.option} onClick={() => handle(onDetails)}>
+                    <div className={styles.option} onClick={() => handleActionClick(onDetails)}>
                         Details <Eye size="14" />
                     </div>
                 )}
                 {onDelete && (
-                    <div className={styles.option} onClick={() => handle(onDelete)}>
+                    <div className={styles.option} onClick={() => handleActionClick(onDelete)}>
                         Delete <Trash size="14" />
                     </div>
                 )}

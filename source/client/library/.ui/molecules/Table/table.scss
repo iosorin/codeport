@@ -24,27 +24,24 @@
     }
 
     &.clickable {
-        tbody {
-            tr {
-                cursor: pointer;
-                transition: $tr;
-            }
+        tr {
+            cursor: pointer;
+        }
+
+        td {
+            transition: background $tr;
         }
 
         &.light,
         &.none {
-            td {
-                &:hover {
-                    background: lighten($black-lighten, 2%);
-                }
+            tr:hover td {
+                background: lighten($black-lighten, 2%);
             }
         }
 
         &.dark {
-            td {
-                &:hover {
-                    background: $black-darken;
-                }
+            tr:hover td {
+                background: $black-darken;
             }
         }
     }
@@ -122,5 +119,9 @@
                 transform: rotate(180deg);
             }
         }
+    }
+
+    input {
+        max-height: 35px;
     }
 }
