@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { CompletedScheduleEvent } from 'types';
-import { Block, Button, Colors, Dialog, Event } from '@/library/.ui';
-import styles from './activity-details.scss';
+import { Block, Colors, Dialog, Event } from '@/library/.ui';
 import { ArrowLeft, ArrowRight } from 'react-feather';
 
 type Props = {
@@ -21,7 +20,7 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details 
                 size="fullscreen"
                 title={details.title}
             >
-                <div className={`flex-col ${styles.container}`}>
+                <div className={`flex-col`}>
                     <div className="flex my-2">
                         <div className="flex-col flex-1 mr-2">
                             <h4>Rating</h4>

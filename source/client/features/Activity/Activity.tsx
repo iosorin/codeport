@@ -1,8 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ConfirmDialog, Chart, Table } from '@/library/.ui';
-import { ActivityDetails } from './ActivityDetails';
-import { Stats } from './.ui';
+import { ConfirmDialog, EventsChart, Table } from '@/library/.ui';
+import { Stats, DetailsDialog } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
@@ -21,8 +20,6 @@ export const Activity = observer(() => {
                             <Table
                                 background="light"
                                 color="color"
-                                edit={store.updateEvent}
-                                editable={{ title: 'text', rating: 'number' }}
                                 labels={[
                                     'title',
                                     'stack',
@@ -39,7 +36,7 @@ export const Activity = observer(() => {
                                 source={store.events}
                             />
 
-                            <ActivityDetails
+                            <DetailsDialog
                                 close={() => store.toggleDialog(null)}
                                 details={store.dialogEvent}
                                 isVisible={store.dialogIsVisible}
@@ -61,7 +58,7 @@ export const Activity = observer(() => {
                         </div>
                     )}
 
-                    <Chart size={15} source={store.events} />
+                    <EventsChart events={store.events} size={15} />
                 </div>
             </div>
         </>
