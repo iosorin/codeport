@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 import { date } from '@/library/utils';
-import './event.scss';
+import styles from './event.scss';
 
 type Props = {
     details: ScheduleEvent;
     showRating?: boolean;
     showDate?: boolean;
     showEmpty?: boolean;
+    small?: boolean;
 };
 
-export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmpty }) => {
+export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmpty, small }) => {
     const empty = <span className="text-grey">-</span>;
 
     const map = [
@@ -48,17 +49,17 @@ export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmp
     }
 
     return (
-        <>
+        <div className={small ? styles.small : ''}>
             {map.map((detail, index) => {
                 return (
                     (showEmpty || detail.value) && (
                         <p key={index}>
-                            <b>{detail.label}</b>: <br />
-                            {detail.value || (showEmpty && empty)}
+                            <b>{detail.label}:</b> <br />
+                            <span>{detail.value || (showEmpty && empty)}</span>
                         </p>
                     )
                 );
             })}
-        </>
+        </div>
     );
 };

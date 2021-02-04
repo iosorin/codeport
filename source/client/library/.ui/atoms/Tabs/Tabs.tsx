@@ -1,25 +1,40 @@
 import React from 'react';
 import { Button } from '..';
+import styles from './tabs.scss';
 
 type Props<T> = {
     active: T;
     list: T[];
+    align: 'left' | 'center' | 'right';
+    bordered?: boolean;
+    dark?: boolean;
     onChange: (tab: T) => void;
 };
 
-export const Tabs = <T,>({ active, list, onChange }: Props<T>): JSX.Element => {
+export const Tabs = <T,>({
+    active,
+    list,
+    align = 'left',
+    bordered,
+    dark,
+    onChange,
+}: Props<T>): JSX.Element => {
+    const classlist = [styles.tabs, styles[align]];
+
+    if (dark) classlist.push(styles.dark);
+    if (bordered) classlist.push(styles.bordered);
+
     return (
-        <>
+        <div className={classlist.join(' ')}>
             {list.map((tab, index) => (
-                <Button
+                <div
+                    key={index}
                     onClick={() => onChange(tab)}
-                    size="small"
-                    background={active === tab ? 'primary' : 'light'}
-                    className={index === list.length - 1 ? '' : 'mr-xs'}
+                    className={`${styles.tab} ${active === tab ? styles.active : 'hoverable'}`}
                 >
                     {tab}
-                </Button>
+                </div>
             ))}
-        </>
+        </div>
     );
 };

@@ -17,7 +17,7 @@
         "experimentalDecorators": true,
         "esModuleInterop": true,
         "sourceMap": true,
-        // "typeRoots": ["node_modules/@types", "../"],
+        "typeRoots": ["node_modules/@types"],
         "paths": {
             "@/*": ["source/client/*"],
 
