@@ -1,7 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Block, ConfirmDialog, Stats, Table } from '@/library/.ui';
+import { ConfirmDialog, Chart, Table } from '@/library/.ui';
 import { ActivityDetails } from './ActivityDetails';
+import { Stats } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
@@ -12,26 +13,7 @@ export const Activity = observer(() => {
             )}
 
             <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
-                {!store.empty && (
-                    <>
-                        <div className="grid grid--25 mb-1">
-                            <Block background="black" flex>
-                                <small>Сonferences</small>
-                                <b className="h2">{store.events.length}</b>
-                            </Block>
-
-                            <Block background="black" flex>
-                                <small>Total time</small>
-                                <b className="h2">{store.total.time} min.</b>
-                            </Block>
-
-                            <Block background="black" flex>
-                                <small>Snippets</small>
-                                <b className="h2">{store.total.snippets}</b>
-                            </Block>
-                        </div>
-                    </>
-                )}
+                {!store.empty && <Stats store={store} />}
 
                 <div className="flex-col-reverse mt-2">
                     {!store.empty && (
@@ -39,6 +21,8 @@ export const Activity = observer(() => {
                             <Table
                                 background="light"
                                 color="color"
+                                edit={store.updateEvent}
+                                editable={{ title: 'text', rating: 'number' }}
                                 labels={[
                                     'title',
                                     'stack',
@@ -49,8 +33,8 @@ export const Activity = observer(() => {
                                     'date',
                                 ]}
                                 onDelete={store.toggleConfirmDialog}
-                                onDetails={store.toggleDialog}
-                                prefixes={{ time: ' min.' }}
+                                onTrClick={store.toggleDialog}
+                                prefixes={{ time: ' min.', rating: ' / 10' }}
                                 sortable={['date', 'rating']}
                                 source={store.events}
                             />
@@ -64,7 +48,9 @@ export const Activity = observer(() => {
 
                             <ConfirmDialog
                                 close={() => store.toggleConfirmDialog(null)}
-                                confirm={console.log}
+                                confirm={() =>
+                                    store.dialogEvent && store.removeEvent(store.dialogEvent.id)
+                                }
                                 isVisible={store.confirmDialogIsVisible}
                             >
                                 <div className="h3 mb-1">
@@ -75,7 +61,7 @@ export const Activity = observer(() => {
                         </div>
                     )}
 
-                    <Stats size={15} source={store.events} />
+                    <Chart size={15} source={store.events} />
                 </div>
             </div>
         </>
