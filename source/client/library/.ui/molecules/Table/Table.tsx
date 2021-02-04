@@ -5,8 +5,8 @@ import styles from './table.scss';
 import { Color, Input } from '../..';
 
 type Item = {
-    [key: string]: string | number | Date | JSX.Element | any[];
     id: string | number;
+    [key: string]: string | number | Date | JSX.Element | any[];
 };
 
 type Props = {
@@ -16,8 +16,6 @@ type Props = {
     source: Item[];
     labels?: string[];
     sortable?: string[];
-    edit?: (result: Item) => void;
-    editable?: { [key: string]: 'text' | 'number' };
     prefixes?: { [key: string]: string };
     background?: 'light' | 'dark' | 'none';
     groupBy?: string;
@@ -32,8 +30,6 @@ export const Table: FC<Props> = ({
     source: origin,
     labels: originLabels,
     sortable,
-    editable = {},
-    edit,
     background = 'none',
     groupBy,
     onTrClick,
@@ -45,7 +41,6 @@ export const Table: FC<Props> = ({
     const [source, setSource] = useState(origin);
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
-    const editableMap = useRef<Map<string, boolean>>(new Map());
 
     const showDeleteIcon = !!onDelete;
 
@@ -57,12 +52,6 @@ export const Table: FC<Props> = ({
         sortable?.forEach((label) => {
             sortedMap.current.set(label, 'inactive');
         });
-
-        if (Object.keys(editable).length) {
-            Object.keys(editable).forEach((key) => {
-                editableMap.current.set(key, false);
-            });
-        }
 
         if (groupBy) {
             groupSource();
@@ -164,13 +153,7 @@ export const Table: FC<Props> = ({
             return <td key={index}></td>;
         }
 
-        const valuePrefix = prefixes?.[key as keyof typeof prefixes];
-        const editType = editable?.[key as keyof typeof editable];
-        const showEditInput = editableMap.current.get(key as string);
-
-        if (showEditInput) {
-            console.log('showEditInput', showEditInput, key);
-        }
+        const prefix = prefixes?.[key as keyof typeof prefixes];
 
         if (Array.isArray(value)) {
             value = value.length;
@@ -181,39 +164,11 @@ export const Table: FC<Props> = ({
             value = date.when(value);
         }
 
-        if (valuePrefix) {
-            value += valuePrefix;
+        if (prefix) {
+            value += prefix;
         }
 
-        return (
-            <td
-                key={index}
-                onClick={(e) => {
-                    if (showEditInput || !editType) return;
-                    e.stopPropagation();
-                    editableMap.current.set(key as string, true);
-                    forceUpdate((n) => n + 1);
-                }}
-            >
-                {showEditInput ? (
-                    <Input
-                        value={value as string | number}
-                        onChange={(e) => {
-                            edit?.({ [key as string]: e.currentTarget.value, id: item.id });
-                        }}
-                        type={editType}
-                        dark
-                        onClick={(e) => e.stopPropagation()}
-                        onBlur={() => {
-                            editableMap.current.set(key as string, false);
-                            forceUpdate((n) => n + 1);
-                        }}
-                    />
-                ) : (
-                    value
-                )}
-            </td>
-        );
+        return <td key={`${item.id}-${key}`}>{value}</td>;
     };
 
     const renderTbody = () => {
