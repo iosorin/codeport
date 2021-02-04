@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 import { Block, Button, Color, Colors, Dialog, Event, Input, Textarea, Range } from '@/library/.ui';
-import styles from './activity-details.scss';
 import { ArrowLeft, ArrowRight, Check } from 'react-feather';
 import { date } from '@/library/utils';
 
@@ -147,13 +146,12 @@ export const ActivityDetails: FC<Props> = observer(({ isVisible, close, details,
     return (
         <Dialog
             close={close}
-            dark
             isVisible={isVisible}
             size="fullscreen"
             style={{ paddingRight: 60 }}
             title={title}
         >
-            <div className={`flex-col ${styles.container}`}>
+            <div className="flex-col">
                 <div className="flex mb-xs">
                     <div className="flex-col flex-1 mr-2" onClick={() => !edit && setedit(true)}>
                         <Block controlsInBottom height="315px" hover size="small">
