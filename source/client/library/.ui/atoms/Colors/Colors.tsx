@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Color } from './Color';
 import styles from './colors.scss';
 
-const colors = ['#6c67f4', '#ecfa1c', '#ff6150', '#3ee97f'];
+const colors = ['#161616', '#6c67f4', '#ecfa1c', '#ff6150', '#3ee97f'];
 
 type Props = {
     label?: string;

@@ -18,88 +18,31 @@
         @include disabled;
     }
 
-    // hover ------------------------------------------------------------
-    &.medium,
-    &.large,
-    &.rounded {
-        transition: transform 0.35s ease;
-        backface-visibility: hidden;
-    }
-
-    &.large {
-        &:hover:not(:active) {
-            transform: scale(1.02);
-        }
-    }
-    &.rounded,
-    &.medium {
-        &:hover:not(:active) {
-            transform: scale(1.055);
-        }
-    }
-
-    &.rounded {
-        &.outline {
-            border: 2px solid transparent;
-            transition: border $tr;
-            &:hover:not(:active) {
-                border: 2px solid;
-                transform: none !important;
-            }
-        }
-    }
-
-    &.hover {
-        transition: $tr;
-
-        &:not(:hover) {
-            background-color: transparent;
-        }
-    }
-
-    &.shadow-light {
-        &:hover:not(:active) {
-            box-shadow: $shadow-light;
-        }
-    }
-    &.shadow-dark {
-        &:hover:not(:active) {
-            box-shadow: $shadow-2;
-        }
-    }
-
     // color, hover -----------------------------------------------------
     &.white {
         color: white;
     }
+
     &.black {
         color: $black;
     }
 
     // background -------------------------------------------------------
     &.primary {
-        color: $black;
         background-color: $button-primary-background;
     }
+
     &.secondary {
         background-color: $button-secondary-background;
     }
+
     &.success {
         background-color: $success;
     }
+
     &.light {
-        background-color: $light !important;
         color: $black;
-        &.hover:hover {
-            background-color: $button-secondary-background !important;
-            color: white;
-        }
-    }
-    &.primary,
-    &.success {
-        &.hover:not(:hover) {
-            background-color: $button-secondary-background !important;
-        }
+        background-color: $light;
     }
 
     // size -------------------------------------------------------------
@@ -121,6 +64,7 @@
             max-height: 1rem;
         }
     }
+
     &.medium {
         font-size: 0.9rem;
         height: 2.2rem;
@@ -132,6 +76,7 @@
             padding: 8px;
         }
     }
+
     &.large {
         font-size: 1.1rem;
         height: 3.1rem;
@@ -144,6 +89,7 @@
         }
     }
 
+    // rounded ----------------------------------------------------------
     &.rounded {
         display: flex;
         align-items: center;
@@ -168,6 +114,68 @@
             & + span {
                 margin-right: 9px;
             }
+        }
+    }
+
+    // hover ------------------------------------------------------------
+    &.zoom {
+        &.medium,
+        &.large,
+        &.rounded {
+            &:not(.hover) {
+                transition: transform 0.35s ease;
+                backface-visibility: hidden;
+            }
+        }
+
+        &.large {
+            &:not(.hover) {
+                &:hover:not(:active) {
+                    transform: scale(1.02);
+                }
+            }
+        }
+
+        &.rounded,
+        &.medium {
+            &:not(.hover) {
+                &:hover:not(:active) {
+                    transform: scale(1.055);
+                }
+            }
+        }
+    }
+
+    &.rounded {
+        &.outline {
+            transition: border $tr;
+            border: 2px solid transparent;
+
+            &:hover:not(:active) {
+                border: 2px solid;
+            }
+        }
+    }
+
+    &.hover {
+        transition: background-color $tr;
+
+        &:hover:not(:active) {
+            background-color: $primary;
+        }
+    }
+
+    &.shadow-light {
+        transition: box-shadow $tr;
+        &:hover:not(:active) {
+            box-shadow: $shadow-light;
+        }
+    }
+
+    &.shadow-dark {
+        transition: box-shadow $tr;
+        &:hover:not(:active) {
+            box-shadow: $shadow-2;
         }
     }
 }

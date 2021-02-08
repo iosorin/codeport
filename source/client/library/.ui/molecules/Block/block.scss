@@ -43,7 +43,12 @@
     }
 
     &.light {
-        background: white;
+        background: $light;
+    }
+
+    &.grey {
+        color: $black;
+        background: $grey;
     }
 
     &.dark,
@@ -60,12 +65,16 @@
     }
 
     &.hover {
-        border: none;
-        transition: background $tr;
+        transition: $tr;
         background: rgba($black-lighten, 0.2);
         position: relative;
         cursor: pointer;
         border: $border;
+
+        &.light {
+            border: $border-dark;
+            background: $light;
+        }
 
         &:not(:hover) {
             border-color: transparent;
@@ -121,25 +130,6 @@
         .footer {
             margin-top: initial;
         }
-    }
-
-    &.empty {
-        position: relative;
-        background: $black;
-        @include disabled;
-
-        // &::before {
-        //     $s: 10px;
-
-        //     content: '';
-        //     position: absolute;
-        //     width: calc(100% - #{$s * 2});
-        //     height: calc(100% - #{$s * 2});
-        //     left: $s;
-        //     top: $s;
-        //     border: 1px dashed $black-lighten;
-        //     border-radius: $radius;
-        // }
     }
 }
 

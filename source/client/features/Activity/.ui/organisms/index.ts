@@ -1,1 +1,0 @@
-export { DetailsDialog } from './DetailsDialog';

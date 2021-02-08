@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ConfirmDialog, EventsChart, Table } from '@/library/.ui';
-import { Stats, DetailsDialog } from './.ui';
+import { ConfirmDialog, EventsChart, Table } from '@ui';
+import { Stats, EventDialog } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
@@ -36,15 +36,15 @@ export const Activity = observer(() => {
                                 source={store.events}
                             />
 
-                            <DetailsDialog
-                                close={() => store.toggleDialog(null)}
+                            <EventDialog
+                                close={() => store.toggleDialog()}
                                 details={store.dialogEvent}
                                 isVisible={store.dialogIsVisible}
                                 setDetails={store.updateDialogEvent}
                             />
 
                             <ConfirmDialog
-                                close={() => store.toggleConfirmDialog(null)}
+                                close={() => store.toggleConfirmDialog()}
                                 confirm={() =>
                                     store.dialogEvent && store.removeEvent(store.dialogEvent.id)
                                 }

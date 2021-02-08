@@ -2,10 +2,8 @@ import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
 
 import styles from './range.scss';
 
-type ValueType = number;
-
 export type Props = {
-    value: ValueType;
+    value: number | undefined;
     min?: string | number;
     max?: string | number;
     step?: string | number;
@@ -13,11 +11,11 @@ export type Props = {
     disabled?: boolean;
     dark?: boolean;
     units?: string;
-    onChange: (e: ValueType) => void;
+    onChange: (e: number) => void;
 };
 
 export const Range: FC<Props> = ({
-    value,
+    value = 0,
     units = 'px',
     min = 5,
     max = 10,
@@ -53,6 +51,7 @@ export const Range: FC<Props> = ({
                     {value}
                     {units}
                 </b>
+
                 <input
                     ref={range}
                     className={styles.range}
