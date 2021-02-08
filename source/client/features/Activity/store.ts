@@ -73,13 +73,13 @@ class ActivityStore {
         this.setEvents(this.events.filter((event) => event.id !== id));
     };
 
-    toggleDialog = (event: CompletedScheduleEvent | null) => {
+    toggleDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
         this.dialogIsVisible = !!event;
     };
 
-    toggleConfirmDialog = (event: CompletedScheduleEvent | null) => {
+    toggleConfirmDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
         this.confirmDialogIsVisible = !!event;

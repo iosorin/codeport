@@ -11,6 +11,7 @@ export type Props = {
     hover?: boolean;
     background?: 'primary' | 'secondary' | 'success' | 'light';
     shadow?: 'dark' | 'light';
+    zoom?: boolean;
     rounded?: boolean;
     outline?: boolean;
     loading?: boolean;
@@ -26,6 +27,7 @@ export const Button: React.FC<Props> = ({
     background = 'secondary',
     color = 'white',
     shadow,
+    zoom,
     label,
     rounded,
     outline,
@@ -39,6 +41,7 @@ export const Button: React.FC<Props> = ({
 }) => {
     const classlist = [styles.button, styles[size], styles[background], styles[color], className];
 
+    if (zoom) classlist.push(styles.zoom);
     if (hover) classlist.push(styles.hover);
     if (shadow) classlist.push(styles[`shadow-${shadow}`]);
     if (rounded) classlist.push(styles.rounded);

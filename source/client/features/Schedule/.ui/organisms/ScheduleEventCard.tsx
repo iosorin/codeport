@@ -20,6 +20,7 @@ export const ScheduleEventCard: FC<Props> = ({ event, removeEvent, openDialog, c
             styled
             title={event.title}
             height="220px"
+            customBackground={event.color}
             small={startsIn ? `starts in: ${startsIn}` : ''}
         >
             <Event details={event} />

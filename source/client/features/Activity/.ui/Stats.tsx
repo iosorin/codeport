@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Block } from '@/library/.ui';
-import { Store } from '../../store';
+import { Block } from '@ui';
+import { Store } from '../store';
 
 type Props = {
     store: Store;

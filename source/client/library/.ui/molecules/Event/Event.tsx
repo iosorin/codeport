@@ -8,10 +8,10 @@ type Props = {
     showRating?: boolean;
     showDate?: boolean;
     showEmpty?: boolean;
-    small?: boolean;
+    accent?: boolean;
 };
 
-export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmpty, small }) => {
+export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmpty, accent }) => {
     const empty = <span className="text-grey">-</span>;
 
     const map = [
@@ -34,10 +34,10 @@ export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmp
         },
     ];
 
-    if (showRating && details.rating) {
+    if (showRating && typeof details.rating === 'number') {
         map.push({
             label: 'Rating',
-            value: details.rating.toString(),
+            value: details.rating.toString() + ' / 10',
         });
     }
 
@@ -49,7 +49,7 @@ export const Event: FC<Props> = ({ details, showDate = true, showRating, showEmp
     }
 
     return (
-        <div className={small ? styles.small : ''}>
+        <div className={accent ? styles.accent : ''}>
             {map.map((detail, index) => {
                 return (
                     (showEmpty || detail.value) && (

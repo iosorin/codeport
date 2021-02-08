@@ -8,12 +8,11 @@ export type Props = {
     icon?: string | JSX.Element;
     small?: string | number;
     size?: 'small' | 'medium' | 'large';
-    background?: 'light' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
+    background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
     customBackground?: string;
     flex?: boolean;
     hover?: boolean;
     styled?: boolean;
-    empty?: boolean;
     controlsInBottom?: boolean;
     height?: string;
     onEdit?: false | (() => void);
@@ -32,7 +31,6 @@ export const Block: FC<Props> = memo(
         flex,
         hover,
         styled,
-        empty,
         controlsInBottom,
         onEdit,
         onRemove,
@@ -42,7 +40,6 @@ export const Block: FC<Props> = memo(
 
         if (flex) classlist.push(styles.flex);
         if (hover) classlist.push(styles.hover);
-        if (empty) classlist.push(styles.empty);
         if (styled) classlist.push(styles.styled);
 
         const controls = (

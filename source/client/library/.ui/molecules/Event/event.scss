@@ -5,27 +5,28 @@ p {
     }
 }
 
-.small {
+.accent {
+    font-family: $sans-accent;
     p {
-        font-size: 0.87rem;
+        font-size: 0.8rem;
 
         // & + p {
-        //     margin-top: 0.6rem !important;
+        // margin-top: 0.9rem !important;
         // }
     }
 
-    b {
-        // background: $black;
-        // border-radius: $radius;
-        // padding: 2px 15px;
-        // display: inline-block;
-    }
+    // b {
+    // background: $black;
+    // border-radius: $radius;
+    // padding: 2px 15px;
+    // display: inline-block;
+    // }
 
-    span {
-        // background: $black;
-        // border-radius: $radius;
-        // padding: 2px 15px;
-        // margin-top: 5px;
-        // display: inline-block;
-    }
+    // span {
+    // background: $black;
+    // border-radius: $radius;
+    // padding: 2px 15px;
+    // margin-top: 5px;
+    // display: inline-block;
+    // }
 }

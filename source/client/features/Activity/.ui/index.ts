@@ -1,2 +1,2 @@
-export * from './molecules';
-export * from './organisms';
+export { EventDialog } from './EventDialog';
+export { Stats } from './Stats';

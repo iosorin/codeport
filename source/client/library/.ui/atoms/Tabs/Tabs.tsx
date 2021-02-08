@@ -30,7 +30,7 @@ export const Tabs = <T,>({
                 <div
                     key={index}
                     onClick={() => onChange(tab)}
-                    className={`${styles.tab} ${active === tab ? styles.active : 'hoverable'}`}
+                    className={`${styles.tab} ${active === tab ? styles.active : ''}`}
                 >
                     {tab}
                 </div>
