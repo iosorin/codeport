@@ -15,8 +15,9 @@ export type Props = {
     styled?: boolean;
     controlsInBottom?: boolean;
     height?: string;
-    onEdit?: false | (() => void);
-    onRemove?: false | (() => void);
+    onEdit?: () => void;
+    onRemove?: () => void;
+    onClick?: () => void;
 };
 
 export const Block: FC<Props> = memo(
@@ -34,12 +35,13 @@ export const Block: FC<Props> = memo(
         controlsInBottom,
         onEdit,
         onRemove,
+        onClick,
         children,
     }) => {
         const classlist = [styles.block, styles[size], styles[background]];
 
         if (flex) classlist.push(styles.flex);
-        if (hover) classlist.push(styles.hover);
+        if (hover || onClick) classlist.push(styles.hover);
         if (styled) classlist.push(styles.styled);
 
         const controls = (
@@ -76,6 +78,7 @@ export const Block: FC<Props> = memo(
             <div
                 className={classlist.join(' ')}
                 style={{ minHeight, background: customBackground || '' }}
+                onClick={onClick}
             >
                 {(title || onEdit || onRemove) && (
                     <div className={styles.header}>

@@ -8,9 +8,17 @@ type Props = {
     onDelete?: false | (() => void);
     onDetails?: false | (() => void);
     showOnHover?: boolean;
+    trigger?: JSX.Element;
 };
 
-export const Menu: FC<Props> = ({ onEdit, onDelete, onDetails, showOnHover, children }) => {
+export const Menu: FC<Props> = ({
+    trigger,
+    onEdit,
+    onDelete,
+    onDetails,
+    showOnHover,
+    children,
+}) => {
     const [isVisible, setIsVisible] = useState(false);
     const [ref] = useOutsideClick(() => setIsVisible(false));
 
@@ -29,11 +37,13 @@ export const Menu: FC<Props> = ({ onEdit, onDelete, onDetails, showOnHover, chil
 
     return (
         <div
-            className={`hoverable ${styles.container} ${showOnHover ? styles.hover : ''}`}
+            className={`${isVisible ? '' : 'hoverable'} ${styles.container} ${
+                showOnHover ? styles.hover : ''
+            }`}
             ref={ref}
         >
             <div className={styles.trigger} onClick={handleTriggerClick}>
-                <MoreHorizontal size="15" />
+                {trigger || <MoreHorizontal size="15" />}
             </div>
 
             <div className={`${styles.content} ${isVisible ? styles.visible : ''}`}>

@@ -44,13 +44,15 @@ export const Range: FC<Props> = ({
 
     return (
         <div className={`${styles.container} ${dark ? styles.dark : ''}`}>
-            {label ? <div className="label">{label}</div> : null}
+            {label ? <div className="label mb-0">{label}</div> : null}
 
-            <div className="flex-col align-start">
-                <b className={styles.value}>
-                    {value}
-                    {units}
-                </b>
+            <div className="flex-row-reverse align-center">
+                <small className={styles.value}>
+                    <b>
+                        {value}
+                        {units}
+                    </b>
+                </small>
 
                 <input
                     ref={range}

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 import {
@@ -14,7 +14,6 @@ import {
     Range,
 } from '@ui';
 import { date } from '@/library/utils';
-import { update } from 'source/server/controllers/schedule';
 
 type Props = {
     isVisible: boolean;
@@ -24,41 +23,33 @@ type Props = {
 };
 
 export const EventDialog: FC<Props> = observer(({ isVisible, close, details, setDetails }) => {
-    const [isBodyEditing, setIsBodyEditing] = useState(false);
     const [isTitleEditing, setIsTitleEditing] = useState(false);
+    const [isBodyEditing, setIsBodyEditing] = useState(false);
 
     if (!details) return null;
 
-    const title = isTitleEditing ? (
-        <div className="flex-50">
-            <EventForm
-                details={details}
-                completed
-                onSubmit={(updated) => {
-                    setDetails(updated);
-                    setIsTitleEditing(false);
-                }}
-                onCancel={() => setIsTitleEditing(false)}
-                align="end"
-                exclude={['main']}
-            />
-        </div>
-    ) : (
+    const submit = (action: () => void) => {
+        setIsTitleEditing(false);
+        setIsBodyEditing(false);
+
+        action();
+    };
+
+    const title = (
         <Block
             background="black"
             onClick={() => {
-                setIsTitleEditing(true);
                 setIsBodyEditing(false);
+                setIsTitleEditing(true);
             }}
         >
             <div className="flex-start">
-                {/* <Colors
+                <Colors
                     type="button"
                     active={details.color}
                     onChange={(color) => setDetails({ color })}
                     trigger={<Color color={details.color} size="large"></Color>}
-                /> */}
-                <Color color={details.color} size="large"></Color>
+                />
 
                 <div className="h3 text-accent ml-1 mb-0">
                     {details.title} ({details.rating} / 10)
@@ -73,13 +64,8 @@ export const EventDialog: FC<Props> = observer(({ isVisible, close, details, set
                 <EventForm
                     details={details}
                     completed
-                    onSubmit={(updated) => {
-                        setDetails(updated);
-                        setIsBodyEditing(false);
-                    }}
-                    onCancel={() => {
-                        setIsBodyEditing(false);
-                    }}
+                    onSubmit={(updated) => submit(() => setDetails(updated))}
+                    onCancel={() => setIsBodyEditing(false)}
                     align="end"
                     exclude={['title', 'rating', 'color']}
                 />
@@ -99,11 +85,30 @@ export const EventDialog: FC<Props> = observer(({ isVisible, close, details, set
 
     return (
         details && (
-            <Dialog close={close} isVisible={isVisible} size="fullscreen" title={title}>
-                <div className="flex mb-1">
-                    <div className="flex-1 mr-1">{body}</div>
+            <Dialog
+                close={close}
+                isVisible={isVisible}
+                size="fullscreen"
+                title={!isTitleEditing && title}
+            >
+                <div className="flex">
+                    <div className="flex-col flex-1">
+                        {isTitleEditing && (
+                            <div className="flex-50 mb-2">
+                                <EventForm
+                                    details={details}
+                                    completed
+                                    onSubmit={(updated) => submit(() => setDetails(updated))}
+                                    onCancel={() => setIsTitleEditing(false)}
+                                    align="end"
+                                    exclude={['main']}
+                                />
+                            </div>
+                        )}
+                        <div className="mr-1">{body}</div>
+                    </div>
 
-                    <div className="flex-1 ml-1">
+                    <div className="flex-1 mb-1">
                         <Snippets snippets={details.snippets} />
                     </div>
                 </div>

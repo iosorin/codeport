@@ -10,15 +10,17 @@ type Props = {
 };
 
 export const ScheduleDialog: FC<Props> = observer(({ store, closeDialog }) => {
-    const submitHandler = (details: ScheduleEvent) => {
+    const submitHandler = async (details: ScheduleEvent) => {
         const action = details.id ? store.updateEvent : store.createEvent;
 
-        action(details);
+        await action(details);
+
+        closeDialog();
     };
 
     return (
         <Dialog close={closeDialog} isVisible={store.dialogIsVisible} title="Schedule Event">
-            <EventForm details={store.dialogEvent} onSubmit={submitHandler} />
+            <EventForm details={store.dialogEvent} onSubmit={submitHandler} exclude={['color']} />
         </Dialog>
     );
 });

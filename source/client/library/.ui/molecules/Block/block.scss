@@ -37,9 +37,21 @@
         font-size: $block-fz * 1.1;
     }
 
-    // background
+    // border, background
     &.none {
-        border: 1px solid $black;
+        border: 1px solid;
+    }
+
+    &.hover {
+        transition: border 0.3s $ease-1;
+        background: $light !important;
+        position: relative;
+        cursor: pointer;
+        border: 2px solid;
+
+        &:not(:hover) {
+            border-color: transparent;
+        }
     }
 
     &.light {
@@ -47,43 +59,23 @@
     }
 
     &.grey {
-        color: $black;
         background: $grey;
+        border-color: $grey;
     }
 
-    &.dark,
-    &.black {
-        border-color: $black-darken;
-        color: white;
-    }
     &.black {
         background: $black-darken;
+        border-color: $black-darken;
     }
 
     &.dark {
         background: $black;
-    }
-
-    &.hover {
-        transition: $tr;
-        background: rgba($black-lighten, 0.2);
-        position: relative;
-        cursor: pointer;
-        border: $border;
-
-        &.light {
-            border: $border-dark;
-            background: $light;
-        }
-
-        &:not(:hover) {
-            border-color: transparent;
-        }
+        border-color: $black;
     }
 
     &.primary {
-        background: $block-primary;
-        border-color: $block-primary;
+        background: $primary;
+        border-color: $primary;
     }
 
     &.success {
@@ -96,11 +88,22 @@
         border-color: $yellow;
     }
 
+    // fix text color
+    &.dark,
+    &.black {
+        &:not(.hover) {
+            color: white;
+        }
+    }
+
     &.light,
-    &.yellow {
-        color: $black;
-        a {
+    &.yellow,
+    &.grey {
+        &:not(.hover) {
             color: $black;
+            a {
+                color: $black;
+            }
         }
     }
 

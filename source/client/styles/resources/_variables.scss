@@ -11,14 +11,14 @@ $black-darken: darken($black, 4%);
 $light: #f6f6f6;
 
 $yellow: #ffeb3b;
-$orange: #fb5d2b;
+$orange: #ff4d2c;
 $red: #f83429;
 $violet: #ae81ff;
-$blue: #3777ff;
+$blue: #4971ff;
 $green: #00e676;
 $grey: #ededed;
 
-$primary: $violet;
+$primary: $blue;
 $secondary: $yellow;
 $success: $green;
 
@@ -47,11 +47,10 @@ $tr: 0.22s $ease-1;
 /* $block */
 $block-fz: 0.9em;
 $block-ff: $sans-serif;
-$block-primary: $orange;
 
 /* button */
 $button-primary-background: $primary;
-$button-secondary-background: black;
+$button-secondary-background: $secondary;
 $button-font-family: $sans-serif;
 $button-radius: 3rem;
 
