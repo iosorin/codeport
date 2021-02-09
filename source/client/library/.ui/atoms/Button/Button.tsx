@@ -10,7 +10,7 @@ export type Props = {
     color?: 'white' | 'black';
     hover?: boolean;
     background?: 'primary' | 'secondary' | 'success' | 'light';
-    shadow?: 'dark' | 'light';
+    shadow?: 'dark' | 'light' | false;
     zoom?: boolean;
     rounded?: boolean;
     outline?: boolean;
@@ -62,7 +62,13 @@ export const Button: React.FC<Props> = ({
             type={type}
             disabled={disabled}
         >
-            {loading ? <Loader type="dots" dur="1s" /> : <span>{content}</span>}
+            {loading ? (
+                <span className={styles.loader}>
+                    <Loader type="dots" dur="1s" />
+                </span>
+            ) : (
+                <span className={loading ? 'invisible' : ''}>{content}</span>
+            )}
         </button>
     );
 };

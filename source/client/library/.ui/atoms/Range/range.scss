@@ -1,7 +1,7 @@
 $color: $light;
 $thumbColor: $light;
 $activeColor: $green;
-$trackColor: $black;
+$trackColor: $grey;
 $thumbHeight: 16px;
 $trackHeight: 6px;
 $progressPercent: 50%;
@@ -9,8 +9,7 @@ $progressPercent: 50%;
 .container {
     width: 100%;
     position: relative;
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
+    margin: $input-margin;
 
     &.dark {
         .range {
@@ -20,10 +19,9 @@ $progressPercent: 50%;
 }
 
 .value {
-    left: 0;
-    bottom: calc(100% + 0.5rem);
-    position: absolute;
     font-size: $input-fz;
+    width: 60px;
+    text-align: right;
 }
 
 @mixin thumb {
@@ -61,7 +59,7 @@ $progressPercent: 50%;
     border: $input-border;
     border-radius: $input-radius;
     transition: $input-tr;
-    padding: $padding-y * 2 $padding-x;
+    padding: $padding-y * 2 0;
     background: transparent;
 
     &:focus {
