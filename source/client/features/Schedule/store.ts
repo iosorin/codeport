@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
 import { date, debounce } from '@/library/utils';
-import { api } from './schedule.api';
+import { api } from './api';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
 
@@ -44,7 +44,7 @@ class ScheduleStore {
         this.events = events;
     };
 
-    getEvents = () => {
+    fetchEvents = () => {
         return api.get().then(this.setEvents);
     };
 

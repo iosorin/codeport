@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
-import { User } from 'types';
+import { ConferenceUser } from 'types';
 import { router } from './router';
 import * as dotenv from 'dotenv';
 
@@ -19,7 +19,7 @@ class App {
 
     private connections: socketIO.Socket[] = [];
 
-    private users: { [key: string]: User[] } = {};
+    private users: { [key: string]: ConferenceUser[] } = {};
 
     private socketToRoom: { [key: string]: string } = {};
 

@@ -7,7 +7,7 @@ import store from './store';
 
 export const Schedule: FC = observer(() => {
     useEffect(() => {
-        store.getEvents();
+        store.fetchEvents();
     }, []);
 
     const openDialog = (event: ScheduleEvent | null = null) => {

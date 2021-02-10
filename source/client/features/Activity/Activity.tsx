@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ConfirmDialog, EventsChart, Table } from '@ui';
 import { Stats, EventDialog } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
+    useEffect(() => {
+        store.fetchEvents();
+    }, []);
+
     return (
         <>
-            {store.empty && (
-                <p className="h4 text-grey">The history of your activity will be recorded here</p>
-            )}
-
             <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
-                {!store.empty && <Stats store={store} />}
+                <Stats store={store} />
 
                 <div className="flex-col-reverse mt-2">
                     {!store.empty && (

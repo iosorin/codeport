@@ -1,4 +1,6 @@
-type Language = {
+import { Language } from 'types';
+
+type LanguageObj = {
     key: number;
     version: string;
     args?: string;
@@ -58,4 +60,4 @@ class Entry
     }
 }`,
     },
-} as { [key: string]: Language };
+} as Record<Language, LanguageObj>;

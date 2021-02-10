@@ -1,20 +1,8 @@
 import React, { FC, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
-import {
-    Button,
-    Color,
-    Dialog,
-    Snippets,
-    EventForm,
-    Event,
-    Block,
-    Colors,
-    Input,
-    Range,
-} from '@ui';
+import { Color, Dialog, Snippets, EventForm, Event, Block } from '@ui';
 import { date } from '@/library/utils';
-import { update } from 'source/server/controllers/schedule';
 
 type Props = {
     isVisible: boolean;
@@ -23,7 +11,7 @@ type Props = {
     close: () => void;
 };
 
-export const EventDialog: FC<Props> = observer(({ isVisible, close, details, setDetails }) => {
+export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails, close }) => {
     const [isBodyEditing, setIsBodyEditing] = useState(false);
     const [isTitleEditing, setIsTitleEditing] = useState(false);
 
@@ -45,7 +33,7 @@ export const EventDialog: FC<Props> = observer(({ isVisible, close, details, set
         </div>
     ) : (
         <Block
-            background="black"
+            background="grey"
             onClick={() => {
                 setIsTitleEditing(true);
                 setIsBodyEditing(false);
@@ -74,8 +62,10 @@ export const EventDialog: FC<Props> = observer(({ isVisible, close, details, set
                     details={details}
                     completed
                     onSubmit={(updated) => {
-                        setDetails(updated);
-                        setIsBodyEditing(false);
+                        return new Promise((resolve) => {
+                            resolve(setDetails(updated));
+                            setIsBodyEditing(false);
+                        });
                     }}
                     onCancel={() => {
                         setIsBodyEditing(false);
@@ -85,7 +75,7 @@ export const EventDialog: FC<Props> = observer(({ isVisible, close, details, set
                 />
             ) : (
                 <Block
-                    background="black"
+                    background="grey"
                     onClick={() => {
                         setIsTitleEditing(false);
                         setIsBodyEditing(true);

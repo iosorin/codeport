@@ -1,7 +1,7 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
 import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettings } from './constants';
-import { api } from './editor.api';
+import { api } from './api';
 
 class EditorStore {
     roomID = '';

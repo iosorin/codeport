@@ -9,6 +9,7 @@ export type Props = {
     small?: string | number;
     size?: 'small' | 'medium' | 'large';
     background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
+    color?: 'black' | 'white';
     customBackground?: string;
     flex?: boolean;
     hover?: boolean;
@@ -26,6 +27,7 @@ export const Block: FC<Props> = memo(
         size = 'medium',
         customBackground,
         background = 'dark',
+        color = customBackground ? 'black' : 'white',
         height: minHeight = '',
         icon,
         small,
@@ -38,7 +40,12 @@ export const Block: FC<Props> = memo(
         onClick,
         children,
     }) => {
-        const classlist = [styles.block, styles[size], styles[background]];
+        const classlist = [
+            styles.block,
+            styles[size],
+            styles[`color-${color}`],
+            styles[background],
+        ];
 
         if (flex) classlist.push(styles.flex);
         if (hover || onClick) classlist.push(styles.hover);

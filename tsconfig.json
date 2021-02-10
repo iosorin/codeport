@@ -33,7 +33,8 @@
             "@layouts/*": ["source/client/layouts/*"],
             "@layouts": ["source/client/layouts"],
 
-            "types": ["source/types"]
+            "types": ["source/shared/types"],
+            "defaults": ["source/shared/defaults"]
         }
     },
     "include": ["./source/**/*"],

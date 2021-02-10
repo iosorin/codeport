@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import { SupportedLanguages } from 'defaults';
 import { Select, Input, Dialog } from '@ui';
-import { EditorSettings, MODES, THEMES } from '../constants';
+import { EditorSettings, THEMES } from '../constants';
 
 type Props = {
     settings: EditorSettings;
@@ -27,7 +28,7 @@ export const Settings: FC<Props> = ({ settings, isOpen, toggleSettings, setSetti
             <Select
                 label="Language"
                 onChange={(mode: string) => setSettings({ mode })}
-                options={MODES}
+                options={[...SupportedLanguages]}
                 value={settings.mode}
             />
 

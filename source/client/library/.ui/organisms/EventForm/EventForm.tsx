@@ -23,7 +23,7 @@ export const EventForm: FC<Props> = ({
     onCancel,
 }) => {
     const [isLoading, setisLoading] = useState(false);
-    const [details, setDetails] = useState<ScheduleEventOrNull>(source);
+    const [details, setDetails] = useState<ScheduleEventOrNull>({ ...source });
 
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

@@ -1,51 +1,27 @@
 import { Response, Request } from 'express';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
+import { Schedule } from '../models/Schedule';
 
-let list: ScheduleEventStrict[] = [
-    {
-        id: 1,
-        date: 1611411691902,
-        title: 'SFXDX, Kaliningrad',
-        stack: 'react, typescript, mobx, unit-tests',
-        salary: 'from 70 000 after taxes',
-        contacts: 'https://t.me/someone',
-        additional: 'full time, remote working',
-        color: '#ff6150',
-    },
-];
+export const get = async (_: Request, res: Response) => {
+    const schedule = await Schedule.fetch();
 
-const template = {
-    date: 0,
-    title: '',
-    stack: '',
-    salary: '',
-    contacts: '',
-    additional: '',
-    color: '#ff6150',
+    return res.json(schedule);
 };
 
-export const get = (_: Request, res: Response) => res.json(list);
+export const create = async (req: Request<null, null, ScheduleEvent>, res: Response) => {
+    const schedule = await Schedule.create(req.body);
 
-export const create = (req: Request<null, null, ScheduleEvent>, res: Response) => {
-    list.push({ ...template, ...req.body, id: Date.now() });
-
-    return res.status(201).json(list);
+    return res.status(201).json(schedule);
 };
 
-export const update = (req: Request<null, null, ScheduleEventStrict>, res: Response) => {
-    list = list.map((event) => {
-        if (event.id === req.body?.id) {
-            return { ...event, ...req.body };
-        }
+export const update = async (req: Request<null, null, ScheduleEventStrict>, res: Response) => {
+    const schedule = await Schedule.update(req.body);
 
-        return event;
-    });
-
-    return res.status(200).json(list);
+    return res.json(schedule);
 };
 
-export const remove = (req: Request<{ id: string }>, res: Response) => {
-    list = list.filter((s) => s.id.toString() !== req.params.id);
+export const remove = async (req: Request<{ id: string }>, res: Response) => {
+    const schedule = await Schedule.remove(req.params.id);
 
-    return res.json(list);
+    return res.json(schedule);
 };

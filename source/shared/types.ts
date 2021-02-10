@@ -1,4 +1,13 @@
-export type User = {
+import { SupportedLanguages } from './defaults';
+
+export type Language = typeof SupportedLanguages[number];
+
+export type CodeSnippet = {
+    lang: Language;
+    content: string;
+};
+
+export type ConferenceUser = {
     id: string;
     constraints: {
         audio: boolean;
@@ -17,7 +26,7 @@ export type ScheduleEvent = {
     color?: string;
 
     rating?: number;
-    snippets?: string[];
+    snippets?: CodeSnippet[];
     time?: number;
 };
 
@@ -34,6 +43,6 @@ export type ScheduleEventStrict = {
 
 export type CompletedScheduleEvent = ScheduleEventStrict & {
     rating: number;
-    snippets: string[];
+    snippets: CodeSnippet[];
     time: number; // min.
 };
