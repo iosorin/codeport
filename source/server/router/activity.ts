@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { get, create, update, remove } from '../controllers/schedule';
+import { get, update, remove } from '../controllers/activity';
 
 const router = Router();
 
 router.get('/', get);
-router.post('/', create);
 router.put('/', update);
 router.delete('/:id', remove);
 

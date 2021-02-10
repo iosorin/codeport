@@ -1,0 +1,28 @@
+[
+    {
+        "id": "30",
+        "title": "Bla bla",
+        "date": 1611696824940,
+        "rating": 9,
+        "snippets": ["1221", "212"],
+        "stack": "react, typescript, jest, atomic design",
+        "salary": "12$/hr.sds",
+        "contacts": "contacts35",
+        "additional": "full time, remote working..ass",
+        "time": 20,
+        "color": "#A1AEC6"
+    },
+    {
+        "id": "10",
+        "title": "ESET 5",
+        "date": 1611696824940,
+        "rating": 5.5,
+        "snippets": ["1221", "212"],
+        "stack": "vue, typescript, jest, atomic design",
+        "salary": "12$/hr.",
+        "contacts": "contacts",
+        "additional": "full time, remote workingds",
+        "time": 20,
+        "color": "#BFA392"
+    }
+]

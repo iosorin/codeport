@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { api } from './console.api';
+import { Language } from 'types';
+import { api } from './api';
 import { languages } from './languages';
 
 type ContentItem = {
@@ -54,7 +55,7 @@ class CompilerStore {
         this.scriptCache += 1;
     };
 
-    setLanguageInfo = (language: string) => {
+    setLanguageInfo = (language: Language) => {
         if (languages[language]?.version !== this.languageInfo?.version) {
             this.setResults([]);
         }

@@ -1,31 +1,28 @@
 import React, { FC } from 'react';
-import { ArrowLeft, ArrowRight } from 'react-feather';
-import { Block } from '@ui';
+import { CodeSnippet } from 'types';
+import { Carousel, Block } from '@ui';
+import { Snippet } from './Snippet';
 
 type Props = {
-    snippets: string[];
+    snippets: CodeSnippet[];
 };
 
 export const Snippets: FC<Props> = ({ snippets }) => {
-    return (
-        <div className="flex-col fill disabled" style={{ maxHeight: '295px' }}>
-            <Block background="grey" flex>
-                <div className="text-grey">No snippets was saved</div>
-            </Block>
-        </div>
-    );
+    const isEmpty = !snippets.length;
 
     return (
-        <div className="flex-col fill disabled">
+        <div className={`flex-col fill ${isEmpty ? 'disabled' : ''}`}>
             <Block background="grey" flex>
-                <div className="text-grey">No snippets was saved</div>
+                {isEmpty ? (
+                    <div className="text-grey">No snippets was saved</div>
+                ) : (
+                    <Carousel>
+                        {snippets.map((snippet) => (
+                            <Snippet snippet={snippet} />
+                        ))}
+                    </Carousel>
+                )}
             </Block>
-
-            <div className="flex flex-end mt-2 disabled">
-                <ArrowLeft className="mr-2" size="18" />
-
-                <ArrowRight size="18" />
-            </div>
         </div>
     );
 };

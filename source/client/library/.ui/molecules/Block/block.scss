@@ -88,19 +88,26 @@
         border-color: $yellow;
     }
 
-    // fix text color
+    // text color
+    &.color-white,
     &.dark,
     &.black {
         &:not(.hover) {
             color: white;
+
+            a {
+                color: white;
+            }
         }
     }
 
+    &.color-black,
     &.light,
     &.yellow,
     &.grey {
         &:not(.hover) {
             color: $black;
+
             a {
                 color: $black;
             }

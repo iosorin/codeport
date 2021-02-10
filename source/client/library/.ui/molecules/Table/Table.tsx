@@ -36,13 +36,15 @@ export const Table: FC<Props> = ({
     onDelete,
     prefixes,
 }) => {
-    const [, forceUpdate] = useState(0);
-
     const [source, setSource] = useState(origin);
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
 
     const showDeleteIcon = !!onDelete;
+
+    useEffect(() => {
+        setSource(origin);
+    }, [origin]);
 
     useEffect(() => {
         if (!originLabels) {

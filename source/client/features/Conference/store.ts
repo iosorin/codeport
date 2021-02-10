@@ -1,6 +1,6 @@
 import Peer from 'simple-peer';
 import { makeAutoObservable, reaction } from 'mobx';
-import { User } from 'types';
+import { ConferenceUser } from 'types';
 import { SocketService } from '@services';
 
 export type PeerItem = {
@@ -115,7 +115,7 @@ class ConferenceStore {
         });
     };
 
-    createPeer = (userToSignal: string, caller: User) => {
+    createPeer = (userToSignal: string, caller: ConferenceUser) => {
         const peer = new Peer({
             initiator: true,
             trickle: false,
@@ -133,7 +133,7 @@ class ConferenceStore {
         return peer;
     };
 
-    addPeer = (caller: User, signal: string) => {
+    addPeer = (caller: ConferenceUser, signal: string) => {
         const peer = new Peer({
             initiator: false,
             trickle: false,
@@ -154,7 +154,7 @@ class ConferenceStore {
             this.limitExceed = true;
         });
 
-        this.socket.on('client:users-present-in-room', (users: User[]) => {
+        this.socket.on('client:users-present-in-room', (users: ConferenceUser[]) => {
             this.setPeers(
                 users.map((user) => {
                     const peer = this.createPeer(user.id, {
@@ -171,7 +171,7 @@ class ConferenceStore {
             );
         });
 
-        this.socket.on('client:constraints', (user: User) => {
+        this.socket.on('client:constraints', (user: ConferenceUser) => {
             this.setPeers(
                 this.peers.map((peer) => {
                     if (peer.peerID === user.id) {
@@ -185,7 +185,7 @@ class ConferenceStore {
 
         this.socket.on(
             'client:user-joined',
-            ({ signal = '', caller }: { signal: string; caller: User }) => {
+            ({ signal = '', caller }: { signal: string; caller: ConferenceUser }) => {
                 const peer = this.addPeer(caller, signal);
 
                 this.setPeers([

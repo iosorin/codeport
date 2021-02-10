@@ -1,43 +1,18 @@
-import { uuid } from '@/library/utils';
 import { makeAutoObservable } from 'mobx';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { api } from './api';
 
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
 export type EventWithID = ScheduleEvent & { id: string | number };
 
 class ActivityStore {
-    events: CompletedScheduleEvent[] = [
-        {
-            id: uuid(),
-            title: 'Ресторан Сервис Инфо',
-            date: 1611196124940,
-            rating: 0.0,
-            snippets: ['1221'],
-            stack: 'react, jest, docker, ant-design, full time, remote working',
-            salary: 'from 80 000',
-            contacts: 'https://github.com/osorina',
-            additional: 'full time, remote working full time, remote working full time',
-            time: 40,
-            color: '#6c67f4',
-        },
-        {
-            id: uuid(),
-            title: 'ESET',
-            date: 1611696824940,
-            rating: 5.5,
-            snippets: ['1221', '212'],
-            stack: 'vue, typescript, jest, atomic design',
-            salary: '12$/hr.',
-            contacts: 'contacts',
-            additional: 'full time, remote working',
-            time: 20,
-            color: '#ecfa1c',
-        },
-    ];
+    events: CompletedScheduleEvent[] = [];
 
-    dialogIsVisible = false;
+    dialogIsVisible = true;
 
     confirmDialogIsVisible = false;
+
+    loading = false;
 
     dialogEvent: CompletedScheduleEvent | null = null;
 
@@ -61,8 +36,25 @@ class ActivityStore {
         );
     }
 
+    fetchEvents = async () => {
+        const events = await api.get();
+
+        this.setEvents(events);
+        this.setDialogEvent(events[0]);
+    };
+
+    updateEvent = async (event: EventWithID) => {
+        const events = await api.update(event);
+
+        this.setEvents(events);
+    };
+
     setEvents = (events: CompletedScheduleEvent[]) => {
         this.events = events;
+    };
+
+    setLoading = (loading: boolean) => {
+        this.loading = loading;
     };
 
     setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
@@ -89,18 +81,8 @@ class ActivityStore {
         if (!this.dialogEvent) return;
 
         this.setDialogEvent({ ...this.dialogEvent, ...updated });
-    };
 
-    updateEvent = (updated: EventWithID) => {
-        this.setEvents(
-            this.events.map((event) => {
-                if (event.id === updated.id) {
-                    return { ...event, ...updated };
-                }
-
-                return event;
-            })
-        );
+        this.updateEvent(this.dialogEvent);
     };
 }
 

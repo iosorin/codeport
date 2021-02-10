@@ -1,5 +1,5 @@
 {
-    "watch": ["source/server", "source/types", ".env"],
+    "watch": ["source/server", "source/shared", ".env"],
     "ext": "ts",
     "exec": "cross-env NODE_ENV=development node --inspect -r ts-node/register ./source/server/index.ts"
 }

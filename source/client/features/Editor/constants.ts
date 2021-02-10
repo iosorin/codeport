@@ -34,25 +34,6 @@ export const THEMES = [
 ];
 export const DEFAULT_THEME = 'darcula';
 
-/* default languages list (https://github.com/uiwjs/react-codemirror/blob/master/website/modes.js) */
-export const MODES = [
-    'javascript',
-    'java',
-    'php',
-    'c#',
-    'c++',
-    'python',
-    'clojure',
-    'kotlin',
-    'swift',
-    'go',
-    'ruby',
-    'lua',
-    'html',
-    'typescript',
-    'jsx',
-];
-
 /* default language font-size */
 export const DEFAULT_MODE = 'javascript';
 

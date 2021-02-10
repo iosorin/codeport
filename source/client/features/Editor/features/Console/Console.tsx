@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Language } from 'types';
 import { Button } from '@ui';
 import store from './store';
 import styles from './console.scss';
@@ -8,7 +9,7 @@ import { X } from 'react-feather';
 
 type Props = {
     code: string;
-    language: string;
+    language: Language;
     className?: string;
     setEditorValue: (value: string) => void;
     toggleConsole: (show: boolean) => void;
