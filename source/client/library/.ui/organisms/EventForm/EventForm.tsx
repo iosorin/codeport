@@ -131,7 +131,7 @@ export const EventForm: FC<Props> = ({
                     </>
                 )}
 
-                <div className={`flex-${align} mt-xs`}>
+                <div className={`flex-${align} mt-2`}>
                     <Button
                         background="success"
                         loading={isLoading}

@@ -18,22 +18,24 @@ export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails
     if (!details) return null;
 
     const title = isTitleEditing ? (
-        <div className="flex-50">
-            <EventForm
-                details={details}
-                completed
-                onSubmit={(updated) => {
-                    setDetails(updated);
-                    setIsTitleEditing(false);
-                }}
-                onCancel={() => setIsTitleEditing(false)}
-                align="end"
-                exclude={['main']}
-            />
+        <div className="flex-1">
+            <Block background="light">
+                <EventForm
+                    details={details}
+                    completed
+                    onSubmit={(updated) => {
+                        setDetails(updated);
+                        setIsTitleEditing(false);
+                    }}
+                    onCancel={() => setIsTitleEditing(false)}
+                    align="end"
+                    exclude={['main']}
+                />
+            </Block>
         </div>
     ) : (
         <Block
-            background="grey"
+            background="none"
             onClick={() => {
                 setIsTitleEditing(true);
                 setIsBodyEditing(false);
@@ -58,24 +60,26 @@ export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails
     const body = (
         <>
             {isBodyEditing ? (
-                <EventForm
-                    details={details}
-                    completed
-                    onSubmit={(updated) => {
-                        return new Promise((resolve) => {
-                            resolve(setDetails(updated));
+                <Block background="light">
+                    <EventForm
+                        details={details}
+                        completed
+                        onSubmit={(updated) => {
+                            return new Promise((resolve) => {
+                                resolve(setDetails(updated));
+                                setIsBodyEditing(false);
+                            });
+                        }}
+                        onCancel={() => {
                             setIsBodyEditing(false);
-                        });
-                    }}
-                    onCancel={() => {
-                        setIsBodyEditing(false);
-                    }}
-                    align="end"
-                    exclude={['title', 'rating', 'color']}
-                />
+                        }}
+                        align="end"
+                        exclude={['title', 'rating', 'color']}
+                    />
+                </Block>
             ) : (
                 <Block
-                    background="grey"
+                    background="none"
                     onClick={() => {
                         setIsTitleEditing(false);
                         setIsBodyEditing(true);
@@ -98,7 +102,7 @@ export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails
                     </div>
                 </div>
 
-                <hr className="my-2"></hr>
+                <hr className="my-3"></hr>
 
                 <div className="flex-between">
                     <div className="h4 text-accent">{date.when(details.date)}</div>

@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import { Edit3, X } from 'react-feather';
+import { Edit, X } from 'react-feather';
 import { Button } from '../../atoms';
 import styles from './block.scss';
 
@@ -11,6 +11,7 @@ export type Props = {
     background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
     color?: 'black' | 'white';
     customBackground?: string;
+    p0?: boolean;
     flex?: boolean;
     hover?: boolean;
     styled?: boolean;
@@ -31,6 +32,7 @@ export const Block: FC<Props> = memo(
         height: minHeight = '',
         icon,
         small,
+        p0,
         flex,
         hover,
         styled,
@@ -50,28 +52,27 @@ export const Block: FC<Props> = memo(
         if (flex) classlist.push(styles.flex);
         if (hover || onClick) classlist.push(styles.hover);
         if (styled) classlist.push(styles.styled);
+        if (p0) classlist.push(styles.p0);
 
         const controls = (
             <div className={styles.controls}>
                 {onEdit && (
                     <Button
                         rounded
-                        outline
                         hover
-                        size="small"
+                        background="grey"
                         onClick={onEdit}
                         color={background === ('light' || 'yellow') ? 'black' : 'white'}
                     >
-                        <Edit3 size="15" />
+                        <Edit size="15" />
                     </Button>
                 )}
 
                 {onRemove && (
                     <Button
                         rounded
-                        outline
                         hover
-                        size="small"
+                        background="grey"
                         onClick={onRemove}
                         color={background === ('light' || 'yellow') ? 'black' : 'white'}
                     >

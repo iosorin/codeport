@@ -9,3 +9,5 @@ export const HOTKEYS = {
         label: 'Console [ctrl+.]',
     },
 };
+
+export const DEFAULT_EDITOR_THEME = 'default';

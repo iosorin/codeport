@@ -37,7 +37,7 @@ export const Colors: FC<Props> = ({
                         active={isActive(color)}
                         color={color}
                         onClick={onChange}
-                        size="medium"
+                        size="large"
                     />
                 ))}
             </div>

@@ -2,6 +2,11 @@
     &.CodeMirror {
         background: $editor-default-background;
         color: #f8f8f2;
+        padding: 0.5em 0.5em 1.5em 0.5em;
+
+        &-selected {
+            background: lighten($editor-default-background, 5%) !important;
+        }
     }
 
     .CodeMirror {
@@ -44,7 +49,7 @@
     }
 
     span.qualifier {
-        // color: #9ccc7a;
+        color: #9ccc7a;
     }
     span.cm-meta {
         color: #bbb529;

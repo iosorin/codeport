@@ -1,7 +1,7 @@
 .colors {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-top: 0.5rem;
 
     &.outer {
@@ -15,16 +15,18 @@
 
     .color {
         cursor: pointer;
-        flex: 0 0 auto;
         margin-bottom: 0.5rem;
-        transition: transform $tr;
+        transition: transform 0.3s $ease-2;
 
         &:not(:last-child) {
-            margin-right: 0.4rem;
+            margin-right: 1rem;
+            &.small {
+                margin-right: 0.5rem;
+            }
         }
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         &.active {

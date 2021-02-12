@@ -97,6 +97,8 @@ a img {
 }
 
 img {
+    display: block;
+    max-width: 100%;
     user-select: none;
 }
 
@@ -109,6 +111,13 @@ select {
     &:focus {
         outline: none;
     }
+}
+
+input,
+textarea,
+select {
+    display: block;
+    width: 100%;
 }
 
 input[type='text'],
