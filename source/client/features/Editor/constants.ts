@@ -1,28 +1,11 @@
 import { EditorConfiguration } from 'codemirror';
 
 /* default editor value */
-export const DEFAULT_VALUE = `// 1. Implement a binary search algorithm.
-class BinarySearch {
-    constructor(sorted) {}
+export const DEFAULT_VALUE = '';
 
-    indexOf(number) {}
-}
-
-const instance = new BinarySearch([1,2,3,4,5]);
-
-console.log(instance.indexOf(4));`;
-
-export const KOTLIN_DEFAULT_VALUE = `/**
-* We declare a package-level function main which returns Unit and takes
-* an Array of strings as a parameter. Note that semicolons are optional.
-*/
-
-fun main(args: Array<String>) {
-   println("Hello, world!")
-}`;
-
-/* default color theme */
+/* themes */
 export const CODEPORT_THEME = 'codeport';
+
 export const THEMES = [
     CODEPORT_THEME,
     'darcula',
@@ -32,15 +15,16 @@ export const THEMES = [
     'monokai',
     'material',
 ];
-export const DEFAULT_THEME = 'darcula';
 
-/* default language font-size */
+export const DEFAULT_THEME = CODEPORT_THEME;
+
+/* language */
 export const DEFAULT_MODE = 'javascript';
 
-/* default font-size (px) */
+/* font-size */
 export const DEFAULT_FZ = 18;
 
-/* default settings */
+/* settings */
 export type EditorSettings = EditorConfiguration & { fontSize?: number };
 export const DEFAULT_SETTINGS: EditorSettings = {
     mode: DEFAULT_MODE,
@@ -58,7 +42,4 @@ export const DEFAULT_SETTINGS: EditorSettings = {
     autoCloseBrackets: true,
     autocorrect: true,
     autocapitalize: true,
-    extraKeys: {
-        Tab: 'save',
-    },
 };

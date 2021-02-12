@@ -10,20 +10,6 @@ body {
     overflow: hidden;
 }
 
-input {
-    width: 100%;
-    display: block;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-article > * + * {
-    margin-top: 1em;
-}
-
 ::selection {
     background: $primary;
     color: rgba(black, 0.7);
@@ -46,21 +32,17 @@ article > * + * {
     flex-direction: column;
 }
 
-hr {
-    display: block;
-    border: none;
-    width: 100%;
-    height: 1px;
-    background: $grey;
-
-    &.dark {
-        background: $black-lighten;
+.hover {
+    .hover-target {
+        opacity: 0;
+        transition: opacity $tr;
     }
-}
 
-.fill {
-    width: 100%;
-    height: 100%;
+    &:hover {
+        .hover-target {
+            opacity: 1;
+        }
+    }
 }
 
 .grid {
@@ -100,5 +82,17 @@ hr {
         & > * {
             flex: 1;
         }
+    }
+}
+
+hr {
+    display: block;
+    border: none;
+    width: 100%;
+    height: 1px;
+    background: $grey;
+
+    &.dark {
+        background: $black-lighten;
     }
 }

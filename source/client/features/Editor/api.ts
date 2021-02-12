@@ -1,7 +1,7 @@
 import { debounce, ls } from '@/library/utils';
 import { EditorSettings } from './constants';
 
-const dbLs = debounce(ls, 300);
+const dbLs = debounce(ls, 250);
 const title = process.env.TITLE;
 
 export const api = {

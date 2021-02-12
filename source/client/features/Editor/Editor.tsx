@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import Codemirror from '@uiw/react-codemirror';
+import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
 import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/edit/closebrackets';
@@ -9,9 +10,7 @@ import 'codemirror/keymap/sublime';
 import { Settings, StatusBar } from './.ui';
 import { Console } from './features/Console';
 import store from './store';
-import styles from './styles/editor.scss';
-import './styles/codemirror.shared.scss';
-import { HOTKEYS } from '@/library/constants';
+import styles from './editor.scss';
 
 type Props = {
     roomID: string;

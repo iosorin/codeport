@@ -9,7 +9,7 @@ export type Props = {
     size?: 'small' | 'medium' | 'large';
     color?: 'white' | 'black';
     hover?: boolean;
-    background?: 'primary' | 'secondary' | 'success' | 'light';
+    background?: 'primary' | 'secondary' | 'success' | 'light' | 'grey';
     shadow?: 'dark' | 'light' | false;
     zoom?: boolean;
     rounded?: boolean;
@@ -58,7 +58,7 @@ export const Button: React.FC<Props> = ({
         <button
             className={classlist.join(' ')}
             onClick={onClick}
-            style={{ backgroundColor: background, ...style }}
+            style={{ ...style }}
             type={type}
             disabled={disabled}
         >
