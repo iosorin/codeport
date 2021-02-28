@@ -3,102 +3,102 @@ import { observer } from 'mobx-react-lite';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 import { Color, Dialog, Snippets, EventForm, Event, Block } from '@ui';
 import { date } from '@/library/utils';
+import { mapList } from 'utils';
 
 type Props = {
     isVisible: boolean;
+    isLoading?: boolean;
     details: CompletedScheduleEvent | null;
     setDetails: (details: ScheduleEvent) => void;
     close: () => void;
 };
 
-export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails, close }) => {
-    const [isBodyEditing, setIsBodyEditing] = useState(false);
-    const [isTitleEditing, setIsTitleEditing] = useState(false);
+export const EventDialog: FC<Props> = observer(
+    ({ isVisible, isLoading, details, setDetails, close }) => {
+        const [isTitleEditing, setIsTitleEditing] = useState(false);
+        const [isBodyEditing, setIsBodyEditing] = useState(false);
 
-    if (!details) return null;
+        if (!details) return null;
 
-    const title = isTitleEditing ? (
-        <div className="flex-1">
-            <Block background="light">
-                <EventForm
-                    details={details}
-                    completed
-                    onSubmit={(updated) => {
-                        setDetails(updated);
-                        setIsTitleEditing(false);
-                    }}
-                    onCancel={() => setIsTitleEditing(false)}
-                    align="end"
-                    exclude={['main']}
-                />
-            </Block>
-        </div>
-    ) : (
-        <Block
-            background="none"
-            onClick={() => {
-                setIsTitleEditing(true);
-                setIsBodyEditing(false);
-            }}
-        >
-            <div className="flex-start">
-                {/* <Colors
-                    type="button"
-                    active={details.color}
-                    onChange={(color) => setDetails({ color })}
-                    trigger={<Color color={details.color} size="large"></Color>}
-                /> */}
-                <Color color={details.color} size="large"></Color>
-
-                <div className="h3 text-accent ml-1 mb-0">
-                    {details.title} ({details.rating} / 10)
-                </div>
-            </div>
-        </Block>
-    );
-
-    const body = (
-        <>
-            {isBodyEditing ? (
+        const title = isTitleEditing ? (
+            <div className="flex-1">
                 <Block background="light">
                     <EventForm
                         details={details}
                         completed
                         onSubmit={(updated) => {
-                            return new Promise((resolve) => {
-                                resolve(setDetails(updated));
-                                setIsBodyEditing(false);
-                            });
+                            setDetails(updated);
+                            setIsTitleEditing(false);
                         }}
-                        onCancel={() => {
-                            setIsBodyEditing(false);
-                        }}
+                        onCancel={() => setIsTitleEditing(false)}
                         align="end"
-                        exclude={['title', 'rating', 'color']}
+                        exclude={['main']}
                     />
                 </Block>
-            ) : (
-                <Block
-                    background="none"
-                    onClick={() => {
-                        setIsTitleEditing(false);
-                        setIsBodyEditing(true);
-                    }}
-                >
-                    <Event details={details} date={false} accent />
-                </Block>
-            )}
-        </>
-    );
+            </div>
+        ) : (
+            <Block
+                background="none"
+                onClick={() => {
+                    setIsTitleEditing(true);
+                    setIsBodyEditing(false);
+                }}
+            >
+                <div className="flex-start">
+                    <Color color={details.color} size="large"></Color>
 
-    return (
-        details && (
+                    <div className="h3 text-accent ml-1 mb-0">
+                        {details.title} ({details.rating} / 10)
+                    </div>
+                </div>
+            </Block>
+        );
+
+        const body = (
+            <>
+                {isBodyEditing ? (
+                    <Block background="light">
+                        <EventForm
+                            details={details}
+                            completed
+                            onSubmit={(updated) => {
+                                setDetails(updated);
+                                setIsBodyEditing(false);
+                            }}
+                            onCancel={() => {
+                                setIsBodyEditing(false);
+                            }}
+                            align="end"
+                            exclude={['title', 'rating', 'color']}
+                        />
+                    </Block>
+                ) : (
+                    <Block
+                        background="none"
+                        onClick={() => {
+                            setIsTitleEditing(false);
+                            setIsBodyEditing(true);
+                        }}
+                    >
+                        <Event details={details} date={false} accent />
+                    </Block>
+                )}
+            </>
+        );
+
+        return details ? (
             <Dialog close={close} isVisible={isVisible} size="fullscreen" title={title}>
                 <div className="flex mb-1">
                     <div className="flex-1 mr-1">{body}</div>
 
                     <div className="flex-1 ml-1">
-                        <Snippets snippets={details.snippets} />
+                        <Snippets
+                            loading={isLoading}
+                            snippets={details.snippets}
+                            onSave={(snippet) =>
+                                setDetails({ snippets: mapList(details.snippets, snippet) })
+                            }
+                        />
                     </div>
                 </div>
 
@@ -109,6 +109,6 @@ export const EventDialog: FC<Props> = observer(({ isVisible, details, setDetails
                     <div className="h4 text-accent">{details.time} min.</div>
                 </div>
             </Dialog>
-        )
-    );
-});
+        ) : null;
+    }
+);

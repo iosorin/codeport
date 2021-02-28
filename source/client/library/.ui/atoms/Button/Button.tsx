@@ -63,9 +63,7 @@ export const Button: React.FC<Props> = ({
             disabled={disabled}
         >
             {loading ? (
-                <span className={styles.loader}>
-                    <Loader type="dots" dur="1s" />
-                </span>
+                <Loader type="dots" dur="1s" color={color} />
             ) : (
                 <span className={loading ? 'invisible' : ''}>{content}</span>
             )}
