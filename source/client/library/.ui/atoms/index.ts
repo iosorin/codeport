@@ -1,6 +1,7 @@
 export { Backdrop } from './Backdrop';
 export { Button } from './Button';
 export { Colors, Color } from './Colors';
+export { Emojis, Emoji } from './Emojis';
 export { Input } from './Input/Input';
 export { Loader } from './Loader';
 export { Logo } from './Logo';

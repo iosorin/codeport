@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const emojiHero = () => {
-    // prettier-ignore
-    const emojis = [
-        '💃','👻','🎅','👩‍🚀','👨‍🚀','🐱‍🏍','🐱‍💻','🐱‍👓','🐱‍🚀','🦸‍♂️','🦸‍♀️','🧚‍♂️','🧚‍♀️'
-    ];
-
-    return emojis[Math.floor(Math.random() * emojis.length)];
+export const copy = (text: string) => {
+    navigator.clipboard.writeText(text);
 };
 
 export const uuid = () => {
@@ -131,4 +126,13 @@ export const date = {
 
         return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
     },
+};
+
+export const emojiHero = () => {
+    // prettier-ignore
+    const emojis = [
+        '💃','👻','🎅','👩‍🚀','👨‍🚀','🐱‍🏍','🐱‍💻','🐱‍👓','🐱‍🚀','🦸‍♂️','🦸‍♀️','🧚‍♂️','🧚‍♀️'
+    ];
+
+    return emojis[Math.floor(Math.random() * emojis.length)];
 };

@@ -1,16 +1,18 @@
+.container {
+    margin: $input-margin;
+}
+
 .colors {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-top: 0.5rem;
 
     &.outer {
-        padding: 1rem 1.2rem;
+        padding: 1rem 1rem 0.5rem;
         background: white;
         border-radius: $radius;
         box-shadow: $shadow-2;
         justify-content: flex-start;
-        width: 400px;
     }
 
     .color {
@@ -47,8 +49,8 @@
     }
 
     &.medium {
-        width: 17px;
-        height: 17px;
+        width: 16px;
+        height: 16px;
     }
 
     &.large {

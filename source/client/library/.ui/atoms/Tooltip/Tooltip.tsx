@@ -10,6 +10,7 @@ export type Props = {
     error?: boolean;
     className?: string;
     onClick?: () => void;
+    disabled?: boolean;
 };
 
 export const Tooltip: FC<Props> = ({
@@ -20,6 +21,7 @@ export const Tooltip: FC<Props> = ({
     error,
     className = '',
     children,
+    disabled,
     ...props
 }) => {
     let classlist = [styles.tooltip, className];
@@ -28,6 +30,7 @@ export const Tooltip: FC<Props> = ({
     if (center) classlist.push(styles.center);
     if (bottom) classlist.push(styles.bottom);
     if (error) classlist.push(styles.error);
+    if (disabled) classlist.push('disabled');
 
     return (
         <div className={classlist.join(' ')} data-tooltip={content} {...props}>

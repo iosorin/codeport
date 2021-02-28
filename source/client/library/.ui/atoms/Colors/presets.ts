@@ -18,7 +18,6 @@ const standard = [
 ];
 
 const mini = [
-    '#F2F5F9',
     '#4B4F63',
     '#96A2B4',
     '#959BCB',

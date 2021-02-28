@@ -44,7 +44,7 @@ export const Table: FC<Props> = ({
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
 
-    const showMenu = !!(onEdit || onDelete || onDetails);
+    const showMenu = Boolean(onEdit || onDelete || onDetails);
 
     useEffect(() => {
         if (!originLabels) {
