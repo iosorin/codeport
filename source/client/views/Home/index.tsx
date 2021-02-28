@@ -13,7 +13,7 @@ export const HomeView: FC = observer((props) => {
     const { ui, socket } = useCore();
 
     useEffect(() => {
-        ui.toggleConferencePanel(!!uuid);
+        ui.toggleConferencePanel(Boolean(uuid));
 
         if (uuid) {
             socket.emit('check-room', uuid);

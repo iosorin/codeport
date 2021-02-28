@@ -6,8 +6,9 @@ import presets from './presets';
 import styles from './colors.scss';
 
 type Props = {
-    type?: 'palette' | 'button';
-    trigger?: JSX.Element;
+    type?: 'palette' | 'single';
+    trigger?: 'button' | 'color';
+    size?: 'small' | 'medium' | 'large';
     label?: string;
     active?: string;
     preset?: 'standard' | 'mini';
@@ -16,10 +17,11 @@ type Props = {
 
 export const Colors: FC<Props> = ({
     type = 'palette',
-    trigger,
+    trigger = 'color',
     label,
-    preset = 'standard',
+    preset = 'mini',
     active = preset[0],
+    size = 'medium',
     onChange,
 }) => {
     const isPalette = type === 'palette';
@@ -29,15 +31,13 @@ export const Colors: FC<Props> = ({
     const palette = () => {
         return (
             <div className={`${styles.colors} ${isPalette ? '' : styles.outer}`}>
-                {label ? <div className="label mr-1">{label}</div> : null}
-
                 {presets[preset].map((color, index) => (
                     <Color
                         key={index}
                         active={isActive(color)}
+                        size={size}
                         color={color}
                         onClick={onChange}
-                        size="large"
                     />
                 ))}
             </div>
@@ -45,14 +45,20 @@ export const Colors: FC<Props> = ({
     };
 
     const button = () => {
-        return (
-            trigger || (
-                <Button rounded hover size="small" background="light">
-                    <Droplet size="20" />
-                </Button>
-            )
+        return trigger === 'button' ? (
+            <Button rounded hover size="small" background="light">
+                <Droplet size="20" />
+            </Button>
+        ) : (
+            <Color color={active} size={size} />
         );
     };
 
-    return isPalette ? palette() : <Menu trigger={button()}>{palette()}</Menu>;
+    return (
+        <div className={styles.container}>
+            {label ? <div className="label mr-1">{label}</div> : null}
+
+            {isPalette ? palette() : <Menu trigger={button()}>{palette()}</Menu>}
+        </div>
+    );
 };

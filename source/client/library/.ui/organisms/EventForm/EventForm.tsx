@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { ScheduleEvent } from 'types';
-import { Input, Textarea, Colors, Range, Button, Color } from '@ui';
+import { Input, Textarea, Colors, Range, Button, Color, Emojis } from '@ui';
 import { date } from '@/library/utils';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
@@ -46,7 +46,10 @@ export const EventForm: FC<Props> = ({
     return (
         <form onSubmit={submitHandler}>
             <div className="flex-col">
-                {/* <div className="flex-center"> */}
+                {!exclude?.includes('color') && details?.color && (
+                    <Colors active={details?.color} onChange={(color) => set({ color })} />
+                )}
+
                 {!exclude?.includes('title') && (
                     <Input
                         label="Title"
@@ -57,34 +60,14 @@ export const EventForm: FC<Props> = ({
                     />
                 )}
 
-                {/* {!exclude?.includes('color') && details?.color && (
-                        <div className="ml-2 mt-1">
-                            <Colors
-                                type="button"
-                                active={details?.color}
-                                onChange={(color) => set({ color })}
-                                trigger={<Color color={details.color} size="large"></Color>}
-                            />
-                        </div>
-                    )} */}
-                {/* </div> */}
-
-                {!exclude?.includes('color') && (
-                    <Colors
-                        active={details?.color}
-                        onChange={(color) => set({ color })}
-                        type="palette"
-                    />
-                )}
                 {completed && !exclude?.includes('rating') && (
-                    <Range
-                        label="Rating"
-                        onChange={(rating) => set({ rating })}
-                        value={details?.rating}
-                        units=" / 10"
-                        step={0.5}
-                        min={0}
-                    />
+                    <div>
+                        <Emojis
+                            label="Rating"
+                            onChange={(rating: number) => set({ rating })}
+                            value={details?.rating}
+                        />
+                    </div>
                 )}
 
                 {!completed && !exclude?.includes('date') && (

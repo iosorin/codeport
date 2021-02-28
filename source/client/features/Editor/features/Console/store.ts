@@ -28,7 +28,7 @@ class CompilerStore {
     }
 
     get languageIsSupported() {
-        return !!this.languageInfo.version || this.isJS;
+        return Boolean(this.languageInfo.version || this.isJS);
     }
 
     constructor() {

@@ -39,6 +39,7 @@ export const Activity = observer(() => {
                             <EventDialog
                                 close={() => store.toggleDialog()}
                                 details={store.dialogEvent}
+                                isLoading={store.isLoading}
                                 isVisible={store.dialogIsVisible}
                                 setDetails={store.updateDialogEvent}
                             />

@@ -40,7 +40,7 @@ export const Table: FC<Props> = ({
     const [labels, setLabels] = useState(originLabels);
     const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
 
-    const showDeleteIcon = !!onDelete;
+    const showDeleteIcon = Boolean(onDelete);
 
     useEffect(() => {
         setSource(origin);

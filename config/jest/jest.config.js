@@ -41,6 +41,7 @@ module.exports = {
         '@layouts(.*)$': '<rootDir>/source/client/layouts',
         'types/(.*)$': '<rootDir>/source/shared/types/$1',
         'constants/(.*)$': '<rootDir>/source/shared/defaults/$1',
+        'utils/(.*)$': '<rootDir>/source/shared/utils/$1',
     },
 
     // Test spec file resolution pattern

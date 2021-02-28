@@ -28,7 +28,7 @@ export const Transition: FC<Props> = ({
         <CSSTransition
             appear
             classNames={type}
-            in={!!inProp}
+            in={Boolean(inProp)}
             mountOnEnter
             nodeRef={ref}
             timeout={+duration}

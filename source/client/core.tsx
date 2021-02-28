@@ -1,7 +1,7 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
 import { SocketService } from '@services';
-import { UiStore } from './stores/UI.store';
+import { UiStore } from '@/stores/ui.store';
 
 configure({
     enforceActions: 'observed',

@@ -5,7 +5,8 @@ import styles from './carousel.scss';
 
 type Props = {
     children: JSX.Element[];
-    navigation?: 'arrows' | 'dots';
+    navigation?: 'arrows' | 'dots' | 'disabled';
+    navigationDisabled?: boolean;
     align?: 'start' | 'center' | 'end';
 };
 type Item = {
@@ -13,7 +14,12 @@ type Item = {
     child: JSX.Element;
 };
 
-export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'end' }) => {
+export const Carousel: FC<Props> = ({
+    children,
+    navigation = 'dots',
+    navigationDisabled,
+    align = 'end',
+}) => {
     const [items, setItems] = useState<Item[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,16 +42,9 @@ export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'en
             return;
         }
 
-        const { length } = items;
-        const last = length - 1;
+        const nextIndex = direction === 'forward' ? currentIndex + 1 : currentIndex - 1;
 
-        if (direction === 'forward') {
-            setCurrentIndex((index) => (index === last ? 0 : index + 1));
-
-            return;
-        }
-
-        setCurrentIndex((index) => (index === 0 ? last : index - 1));
+        setCurrentIndex(nextIndex);
     };
 
     const renderArrows = () => {
@@ -58,6 +57,7 @@ export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'en
                     size="small"
                     hover
                     onClick={() => move('backward')}
+                    disabled={currentIndex === 0}
                 >
                     <ChevronLeft className="hoverable" size="17" />
                 </Button>
@@ -70,6 +70,7 @@ export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'en
                     hover
                     className="ml-xs"
                     onClick={() => move('forward')}
+                    disabled={currentIndex === items.length - 1}
                 >
                     <ChevronRight className="hoverable" size="17" />
                 </Button>
@@ -110,7 +111,7 @@ export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'en
         <div className={`${styles.container} align-${align}`}>
             <div className={styles.items}>{renderItems()}</div>
 
-            <div className={styles.navigation}>
+            <div className={`${styles.navigation} ${navigationDisabled ? 'disabled' : ''}`}>
                 {navigation === 'arrows' ? renderArrows() : renderDots()}
             </div>
         </div>
