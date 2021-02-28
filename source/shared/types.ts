@@ -3,6 +3,7 @@ import { SupportedLanguages } from './defaults';
 export type Language = typeof SupportedLanguages[number];
 
 export type CodeSnippet = {
+    id: string;
     lang: Language;
     content: string;
 };

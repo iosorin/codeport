@@ -12,7 +12,9 @@ class ActivityStore {
 
     confirmDialogIsVisible = false;
 
-    loading = false;
+    isFetching = false;
+
+    isLoading = false;
 
     dialogEvent: CompletedScheduleEvent | null = null;
 
@@ -36,25 +38,16 @@ class ActivityStore {
         );
     }
 
-    fetchEvents = async () => {
-        const events = await api.get();
-
-        this.setEvents(events);
-        this.setDialogEvent(events[0]);
-    };
-
-    updateEvent = async (event: EventWithID) => {
-        const events = await api.update(event);
-
-        this.setEvents(events);
-    };
-
     setEvents = (events: CompletedScheduleEvent[]) => {
         this.events = events;
     };
 
-    setLoading = (loading: boolean) => {
-        this.loading = loading;
+    markFetching = (fetching: boolean) => {
+        this.isFetching = fetching;
+    };
+
+    markLoading = (loading: boolean) => {
+        this.isLoading = loading;
     };
 
     setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
@@ -68,13 +61,13 @@ class ActivityStore {
     toggleDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
-        this.dialogIsVisible = !!event;
+        this.dialogIsVisible = Boolean(event);
     };
 
     toggleConfirmDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
-        this.confirmDialogIsVisible = !!event;
+        this.confirmDialogIsVisible = Boolean(event);
     };
 
     updateDialogEvent = (updated: ScheduleEvent) => {
@@ -83,6 +76,33 @@ class ActivityStore {
         this.setDialogEvent({ ...this.dialogEvent, ...updated });
 
         this.updateEvent(this.dialogEvent);
+    };
+
+    fetchEvents = () => {
+        this.markFetching(true);
+
+        api.get()
+            .then((events) => {
+                this.setEvents(events);
+                this.setDialogEvent(events[0]);
+            })
+            .finally(() => {
+                this.markFetching(false);
+            });
+    };
+
+    updateEvent = (event: EventWithID) => {
+        this.markLoading(true);
+
+        api.update(event)
+            .then((events) => {
+                this.setEvents(events);
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    this.markLoading(false);
+                }, 1000);
+            });
     };
 }
 

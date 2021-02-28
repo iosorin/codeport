@@ -32,13 +32,7 @@ export const Colors: FC<Props> = ({
                 {label ? <div className="label mr-1">{label}</div> : null}
 
                 {presets[preset].map((color, index) => (
-                    <Color
-                        key={index}
-                        active={isActive(color)}
-                        color={color}
-                        onClick={onChange}
-                        size="large"
-                    />
+                    <Color key={index} active={isActive(color)} color={color} onClick={onChange} />
                 ))}
             </div>
         );

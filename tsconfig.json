@@ -34,7 +34,8 @@
             "@layouts": ["source/client/layouts"],
 
             "types": ["source/shared/types"],
-            "defaults": ["source/shared/defaults"]
+            "defaults": ["source/shared/defaults"],
+            "utils": ["source/shared/utils"]
         }
     },
     "include": ["./source/**/*"],

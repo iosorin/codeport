@@ -5,7 +5,8 @@ import styles from './carousel.scss';
 
 type Props = {
     children: JSX.Element[];
-    navigation?: 'arrows' | 'dots';
+    navigation?: 'arrows' | 'dots' | 'disabled';
+    navigationDisabled?: boolean;
     align?: 'start' | 'center' | 'end';
 };
 type Item = {
@@ -13,7 +14,12 @@ type Item = {
     child: JSX.Element;
 };
 
-export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'end' }) => {
+export const Carousel: FC<Props> = ({
+    children,
+    navigation = 'dots',
+    navigationDisabled,
+    align = 'end',
+}) => {
     const [items, setItems] = useState<Item[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -110,7 +116,7 @@ export const Carousel: FC<Props> = ({ children, navigation = 'dots', align = 'en
         <div className={`${styles.container} align-${align}`}>
             <div className={styles.items}>{renderItems()}</div>
 
-            <div className={styles.navigation}>
+            <div className={`${styles.navigation} ${navigationDisabled ? 'disabled' : ''}`}>
                 {navigation === 'arrows' ? renderArrows() : renderDots()}
             </div>
         </div>
