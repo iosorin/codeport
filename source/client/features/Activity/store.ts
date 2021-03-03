@@ -2,8 +2,8 @@ import { makeAutoObservable } from 'mobx';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
 import { api } from './api';
 
+type EventWithID = ScheduleEvent & { id: string | number };
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
-export type EventWithID = ScheduleEvent & { id: string | number };
 
 class ActivityStore {
     events: CompletedScheduleEvent[] = [];
@@ -23,8 +23,6 @@ class ActivityStore {
     }
 
     get empty() {
-        console.log('ACTIVITY STORE CONSTRUCTOR');
-
         return !this.events.length;
     }
 
@@ -108,4 +106,4 @@ class ActivityStore {
     };
 }
 
-export { ActivityStore };
+export { ActivityStore, EventWithID };

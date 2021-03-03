@@ -155,6 +155,8 @@ class ConferenceStore {
         });
 
         this.socket.on('client:users-present-in-room', (users: ConferenceUser[]) => {
+            if (!this.socket.socket) return;
+
             this.setPeers(
                 users.map((user) => {
                     const peer = this.createPeer(user.id, {
@@ -217,4 +219,4 @@ class ConferenceStore {
     };
 }
 
-export default new ConferenceStore();
+export { ConferenceStore };

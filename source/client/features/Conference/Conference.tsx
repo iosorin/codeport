@@ -8,8 +8,8 @@ import {
     ParticipantStream,
     ConferenceLimitDialog,
 } from './.ui';
-import store from './store';
 import styles from './conference.scss';
+import { useRoot } from '@/core';
 
 type Props = {
     mode?: 'list' | 'grid';
@@ -19,11 +19,13 @@ type Props = {
 export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) => {
     const history = useHistory();
 
+    const { conference: store } = useRoot();
+
     useEffect(() => {
         store.setRoomID(roomID);
 
         return store.leaveRoom;
-    }, [roomID]);
+    }, [roomID, store]);
 
     const goHome = () => {
         history.push('/');
