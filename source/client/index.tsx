@@ -7,11 +7,11 @@ import './styles/app.scss';
 
 ReactDOM.render(
     <StrictMode>
-        <BrowserRouter>
-            <CoreProvider>
+        <CoreProvider>
+            <BrowserRouter>
                 <AppRouter />
-            </CoreProvider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </CoreProvider>
     </StrictMode>,
     document.getElementById('root')
 );

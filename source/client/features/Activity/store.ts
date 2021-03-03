@@ -23,6 +23,8 @@ class ActivityStore {
     }
 
     get empty() {
+        console.log('ACTIVITY STORE CONSTRUCTOR');
+
         return !this.events.length;
     }
 
@@ -106,8 +108,4 @@ class ActivityStore {
     };
 }
 
-const store = new ActivityStore();
-
-export type Store = typeof store;
-
-export default store;
+export { ActivityStore };

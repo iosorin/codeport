@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Block } from '@ui';
-import { Store } from '../store';
+import { useRoot } from '@/core';
 
-type Props = {
-    store: Store;
-};
+export const Stats: FC = observer(() => {
+    const { activity: store } = useRoot();
 
-export const Stats: FC<Props> = observer(({ store }) => {
     return (
         <div className="grid grid--25 mb-1">
             <Block background="black" flex>
