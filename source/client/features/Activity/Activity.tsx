@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ConfirmDialog, EventsChart, Table } from '@ui';
 import { Stats, EventDialog } from './.ui';
-import store from './store';
+import { useRoot } from '@/core';
 
 export const Activity = observer(() => {
+    const { activity: store } = useRoot();
+
     useEffect(() => {
         store.fetchEvents();
-    }, []);
+    }, [store]);
 
     return (
         <>
             <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
-                <Stats store={store} />
+                <Stats />
 
                 <div className="flex-col-reverse mt-2">
                     {!store.empty && (

@@ -1,7 +1,8 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
+import { UiStore } from '@/stores/ui.store';
+import { RootStore } from '@/stores/root.store';
 import { SocketService } from '@services';
-import { UiStore } from '@/stores/UI.store';
 
 configure({
     enforceActions: 'observed',
@@ -14,6 +15,7 @@ configure({
 /* Core */
 const Core = {
     ui: new UiStore(),
+    root: new RootStore(),
     socket: SocketService.getInstance(),
 };
 
@@ -24,7 +26,11 @@ export const useCore = () => {
 };
 
 export const useUi = () => {
-    return useContext(CoreContext).ui;
+    return Core.ui;
+};
+
+export const useRoot = () => {
+    return Core.root;
 };
 
 export const CoreProvider: FC = ({ children }) => {
