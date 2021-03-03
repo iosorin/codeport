@@ -14,7 +14,7 @@ export const Activity = observer(() => {
     return (
         <>
             <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
-                <Stats />
+                <Stats length={store.events.length} total={store.total} />
 
                 <div className="flex-col-reverse mt-2">
                     {!store.empty && (

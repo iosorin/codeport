@@ -26,11 +26,11 @@ export const useCore = () => {
 };
 
 export const useUi = () => {
-    return Core.ui;
+    return useCore().ui;
 };
 
 export const useRoot = () => {
-    return Core.root;
+    return useCore().root;
 };
 
 export const CoreProvider: FC = ({ children }) => {
