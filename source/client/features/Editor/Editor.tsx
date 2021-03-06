@@ -39,26 +39,27 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
             <Codemirror onChange={onChange} options={store.settings} value={store.value} />
 
             <EditorSettings
-                isOpen={store.settingsIsVisible}
+                isOpen={store.settingsVisible}
                 setSettings={store.setSettings}
                 settings={store.settings}
                 toggleSettings={store.toggleSettings}
             />
 
-            <div className={`${styles.Bar} ${store.consoleIsVisible ? styles.active : ''}`}>
-                <Console
-                    className={store.consoleIsVisible ? '' : 'hidden'}
-                    code={store.value}
-                    language={store.settings.mode}
-                    setEditorValue={store.setValue}
-                    toggleConsole={store.toggleConsole}
-                />
+            <div className={`${styles.Bar} ${store.consoleVisible ? styles.active : ''}`}>
+                <div className={store.consoleVisible ? '' : 'hidden'}>
+                    <Console
+                        code={store.value}
+                        language={store.settings.mode}
+                        setEditorValue={store.setValue}
+                        toggleConsole={store.toggleConsole}
+                    />
+                </div>
 
                 <EditorBar
-                    consoleIsVisible={store.consoleIsVisible}
                     settings={store.settings}
                     toggleConsole={store.toggleConsole}
                     toggleSettings={store.toggleSettings}
+                    visible={store.consoleVisible}
                 />
             </div>
         </div>

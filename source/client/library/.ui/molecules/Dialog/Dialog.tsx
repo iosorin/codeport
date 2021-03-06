@@ -6,7 +6,7 @@ import { Backdrop, Transition } from '@ui';
 import styles from './dialog.scss';
 
 export type Props = {
-    isVisible: boolean;
+    visible: boolean;
     title?: string | boolean | JSX.Element | null;
     closeIcon?: boolean;
     persistent?: boolean;
@@ -19,7 +19,7 @@ export type Props = {
 };
 
 export const Dialog: FC<Props> = ({
-    isVisible,
+    visible,
     children,
     title = null,
     closeIcon = true,
@@ -31,13 +31,13 @@ export const Dialog: FC<Props> = ({
     style = {},
     close,
 }) => {
-    useHotkey('escape', close, isVisible);
+    useHotkey('escape', close, visible);
 
     const dialog = () => {
         return (
             <>
                 <Backdrop
-                    isVisible={isVisible}
+                    visible={visible}
                     onClick={() => !persistent && close()}
                     style={{ zIndex: 10 }}
                 />
@@ -50,7 +50,7 @@ export const Dialog: FC<Props> = ({
                     style={{ zIndex: 10 }}
                     tabIndex={-1}
                 >
-                    <Transition duration={450} in={isVisible} type={transition}>
+                    <Transition duration={450} in={visible} type={transition}>
                         <div
                             style={{ ...style }}
                             className={`${styles.dialog} ${dark ? styles.dark : ''} ${

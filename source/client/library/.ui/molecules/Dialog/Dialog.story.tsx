@@ -18,4 +18,4 @@ export const Basic: Story<Props> = (args) => (
     </Dialog>
 );
 
-Basic.args = { title: 'Dialog title', isVisible: true, closeIcon: true };
+Basic.args = { title: 'Dialog title', visible: true, closeIcon: true };

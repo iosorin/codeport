@@ -14,9 +14,9 @@ jest.mock('react-transition-group/CSSTransition', () => {
     return FakeCSSTransition;
 });
 
-const dialog = (isVisible: boolean) => {
+const dialog = (visible: boolean) => {
     return (
-        <Dialog close={() => {}} isVisible={isVisible} persistent title={title}>
+        <Dialog close={() => {}} visible={visible} persistent title={title}>
             {text}
         </Dialog>
     );

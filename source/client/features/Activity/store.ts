@@ -8,9 +8,9 @@ type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
 class ActivityStore {
     events: CompletedScheduleEvent[] = [];
 
-    dialogIsVisible = false;
+    dialogVisible = false;
 
-    confirmDialogIsVisible = false;
+    confirmDialogVisible = false;
 
     loading = false;
 
@@ -51,13 +51,13 @@ class ActivityStore {
     toggleDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
-        this.dialogIsVisible = Boolean(event);
+        this.dialogVisible = Boolean(event);
     };
 
     toggleConfirmDialog = (event?: CompletedScheduleEvent | null) => {
         this.setDialogEvent(event);
 
-        this.confirmDialogIsVisible = Boolean(event);
+        this.confirmDialogVisible = Boolean(event);
     };
 
     updateDialogEvent = (updated: ScheduleEvent) => {

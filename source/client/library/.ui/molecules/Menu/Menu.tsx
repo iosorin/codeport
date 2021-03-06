@@ -19,26 +19,26 @@ export const Menu: FC<Props> = ({
     showOnHover,
     children,
 }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [ref] = useOutsideClick(() => setIsVisible(false));
+    const [visible, setVisible] = useState(false);
+    const [ref] = useOutsideClick(() => setVisible(false));
 
     const handleTriggerClick = (event: any) => {
         if (showOnHover) return;
 
         event.stopPropagation();
 
-        setIsVisible(!isVisible);
+        setVisible(!visible);
     };
 
     const handleClick = (cb: () => void) => {
-        setIsVisible(false);
+        setVisible(false);
         cb();
     };
 
     return (
         <div
             ref={ref}
-            className={`${isVisible ? '' : 'hoverable'} ${styles.container} ${
+            className={`${visible ? '' : 'hoverable'} ${styles.container} ${
                 showOnHover ? styles.hover : ''
             }`}
         >
@@ -46,7 +46,7 @@ export const Menu: FC<Props> = ({
                 {trigger || <MoreHorizontal size="15" />}
             </div>
 
-            <div className={`${styles.content} ${isVisible ? styles.visible : ''}`}>
+            <div className={`${styles.content} ${visible ? styles.visible : ''}`}>
                 {children}
 
                 {onEdit && (

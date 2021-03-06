@@ -23,7 +23,6 @@ export const Colors: FC<Props> = ({
     onChange,
 }) => {
     const isPalette = type === 'palette';
-
     const isActive = (color: string) => color.toLowerCase() === active.toLowerCase();
 
     const palette = () => {

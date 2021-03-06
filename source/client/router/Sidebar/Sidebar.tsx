@@ -7,12 +7,12 @@ import styles from './sidebar.scss';
 
 export type Props = {
     className?: string;
-    isVisible: boolean;
+    visible: boolean;
 };
 
-export const Sidebar: FC<Props> = ({ className = '', isVisible }) => {
+export const Sidebar: FC<Props> = ({ className = '', visible }) => {
     return (
-        <div className={`${styles.sidebar} ${isVisible ? '' : styles.hidden} ${className}`}>
+        <div className={`${styles.sidebar} ${visible ? '' : styles.hidden} ${className}`}>
             <NavLink exact={ROUTES.HOME.exact} to={ROUTES.HOME.path}>
                 <Logo className={styles.logo} short />
             </NavLink>

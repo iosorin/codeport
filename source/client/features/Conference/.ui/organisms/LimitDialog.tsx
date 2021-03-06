@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 import { Button, Dialog } from '@ui';
 
 type Props = {
-    isVisible: boolean;
+    visible: boolean;
     close: () => void;
 };
 
-export const LimitDialog: FC<Props> = ({ isVisible, close }) => {
+export const LimitDialog: FC<Props> = ({ visible, close }) => {
     return (
         <Dialog
             centered
             closeIcon={false}
             close={close}
-            isVisible={isVisible}
+            visible={visible}
             persistent
             title="Oops..."
             transition="slide-in-left"

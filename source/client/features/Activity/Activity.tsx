@@ -39,9 +39,9 @@ export const Activity = observer(() => {
                             <ActivityDialog
                                 close={() => store.toggleDialog()}
                                 details={store.dialogEvent}
-                                isVisible={store.dialogIsVisible}
                                 loading={store.loading}
                                 setDetails={store.updateDialogEvent}
+                                visible={store.dialogVisible}
                             />
 
                             <ConfirmDialog
@@ -49,7 +49,7 @@ export const Activity = observer(() => {
                                 confirm={() =>
                                     store.dialogEvent && store.removeEvent(store.dialogEvent.id)
                                 }
-                                isVisible={store.confirmDialogIsVisible}
+                                visible={store.confirmDialogVisible}
                             >
                                 <div className="h3 mb-1">
                                     Remove event &quot;{store.dialogEvent?.title}&quot; <br /> from

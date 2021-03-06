@@ -5,19 +5,19 @@ import { date } from '@/library/utils';
 import { mapList } from 'utils';
 
 type Props = {
-    isVisible: boolean;
+    visible: boolean;
     loading?: boolean;
     details: CompletedScheduleEvent | null;
     setDetails: (details: ScheduleEvent) => void;
     close: () => void;
 };
 
-export const ActivityDialog: FC<Props> = ({ isVisible, loading, details, setDetails, close }) => {
-    const [isBodyEditing, setIsBodyEditing] = useState(false);
+export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetails, close }) => {
+    const [editing, setEditing] = useState(false);
 
     useEffect(() => {
-        if (!isVisible) setIsBodyEditing(false);
-    }, [isVisible]);
+        if (!visible) setEditing(false);
+    }, [visible]);
 
     if (!details) return null;
 
@@ -40,16 +40,16 @@ export const ActivityDialog: FC<Props> = ({ isVisible, loading, details, setDeta
 
     const body = (
         <>
-            {isBodyEditing ? (
+            {editing ? (
                 <EventForm
                     details={details}
                     completed
                     onSubmit={(updated) => {
                         setDetails(updated);
-                        setIsBodyEditing(false);
+                        setEditing(false);
                     }}
                     onCancel={() => {
-                        setIsBodyEditing(false);
+                        setEditing(false);
                     }}
                     align="end"
                     exclude={['color']}
@@ -58,7 +58,7 @@ export const ActivityDialog: FC<Props> = ({ isVisible, loading, details, setDeta
                 <Block
                     background="none"
                     onClick={() => {
-                        setIsBodyEditing(true);
+                        setEditing(true);
                     }}
                 >
                     <Event details={details} date={false} accent />
@@ -68,7 +68,7 @@ export const ActivityDialog: FC<Props> = ({ isVisible, loading, details, setDeta
     );
 
     return details ? (
-        <Dialog close={close} isVisible={isVisible} size="fullscreen" title={title}>
+        <Dialog close={close} visible={visible} size="fullscreen" title={title}>
             <div className="flex mb-1">
                 <div className="flex-1 mr-1">{body}</div>
 

@@ -21,7 +21,7 @@ export const ScheduleDialog: FC<Props> = observer(({ store }) => {
     return (
         <Dialog
             close={() => store.toggleDialog()}
-            isVisible={store.dialogIsVisible}
+            visible={store.dialogVisible}
             title={store.dialogEvent?.title ?? 'Schedule Event'}
             size="large"
         >

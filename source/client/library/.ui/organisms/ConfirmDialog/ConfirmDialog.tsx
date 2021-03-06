@@ -2,21 +2,14 @@ import React, { FC } from 'react';
 import { Button, Dialog } from '@ui';
 
 type Props = {
-    isVisible: boolean;
+    visible: boolean;
     title?: string;
     confirm: () => void;
     close: () => void;
     loading?: boolean;
 };
 
-export const ConfirmDialog: FC<Props> = ({
-    isVisible,
-    confirm,
-    close,
-    title,
-    loading,
-    children,
-}) => {
+export const ConfirmDialog: FC<Props> = ({ visible, confirm, close, title, loading, children }) => {
     const handleConfirm = async () => {
         try {
             await confirm();
@@ -31,7 +24,7 @@ export const ConfirmDialog: FC<Props> = ({
             centered
             closeIcon={false}
             close={close}
-            isVisible={isVisible}
+            visible={visible}
             title={title}
             size="large"
         >
