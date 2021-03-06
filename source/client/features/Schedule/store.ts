@@ -8,9 +8,9 @@ type ScheduleEventOrNull = ScheduleEvent | null | undefined;
 class ScheduleStore {
     events: ScheduleEventStrict[] = [];
 
-    dialogIsVisible = false;
+    dialogVisible = false;
 
-    confirmDialogIsVisible = false;
+    confirmDialogVisible = false;
 
     dialogEvent: ScheduleEventOrNull = null;
 
@@ -34,10 +34,10 @@ class ScheduleStore {
         return this.grouped.get(date.when(Date.now(), false))?.length ?? 0;
     }
 
-    toggleDialog = (event?: ScheduleEventOrNull, isVisible?: boolean) => {
+    toggleDialog = (event?: ScheduleEventOrNull, visible?: boolean) => {
         this.setDialogEvent(event);
 
-        this.dialogIsVisible = typeof isVisible === 'boolean' ? isVisible : Boolean(event);
+        this.dialogVisible = typeof visible === 'boolean' ? visible : Boolean(event);
     };
 
     openDialog = () => this.toggleDialog(null, true);
@@ -45,7 +45,7 @@ class ScheduleStore {
     toggleConfirmDialog = (event?: ScheduleEventOrNull) => {
         this.setDialogEvent(event);
 
-        this.confirmDialogIsVisible = Boolean(event);
+        this.confirmDialogVisible = Boolean(event);
     };
 
     setDialogEvent = (dialogEvent: ScheduleEventOrNull = null) => {

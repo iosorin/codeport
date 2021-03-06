@@ -21,7 +21,7 @@ export const BaseLayout: FC<Props> = ({ wide, centered, children }) => {
     return (
         <BlankLayout>
             <Observer>
-                {() => <Sidebar className={styles.sidebar} isVisible={ui.sidebarIsVisible} />}
+                {() => <Sidebar className={styles.sidebar} visible={ui.sidebarVisible} />}
             </Observer>
 
             <div className={classlist.join(' ')}>{children}</div>

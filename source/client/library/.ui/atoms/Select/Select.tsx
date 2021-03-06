@@ -16,14 +16,14 @@ export type Props = {
 };
 
 export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, onChange }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const selectHandler = (selected: ValueType) => {
         onChange(selected);
-        setIsOpen(false);
+        setOpen(false);
     };
 
-    const [ref] = useOutsideClick(() => setIsOpen(false));
+    const [ref] = useOutsideClick(() => setOpen(false));
 
     const getValue = (e: OptionType): string => {
         return typeof e === 'string' ? e : e.value;
@@ -36,11 +36,11 @@ export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, o
     return (
         <div
             ref={ref}
-            className={`${styles.select} ${isOpen ? styles.isOpen : ''}`}
+            className={`${styles.select} ${open ? styles.isOpen : ''}`}
             tabIndex={tabIndex}
         >
             {label ? <div className="label">{label}</div> : null}
-            <div className={styles.value} onClick={() => setIsOpen(!isOpen)}>
+            <div className={styles.value} onClick={() => setOpen(!open)}>
                 <span>{getTitle(value)}</span>
 
                 <span className="append">
@@ -48,7 +48,7 @@ export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, o
                 </span>
             </div>
 
-            <ul className={`${styles.options} ${isOpen ? styles.visible : ''}`}>
+            <ul className={`${styles.options} ${open ? styles.visible : ''}`}>
                 {options.map((option) => (
                     <li
                         key={getValue(option)}

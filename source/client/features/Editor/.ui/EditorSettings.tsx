@@ -14,7 +14,7 @@ export const EditorSettings: FC<Props> = ({ settings, isOpen, toggleSettings, se
     return (
         <Dialog
             close={() => toggleSettings(false)}
-            isVisible={isOpen}
+            visible={isOpen}
             title="Editor Settings"
             size="small"
         >

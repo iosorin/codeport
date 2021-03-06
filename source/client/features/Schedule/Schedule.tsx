@@ -26,7 +26,7 @@ export const Schedule: FC = observer(() => {
             <ConfirmDialog
                 close={closeConfirm}
                 confirm={handleConfirm}
-                isVisible={store.confirmDialogIsVisible}
+                visible={store.confirmDialogVisible}
             >
                 <div className="h3 mb-1">
                     Remove event &quot;{store.dialogEvent?.title}&quot; <br /> from your schedule?

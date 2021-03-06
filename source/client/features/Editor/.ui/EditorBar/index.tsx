@@ -6,24 +6,15 @@ import { EditorSettingsType } from '../../constants';
 import styles from './editor-bar.scss';
 
 type Props = {
+    visible?: boolean;
     settings: EditorSettingsType;
-    className?: string;
     toggleSettings: (show?: boolean) => void;
     toggleConsole: (show?: boolean) => void;
-    consoleIsVisible?: boolean;
 };
 
-export const EditorBar: FC<Props> = ({
-    settings,
-    consoleIsVisible,
-    className = '',
-    toggleSettings,
-    toggleConsole,
-}) => {
+export const EditorBar: FC<Props> = ({ visible, settings, toggleSettings, toggleConsole }) => {
     return (
-        <div
-            className={`${styles.container} ${className} ${consoleIsVisible ? styles.active : ''}`}
-        >
+        <div className={`${styles.container} ${visible ? styles.active : ''}`}>
             <span>{settings.mode}</span>
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>

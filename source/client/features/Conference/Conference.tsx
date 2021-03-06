@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
-import { Footer, DevicesErrorTip, ParticipantsList, ParticipantStream, LimitDialog } from './.ui';
+import { ParticipantsList, ParticipantStream, LimitDialog, Footer, DevicesErrorTip } from './.ui';
 import store from './store';
 import styles from './conference.scss';
 
@@ -13,8 +13,8 @@ type Props = {
 export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) => {
     const history = useHistory();
 
-    const home = () => history.push('/');
-    const refresh = () => history.go(0);
+    const goHome = () => history.push('/');
+    const refreshPage = () => history.go(0);
 
     useEffect(() => {
         store.setRoomID(roomID);
@@ -24,7 +24,7 @@ export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) =
 
     return (
         <div className={`${styles.panel} ${styles[mode]}`}>
-            <LimitDialog close={home} isVisible={store.limitExceed} />
+            <LimitDialog close={goHome} visible={store.limitExceed} />
 
             {store.streamError ? (
                 <DevicesErrorTip />
@@ -32,7 +32,7 @@ export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) =
                 <>
                     <ParticipantStream
                         constraints={store.constraints}
-                        isCurrentUser
+                        currentUser
                         loading={store.loading}
                         stream={store.stream}
                         toggleConstraint={store.toggleConstraint}
@@ -42,7 +42,7 @@ export const Conference: FC<Props> = observer(({ roomID = '', mode = 'list' }) =
                 </>
             )}
 
-            <Footer leave={home} length={store.peers.length + 1} refresh={refresh} />
+            <Footer leave={goHome} length={store.peers.length + 1} refresh={refreshPage} />
         </div>
     );
 });

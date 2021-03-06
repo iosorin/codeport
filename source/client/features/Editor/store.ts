@@ -12,9 +12,9 @@ class EditorStore {
 
     settings = DEFAULT_SETTINGS;
 
-    settingsIsVisible = false;
+    settingsVisible = false;
 
-    consoleIsVisible = false;
+    consoleVisible = false;
 
     constructor() {
         makeAutoObservable(this, { socket: false });
@@ -56,12 +56,12 @@ class EditorStore {
         this.roomID = value;
     };
 
-    toggleSettings = (visible = !this.settingsIsVisible) => {
-        this.settingsIsVisible = visible;
+    toggleSettings = (visible = !this.settingsVisible) => {
+        this.settingsVisible = visible;
     };
 
-    toggleConsole = (visible = !this.consoleIsVisible) => {
-        this.consoleIsVisible = visible;
+    toggleConsole = (visible = !this.consoleVisible) => {
+        this.consoleVisible = visible;
     };
 
     _setSettings = (settings: EditorSettingsType) => {

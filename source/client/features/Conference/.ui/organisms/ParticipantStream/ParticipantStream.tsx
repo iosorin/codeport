@@ -10,7 +10,7 @@ type Props = {
     peer?: PeerItem;
     constraints?: { audio: boolean; video: boolean };
     toggleConstraint?: (kind: 'audio' | 'video') => void;
-    isCurrentUser?: boolean;
+    currentUser?: boolean;
     loading?: boolean;
 };
 
@@ -20,7 +20,7 @@ export const ParticipantStream: FC<Props> = observer(
         peer,
         constraints = { audio: false, video: false },
         toggleConstraint = () => {},
-        isCurrentUser,
+        currentUser,
         loading,
     }) => {
         const el = useRef<HTMLVideoElement>(null);
@@ -48,7 +48,7 @@ export const ParticipantStream: FC<Props> = observer(
         }, [stream, peer]);
 
         return (
-            <div className={`${styles.container} ${isCurrentUser ? '' : styles.guest}`}>
+            <div className={`${styles.container} ${currentUser ? '' : styles.guest}`}>
                 {/* controls */}
                 <div className={styles.controls}>
                     <span
@@ -80,7 +80,7 @@ export const ParticipantStream: FC<Props> = observer(
                 </Transition>
 
                 {/* video ref */}
-                <video ref={el} autoPlay muted={isCurrentUser} playsInline />
+                <video ref={el} autoPlay muted={currentUser} playsInline />
             </div>
         );
     }

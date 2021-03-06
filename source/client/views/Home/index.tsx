@@ -42,7 +42,7 @@ export const HomeView: FC = observer((props) => {
 
                 <div
                     className={`${styles.conference} ${
-                        ui.conferencePanelIsVisible ? styles.visible : ''
+                        ui.conferencePanelVisible ? styles.visible : ''
                     }`}
                 >
                     <Conference roomID={uuid} />

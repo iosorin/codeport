@@ -7,7 +7,7 @@ export default {
     title: 'Atoms/Backdrop',
     component: Backdrop,
     argTypes: {
-        isVisible: { control: 'boolean' },
+        visible: { control: 'boolean' },
         onClick: { action: 'clicked' },
     },
 } as Meta;

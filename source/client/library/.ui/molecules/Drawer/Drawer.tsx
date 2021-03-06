@@ -5,7 +5,7 @@ import { Backdrop, Transition } from '@ui';
 import styles from './drawer.scss';
 
 export type Props = {
-    isVisible: boolean;
+    visible: boolean;
     title?: string | boolean;
     closeIcon?: boolean;
     persistent?: boolean;
@@ -13,7 +13,7 @@ export type Props = {
 };
 
 export const Drawer: FC<Props> = ({
-    isVisible,
+    visible,
     children,
     title = 'Drawer',
     closeIcon = true,
@@ -24,7 +24,7 @@ export const Drawer: FC<Props> = ({
         return (
             <>
                 <Backdrop
-                    isVisible={isVisible}
+                    visible={visible}
                     onClick={() => !persistent && hide()}
                     style={{ zIndex: 10 }}
                 />
@@ -37,7 +37,7 @@ export const Drawer: FC<Props> = ({
                     style={{ zIndex: 10 }}
                     tabIndex={-1}
                 >
-                    <Transition duration={400} in={isVisible} type="slide-in-left">
+                    <Transition duration={400} in={visible} type="slide-in-left">
                         <div className={styles.drawer}>
                             <div className={styles.header}>
                                 {title ? <h4 className={styles.title}>{title}</h4> : null}
