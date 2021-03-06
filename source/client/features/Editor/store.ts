@@ -1,6 +1,6 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
-import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettings } from './constants';
+import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettingsType } from './constants';
 import { api } from './api';
 
 class EditorStore {
@@ -64,11 +64,11 @@ class EditorStore {
         this.consoleIsVisible = visible;
     };
 
-    _setSettings = (settings: EditorSettings) => {
+    _setSettings = (settings: EditorSettingsType) => {
         this.settings = { ...this.settings, ...settings };
     };
 
-    setSettings = async (settings: EditorSettings = {}, fromOrigin = true) => {
+    setSettings = async (settings: EditorSettingsType = {}, fromOrigin = true) => {
         const { theme } = settings;
 
         if (theme && theme !== CODEPORT_THEME) {
@@ -94,7 +94,7 @@ class EditorStore {
             this.setValue(newValue);
         });
 
-        this.socket.on('client:editor-settings', (newSettings: EditorSettings) => {
+        this.socket.on('client:editor-settings', (newSettings: EditorSettingsType) => {
             this.setSettings(newSettings, false);
         });
     };

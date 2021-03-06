@@ -31,7 +31,7 @@
     "rules": {
         /* js */
         "eqeqeq": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "error",
         "newline-before-return": "error",
         "no-useless-return": "error",
         "linebreak-style": "off",
@@ -103,7 +103,8 @@
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-shadow": "off",
         "@typescript-eslint/ban-ts-comment": "warn",
-        "@typescript-eslint/no-namespace": "off"
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/brace-style": ["error"]
     },
     "settings": {
         "react": {

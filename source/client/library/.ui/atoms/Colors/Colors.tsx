@@ -9,7 +9,6 @@ type Props = {
     type?: 'palette' | 'single';
     trigger?: 'button' | 'color';
     size?: 'small' | 'medium' | 'large';
-    label?: string;
     active?: string;
     preset?: 'standard' | 'mini';
     onChange: (color: string) => void;
@@ -18,7 +17,6 @@ type Props = {
 export const Colors: FC<Props> = ({
     type = 'palette',
     trigger = 'color',
-    label,
     preset = 'mini',
     active = preset[0],
     size = 'medium',
@@ -46,19 +44,11 @@ export const Colors: FC<Props> = ({
 
     const button = () => {
         return trigger === 'button' ? (
-            <Button rounded hover size="small" background="light">
-                <Droplet size="20" />
-            </Button>
+            <Droplet size="17" color="white" />
         ) : (
             <Color color={active} size={size} />
         );
     };
 
-    return (
-        <div className={styles.container}>
-            {label ? <div className="label mr-1">{label}</div> : null}
-
-            {isPalette ? palette() : <Menu trigger={button()}>{palette()}</Menu>}
-        </div>
-    );
+    return isPalette ? palette() : <Menu trigger={button()}>{palette()}</Menu>;
 };

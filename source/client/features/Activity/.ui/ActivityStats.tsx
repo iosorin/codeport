@@ -7,7 +7,7 @@ type Props = {
     store: Store;
 };
 
-export const Stats: FC<Props> = observer(({ store }) => {
+export const ActivityStats: FC<Props> = observer(({ store }) => {
     return (
         <div className="grid grid--25 mb-1">
             <Block background="black" flex>

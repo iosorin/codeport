@@ -1,2 +1,2 @@
-export { ScheduleList } from './ScheduleList';
-export { ScheduleListEmpty } from './ScheduleListEmpty';
+export { ScheduleTemplate } from './ScheduleTemplate';
+export { ScheduleTemplateEmpty } from './ScheduleTemplateEmpty';

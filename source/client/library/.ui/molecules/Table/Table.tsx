@@ -1,8 +1,8 @@
-import { date, groupByProp, sortByProp } from '@/library/utils';
-import { ChevronDown, Edit3, Eye, Minus, Trash, X } from 'react-feather';
-import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react';
+import { date, groupBy, sortBy } from '@/library/utils';
+import { ChevronDown, Trash } from 'react-feather';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './table.scss';
-import { Color, Input } from '../..';
+import { Color } from '../..';
 
 type Item = {
     id: string | number;
@@ -31,7 +31,7 @@ export const Table: FC<Props> = ({
     labels: originLabels,
     sortable,
     background = 'none',
-    groupBy,
+    groupBy: groupProp,
     onTrClick,
     onDelete,
     prefixes,
@@ -55,13 +55,13 @@ export const Table: FC<Props> = ({
             sortedMap.current.set(label, 'inactive');
         });
 
-        if (groupBy) {
+        if (groupProp) {
             groupSource();
         }
     }, []);
 
     const sortSource = (prop: string) => {
-        if (groupBy) {
+        if (groupProp) {
             if (process.env.NODE_ENV === 'development') {
                 console.warn('@ui/Table - unable to sort grouped source');
             }
@@ -76,13 +76,16 @@ export const Table: FC<Props> = ({
             else map.set(key, 'inactive');
         });
 
-        setSource([...sortByProp(source, prop, toggled)]);
+        setSource([...sortBy(source, prop, toggled)]);
     };
 
     const groupSource = () => {
-        if (!groupBy || !source.length) return;
+        if (!groupProp || !source.length) return;
 
-        setSource(groupByProp(source, groupBy));
+        const map = groupBy<typeof source[0]>(source, groupProp);
+        console.error('TODO: handle groupBy map result');
+
+        // setSource(map.values());
     };
 
     const renderSortIcon = (label: string) => {
@@ -117,7 +120,7 @@ export const Table: FC<Props> = ({
                         onDelete!(item);
                     }}
                 >
-                    <Trash className="hoverable" size="14" />
+                    <Trash className="hoverable" size="15" />
                 </td>
             )
         );
@@ -218,7 +221,8 @@ export const Table: FC<Props> = ({
                                 onClick={() => onTrClick?.(item)}
                             >
                                 {labels?.map((label, index) => {
-                                    const renderLabel = label === groupBy ? itemIndex === 0 : true;
+                                    const renderLabel =
+                                        label === groupProp ? itemIndex === 0 : true;
 
                                     return renderTd(renderLabel && label, item, index);
                                 })}
@@ -240,7 +244,7 @@ export const Table: FC<Props> = ({
 
             {renderThead()}
 
-            {groupBy ? renderGroupedTbody() : renderTbody()}
+            {groupProp ? renderGroupedTbody() : renderTbody()}
         </table>
     );
 };

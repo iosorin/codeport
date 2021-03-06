@@ -25,8 +25,8 @@ export const DEFAULT_MODE = 'javascript';
 export const DEFAULT_FZ = 18;
 
 /* settings */
-export type EditorSettings = EditorConfiguration & { fontSize?: number };
-export const DEFAULT_SETTINGS: EditorSettings = {
+export type EditorSettingsType = EditorConfiguration & { fontSize?: number };
+export const DEFAULT_SETTINGS: EditorSettingsType = {
     mode: DEFAULT_MODE,
     theme: DEFAULT_THEME,
     tabSize: 4,

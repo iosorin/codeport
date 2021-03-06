@@ -36,22 +36,39 @@ export const debounce = <F extends (...args: any[]) => any>(func: F, wait = 300)
         });
 };
 
-export const sortByProp = (source: any[], prop: string, up = false) => {
+export const sortBy = (source: any[], prop: string, up = false) => {
     return source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
 };
 
-export const groupByProp = (source: any[], prop: string) => {
-    if (!source?.length) return [];
+export const reduceBy = <T>(source: T[], get: string | ((item: T) => string)) => {
+    return source.reduce((total: { [key: string]: T[] }, item) => {
+        const prop = typeof get === 'string' ? get : get(item);
 
-    return source.reduce((total, entry) => {
-        if (!total[entry[prop]]) {
-            total[entry[prop]] = [];
+        if (total[prop]) {
+            total[prop].push(item);
+        } else {
+            total[prop] = [item];
         }
-
-        total[entry[prop]].push(entry);
 
         return total;
     }, {});
+};
+
+export const groupBy = <T>(source: T[], get: string | ((item: T) => string)) => {
+    const map: Map<string, T[]> = new Map();
+
+    source.forEach((item) => {
+        const key = typeof get === 'string' ? get : get(item);
+        const collection = map.get(key);
+
+        if (!collection) {
+            map.set(key, [item]);
+        } else {
+            collection.push(item);
+        }
+    });
+
+    return map;
 };
 
 export const date = {
@@ -115,16 +132,17 @@ export const date = {
     when: (d: Date | number | undefined, showTime = true) => {
         if (!d) return '';
 
-        const options = showTime
-            ? {
-                  month: 'long',
-                  day: 'numeric',
-                  hour: 'numeric',
-                  minute: 'numeric',
-              }
-            : { month: 'long', day: 'numeric' };
-
-        return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
+        return new Intl.DateTimeFormat(
+            undefined,
+            showTime
+                ? {
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                  }
+                : { month: 'long', day: 'numeric' }
+        ).format(new Date(d));
     },
 };
 

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Slash } from 'react-feather';
 import styles from './text.scss';
 
-export const DevicesErrorText: FC = () => {
+export const DevicesErrorTip: FC = () => {
     return (
         <div className={styles.text}>
             <Slash />

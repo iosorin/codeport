@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { observer } from 'mobx-react-lite';
 import { Button, Dialog } from '@ui';
 
 type Props = {
@@ -7,7 +6,7 @@ type Props = {
     close: () => void;
 };
 
-export const ConferenceLimitDialog: FC<Props> = ({ isVisible, close }) => {
+export const LimitDialog: FC<Props> = ({ isVisible, close }) => {
     return (
         <Dialog
             centered

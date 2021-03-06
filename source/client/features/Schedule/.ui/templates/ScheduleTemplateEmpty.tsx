@@ -5,7 +5,7 @@ type Props = {
     openDialog: () => void;
 };
 
-export const ScheduleListEmpty: FC<Props> = ({ openDialog }) => {
+export const ScheduleTemplateEmpty: FC<Props> = ({ openDialog }) => {
     return (
         <div className="text-center">
             <p className="h4 text-grey mb-2">The list of scheduled events is empty</p>

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { ScheduleEvent, ScheduleEventStrict } from 'types';
-import { date, debounce } from '@/library/utils';
+import { ScheduleEvent, ScheduleEventStrict, EventWithID } from 'types';
+import { date, debounce, groupBy } from '@/library/utils';
 import { api } from './api';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
@@ -9,6 +9,8 @@ class ScheduleStore {
     events: ScheduleEventStrict[] = [];
 
     dialogIsVisible = false;
+
+    confirmDialogIsVisible = false;
 
     dialogEvent: ScheduleEventOrNull = null;
 
@@ -24,12 +26,26 @@ class ScheduleStore {
         return [...this.events].sort((a, b) => a.date - b.date);
     }
 
-    get todayEvents() {
-        return this.events.filter((event) => date.match(event.date));
+    get grouped() {
+        return groupBy<ScheduleEventStrict>(this.sorted, (event) => date.when(event.date, false));
     }
 
-    toggleDialog = (visible = !this.dialogIsVisible) => {
-        this.dialogIsVisible = visible;
+    get today() {
+        return this.grouped.get(date.when(Date.now(), false))?.length ?? 0;
+    }
+
+    toggleDialog = (event?: ScheduleEventOrNull, isVisible?: boolean) => {
+        this.setDialogEvent(event);
+
+        this.dialogIsVisible = typeof isVisible === 'boolean' ? isVisible : Boolean(event);
+    };
+
+    openDialog = () => this.toggleDialog(null, true);
+
+    toggleConfirmDialog = (event?: ScheduleEventOrNull) => {
+        this.setDialogEvent(event);
+
+        this.confirmDialogIsVisible = Boolean(event);
     };
 
     setDialogEvent = (dialogEvent: ScheduleEventOrNull = null) => {
@@ -44,27 +60,20 @@ class ScheduleStore {
         this.events = events;
     };
 
-    fetchEvents = () => {
-        return api.get().then(this.setEvents);
-    };
+    fetchEvents = () => api.get().then(this.setEvents);
 
-    createEvent = (event: ScheduleEvent) => {
-        if (!event.date) event.date = Date.now();
+    createEvent = (event: ScheduleEvent) => api.create(event).then(debounce(this.setEvents));
 
-        return api.create(event).then(debounce(this.setEvents));
-    };
+    updateEvent = (event: EventWithID<ScheduleEvent>) =>
+        api.update(event).then(debounce(this.setEvents));
 
-    updateEvent = (event: ScheduleEvent) => {
-        return api.update(event).then(debounce(this.setEvents));
-    };
-
-    removeEvent = (event: ScheduleEventStrict) => {
-        return api.delete(event.id).then(this.setEvents);
-    };
+    removeEvent = (id: string | number) => api.delete(id).then(this.setEvents);
 }
 
 const store = new ScheduleStore();
 
-export type ScheduleStoreType = typeof store;
+type ScheduleStoreType = typeof store;
+
+export { ScheduleStoreType };
 
 export default store;

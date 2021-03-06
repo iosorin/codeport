@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { PeerItem } from '@/features/Conference/store';
-import { CopyLinkText, ParticipantStream } from '../..';
+import { CopyLinkTip, ParticipantStream } from '../..';
 import styles from './participants-list.scss';
 
 type Props = {
@@ -22,7 +22,7 @@ export const ParticipantsList: FC<Props> = observer(({ peers = [] }) => {
                     ))}
                 </div>
             ) : (
-                <CopyLinkText />
+                <CopyLinkTip />
             )}
         </>
     );

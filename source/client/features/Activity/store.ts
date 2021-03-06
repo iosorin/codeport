@@ -1,20 +1,18 @@
 import { makeAutoObservable } from 'mobx';
-import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { CompletedScheduleEvent, EventWithID, ScheduleEvent } from 'types';
 import { api } from './api';
 
+type WithID = EventWithID<ScheduleEvent>;
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
-export type EventWithID = ScheduleEvent & { id: string | number };
 
 class ActivityStore {
     events: CompletedScheduleEvent[] = [];
 
-    dialogIsVisible = true;
+    dialogIsVisible = false;
 
     confirmDialogIsVisible = false;
 
-    isFetching = false;
-
-    isLoading = false;
+    loading = false;
 
     dialogEvent: CompletedScheduleEvent | null = null;
 
@@ -42,20 +40,12 @@ class ActivityStore {
         this.events = events;
     };
 
-    markFetching = (fetching: boolean) => {
-        this.isFetching = fetching;
-    };
-
     markLoading = (loading: boolean) => {
-        this.isLoading = loading;
+        this.loading = loading;
     };
 
     setDialogEvent = (dialogEvent: ActivityEventOrNull = null) => {
         this.dialogEvent = dialogEvent;
-    };
-
-    removeEvent = (id: string | number) => {
-        this.setEvents(this.events.filter((event) => event.id !== id));
     };
 
     toggleDialog = (event?: CompletedScheduleEvent | null) => {
@@ -78,36 +68,35 @@ class ActivityStore {
         this.updateEvent(this.dialogEvent);
     };
 
-    fetchEvents = () => {
-        this.markFetching(true);
+    call = (apiMethod: () => Promise<CompletedScheduleEvent[]>) => {
+        this.markLoading(true);
 
-        api.get()
+        apiMethod()
             .then((events) => {
                 this.setEvents(events);
-                this.setDialogEvent(events[0]);
             })
             .finally(() => {
-                this.markFetching(false);
+                this.markLoading(false);
             });
     };
 
-    updateEvent = (event: EventWithID) => {
-        this.markLoading(true);
+    fetchEvents = () => {
+        this.call(api.get);
+    };
 
-        api.update(event)
-            .then((events) => {
-                this.setEvents(events);
-            })
-            .finally(() => {
-                setTimeout(() => {
-                    this.markLoading(false);
-                }, 1000);
-            });
+    updateEvent = (event: WithID) => {
+        this.call(api.update.bind(null, event));
+    };
+
+    removeEvent = (id: string | number) => {
+        this.call(api.delete.bind(null, id));
     };
 }
 
 const store = new ActivityStore();
 
-export type Store = typeof store;
+type Store = typeof store;
+
+export { Store, WithID as EventWithID };
 
 export default store;

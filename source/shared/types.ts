@@ -47,3 +47,5 @@ export type CompletedScheduleEvent = ScheduleEventStrict & {
     snippets: CodeSnippet[];
     time: number; // min.
 };
+
+export type EventWithID<T> = T & { id: string | number };

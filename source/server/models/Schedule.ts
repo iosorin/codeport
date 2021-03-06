@@ -31,7 +31,7 @@ export class Schedule {
         let schedule: ScheduleEventStrict[] = await Schedule.fetch();
 
         schedule = schedule.map((ev) => {
-            if (ev.id === event?.id) {
+            if (ev.id === event.id) {
                 return { ...ev, ...event };
             }
 

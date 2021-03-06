@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
 import { ArrowUpLeft, Settings } from 'react-feather';
-import styles from './status-bar.scss';
-import { EditorSettings } from '../../constants';
-import { Tooltip } from '@ui';
 import { HOTKEYS } from '@/library/constants';
+import { Tooltip } from '@ui';
+import { EditorSettingsType } from '../../constants';
+import styles from './editor-bar.scss';
 
 type Props = {
-    settings: EditorSettings;
+    settings: EditorSettingsType;
     className?: string;
     toggleSettings: (show?: boolean) => void;
     toggleConsole: (show?: boolean) => void;
     consoleIsVisible?: boolean;
 };
 
-export const StatusBar: FC<Props> = ({
+export const EditorBar: FC<Props> = ({
     settings,
     consoleIsVisible,
     className = '',

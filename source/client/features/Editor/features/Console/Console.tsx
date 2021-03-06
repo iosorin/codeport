@@ -33,6 +33,7 @@ export const Console: FC<Props> = observer(
                     <div className="hoverable" onClick={() => store.setResults([])}>
                         clear
                     </div>
+
                     <X className="hoverable" onClick={() => toggleConsole(false)} size="16" />
                 </div>
 

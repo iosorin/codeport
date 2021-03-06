@@ -1,25 +1,30 @@
-import React, { FC, FormEvent, useState } from 'react';
-import { Dialog, EventForm, Button } from '@ui';
+import React, { FC } from 'react';
+import { Dialog, EventForm } from '@ui';
 import { ScheduleStoreType } from '../../store';
 import { observer } from 'mobx-react-lite';
 import { ScheduleEvent } from 'types';
 
 type Props = {
     store: ScheduleStoreType;
-    closeDialog: () => void;
 };
 
-export const ScheduleDialog: FC<Props> = observer(({ store, closeDialog }) => {
+export const ScheduleDialog: FC<Props> = observer(({ store }) => {
     const submitHandler = async (details: ScheduleEvent) => {
         const action = details.id ? store.updateEvent : store.createEvent;
 
+        // @ts-ignore
         await action(details);
 
-        closeDialog();
+        store.toggleDialog();
     };
 
     return (
-        <Dialog close={closeDialog} isVisible={store.dialogIsVisible} title="Schedule Event">
+        <Dialog
+            close={() => store.toggleDialog()}
+            isVisible={store.dialogIsVisible}
+            title={store.dialogEvent?.title ?? 'Schedule Event'}
+            size="large"
+        >
             <EventForm details={store.dialogEvent} onSubmit={submitHandler} exclude={['color']} />
         </Dialog>
     );

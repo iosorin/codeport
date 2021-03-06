@@ -1,2 +1,2 @@
-export { Settings } from './Settings';
-export { StatusBar } from './StatusBar/StatusBar';
+export { EditorBar } from './EditorBar';
+export { EditorSettings } from './EditorSettings';
