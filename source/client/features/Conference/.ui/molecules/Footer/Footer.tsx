@@ -19,7 +19,7 @@ export const Footer: FC<Props> = ({ length, leave, refresh }) => {
             </div>
 
             <div className="flex-end">
-                <Button size="small" onClick={leave} hover>
+                <Button size="small" onClick={leave} hover background="grey">
                     Leave
                 </Button>
 

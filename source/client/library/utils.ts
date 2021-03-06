@@ -129,20 +129,24 @@ export const date = {
         return dates;
     },
 
-    when: (d: Date | number | undefined, showTime = true) => {
+    when: (d: Date | number | undefined, showTime = true, showDay = true) => {
         if (!d) return '';
 
-        return new Intl.DateTimeFormat(
-            undefined,
-            showTime
-                ? {
-                      month: 'long',
-                      day: 'numeric',
-                      hour: 'numeric',
-                      minute: 'numeric',
-                  }
-                : { month: 'long', day: 'numeric' }
-        ).format(new Date(d));
+        const options: Intl.DateTimeFormatOptions = {
+            hour12: true,
+        };
+
+        if (showDay) {
+            options.month = 'long';
+            options.day = 'numeric';
+        }
+
+        if (showTime || !showDay) {
+            options.hour = 'numeric';
+            options.minute = 'numeric';
+        }
+
+        return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
     },
 };
 

@@ -9,7 +9,7 @@ export type Props = {
     size?: 'small' | 'medium' | 'large';
     color?: 'white' | 'black';
     hover?: boolean;
-    background?: 'primary' | 'secondary' | 'success' | 'light' | 'grey';
+    background?: 'primary' | 'secondary' | 'success' | 'light' | 'grey' | 'dark';
     shadow?: 'dark' | 'light' | false;
     zoom?: boolean;
     rounded?: boolean;

@@ -12,7 +12,7 @@ type Props = {
 export const Snippets: FC<Props> = ({ snippets, loading, onSave }) => {
     return (
         <div className="flex-col fill">
-            <Block background="light" flex p0>
+            <Block background="light" flex size="small">
                 {snippets.length ? (
                     <Carousel align="end" navigation="arrows" navigationDisabled={loading}>
                         {snippets.map((snippet) => (

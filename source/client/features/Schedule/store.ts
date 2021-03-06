@@ -22,17 +22,28 @@ class ScheduleStore {
         return !this.events.length;
     }
 
-    get sorted() {
-        return [...this.events].sort((a, b) => a.date - b.date);
+    get active() {
+        return this.group(
+            [...this.events]
+                .sort((a, b) => a.date - b.date)
+                .filter((event) => event.date >= Date.now())
+        );
     }
 
-    get grouped() {
-        return groupBy<ScheduleEventStrict>(this.sorted, (event) => date.when(event.date, false));
+    get expired() {
+        return this.group(
+            [...this.events]
+                .sort((a, b) => b.date - a.date)
+                .filter((event) => event.date < Date.now())
+        );
     }
 
     get today() {
-        return this.grouped.get(date.when(Date.now(), false))?.length ?? 0;
+        return this.active.get(date.when(Date.now(), false))?.length ?? 0;
     }
+
+    group = (events: ScheduleEventStrict[]) =>
+        groupBy<ScheduleEventStrict>(events, (event) => date.when(event.date, false));
 
     toggleDialog = (event?: ScheduleEventOrNull, visible?: boolean) => {
         this.setDialogEvent(event);
@@ -52,8 +63,8 @@ class ScheduleStore {
         this.dialogEvent = dialogEvent;
     };
 
-    updateDialogEvent = (props: ScheduleEvent) => {
-        this.setDialogEvent({ ...this.dialogEvent, ...props });
+    updateDialogEvent = (details: ScheduleEvent) => {
+        this.setDialogEvent({ ...this.dialogEvent, ...details });
     };
 
     setEvents = (events: ScheduleEventStrict[]) => {
@@ -62,7 +73,12 @@ class ScheduleStore {
 
     fetchEvents = () => api.get().then(this.setEvents);
 
-    createEvent = (event: ScheduleEvent) => api.create(event).then(debounce(this.setEvents));
+    createEvent = (event: ScheduleEvent) => {
+        if (!event.date) event.date = date.addDays(1);
+        if (!event.color) event.color = '#ffeb3b';
+
+        return api.create(event).then(debounce(this.setEvents));
+    };
 
     updateEvent = (event: EventWithID<ScheduleEvent>) =>
         api.update(event).then(debounce(this.setEvents));

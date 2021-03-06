@@ -36,12 +36,7 @@ export const Menu: FC<Props> = ({
     };
 
     return (
-        <div
-            ref={ref}
-            className={`${visible ? '' : 'hoverable'} ${styles.container} ${
-                showOnHover ? styles.hover : ''
-            }`}
-        >
+        <div ref={ref} className={`${styles.container} ${showOnHover ? styles.hover : ''}`}>
             <div className={styles.trigger} onClick={handleTriggerClick}>
                 {trigger || <MoreHorizontal size="15" />}
             </div>

@@ -7,9 +7,7 @@ export const ScheduleView: FC = () => {
         <BaseLayout>
             <h1>Schedule</h1>
 
-            <div className="container">
-                <Schedule />
-            </div>
+            <Schedule />
         </BaseLayout>
     );
 };

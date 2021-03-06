@@ -1,3 +1,5 @@
+$margin: 0.5rem;
+
 .colors {
     display: flex;
     flex-wrap: wrap;
@@ -5,32 +7,30 @@
     margin: $input-margin;
 
     &.outer {
-        padding: 1rem 1rem 0.5rem;
+        padding: $margin / 2;
         background: white;
         border-radius: $radius;
         box-shadow: $shadow-2;
-        justify-content: flex-start;
+        justify-content: space-between;
         margin-top: 0.5rem;
+        max-width: 268px;
+        &::after {
+            content: '';
+            flex: 1;
+            order: 2;
+        }
     }
 
     .color {
         cursor: pointer;
-        margin-bottom: 0.5rem;
-        transition: transform 0.3s $ease-2;
-
-        &:not(:last-child) {
-            margin-right: 1rem;
-            &.small {
-                margin-right: 0.5rem;
-            }
-        }
+        margin: $margin;
+        transition: transform $tr;
 
         &:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
-
         &.active {
-            transform: scale(1.25);
+            transform: scale(1.2);
         }
     }
 }
@@ -41,18 +41,23 @@
     border: $border;
     border-radius: 50%;
 
-    &.small {
+    &.dot {
         width: 8px;
         height: 8px;
     }
 
-    &.medium {
+    &.small {
         width: 16px;
         height: 16px;
     }
 
-    &.large {
+    &.medium {
         width: 20px;
         height: 20px;
+    }
+
+    &.large {
+        width: 24px;
+        height: 24px;
     }
 }

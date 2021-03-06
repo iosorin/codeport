@@ -72,6 +72,7 @@ export const Console: FC<Props> = observer(({ code, language, setEditorValue, to
                 <div className={styles.Version}>{store.languageInfo.version}</div>
 
                 <Button
+                    background="dark"
                     hover
                     loading={store.loading}
                     onClick={() => store.execute(code, language)}
