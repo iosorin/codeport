@@ -1,39 +1,37 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ScheduleEvent } from 'types';
 import { ScheduleDialog } from './.ui/organisms/ScheduleDialog';
-import { ScheduleList, ScheduleListEmpty } from './.ui/templates';
+import { ScheduleTemplate, ScheduleTemplateEmpty } from './.ui/templates';
 import store from './store';
+import { ConfirmDialog } from '@/library/.ui';
 
 export const Schedule: FC = observer(() => {
     useEffect(() => {
         store.fetchEvents();
     }, []);
 
-    const openDialog = (event: ScheduleEvent | null = null) => {
-        store.setDialogEvent(event);
-        store.toggleDialog(true);
-    };
-
-    const closeDialog = () => {
-        store.setDialogEvent(null);
-        store.toggleDialog(false);
-    };
+    const closeConfirm = () => store.toggleConfirmDialog();
+    const handleConfirm = () => store.dialogEvent?.id && store.removeEvent(store.dialogEvent.id);
 
     return (
         <>
             {store.empty ? (
-                <ScheduleListEmpty openDialog={() => openDialog()} />
+                <ScheduleTemplateEmpty openDialog={store.openDialog} />
             ) : (
-                <ScheduleList
-                    events={store.sorted}
-                    openDialog={openDialog}
-                    removeEvent={store.removeEvent}
-                    todayEvents={store.todayEvents}
-                />
+                <ScheduleTemplate store={store} />
             )}
 
-            <ScheduleDialog closeDialog={closeDialog} store={store} />
+            <ScheduleDialog store={store} />
+
+            <ConfirmDialog
+                close={closeConfirm}
+                confirm={handleConfirm}
+                isVisible={store.confirmDialogIsVisible}
+            >
+                <div className="h3 mb-1">
+                    Remove event &quot;{store.dialogEvent?.title}&quot; <br /> from your schedule?
+                </div>
+            </ConfirmDialog>
         </>
     );
 });

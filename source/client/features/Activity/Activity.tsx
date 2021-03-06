@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ConfirmDialog, EventsChart, Table } from '@ui';
-import { Stats, EventDialog } from './.ui';
+import { ActivityStats, ActivityDialog } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
@@ -12,7 +12,7 @@ export const Activity = observer(() => {
     return (
         <>
             <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
-                <Stats store={store} />
+                <ActivityStats store={store} />
 
                 <div className="flex-col-reverse mt-2">
                     {!store.empty && (
@@ -36,11 +36,11 @@ export const Activity = observer(() => {
                                 source={store.events}
                             />
 
-                            <EventDialog
+                            <ActivityDialog
                                 close={() => store.toggleDialog()}
                                 details={store.dialogEvent}
-                                isLoading={store.isLoading}
                                 isVisible={store.dialogIsVisible}
+                                loading={store.loading}
                                 setDetails={store.updateDialogEvent}
                             />
 

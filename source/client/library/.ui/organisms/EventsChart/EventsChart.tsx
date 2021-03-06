@@ -39,7 +39,7 @@ export const EventsChart: FC<Props> = ({ size = 15, height = 250, events: source
     return (
         <div
             style={{
-                width: 'calc(100% + 51px)',
+                width: 'calc(100% + 50px)',
                 height,
                 marginLeft: -50,
             }}

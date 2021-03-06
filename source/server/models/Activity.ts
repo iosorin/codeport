@@ -15,7 +15,7 @@ export class Activity {
         let events = await Activity.fetch();
 
         events = events.map((ev) => {
-            if (ev.id === event?.id) {
+            if (ev.id === event.id) {
                 return { ...ev, ...event };
             }
 

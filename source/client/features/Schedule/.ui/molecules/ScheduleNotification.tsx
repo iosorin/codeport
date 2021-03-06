@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import styles from './ScheduleNotification.scss';
 
 type Props = {
-    count?: number | null | undefined;
+    todayLength?: number | null | undefined;
 };
 
-export const ScheduleNotification: FC<Props> = ({ count }) => {
+export const ScheduleNotification: FC<Props> = ({ todayLength: count }) => {
     const isBusy = count && count > 0 && count <= 3;
     const isTooBusy = count && count > 3;
 

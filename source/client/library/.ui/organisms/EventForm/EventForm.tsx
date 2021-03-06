@@ -10,7 +10,7 @@ type Props = {
     completed?: boolean;
     align?: 'start' | 'center' | 'end';
     exclude?: ('title' | 'rating' | 'color' | 'date' | 'main')[];
-    onSubmit: (event: ScheduleEvent) => void;
+    onSubmit: (event: ScheduleEvent) => void | Promise<any>;
     onCancel?: () => void;
 };
 
@@ -22,20 +22,30 @@ export const EventForm: FC<Props> = ({
     onSubmit,
     onCancel,
 }) => {
-    const [isLoading, setisLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [details, setDetails] = useState<ScheduleEventOrNull>({ ...source });
+
+    const showTitle = !exclude?.includes('title');
+    const showColor = !exclude?.includes('color');
+    const showMain = !exclude?.includes('main');
+    const showDate = !completed && !exclude?.includes('date');
+    const showRating = completed && !exclude?.includes('rating');
 
     const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!details) return;
 
-        setisLoading(true);
+        setLoading(true);
 
         try {
+            if (!completed && !exclude?.includes('date') && !details.date) {
+                setDetails({ date: date.addDays(1) });
+            }
+
             await onSubmit(details);
         } finally {
-            setisLoading(false);
+            setLoading(false);
         }
     };
 
@@ -46,11 +56,11 @@ export const EventForm: FC<Props> = ({
     return (
         <form onSubmit={submitHandler}>
             <div className="flex-col">
-                {!exclude?.includes('color') && details?.color && (
+                {showColor && (
                     <Colors active={details?.color} onChange={(color) => set({ color })} />
                 )}
 
-                {!exclude?.includes('title') && (
+                {showTitle && (
                     <Input
                         label="Title"
                         onChange={(e) => set({ title: e.currentTarget.value })}
@@ -60,7 +70,7 @@ export const EventForm: FC<Props> = ({
                     />
                 )}
 
-                {completed && !exclude?.includes('rating') && (
+                {showRating && (
                     <div>
                         <Emojis
                             label="Rating"
@@ -70,7 +80,7 @@ export const EventForm: FC<Props> = ({
                     </div>
                 )}
 
-                {!completed && !exclude?.includes('date') && (
+                {showDate && (
                     <Input
                         label="Date"
                         onChange={(e) =>
@@ -79,10 +89,11 @@ export const EventForm: FC<Props> = ({
                             })
                         }
                         type="datetime-local"
+                        min={date.input(Date.now())}
                         value={date.input(details?.date)}
                     />
                 )}
-                {!exclude?.includes('main') && (
+                {showMain && (
                     <>
                         <Input
                             label="Stack"
@@ -117,7 +128,7 @@ export const EventForm: FC<Props> = ({
                 <div className={`flex-${align} mt-2`}>
                     <Button
                         background="success"
-                        loading={isLoading}
+                        loading={loading}
                         type="submit"
                         size={onCancel ? 'medium' : 'large'}
                         zoom={!onCancel}

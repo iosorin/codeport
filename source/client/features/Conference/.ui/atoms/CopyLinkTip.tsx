@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './text.scss';
 
-export const CopyLinkText = () => {
+export const CopyLinkTip = () => {
     return (
         <div className={styles.text}>
             <h4 className="text-center text-grey" style={{ marginTop: 70 }}>

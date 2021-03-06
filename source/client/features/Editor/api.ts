@@ -1,5 +1,5 @@
 import { debounce, ls } from '@/library/utils';
-import { EditorSettings } from './constants';
+import { EditorSettingsType } from './constants';
 
 const dbLs = debounce(ls, 250);
 const title = process.env.TITLE;
@@ -17,7 +17,7 @@ export const api = {
         return ls(`${title}-editor-settings`);
     },
 
-    set settings(settings: EditorSettings) {
+    set settings(settings: EditorSettingsType) {
         dbLs(`${title}-editor-settings`, settings, true);
     },
 };

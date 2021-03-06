@@ -1,2 +1,2 @@
-export { CopyLinkText } from './CopyLinkText';
-export { DevicesErrorText } from './DevicesErrorText';
+export { CopyLinkTip } from './CopyLinkTip';
+export { DevicesErrorTip } from './DevicesErrorTip';

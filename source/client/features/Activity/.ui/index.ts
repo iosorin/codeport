@@ -1,2 +1,2 @@
-export { EventDialog } from './EventDialog';
-export { Stats } from './Stats';
+export { ActivityDialog } from './ActivityDialog';
+export { ActivityStats } from './ActivityStats';

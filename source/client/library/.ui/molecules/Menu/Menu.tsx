@@ -30,17 +30,17 @@ export const Menu: FC<Props> = ({
         setIsVisible(!isVisible);
     };
 
-    const handleActionClick = (action: () => void) => {
+    const handleClick = (cb: () => void) => {
         setIsVisible(false);
-        action();
+        cb();
     };
 
     return (
         <div
+            ref={ref}
             className={`${isVisible ? '' : 'hoverable'} ${styles.container} ${
                 showOnHover ? styles.hover : ''
             }`}
-            ref={ref}
         >
             <div className={styles.trigger} onClick={handleTriggerClick}>
                 {trigger || <MoreHorizontal size="15" />}
@@ -50,17 +50,19 @@ export const Menu: FC<Props> = ({
                 {children}
 
                 {onEdit && (
-                    <div className={styles.option} onClick={() => handleActionClick(onEdit)}>
+                    <div className={styles.option} onClick={() => handleClick(onEdit)}>
                         Edit <Edit size="14" />
                     </div>
                 )}
+
                 {onDetails && (
-                    <div className={styles.option} onClick={() => handleActionClick(onDetails)}>
+                    <div className={styles.option} onClick={() => handleClick(onDetails)}>
                         Details <Eye size="14" />
                     </div>
                 )}
+
                 {onDelete && (
-                    <div className={styles.option} onClick={() => handleActionClick(onDelete)}>
+                    <div className={styles.option} onClick={() => handleClick(onDelete)}>
                         Delete <Trash size="14" />
                     </div>
                 )}

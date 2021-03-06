@@ -1,19 +1,23 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { CompletedScheduleEvent, ScheduleEvent } from 'types';
-import { Color, Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
+import { Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
 import { date } from '@/library/utils';
 import { mapList } from 'utils';
 
 type Props = {
     isVisible: boolean;
-    isLoading?: boolean;
+    loading?: boolean;
     details: CompletedScheduleEvent | null;
     setDetails: (details: ScheduleEvent) => void;
     close: () => void;
 };
 
-export const EventDialog: FC<Props> = ({ isVisible, isLoading, details, setDetails, close }) => {
+export const ActivityDialog: FC<Props> = ({ isVisible, loading, details, setDetails, close }) => {
     const [isBodyEditing, setIsBodyEditing] = useState(false);
+
+    useEffect(() => {
+        if (!isVisible) setIsBodyEditing(false);
+    }, [isVisible]);
 
     if (!details) return null;
 
@@ -70,7 +74,7 @@ export const EventDialog: FC<Props> = ({ isVisible, isLoading, details, setDetai
 
                 <div className="flex-1 ml-1">
                     <Snippets
-                        loading={isLoading}
+                        loading={loading}
                         snippets={details.snippets}
                         onSave={(snippet) =>
                             setDetails({ snippets: mapList(details.snippets, snippet) })

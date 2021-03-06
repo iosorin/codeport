@@ -7,12 +7,17 @@
     height: 100%;
 }
 
+.default {
+    cursor: default !important;
+}
+
 .pointer {
-    cursor: pointer;
+    cursor: pointer !important;
     pointer-events: all;
 }
 
 .pointerless {
+    cursor: default !important;
     pointer-events: none !important;
 }
 

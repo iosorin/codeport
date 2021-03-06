@@ -17,6 +17,15 @@ export const ConfirmDialog: FC<Props> = ({
     loading,
     children,
 }) => {
+    const handleConfirm = async () => {
+        try {
+            await confirm();
+            close();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <Dialog
             centered
@@ -30,7 +39,7 @@ export const ConfirmDialog: FC<Props> = ({
                 {children}
 
                 <div className="list flex-center mt-2">
-                    <Button onClick={confirm} background="success" loading={loading} zoom>
+                    <Button onClick={handleConfirm} background="success" loading={loading} zoom>
                         Confirm
                     </Button>
 

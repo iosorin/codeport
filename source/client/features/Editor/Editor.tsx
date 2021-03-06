@@ -7,7 +7,7 @@ import 'codemirror/addon/edit/closetag';
 import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/keymap/sublime';
-import { Settings, StatusBar } from './.ui';
+import { EditorSettings, EditorBar } from './.ui';
 import { Console } from './features/Console';
 import store from './store';
 import styles from './editor.scss';
@@ -38,7 +38,7 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
         <div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
             <Codemirror onChange={onChange} options={store.settings} value={store.value} />
 
-            <Settings
+            <EditorSettings
                 isOpen={store.settingsIsVisible}
                 setSettings={store.setSettings}
                 settings={store.settings}
@@ -54,7 +54,7 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                     toggleConsole={store.toggleConsole}
                 />
 
-                <StatusBar
+                <EditorBar
                     consoleIsVisible={store.consoleIsVisible}
                     settings={store.settings}
                     toggleConsole={store.toggleConsole}

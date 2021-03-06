@@ -30,7 +30,7 @@ class ConferenceStore {
 
     limitExceed = false;
 
-    isLoading = false;
+    loading = false;
 
     constructor() {
         makeAutoObservable(this, {
@@ -60,7 +60,7 @@ class ConferenceStore {
     };
 
     setLoading = (loading = false) => {
-        this.isLoading = loading;
+        this.loading = loading;
     };
 
     setPeers = (peers: PeerItem[]) => {
