@@ -49,31 +49,14 @@ export const Carousel: FC<Props> = ({
 
     const renderArrows = () => {
         return (
-            <div className="flex-start">
-                <Button
-                    rounded
-                    background="grey"
-                    color="black"
-                    size="small"
-                    hover
-                    onClick={() => move('backward')}
-                    disabled={currentIndex === 0}
-                >
-                    <ChevronLeft className="hoverable" size="17" />
-                </Button>
+            <div className={styles.arrows}>
+                <div className={`${currentIndex === 0 ? 'disabled' : ''}`}>
+                    <ChevronLeft className="hoverable" size="17" onClick={() => move('backward')} />
+                </div>
 
-                <Button
-                    rounded
-                    background="grey"
-                    color="black"
-                    size="small"
-                    hover
-                    className="ml-xs"
-                    onClick={() => move('forward')}
-                    disabled={currentIndex === items.length - 1}
-                >
-                    <ChevronRight className="hoverable" size="17" />
-                </Button>
+                <div className={`ml-1 ${currentIndex === items.length - 1 ? 'disabled' : ''}`}>
+                    <ChevronRight className="hoverable" size="17" onClick={() => move('forward')} />
+                </div>
             </div>
         );
     };

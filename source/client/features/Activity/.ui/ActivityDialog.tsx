@@ -31,9 +31,8 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
                 <Colors
                     active={details.color}
                     onChange={(color) => setDetails({ color })}
-                    type="single"
-                    size="large"
-                ></Colors>
+                    trigger="color"
+                />
             </div>
         </>
     );
@@ -56,6 +55,7 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
                 />
             ) : (
                 <Block
+                    size="small"
                     background="none"
                     onClick={() => {
                         setEditing(true);

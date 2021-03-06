@@ -1,9 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ScheduleDialog } from './.ui/organisms/ScheduleDialog';
-import { ScheduleTemplate, ScheduleTemplateEmpty } from './.ui/templates';
-import store from './store';
 import { ConfirmDialog } from '@/library/.ui';
+import { ScheduleHeading, ScheduleList, ScheduleDialog, Calendar } from './.ui/organisms';
+import store from './store';
 
 export const Schedule: FC = observer(() => {
     useEffect(() => {
@@ -15,10 +14,20 @@ export const Schedule: FC = observer(() => {
 
     return (
         <>
-            {store.empty ? (
-                <ScheduleTemplateEmpty openDialog={store.openDialog} />
-            ) : (
-                <ScheduleTemplate store={store} />
+            <div className={`${store.empty ? 'my-auto' : ''}`}>
+                <ScheduleHeading store={store} />
+            </div>
+
+            {!store.empty && (
+                <div className="flex mt-3">
+                    <div className="flex-1 mr-3">
+                        <ScheduleList store={store} />
+
+                        <ScheduleList expired store={store} />
+                    </div>
+
+                    <Calendar />
+                </div>
             )}
 
             <ScheduleDialog store={store} />

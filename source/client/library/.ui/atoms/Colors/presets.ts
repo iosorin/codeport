@@ -1,12 +1,10 @@
-const standard = [
+const standard1 = [
     '#AEB0B9',
     '#D99C9C',
     '#D9A9C4',
     '#C4AED1',
     '#A5AAD1',
     '#93B4D5',
-    '#96BEC7',
-    '#93C6C1',
     '#ABBC94',
     '#C4CB86',
     '#E0C194',
@@ -29,7 +27,13 @@ const mini = [
     '#EA9CBF',
 ];
 
-const prev = ['#161616', '#6c67f4', '#ecfa1c', '#ff6150', '#3ee97f'];
+// const standard = ['#161616', '#6c67f4', '#ecfa1c', '#ff6150', '#3ee97f'];
+// const standard = ['#f4f1de', '#e07a5f', '#3d405b', '#81b29a', '#f2cc8f'];
+// const standard = ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'];
+// const standard
+const standard = ['#ef476f', '#ee7d62', '#ffd166', '#69fa8f', '#7190ff', '#a986ff'];
+
+// const standard = ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'];
 
 export default {
     standard,

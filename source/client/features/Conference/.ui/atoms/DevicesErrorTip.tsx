@@ -7,7 +7,7 @@ export const DevicesErrorTip: FC = () => {
         <div className={styles.text}>
             <Slash />
 
-            <h4 className="my-2">
+            <h5 className="my-2">
                 Check your camera <br />
                 and microphone{' '}
                 <a
@@ -16,7 +16,7 @@ export const DevicesErrorTip: FC = () => {
                 >
                     permissions
                 </a>
-            </h4>
+            </h5>
         </div>
     );
 };

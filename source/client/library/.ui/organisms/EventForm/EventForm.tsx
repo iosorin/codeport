@@ -39,10 +39,6 @@ export const EventForm: FC<Props> = ({
         setLoading(true);
 
         try {
-            if (!completed && !exclude?.includes('date') && !details.date) {
-                setDetails({ date: date.addDays(1) });
-            }
-
             await onSubmit(details);
         } finally {
             setLoading(false);
@@ -52,12 +48,15 @@ export const EventForm: FC<Props> = ({
     const set = (updated: ScheduleEvent) => {
         setDetails({ ...details, ...updated });
     };
-
     return (
         <form onSubmit={submitHandler}>
             <div className="flex-col">
                 {showColor && (
-                    <Colors active={details?.color} onChange={(color) => set({ color })} />
+                    <Colors
+                        active={details?.color}
+                        onChange={(color) => set({ color })}
+                        size="small"
+                    />
                 )}
 
                 {showTitle && (

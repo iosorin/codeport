@@ -1,1 +1,1 @@
-export { ScheduleNotification } from './ScheduleNotification';
+export { ScheduleTodayEvents } from './ScheduleTodayEvents';

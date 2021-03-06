@@ -51,14 +51,21 @@
 
     &.grey {
         background: $grey;
+        &.hover:hover {
+            color: $black;
+        }
+    }
+
+    &.dark {
+        background: $black-darken;
     }
 
     // size -------------------------------------------------------------
     &.small {
         font-size: 0.8rem;
         letter-spacing: 0.1px;
-        height: 1.9rem;
-        padding: 0 20px 0.5px;
+        height: 1.8rem;
+        padding: 0 1.2rem 0.5px;
         font-weight: 600;
 
         &.rounded {
@@ -87,9 +94,9 @@
     }
 
     &.large {
-        font-size: 1.1rem;
-        height: 3.1rem;
-        padding: 0 2rem;
+        font-size: 1rem;
+        height: 2.6rem;
+        padding: 0 2rem 2px;
 
         &.rounded {
             width: 50px;
@@ -158,6 +165,7 @@
             &:not(:hover) {
                 background: transparent !important;
             }
+
             &:hover:not(:active) {
                 border: 2px solid;
             }
@@ -167,8 +175,7 @@
     &.hover {
         transition: background-color $tr;
 
-        &:not(:hover),
-        &:active {
+        &:not(:hover) {
             background-color: transparent;
         }
     }

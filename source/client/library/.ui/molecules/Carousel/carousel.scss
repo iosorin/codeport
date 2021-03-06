@@ -19,11 +19,14 @@
         @include invisible;
     }
 }
-
 .navigation {
     z-index: 2;
     margin-top: auto;
-    padding: 0.5rem;
+}
+
+.arrows {
+    display: flex;
+    line-height: 0;
 }
 
 .dot {

@@ -189,7 +189,7 @@ export const Table: FC<Props> = ({
 
                             {color && (
                                 <td className={styles.color}>
-                                    <Color color={item[color] as string} size="small" />
+                                    <Color color={item[color] as string} size="dot" />
                                 </td>
                             )}
 

@@ -6,7 +6,7 @@ $font-size: 14px;
 /* colors */
 
 $black: #202020;
-$black-lighten: lighten($black, 5%);
+$black-lighten: lighten($black, 3.5%);
 $black-darken: darken($black, 4%);
 $light: #f6f6f6;
 
@@ -45,7 +45,7 @@ $ease-3: cubic-bezier(0.22, 0.61, 0.36, 1);
 $tr: 0.22s $ease-1;
 
 /* $block */
-$block-fz: 0.9em;
+$block-fz: 0.9rem;
 $block-ff: $sans-serif;
 
 /* button */
@@ -105,7 +105,7 @@ $editor-status-bar-justify: flex-start;
 $editor-status-bar-opacity: 0.5;
 $editor-status-bar-padding: 10px $small-footer-padding-x;
 $editor-console-padding: 4px $small-footer-padding-x;
-$editor-console-fz: 0.75em;
+$editor-console-fz: 0.7em;
 
 /* conference */
 $call-panel-default-background: $black;

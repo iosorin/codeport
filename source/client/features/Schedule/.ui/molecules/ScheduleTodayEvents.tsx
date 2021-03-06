@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import styles from './ScheduleNotification.scss';
+import styles from './schedule-today-events.scss';
 
 type Props = {
-    todayLength?: number | null | undefined;
+    today: number | null | undefined;
 };
 
-export const ScheduleNotification: FC<Props> = ({ todayLength: count }) => {
-    const isBusy = count && count > 0 && count <= 3;
-    const isTooBusy = count && count > 3;
+export const ScheduleTodayEvents: FC<Props> = ({ today }) => {
+    const isBusy = today && today > 0 && today <= 3;
+    const isTooBusy = today && today > 3;
 
     const classlist = [styles.container];
 
@@ -18,7 +18,7 @@ export const ScheduleNotification: FC<Props> = ({ todayLength: count }) => {
         <div className={classlist.join(' ')}>
             <p className="text-left">
                 {isBusy || isTooBusy
-                    ? `Today you have ${count} scheduled event ${isTooBusy ? '🔥 🔥' : '🤞'}`
+                    ? `Today you have ${today} scheduled event ${isTooBusy ? '🔥 🔥' : '🤞'}`
                     : "You don't have any events scheduled for today"}
             </p>
         </div>

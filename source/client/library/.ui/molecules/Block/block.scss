@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     border-radius: $radius;
+    position: relative;
+    overflow: hidden;
 
     &:hover {
         .controls {
@@ -12,28 +14,21 @@
 
     // size
     &.small {
-        padding: 14px 17px;
-        &.styled {
-            font-size: $block-fz / 1.1;
-        }
+        padding: 1rem 1.2rem 1.2rem;
 
         .header {
-            margin-bottom: 7px;
-        }
-        .footer {
-            span,
-            small {
-                margin-top: 10px;
+            h4 {
+                font-size: $block-fz * 1.2;
             }
         }
     }
 
     &.medium {
-        padding: 20px 25px;
+        padding: 1.3rem 1.5rem;
     }
 
     &.large {
-        padding: 22px 25px;
+        padding: 1.5rem 2rem;
         font-size: $block-fz * 1.1;
     }
 
@@ -76,8 +71,8 @@
     }
 
     &.dark {
-        background: $black;
-        border-color: $black;
+        background: $black-lighten;
+        border-color: $black-lighten;
     }
 
     &.primary {
@@ -149,17 +144,6 @@
             margin-top: initial;
         }
     }
-
-    &.p0 {
-        padding: 0;
-    }
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    line-height: 1;
 }
 
 .content {
@@ -174,6 +158,12 @@
 
     span {
         font-size: 1.4rem;
+        line-height: 0;
+    }
+
+    span,
+    small {
+        margin-top: 0.8rem;
     }
 
     .controls {
@@ -182,15 +172,24 @@
     }
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 1;
+    h4 {
+        margin-bottom: 0.8rem;
+    }
+}
+
 .controls {
-    position: absolute;
-    right: 0;
-    top: 0px;
     display: flex;
     opacity: 0;
     transition: opacity $tr;
+    margin-left: auto;
+    margin-bottom: 0.3rem;
 
     button + button {
-        margin-left: 5px;
+        margin-left: 0.3rem;
     }
 }
