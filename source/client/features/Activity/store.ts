@@ -1,8 +1,7 @@
 import { makeAutoObservable } from 'mobx';
-import { CompletedScheduleEvent, EventWithID, ScheduleEvent } from 'types';
+import { CompletedScheduleEvent, ParamRequired, ScheduleEvent } from 'types';
 import { api } from './api';
 
-type WithID = EventWithID<ScheduleEvent>;
 type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
 
 class ActivityStore {
@@ -84,7 +83,7 @@ class ActivityStore {
         this.call(api.get);
     };
 
-    updateEvent = (event: WithID) => {
+    updateEvent = (event: ParamRequired<ScheduleEvent, 'id'>) => {
         this.call(api.update.bind(null, event));
     };
 
@@ -97,6 +96,6 @@ const store = new ActivityStore();
 
 type Store = typeof store;
 
-export { Store, WithID as EventWithID };
+export { Store };
 
 export default store;
