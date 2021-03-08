@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ScheduleEvent, ScheduleEventStrict, EventWithID } from 'types';
+import { ScheduleEvent, ScheduleEventStrict, ParamRequired } from 'types';
 import { date, debounce, groupBy } from '@/library/utils';
 import { api } from './api';
 
@@ -80,7 +80,7 @@ class ScheduleStore {
         return api.create(event).then(debounce(this.setEvents));
     };
 
-    updateEvent = (event: EventWithID<ScheduleEvent>) =>
+    updateEvent = (event: ParamRequired<ScheduleEvent, 'id'>) =>
         api.update(event).then(debounce(this.setEvents));
 
     removeEvent = (id: string | number) => api.delete(id).then(this.setEvents);

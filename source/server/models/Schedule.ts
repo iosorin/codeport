@@ -1,6 +1,7 @@
 import path from 'path';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
 import { read, write } from '../utils/fs';
+import { Notification } from './Notification';
 
 const schedulePath = path.join(__dirname, '..', '..', '..', 'data', 'schedule.json');
 
@@ -21,6 +22,8 @@ export class Schedule {
 
     static async create(scheduleEvent: ScheduleEvent) {
         const schedule: ScheduleEventStrict[] = await Schedule.fetch();
+
+        if (scheduleEvent.date) Notification.toQueue('scheduled', scheduleEvent);
 
         schedule.push({ ...Schedule.template, ...scheduleEvent, id: Date.now() });
 
