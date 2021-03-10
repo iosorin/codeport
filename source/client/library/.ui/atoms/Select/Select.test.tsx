@@ -1,9 +1,9 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { OptionType, Select } from '.';
+import { Select } from '.';
 
-const options: OptionType[] = [{ value: '1' }, { value: '2' }, { value: '3' }];
+const options = [{ value: '1' }, { value: '2' }, { value: '3' }];
 
 const onChange = jest.fn();
 
@@ -36,3 +36,5 @@ describe('<Select />', () => {
         expect(onChange).toHaveBeenLastCalledWith({ value: '2' });
     });
 });
+
+/* TODO - проверить */

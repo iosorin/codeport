@@ -1,13 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
-import Codemirror from '@uiw/react-codemirror';
 import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
-import 'codemirror/addon/edit/closetag';
-import 'codemirror/addon/edit/closebrackets';
-import 'codemirror/addon/comment/comment';
-import 'codemirror/keymap/sublime';
+import { Codemirror } from '@ui';
 import { EditorSettings, EditorBar } from './.ui';
 import { Console } from './features/Console';
 import store from './store';
@@ -64,12 +60,7 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                     />
                 </div>
 
-                <EditorBar
-                    settings={store.settings}
-                    toggleConsole={store.toggleConsole}
-                    toggleSettings={store.toggleSettings}
-                    visible={store.consoleVisible}
-                />
+                <EditorBar store={store} />
             </div>
         </div>
     );

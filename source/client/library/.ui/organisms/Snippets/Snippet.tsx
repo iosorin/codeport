@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import Codemirror from '@uiw/react-codemirror';
 import { Copy, Save } from 'react-feather';
 import { CodeSnippet } from 'types';
-import { Tooltip } from '@ui';
+import { Tooltip, Codemirror } from '@ui';
 import styles from './snippet.scss';
 import { copy } from '@/library/utils';
+import classNames from 'classnames';
 
 type Props = {
     snippet: CodeSnippet;
@@ -47,7 +47,11 @@ export const Snippet: FC<Props> = ({ snippet, loading, onSave }) => {
 
     return (
         <div className={styles.container}>
-            <div className={`${styles.inner} ${loading ? 'disabled' : ''}`}>
+            <div
+                className={classNames(styles.inner, {
+                    disabled: loading,
+                })}
+            >
                 <div className="fill">
                     <Codemirror
                         value={content}
@@ -55,7 +59,6 @@ export const Snippet: FC<Props> = ({ snippet, loading, onSave }) => {
                         options={{
                             mode: snippet.lang,
                             showCursorWhenSelecting: false,
-                            lineWrapping: true,
                             lineNumbers: false,
                         }}
                     />

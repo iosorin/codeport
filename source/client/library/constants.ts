@@ -10,4 +10,38 @@ export const HOTKEYS = {
     },
 };
 
-export const DEFAULT_EDITOR_THEME = 'default';
+export const EDITOR_THEMES = [
+    'codeport',
+    'default',
+    'darcula',
+    'dracula',
+    'shadowfox',
+    'ayu',
+    'monokai',
+    'material',
+] as const;
+
+export type EditorOptions = CodeMirror.EditorConfiguration & {
+    fontSize?: number;
+    autoCloseTags?: boolean;
+    autoCloseBrackets?: boolean;
+    theme?: typeof EDITOR_THEMES[number];
+};
+
+export const DEFAULT_EDITOR_OPTIONS: EditorOptions = {
+    mode: 'javascript',
+    theme: 'default',
+    tabSize: 4,
+    fontSize: 14,
+    indentUnit: 4,
+    indentWithTabs: true,
+    lineNumbers: true,
+    lineWrapping: true,
+    keyMap: 'sublime',
+    smartIndent: true,
+    autoCloseTags: true,
+    autofocus: true,
+    autoCloseBrackets: true,
+    autocorrect: true,
+    autocapitalize: true,
+};

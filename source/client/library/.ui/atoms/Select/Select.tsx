@@ -3,35 +3,37 @@ import { ChevronDown } from 'react-feather';
 import { useOutsideClick } from '@hooks';
 
 import styles from './select.scss';
+import classNames from 'classnames';
 
-type ValueType = any;
-export type OptionType = { title?: string; value: ValueType } | ValueType;
-
-export type Props = {
+export type Props<T> = {
     label?: string;
-    value?: ValueType;
-    options: OptionType[];
+    value?: T;
+    valueKey?: string;
+    titleKey?: string;
+    options: T[];
     tabIndex?: number | undefined;
-    onChange: (value: ValueType) => void;
+    onChange: (value: T) => void;
 };
-
-export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, onChange }) => {
+export const Select = <T,>({
+    label,
+    value,
+    valueKey,
+    titleKey,
+    options = [],
+    tabIndex,
+    onChange,
+}: Props<T>): JSX.Element => {
     const [open, setOpen] = useState(false);
 
-    const selectHandler = (selected: ValueType) => {
-        onChange(selected);
+    const selectHandler = (option: T) => {
+        onChange(option);
         setOpen(false);
     };
 
     const [ref] = useOutsideClick(() => setOpen(false));
 
-    const getValue = (e: OptionType): string => {
-        return typeof e === 'string' ? e : e.value;
-    };
-
-    const getTitle = (e: OptionType) => {
-        return typeof e === 'string' ? e : e.title || e.value;
-    };
+    const getValue = (option: T) => (valueKey ? option[valueKey as keyof T] : option);
+    const getTitle = (option: T) => (titleKey ? option[titleKey as keyof T] : option);
 
     return (
         <div
@@ -40,28 +42,38 @@ export const Select: FC<Props> = ({ label, value = '', options = [], tabIndex, o
             tabIndex={tabIndex}
         >
             {label ? <div className="label">{label}</div> : null}
+
             <div className={styles.value} onClick={() => setOpen(!open)}>
-                <span>{getTitle(value)}</span>
+                <span>{value}</span>
 
                 <span className="append">
                     <ChevronDown size="16" />
                 </span>
             </div>
 
-            <ul className={`${styles.options} ${open ? styles.visible : ''}`}>
-                {options.map((option) => (
-                    <li
-                        key={getValue(option)}
-                        aria-selected={getValue(option) === value}
-                        className={`${styles.option} ${
-                            getValue(option) === value ? styles.active : ''
-                        }`}
-                        onClick={() => selectHandler(option)}
-                        role="option"
-                    >
-                        {getTitle(option)}
-                    </li>
-                ))}
+            <ul
+                className={classNames(styles.options, {
+                    [styles.visible]: open,
+                })}
+            >
+                {options.map((option, index) => {
+                    const title = getTitle(option);
+                    const selected = getValue(option) === value;
+
+                    return (
+                        <li
+                            key={index}
+                            aria-selected={selected}
+                            className={classNames(styles.option, {
+                                [styles.selected]: selected,
+                            })}
+                            onClick={() => selectHandler(option)}
+                            role="option"
+                        >
+                            {title}
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );

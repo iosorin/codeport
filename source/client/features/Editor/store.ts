@@ -1,6 +1,6 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
-import { DEFAULT_SETTINGS, DEFAULT_VALUE, CODEPORT_THEME, EditorSettingsType } from './constants';
+import { DEFAULT_EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
 import { api } from './api';
 
 class EditorStore {
@@ -8,9 +8,9 @@ class EditorStore {
 
     socket = SocketService.getInstance();
 
-    value = DEFAULT_VALUE;
+    value = '';
 
-    settings = DEFAULT_SETTINGS;
+    settings: EditorOptions = { ...DEFAULT_EDITOR_OPTIONS, theme: 'codeport', fontSize: 18 };
 
     settingsVisible = false;
 
@@ -64,14 +64,14 @@ class EditorStore {
         this.consoleVisible = visible;
     };
 
-    _setSettings = (settings: EditorSettingsType) => {
+    _setSettings = (settings: EditorOptions) => {
         this.settings = { ...this.settings, ...settings };
     };
 
-    setSettings = async (settings: EditorSettingsType = {}, fromOrigin = true) => {
+    setSettings = async (settings: EditorOptions = {}, fromOrigin = true) => {
         const { theme } = settings;
 
-        if (theme && theme !== CODEPORT_THEME) {
+        if (theme && theme !== 'codeport') {
             await import(`codemirror/theme/${theme}.css`);
         }
 
@@ -94,7 +94,7 @@ class EditorStore {
             this.setValue(newValue);
         });
 
-        this.socket.on('client:editor-settings', (newSettings: EditorSettingsType) => {
+        this.socket.on('client:editor-settings', (newSettings: EditorOptions) => {
             this.setSettings(newSettings, false);
         });
     };

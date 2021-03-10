@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { SupportedLanguages } from 'defaults';
 import { Select, Input, Dialog } from '@ui';
-import { EditorSettingsType, THEMES } from '../constants';
+import { EditorOptions, EDITOR_THEMES } from '@/library/constants';
 
 type Props = {
     isOpen: boolean;
-    settings: EditorSettingsType;
+    settings: EditorOptions;
     toggleSettings: (show: boolean) => void;
-    setSettings: (settings: EditorSettingsType) => void;
+    setSettings: (settings: EditorOptions) => void;
 };
 
 export const EditorSettings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
@@ -20,14 +20,14 @@ export const EditorSettings: FC<Props> = ({ settings, isOpen, toggleSettings, se
         >
             <Select
                 label="Theme"
-                onChange={(theme: string) => setSettings({ theme })}
-                options={THEMES}
+                onChange={(theme) => setSettings({ theme })}
+                options={[...EDITOR_THEMES]}
                 value={settings.theme}
             />
 
             <Select
                 label="Language"
-                onChange={(mode: string) => setSettings({ mode })}
+                onChange={(mode) => setSettings({ mode })}
                 options={[...SupportedLanguages]}
                 value={settings.mode}
             />
