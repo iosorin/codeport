@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 import Codemirror from '@uiw/react-codemirror';
 import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
@@ -45,8 +46,16 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                 toggleSettings={store.toggleSettings}
             />
 
-            <div className={`${styles.Bar} ${store.consoleVisible ? styles.active : ''}`}>
-                <div className={store.consoleVisible ? '' : 'hidden'}>
+            <div
+                className={classNames(styles.Bar, {
+                    [styles.active]: store.consoleVisible,
+                })}
+            >
+                <div
+                    className={classNames({
+                        hidden: !store.consoleVisible,
+                    })}
+                >
                     <Console
                         code={store.value}
                         language={store.settings.mode}

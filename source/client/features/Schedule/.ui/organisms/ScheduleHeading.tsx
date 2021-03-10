@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Button } from '@/library/.ui';
 import { ScheduleStoreType } from '../../store';
-import { date } from '@/library/utils';
+import { observer } from 'mobx-react-lite';
 
 type Props = {
     store: ScheduleStoreType;
 };
 
-export const ScheduleHeading: FC<Props> = ({ store }) => {
+export const ScheduleHeading: FC<Props> = observer(({ store }) => {
     const text = () => {
         if (store.events.length) {
             if (store.today) {
@@ -36,4 +36,4 @@ export const ScheduleHeading: FC<Props> = ({ store }) => {
             </Button>
         </div>
     );
-};
+});

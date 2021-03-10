@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import Codemirror from '@uiw/react-codemirror';
-import { Clipboard, Copy, ExternalLink, Save } from 'react-feather';
+import { Copy, Save } from 'react-feather';
 import { CodeSnippet } from 'types';
-import { Button, Tooltip } from '@ui';
+import { Tooltip } from '@ui';
 import styles from './snippet.scss';
 import { copy } from '@/library/utils';
 
