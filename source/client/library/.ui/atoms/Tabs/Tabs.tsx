@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '..';
 import styles from './tabs.scss';
 
 type Props<T> = {
