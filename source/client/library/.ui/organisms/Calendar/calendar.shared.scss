@@ -1,0 +1,107 @@
+@import '@lls/react-light-calendar/dist/index.css';
+
+.rlc-calendar {
+    width: 300px + $padding-x;
+    padding: $padding;
+    border-radius: $radius;
+}
+
+.rlc-month-and-year-wrapper {
+    border-top: none;
+}
+
+.rlc-day {
+    transition: color $tr;
+    &:hover {
+        color: $light;
+    }
+}
+
+.rlc-month-and-year,
+.rlc-date-details {
+    font-weight: 500;
+    font-size: 1rem;
+    color: $light;
+}
+
+.rlc-navigation-button-wrapper {
+    flex-grow: 0;
+}
+
+.rlc-prev-year,
+.rlc-next-year {
+    display: none;
+}
+
+.rlc-prev-month,
+.rlc-next-month {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include hover-opacity('up');
+}
+
+.rlc-day-today {
+    background: $secondary;
+}
+
+.rlc-day-out-of-month {
+    color: inherit;
+    opacity: 0.7;
+}
+
+.rlc-date-details-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.rlc-date-time-selects {
+    display: flex;
+
+    .rlc-time-separator {
+        display: none;
+    }
+
+    select {
+        color: white;
+        background: transparent;
+        @include scrollable;
+        padding: 8px 0 8px 15px;
+        border-radius: 2px;
+        appearance: none;
+
+        & + select {
+            margin-left: 10px;
+        }
+
+        option {
+            color: $black;
+        }
+    }
+}
+
+/* dark */
+.rlc-dark {
+    .rlc-calendar {
+        background: $black;
+
+        select {
+            border-color: $black-lighten;
+        }
+    }
+    .rlc-calendar,
+    .rlc-month-and-year-wrapper {
+        border-color: $black-lighten;
+    }
+
+    .rlc-prev-month,
+    .rlc-next-month {
+        transition: $tr;
+        &:hover {
+            background: $black-lighten;
+        }
+    }
+}

@@ -43,7 +43,7 @@ export const Colors: FC<Props> = ({
     const openTrigger = () => {
         if (trigger === 'button') {
             return (
-                <div className="hoverable">
+                <div className="hover-opacity-up">
                     <Droplet size="17" color="white" />
                 </div>
             );
@@ -54,7 +54,7 @@ export const Colors: FC<Props> = ({
         }
 
         return (
-            <div className="hoverable">
+            <div className="hover-opacity-up">
                 <Color color={active} size={size} />
             </div>
         );

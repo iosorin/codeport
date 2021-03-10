@@ -41,6 +41,21 @@
     }
 }
 
+@mixin hover-opacity($direction: 'up') {
+    cursor: pointer;
+    transition: opacity $tr;
+    @if $direction == 'up' {
+        opacity: 0.7;
+        &:hover {
+            opacity: 1;
+        }
+    } @else {
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
 @mixin invisible($opacity: 0) {
     transition: opacity $tr;
     @if $opacity == 0 {

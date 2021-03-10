@@ -57,7 +57,7 @@ export const ParticipantStream: FC<Props> = observer(
                 {/* controls */}
                 <div className={styles.controls}>
                     <span
-                        className={classNames('hoverable', styles.control, {
+                        className={classNames('hover-opacity-up', styles.control, {
                             [styles.muted]: !constraints.audio,
                         })}
                         onClick={() => stream && toggleConstraint('audio')}
@@ -66,7 +66,7 @@ export const ParticipantStream: FC<Props> = observer(
                     </span>
 
                     <span
-                        className={classNames('hoverable', styles.control, {
+                        className={classNames('hover-opacity-up', styles.control, {
                             [styles.muted]: !constraints.video,
                         })}
                         onClick={() => stream && toggleConstraint('video')}

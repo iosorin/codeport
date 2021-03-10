@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
-import { ConfirmDialog, EventsChart, Table } from '@ui';
-import { ActivityStats, ActivityDialog } from './.ui';
+import { ConfirmDialog, Table } from '@ui';
+import { ActivityChart, ActivityDialog, ActivityStats } from './.ui';
 import store from './store';
 
 export const Activity = observer(() => {
@@ -64,7 +64,7 @@ export const Activity = observer(() => {
                         </div>
                     )}
 
-                    <EventsChart events={store.events} size={15} />
+                    <ActivityChart events={store.events} size={15} />
                 </div>
             </div>
         </>
