@@ -120,7 +120,7 @@ export const Table: FC<Props> = ({
                         onDelete!(item);
                     }}
                 >
-                    <Trash className="hoverable" size="15" />
+                    <Trash className="hover-opacity-up" size="15" />
                 </td>
             )
         );

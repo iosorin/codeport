@@ -2,8 +2,8 @@ import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
 import { ConferenceUser } from 'types';
-import { router } from './router';
 import * as dotenv from 'dotenv';
+import { router } from './router';
 
 // @ts-ignore
 import paths from '../../config/paths';

@@ -33,14 +33,12 @@
     @include unselectable;
 }
 
-.hoverable {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity $tr;
+.hover-opacity-up {
+    @include hover-opacity('up');
+}
 
-    &:hover:not(:active) {
-        opacity: 1;
-    }
+.hover-opacity-down {
+    @include hover-opacity('down');
 }
 
 .hidden {

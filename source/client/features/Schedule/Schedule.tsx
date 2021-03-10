@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ConfirmDialog } from '@/library/.ui';
-import { ScheduleHeading, ScheduleList, ScheduleDialog, Calendar } from './.ui/organisms';
+import { ScheduleHeading, ScheduleList, ScheduleDialog, ScheduleCalendar } from './.ui/organisms';
 import store from './store';
 
 export const Schedule: FC = observer(() => {
@@ -26,7 +26,9 @@ export const Schedule: FC = observer(() => {
                         <ScheduleList expired store={store} />
                     </div>
 
-                    <Calendar />
+                    <div style={{ marginTop: 35 }}>
+                        <ScheduleCalendar />
+                    </div>
                 </div>
             )}
 
