@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 import { Mic, MicOff, Video, VideoOff } from 'react-feather';
 import { Loader, Transition } from '@ui';
 import { PeerItem } from '@/features/Conference/store';
@@ -48,24 +49,36 @@ export const ParticipantStream: FC<Props> = observer(
         }, [stream, peer]);
 
         return (
-            <div className={`${styles.container} ${currentUser ? '' : styles.guest}`}>
+            <div
+                className={classNames(styles.container, {
+                    [styles.guest]: !currentUser,
+                })}
+            >
                 {/* controls */}
                 <div className={styles.controls}>
                     <span
-                        className={`${styles.control} ${constraints.audio ? '' : styles.muted}`}
+                        className={classNames('hoverable', styles.control, {
+                            [styles.muted]: !constraints.audio,
+                        })}
                         onClick={() => stream && toggleConstraint('audio')}
                     >
                         {constraints.audio ? <Mic /> : <MicOff />}
                     </span>
 
                     <span
-                        className={`${styles.control} ${constraints.video ? '' : styles.muted}`}
+                        className={classNames('hoverable', styles.control, {
+                            [styles.muted]: !constraints.video,
+                        })}
                         onClick={() => stream && toggleConstraint('video')}
                     >
                         {constraints.video ? <Video /> : <VideoOff />}
                     </span>
 
-                    <span className={`${styles.status} ${streamID ? styles.active : ''}`}></span>
+                    <span
+                        className={classNames(styles.status, {
+                            [styles.active]: streamID,
+                        })}
+                    ></span>
                 </div>
 
                 {/* preview */}

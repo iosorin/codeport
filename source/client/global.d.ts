@@ -1,6 +1,7 @@
 // / <reference types="node" />
 // / <reference types="react" />
 // / <reference types="react-dom" />
+declare module '@lls/react-light-calendar';
 
 declare namespace NodeJS {
     interface ProcessEnv {

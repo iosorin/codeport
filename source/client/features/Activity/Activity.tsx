@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 import { ConfirmDialog, EventsChart, Table } from '@ui';
 import { ActivityStats, ActivityDialog } from './.ui';
 import store from './store';
@@ -11,7 +12,11 @@ export const Activity = observer(() => {
 
     return (
         <>
-            <div className={`flex-col ${store.empty ? 'disabled' : ''}`}>
+            <div
+                className={classNames('flex-col', {
+                    disabled: store.empty,
+                })}
+            >
                 <ActivityStats store={store} />
 
                 <div className="flex-col-reverse mt-2">

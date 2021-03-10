@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classNames from 'classnames';
 import { ArrowUpLeft, Settings } from 'react-feather';
 import { HOTKEYS } from '@/library/constants';
 import { Tooltip } from '@ui';
@@ -14,7 +15,11 @@ type Props = {
 
 export const EditorBar: FC<Props> = ({ visible, settings, toggleSettings, toggleConsole }) => {
     return (
-        <div className={`${styles.container} ${visible ? styles.active : ''}`}>
+        <div
+            className={classNames(styles.container, {
+                [styles.active]: visible,
+            })}
+        >
             <span>{settings.mode}</span>
             <span>{settings.fontSize}px</span>
             <span>{settings.tabSize}px</span>
