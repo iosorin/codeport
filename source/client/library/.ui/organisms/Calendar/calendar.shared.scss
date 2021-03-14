@@ -1,4 +1,6 @@
-@import '@lls/react-light-calendar/dist/index.css';
+@import 'rlc-typescript/dist/index.css';
+
+$size: 33px;
 
 .rlc-calendar {
     width: 300px + $padding-x;
@@ -11,9 +13,47 @@
 }
 
 .rlc-day {
-    transition: color $tr;
-    &:hover {
-        color: $light;
+    color: white;
+    transition: $tr;
+    width: $size;
+    height: $size;
+    margin: (40px - $size) / 2;
+    position: relative;
+    border-radius: 50%;
+
+    &:hover,
+    &.rlc-day-today {
+        background: rgba(white, 0.1);
+    }
+
+    &.rlc-day-out-of-month {
+        &:not(:hover) {
+            opacity: 0.6;
+        }
+    }
+
+    &.rlc-day-marked {
+        color: black;
+        cursor: pointer !important;
+
+        &::after {
+            content: none;
+        }
+    }
+
+    &.rlc-day-disabled {
+        background: none;
+        pointer-events: none;
+        opacity: 0.4;
+
+        &.rlc-day-marked {
+            pointer-events: all;
+            opacity: 0.5;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 }
 
@@ -42,15 +82,6 @@
     align-items: center;
     justify-content: center;
     @include hover-opacity('up');
-}
-
-.rlc-day-today {
-    background: $secondary;
-}
-
-.rlc-day-out-of-month {
-    color: inherit;
-    opacity: 0.7;
 }
 
 .rlc-date-details-wrapper {
@@ -83,7 +114,7 @@
     }
 }
 
-/* dark */
+// dark
 .rlc-dark {
     .rlc-calendar {
         background: $black;
@@ -100,8 +131,9 @@
     .rlc-prev-month,
     .rlc-next-month {
         transition: $tr;
-        &:hover {
+        &:hover:not(:active) {
             background: $black-lighten;
+            color: $light;
         }
     }
 }

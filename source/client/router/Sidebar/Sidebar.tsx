@@ -23,7 +23,7 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.CONFERENCE.exact}
                     to={ROUTES.CONFERENCE.pathFn()}
                 >
-                    <Tooltip content={ROUTES.CONFERENCE.link}>
+                    <Tooltip text={ROUTES.CONFERENCE.link}>
                         <Video />
                     </Tooltip>
                 </NavLink>
@@ -33,7 +33,7 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.ACTIVITY.exact}
                     to={ROUTES.ACTIVITY.path}
                 >
-                    <Tooltip content={ROUTES.ACTIVITY.link}>
+                    <Tooltip text={ROUTES.ACTIVITY.link}>
                         <Activity />
                     </Tooltip>
                 </NavLink>
@@ -43,7 +43,7 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.SCHEDULE.exact}
                     to={ROUTES.SCHEDULE.path}
                 >
-                    <Tooltip content="Schedule">
+                    <Tooltip text="Schedule">
                         <Calendar />
                     </Tooltip>
                 </NavLink>
@@ -53,7 +53,7 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.NOTIFICATIONS.exact}
                     to={ROUTES.NOTIFICATIONS.path}
                 >
-                    <Tooltip content="Notifications">
+                    <Tooltip text="Notifications">
                         <Bell />
                     </Tooltip>
                 </NavLink>
@@ -65,18 +65,18 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.RESOURCES.exact}
                     to={ROUTES.RESOURCES.path}
                 >
-                    <Tooltip content={ROUTES.RESOURCES.title}>
+                    <Tooltip text={ROUTES.RESOURCES.title}>
                         <Book />
                     </Tooltip>
                 </NavLink>
 
                 <a href="mailto:official.osorina@gmail.com">
-                    <Tooltip content="Get In Touch (@osorina)">
+                    <Tooltip text="Get In Touch (@osorina)">
                         <AtSign />
                     </Tooltip>
                 </a>
 
-                <Tooltip content="Sign In">
+                <Tooltip text="Sign In">
                     <LogIn />
                 </Tooltip>
 

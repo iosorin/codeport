@@ -1,5 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
+    const memory = new Map<string, R>();
+
+    const g = (...args: any[]) => {
+        if (!memory.has(args.join())) {
+            memory.set(args.join(), f(...args));
+        }
+
+        return memory.get(args.join());
+    };
+
+    return g as T;
+};
+
 export const copy = (text: string) => {
     navigator.clipboard.writeText(text);
 };
@@ -36,10 +50,12 @@ export const debounce = <F extends (...args: any[]) => any>(func: F, wait = 300)
         });
 };
 
+// todo - memoize
 export const sortBy = (source: any[], prop: string, up = false) => {
     return source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
 };
 
+// todo - memoize
 export const reduceBy = <T>(source: T[], get: string | ((item: T) => string)) => {
     return source.reduce((total: { [key: string]: T[] }, item) => {
         const prop = typeof get === 'string' ? get : get(item);
@@ -54,6 +70,7 @@ export const reduceBy = <T>(source: T[], get: string | ((item: T) => string)) =>
     }, {});
 };
 
+// todo - memoize
 export const groupBy = <T>(source: T[], get: string | ((item: T) => string)) => {
     const map: Map<string, T[]> = new Map();
 
@@ -72,7 +89,7 @@ export const groupBy = <T>(source: T[], get: string | ((item: T) => string)) => 
 };
 
 export const date = {
-    input: (d: Date | number | undefined, type = 'datetime-local'): string | number => {
+    input: memoize((d: Date | number | undefined, type = 'datetime-local'): string | number => {
         if (!d) return '';
 
         const date = new Date(d);
@@ -82,20 +99,27 @@ export const date = {
         const lastChar = type === 'datetime-local' ? 16 : 10;
 
         return date.toISOString().substring(0, lastChar);
-    },
+    }),
 
-    match: (d1: Date | number | string, d2: Date | number | string = Date.now()): boolean => {
-        d1 = new Date(d1);
-        d2 = new Date(d2);
+    fixed: memoize(
+        (date: Date | number = Date.now(), hours = 0) =>
+            new Date(new Date(date).setHours(hours, 0, 0, 0))
+    ),
 
-        return (
-            d1.getDate() === d2.getDate() &&
-            d1.getMonth() === d2.getMonth() &&
-            d1.getFullYear() === d2.getFullYear()
-        );
-    },
+    withoutTime: memoize((date: Date | number | string = Date.now(), join?: boolean) => {
+        date = new Date(date);
 
-    diff: (start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
+        const arr = [date.getDate(), date.getMonth(), date.getFullYear()];
+
+        return join ? arr.join('-') : arr;
+    }),
+
+    match: memoize(
+        (date1: Date | number | string, date2: Date | number | string = Date.now()): boolean =>
+            date.withoutTime(date1, true) === date.withoutTime(date2, true)
+    ),
+
+    diff: memoize((start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
         const diff = start - end;
         const date = new Date(diff);
 
@@ -110,13 +134,11 @@ export const date = {
             .map((d) => (d.value ? `${d.value} ${d.prefix}` : null))
             .filter((d) => d)
             .join(', ');
-    },
+    }),
 
-    addDays: (days: number, date = new Date()) => {
-        return date.setDate(date.getDate() + days);
-    },
+    addDays: memoize((days: number, date = Date.now()) => date.setDate(date.getDate() + days)),
 
-    getDates: (start: Date, end: Date) => {
+    getDates: memoize((start: Date, end: Date) => {
         const dates = [];
         const currentDate = start;
 
@@ -127,9 +149,9 @@ export const date = {
         }
 
         return dates;
-    },
+    }),
 
-    when: (d: Date | number | undefined, showTime = true, showDay = true) => {
+    when: memoize((d: Date | number | undefined, showTime = true, showDay = true) => {
         if (!d) return '';
 
         const options: Intl.DateTimeFormatOptions = {
@@ -147,7 +169,7 @@ export const date = {
         }
 
         return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
-    },
+    }),
 };
 
 export const emojiHero = () => {

@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
+import classNames from 'classnames';
 import { ConfirmDialog } from '@/library/.ui';
 import { ScheduleHeading, ScheduleList, ScheduleDialog, ScheduleCalendar } from './.ui/organisms';
 import store from './store';
@@ -14,7 +15,11 @@ export const Schedule: FC = observer(() => {
 
     return (
         <>
-            <div className={`${store.empty ? 'my-auto' : ''}`}>
+            <div
+                className={classNames({
+                    'my-auto': store.empty,
+                })}
+            >
                 <ScheduleHeading store={store} />
             </div>
 
@@ -26,8 +31,8 @@ export const Schedule: FC = observer(() => {
                         <ScheduleList expired store={store} />
                     </div>
 
-                    <div style={{ marginTop: 35 }}>
-                        <ScheduleCalendar />
+                    <div className="mt-3">
+                        <ScheduleCalendar store={store} />
                     </div>
                 </div>
             )}

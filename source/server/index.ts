@@ -153,7 +153,7 @@ class App {
     }
 
     public start() {
-        this.server.listen(+this.port);
+        this.server.listen(this.port);
 
         // eslint-disable-next-line no-console
         console.log(`Server listening on port ${this.port}.`);
