@@ -64,7 +64,7 @@ export const Activity = observer(() => {
                         </div>
                     )}
 
-                    <ActivityChart events={store.events} size={15} />
+                    <ActivityChart events={store.events} forceUpdate={!store.loading} size={15} />
                 </div>
             </div>
         </>

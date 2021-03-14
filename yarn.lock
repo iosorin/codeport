@@ -1229,14 +1229,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@lls/react-light-calendar@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@lls/react-light-calendar/-/react-light-calendar-2.2.0.tgz#6bf83f147c1c887ce655960f80720fc0e44bfccf"
-  dependencies:
-    lodash.times "4.3.2"
-    prop-types "15.7.2"
-    timestamp-utils "2.1.0"
-
 "@mdx-js/loader@^1.6.19":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/loader/-/loader-1.6.22.tgz#d9e8fe7f8185ff13c9c8639c048b123e30d322c4"
@@ -8284,7 +8276,7 @@ lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
 
-lodash.times@4.3.2:
+lodash.times@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/lodash.times/-/lodash.times-4.3.2.tgz#3e1f2565c431754d54ab57f2ed1741939285ca1d"
 
@@ -10260,7 +10252,7 @@ prompts@2.4.0, prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.7.2, prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.0.0, prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -11174,6 +11166,13 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rlc-typescript@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/rlc-typescript/-/rlc-typescript-1.0.2.tgz#7f3fa5809e1454bb4df94b7693ff4cc8654bd909"
+  dependencies:
+    lodash.times "^4.3.2"
+    timestamp-utils "^2.1.0"
 
 rsvp@^4.8.4:
   version "4.8.5"
@@ -12266,7 +12265,7 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-timestamp-utils@2.1.0:
+timestamp-utils@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/timestamp-utils/-/timestamp-utils-2.1.0.tgz#6034c743982f40d82d547c5a2015771ba037f7ac"
 

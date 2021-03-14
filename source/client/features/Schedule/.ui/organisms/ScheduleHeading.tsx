@@ -24,7 +24,7 @@ export const ScheduleHeading: FC<Props> = observer(({ store }) => {
 
     return (
         <div className={`${store.empty ? 'text-center' : 'flex-between'}`}>
-            <div className={`h5 text-grey ${store.empty ? 'mb-2' : ''}`}>{text()}</div>
+            <p className={`text-grey text-accent ${store.empty ? 'mb-2' : ''}`}>{text()}</p>
 
             <Button
                 background="primary"

@@ -9,32 +9,37 @@ import {
     YAxis,
 } from 'recharts';
 import { date } from '@/library/utils';
-
-type Item = {
-    date: Date | string | number;
-    [key: string]: any;
-};
+import { ScheduleEventStrict } from 'types';
 
 type Props = {
     size?: number;
-    events: Item[];
+    events: ScheduleEventStrict[];
     height?: string | number;
+    forceUpdate: boolean;
 };
 
-export const ActivityChart: FC<Props> = ({ size = 15, height = 250, events: source }) => {
+export const ActivityChart: FC<Props> = ({
+    size = 15,
+    height = 250,
+    events: source,
+    forceUpdate,
+}) => {
     const data = useMemo(() => {
-        const end = new Date();
-        const start = new Date(new Date().setDate(end.getDate() - size));
+        if (!forceUpdate) return;
 
-        return date.getDates(start, end).map((d) => {
-            const events = source.filter((event) => date.match(event.date, d));
+        const end = date.fixed();
+        const start = new Date(date.addDays(-size, new Date(end)));
+        const chartDays = date.getDates(start, end);
+
+        return chartDays?.map((chartday) => {
+            const events = source.filter((event) => date.match(event.date, chartday));
 
             return {
-                Date: date.when(d, false),
+                Date: date.when(chartday, false),
                 Events: events.length,
             };
         });
-    }, [size]);
+    }, [size, forceUpdate]);
 
     return (
         <div
