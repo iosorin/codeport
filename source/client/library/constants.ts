@@ -45,3 +45,5 @@ export const DEFAULT_EDITOR_OPTIONS: EditorOptions = {
     autocorrect: true,
     autocapitalize: true,
 };
+
+export const EVENTS_COLORS = ['#ef476f', '#ee7d62', '#ffd166', '#69fa8f', '#7190ff', '#a986ff'];
