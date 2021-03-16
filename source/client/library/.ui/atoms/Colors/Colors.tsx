@@ -3,21 +3,19 @@ import { Droplet } from 'react-feather';
 import { Menu } from '../..';
 import { Color } from './Color';
 import { ColorLine } from './ColorLine';
-import presets from './presets';
 import styles from './colors.scss';
+import { EVENTS_COLORS } from '@/library/constants';
 
 type Props = {
     trigger?: 'button' | 'color' | 'line';
     size?: 'small' | 'medium' | 'large' | 'dot';
     active?: string;
-    preset?: 'standard' | 'mini';
     onChange: (color: string) => Promise<any> | void;
 };
 
 export const Colors: FC<Props> = ({
     trigger = false,
-    preset = 'standard',
-    active = preset[0],
+    active = EVENTS_COLORS[0],
     size = 'medium',
     onChange,
 }) => {
@@ -27,7 +25,7 @@ export const Colors: FC<Props> = ({
     const palette = () => {
         return (
             <div className={`${styles.colors} ${isSingle ? styles.outer : ''}`}>
-                {presets[preset].map((color, index) => (
+                {EVENTS_COLORS.map((color, index) => (
                     <Color
                         key={index}
                         active={isActive(color)}
