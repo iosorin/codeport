@@ -43,6 +43,7 @@
         "array-callback-return": "off",
         "no-multi-assign": "off",
         "no-underscore-dangle": "off",
+        "class-methods-use-this": "warn",
         "prettier/prettier": [
             "error",
             {
