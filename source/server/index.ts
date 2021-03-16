@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketIO from 'socket.io';
+import mongoose from 'mongoose';
 import { ConferenceUser } from 'types';
 import * as dotenv from 'dotenv';
 import { router } from './router';
@@ -11,7 +12,7 @@ import paths from '../../config/paths';
 dotenv.config();
 
 class App {
-    private io: socketIO.Server;
+    private io = {} as socketIO.Server;
 
     private port: string | number;
 
@@ -36,12 +37,11 @@ class App {
         this.port = port;
 
         this.server = new http.Server(app);
-        this.io = new socketIO.Server(this.server);
-
-        this.ioConnection();
     }
 
     private ioConnection() {
+        this.io = new socketIO.Server(this.server);
+
         this.io.on('connection', (socket: socketIO.Socket) => {
             this.connections.push(socket);
 
@@ -152,12 +152,25 @@ class App {
         });
     }
 
-    public start() {
-        this.server.listen(this.port);
+    public bootstrap() {
+        mongoose
+            .connect(
+                'mongodb+srv://osorina:3vgKjowSI78udYTL@codeport-cluster.slwbz.mongodb.net/codeport?retryWrites=true&w=majority',
+                {
+                    useNewUrlParser: true,
+                    useFindAndModify: false,
+                    useUnifiedTopology: true,
+                }
+            )
+            .then(() => {
+                this.server.listen(this.port);
 
-        // eslint-disable-next-line no-console
-        console.log(`Server listening on port ${this.port}.`);
+                console.log(`Server listening on port ${this.port}.`);
+
+                this.ioConnection();
+            })
+            .catch(console.error);
     }
 }
 
-new App(process.env.SERVER_PORT).start();
+new App(process.env.SERVER_PORT).bootstrap();
