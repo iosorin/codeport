@@ -1,4 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { EVENTS_COLORS } from './constants';
+
+export const emojiHero = () => {
+    // prettier-ignore
+    const emojis = [
+        '💃','👻','🎅','👩‍🚀','👨‍🚀','🐱‍🏍','🐱‍💻','🐱‍👓','🐱‍🚀','🦸‍♂️','🦸‍♀️','🧚‍♂️','🧚‍♀️'
+    ];
+
+    return emojis[Math.floor(Math.random() * emojis.length)];
+};
+
+export const randomEventColor = () => {
+    return EVENTS_COLORS[Math.floor(Math.random() * EVENTS_COLORS.length)];
+};
 
 export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
     const memory = new Map<string, R>();
@@ -170,13 +184,4 @@ export const date = {
 
         return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
     }),
-};
-
-export const emojiHero = () => {
-    // prettier-ignore
-    const emojis = [
-        '💃','👻','🎅','👩‍🚀','👨‍🚀','🐱‍🏍','🐱‍💻','🐱‍👓','🐱‍🚀','🦸‍♂️','🦸‍♀️','🧚‍♂️','🧚‍♀️'
-    ];
-
-    return emojis[Math.floor(Math.random() * emojis.length)];
 };

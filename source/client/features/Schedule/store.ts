@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { ScheduleEvent, ScheduleEventStrict, ParamRequired } from 'types';
-import { date, debounce, groupBy } from '@/library/utils';
+import { date, debounce, groupBy, randomEventColor } from '@/library/utils';
 import { api } from './api';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
@@ -75,7 +75,7 @@ class ScheduleStore {
 
     createEvent = (event: ScheduleEvent) => {
         if (!event.date) event.date = date.addDays(1);
-        if (!event.color) event.color = '#ffeb3b';
+        if (!event.color) event.color = randomEventColor();
 
         return api.create(event).then(debounce(this.setEvents));
     };
