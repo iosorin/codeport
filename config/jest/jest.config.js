@@ -39,8 +39,9 @@ module.exports = {
         '@services(.*)$': '<rootDir>/source/client/library/services',
         '@layouts/(.*)$': '<rootDir>/source/client/layouts/$1',
         '@layouts(.*)$': '<rootDir>/source/client/layouts',
+        'shared/(.*)$': '<rootDir>/source/shared/$1',
         'types/(.*)$': '<rootDir>/source/shared/types/$1',
-        'constants/(.*)$': '<rootDir>/source/shared/defaults/$1',
+        'defaults/(.*)$': '<rootDir>/source/shared/defaults/$1',
         'utils/(.*)$': '<rootDir>/source/shared/utils/$1',
     },
 
