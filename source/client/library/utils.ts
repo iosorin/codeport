@@ -120,7 +120,7 @@ export const date = {
             new Date(new Date(date).setHours(hours, 0, 0, 0))
     ),
 
-    withoutTime: memoize((date: Date | number | string = Date.now(), join?: boolean) => {
+    nTime: memoize((date: Date | number | string = Date.now(), join?: boolean) => {
         date = new Date(date);
 
         const arr = [date.getDate(), date.getMonth(), date.getFullYear()];
@@ -130,7 +130,7 @@ export const date = {
 
     match: memoize(
         (date1: Date | number | string, date2: Date | number | string = Date.now()): boolean =>
-            date.withoutTime(date1, true) === date.withoutTime(date2, true)
+            date.nTime(date1, true) === date.nTime(date2, true)
     ),
 
     diff: memoize((start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {

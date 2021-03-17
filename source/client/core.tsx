@@ -14,7 +14,8 @@ configure({
 /* Core */
 const Core = {
     ui: new UiStore(),
-    socket: SocketService.getInstance(),
+    // socket: SocketService.getInstance(),
+    socket: {} as any,
 };
 
 const CoreContext = createContext(Core);

@@ -5,11 +5,20 @@ import mongoose from 'mongoose';
 import { ConferenceUser } from 'types';
 import * as dotenv from 'dotenv';
 import { router } from './router';
+import { UserModel } from './models/User';
 
 // @ts-ignore
 import paths from '../../config/paths';
 
 dotenv.config();
+
+mongoose.set('toJSON', {
+    virtuals: true,
+    transform: (doc: any, converted: any) => {
+        delete converted.__v;
+        delete converted._id;
+    },
+});
 
 class App {
     private io = {} as socketIO.Server;
@@ -39,7 +48,7 @@ class App {
         this.server = new http.Server(app);
     }
 
-    private ioConnection() {
+    private ioConnection = () => {
         this.io = new socketIO.Server(this.server);
 
         this.io.on('connection', (socket: socketIO.Socket) => {
@@ -150,26 +159,44 @@ class App {
             socket.on('disconnect-user', disconnect);
             socket.on('disconnect', disconnect);
         });
-    }
+    };
 
-    public bootstrap() {
-        mongoose
-            .connect(
+    private createUser = async () => {
+        await UserModel.findOne((candidate: any) => {
+            if (!candidate) {
+                const user = new UserModel({
+                    name: 'Irina',
+                    email: 'Irina@gmail.com',
+                    schedule: [],
+                    completed: [],
+                });
+
+                return user.save();
+            }
+        });
+    };
+
+    public async bootstrap() {
+        try {
+            await mongoose.connect(
                 'mongodb+srv://osorina:3vgKjowSI78udYTL@codeport-cluster.slwbz.mongodb.net/codeport?retryWrites=true&w=majority',
                 {
                     useNewUrlParser: true,
                     useFindAndModify: false,
                     useUnifiedTopology: true,
                 }
-            )
-            .then(() => {
-                this.server.listen(this.port);
+            );
 
-                console.log(`Server listening on port ${this.port}.`);
+            await this.createUser();
 
-                this.ioConnection();
-            })
-            .catch(console.error);
+            // this.ioConnection();
+
+            this.server.listen(this.port);
+
+            console.log(`Server listening on port ${this.port}.`);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

@@ -1,36 +1,30 @@
 import { Response, Request } from 'express';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
-import { Schedule } from '../models/Schedule';
-import { Activity } from '../models/activity.model';
+import { ScheduleEventModel } from '../models/Event';
 
 export const get = async (_: Request, res: Response) => {
-    const schedule = await Schedule.fetch();
-
-    return res.json(schedule);
+    ScheduleEventModel.find()
+        .then((events) => res.json(events))
+        .catch(console.log);
 };
 
 export const create = async (req: Request<null, null, ScheduleEvent>, res: Response) => {
-    const schedule = await Schedule.create(req.body);
+    const schedule = new ScheduleEventModel(req.body);
 
-    try {
-        delete req.body.id;
-        const bla = await new Activity(req.body).save();
-        console.log('BLA BLA', bla);
-    } catch (error) {
-        console.error(error);
-    }
+    schedule.save();
 
-    return res.status(201).json(schedule);
+    return res.status(201);
 };
 
 export const update = async (req: Request<null, null, ScheduleEventStrict>, res: Response) => {
-    const schedule = await Schedule.update(req.body);
+    // EventModel.findByIdAndUpdate
+    // const schedule = await Schedule.update(req.body);
 
-    return res.json(schedule);
+    return res.json([]);
 };
 
 export const remove = async (req: Request<{ id: string }>, res: Response) => {
-    const schedule = await Schedule.remove(req.params.id);
+    // const schedule = await Schedule.remove(req.params.id);
 
-    return res.json(schedule);
+    return res.json([]);
 };
