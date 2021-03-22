@@ -12,6 +12,7 @@ type Props = {
     constraints?: { audio: boolean; video: boolean };
     toggleConstraint?: (kind: 'audio' | 'video') => void;
     currentUser?: boolean;
+    owner?: boolean;
     loading?: boolean;
 };
 

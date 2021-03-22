@@ -28,10 +28,10 @@ enum Listen {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Fn = (e: any) => void;
-type Sk = SocketIOClient.Socket | null;
+type SocketClientOrNull = SocketIOClient.Socket | null;
 
 export interface SocketServiceInterface {
-    socket: Sk;
+    socket: SocketClientOrNull;
     init(): SocketService;
     on(event: keyof typeof Listen, fn: Fn): SocketService;
     once(event: keyof typeof Listen, fn: Fn): SocketService;
@@ -42,7 +42,7 @@ export interface SocketServiceInterface {
 export class SocketService implements SocketServiceInterface {
     private static instance: SocketService;
 
-    public socket: Sk = null;
+    public socket: SocketClientOrNull = null;
 
     constructor() {
         if (SocketService.instance) {
