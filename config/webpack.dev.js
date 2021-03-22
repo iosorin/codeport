@@ -33,11 +33,11 @@ module.exports = merge(common, {
         historyApiFallback: true,
         proxy: {
             '/socket.io': {
-                target: 'http://localhost:' + process.env.SERVER_PORT,
+                target: 'http://[::1]:' + process.env.SERVER_PORT,
                 ws: true,
             },
             '/api': {
-                target: 'http://localhost:' + process.env.SERVER_PORT,
+                target: 'http://[::1]:' + String(+process.env.SERVER_PORT + 1),
             },
         },
     },
