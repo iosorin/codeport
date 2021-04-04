@@ -13,11 +13,11 @@ export class Notification {
         console.log('for a expired event');
     }
 
-    private static sendEmailForScheduledEvent(date: string | number) {
+    private static scheduledEventEmail(date: string | number) {
         console.log(date);
     }
 
-    private static sendEmailForExpiredEvent(date: string | number) {
+    private static expiredEventEmail(date: string | number) {
         console.log(date);
     }
 }

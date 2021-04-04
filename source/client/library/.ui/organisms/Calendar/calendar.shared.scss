@@ -81,7 +81,7 @@ $size: 33px;
     display: flex;
     align-items: center;
     justify-content: center;
-    @include hover-opacity('up');
+    @include opacity('up');
 }
 
 .rlc-date-details-wrapper {

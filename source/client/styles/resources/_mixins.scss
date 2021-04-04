@@ -41,7 +41,7 @@
     }
 }
 
-@mixin hover-opacity($direction: 'up') {
+@mixin opacity($direction: 'up') {
     cursor: pointer;
     transition: opacity $tr;
     @if $direction == 'up' {

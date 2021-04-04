@@ -32,28 +32,10 @@
         font-size: $block-fz * 1.1;
     }
 
-    // border, background
     &.hover {
-        transition: border 0.3s $ease-1;
-        background: $light !important;
-        position: relative;
         cursor: pointer;
-        border: 2px solid;
-
-        &:not(:hover) {
-            border-color: transparent;
-        }
-    }
-
-    &.none {
-        &.hover {
-            border-color: transparent;
-            transition: background $tr;
-
-            &:hover {
-                background: $grey !important;
-            }
-        }
+        position: relative;
+        @include opacity;
     }
 
     &.light {
@@ -62,32 +44,26 @@
 
     &.grey {
         background: $grey;
-        border-color: $grey;
     }
 
     &.black {
         background: $black-darken;
-        border-color: $black-darken;
     }
 
     &.dark {
         background: $black-lighten;
-        border-color: $black-lighten;
     }
 
     &.primary {
         background: $primary;
-        border-color: $primary;
     }
 
     &.success {
         background: $success;
-        border-color: $success;
     }
 
     &.yellow {
         background: $yellow;
-        border-color: $yellow;
     }
 
     // text color

@@ -1,7 +1,7 @@
 import { http } from '@services';
-import { ScheduleEvent, CompletedScheduleEvent } from 'types';
+import { ScheduleEvent, ActivityEvent } from 'types';
 
-type Res = CompletedScheduleEvent[];
+type Res = ActivityEvent[];
 
 export const api = {
     get: async (): Promise<Res> => {

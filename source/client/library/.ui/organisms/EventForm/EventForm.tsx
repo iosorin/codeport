@@ -1,6 +1,7 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { ScheduleEvent } from 'types';
-import { Input, Textarea, Colors, Range, Button, Color, Emojis } from '@ui';
+import { EVENT_COLOR } from 'defaults';
+import { Input, Textarea, Colors, Button, Emojis } from '@ui';
 import { date } from '@/library/utils';
 
 type ScheduleEventOrNull = ScheduleEvent | null | undefined;
@@ -53,7 +54,7 @@ export const EventForm: FC<Props> = ({
             <div className="flex-col">
                 {showColor && (
                     <Colors
-                        active={details?.color}
+                        active={details?.color ?? EVENT_COLOR}
                         onChange={(color) => set({ color })}
                         size="small"
                     />

@@ -28,11 +28,11 @@ export const Console: FC<Props> = observer(({ code, language, setEditorValue, to
             <div className="flex-between">
                 <div className={styles.Title}>Console</div>
 
-                <div className="hover-opacity-up" onClick={() => store.setResults([])}>
+                <div className="opacity" onClick={() => store.setResults([])}>
                     clear
                 </div>
 
-                <X className="hover-opacity-up" onClick={() => toggleConsole(false)} size="16" />
+                <X className="opacity" onClick={() => toggleConsole(false)} size="16" />
             </div>
 
             <div className={styles.Content}>

@@ -214,10 +214,6 @@ class ConferenceStore {
                 })
             );
         });
-
-        this.socket.on('client:room-empty', () => {
-            console.log('%c%s', 'color: #6666fe; font: 16px Tahoma;', 'BlA');
-        });
     };
 }
 

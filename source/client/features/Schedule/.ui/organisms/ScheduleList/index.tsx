@@ -15,7 +15,7 @@ export const ScheduleList: FC<Props> = observer(({ store, expired }) => {
     return list.size ? (
         <div
             className={classNames({
-                'hover-opacity-up default': expired,
+                'opacity default': expired,
             })}
         >
             {[...list].map(([day, events]) => (

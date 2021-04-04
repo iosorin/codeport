@@ -1,12 +1,3 @@
-.overflow {
-    overflow: hidden;
-}
-
-.fill {
-    width: 100%;
-    height: 100%;
-}
-
 .default {
     cursor: default !important;
 }
@@ -21,31 +12,40 @@
     pointer-events: none !important;
 }
 
-.invisible {
-    @include invisible;
-}
-
-.scrollable {
-    @include scrollable;
-}
-
 .unselectable {
     @include unselectable;
 }
 
-.hover-opacity-up {
-    @include hover-opacity('up');
+.disabled {
+    opacity: 0.5;
+    @include unselectable;
 }
 
-.hover-opacity-down {
-    @include hover-opacity('down');
+.invisible {
+    @include invisible;
 }
 
 .hidden {
     display: none;
 }
 
-.disabled {
-    opacity: 0.5;
-    @include unselectable;
+.opacity {
+    @include opacity('up');
+}
+
+.opacity-down {
+    @include opacity('down');
+}
+
+.scrollable {
+    @include scrollable;
+}
+
+.overflow {
+    overflow: hidden;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
 }

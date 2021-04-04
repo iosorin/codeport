@@ -2,21 +2,21 @@ import express from 'express';
 import http from 'http';
 import * as dotenv from 'dotenv';
 import { router } from './router';
-import { Activity } from './models/Activity';
 import { SocketService } from './services/socket';
+import { EventsRecorder } from './models/EventsRecorder';
+import { Activity } from './models/Activity';
+
 // @ts-ignore
 import paths from '../../config/paths';
 
 dotenv.config();
 
 class App {
-    private port: string | number;
-
     private server: http.Server;
 
     private socket: SocketService;
 
-    constructor(port: string | number = 5000) {
+    constructor(public port: string | number = 5000) {
         const app = express();
 
         app.use(express.static(paths.dist));
@@ -26,11 +26,9 @@ class App {
 
         app.use('/api', router);
 
-        this.port = port;
-
         this.server = new http.Server(app);
 
-        this.socket = new SocketService(this.server, Activity);
+        this.socket = new SocketService(this.server, new EventsRecorder(Activity.create));
     }
 
     public start() {

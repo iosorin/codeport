@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useRef } from 'react';
 import {
     CartesianGrid,
     Legend,
@@ -10,36 +10,27 @@ import {
 } from 'recharts';
 import { date } from '@/library/utils';
 import { ScheduleEventStrict } from 'types';
+import { observer } from 'mobx-react-lite';
 
 type Props = {
     size?: number;
     events: ScheduleEventStrict[];
     height?: string | number;
-    forceUpdate: boolean;
 };
 
-export const ActivityChart: FC<Props> = ({
-    size = 15,
-    height = 250,
-    events: source,
-    forceUpdate,
-}) => {
+export const ActivityChart: FC<Props> = observer(({ size = 15, height = 250, events }) => {
     const data = useMemo(() => {
-        if (!forceUpdate) return;
+        console.log('update');
 
         const end = date.fixed();
         const start = new Date(date.addDays(-size, new Date(end)));
         const chartDays = date.getDates(start, end);
 
-        return chartDays?.map((chartday) => {
-            const events = source.filter((event) => date.match(event.date, chartday));
-
-            return {
-                Date: date.when(chartday, false),
-                Events: events.length,
-            };
-        });
-    }, [size, forceUpdate]);
+        return chartDays?.map((chartday) => ({
+            Date: date.when(chartday, false),
+            Events: events.filter((event) => date.match(event.date, chartday)).length,
+        }));
+    }, [size, events]);
 
     return (
         <div
@@ -80,4 +71,4 @@ export const ActivityChart: FC<Props> = ({
             </ResponsiveContainer>
         </div>
     );
-};
+});

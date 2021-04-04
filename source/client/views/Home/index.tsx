@@ -20,6 +20,7 @@ export const HomeView: FC = observer((props) => {
 
             const leaveRoom = () => {
                 ui.toggleConferencePanel();
+
                 socket.emit('disconnect-user');
             };
 

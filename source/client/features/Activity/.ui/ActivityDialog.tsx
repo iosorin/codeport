@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { ActivityEvent, ScheduleEvent } from 'types';
 import { Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
 import { date } from '@/library/utils';
 import { mapList } from 'utils';
@@ -7,7 +7,7 @@ import { mapList } from 'utils';
 type Props = {
     visible: boolean;
     loading?: boolean;
-    details: CompletedScheduleEvent | null;
+    details: ActivityEvent | null;
     setDetails: (details: ScheduleEvent) => void;
     close: () => void;
 };
@@ -56,12 +56,13 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
             ) : (
                 <Block
                     size="small"
-                    background="none"
+                    background="light"
+                    hover
                     onClick={() => {
                         setEditing(true);
                     }}
                 >
-                    <Event details={details} date={false} accent />
+                    <Event details={details} date={false} accent showEmpty small />
                 </Block>
             )}
         </>

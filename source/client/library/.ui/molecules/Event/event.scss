@@ -1,13 +1,19 @@
-p {
-    // max-width: 400px;
+.normal {
+    p {
+        font-size: 0.9rem;
 
-    & + p {
-        margin-top: 0.7rem !important;
+        & + p {
+            margin-top: 0.7rem !important;
+        }
     }
 }
 
 .small {
     p {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+
+        & + p {
+            margin-top: 0.6rem !important;
+        }
     }
 }

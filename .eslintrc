@@ -43,6 +43,7 @@
         "array-callback-return": "off",
         "no-multi-assign": "off",
         "no-underscore-dangle": "off",
+        "class-methods-use-this": "off",
         "prettier/prettier": [
             "error",
             {
@@ -104,7 +105,9 @@
         "@typescript-eslint/no-shadow": "off",
         "@typescript-eslint/ban-ts-comment": "warn",
         "@typescript-eslint/no-namespace": "off",
-        "@typescript-eslint/brace-style": ["error"]
+        "@typescript-eslint/brace-style": ["error"],
+        "no-unused-expressions": "off",
+        "@typescript-eslint/no-unused-expressions": ["off"]
     },
     "settings": {
         "react": {

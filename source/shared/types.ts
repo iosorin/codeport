@@ -1,6 +1,6 @@
-import { SupportedLanguages } from './defaults';
+import { SUPPORTED_LANGUAGES } from './defaults';
 
-export type Language = typeof SupportedLanguages[number];
+export type Language = typeof SUPPORTED_LANGUAGES[number];
 
 export type CodeSnippet = {
     id: string;
@@ -42,7 +42,7 @@ export type ScheduleEventStrict = {
     color: string;
 };
 
-export type CompletedScheduleEvent = ScheduleEventStrict & {
+export type ActivityEvent = ScheduleEventStrict & {
     rating: number;
     snippets: CodeSnippet[];
     time: number; // min.

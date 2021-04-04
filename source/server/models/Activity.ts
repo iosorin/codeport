@@ -1,19 +1,21 @@
 import path from 'path';
-import { CompletedScheduleEvent, ScheduleEvent } from 'types';
+import { ActivityEvent, ScheduleEvent, ScheduleEventStrict } from 'types';
+/* todo path */
+import { EVENT_COLOR } from '../../shared/defaults';
 import { read, write } from '../utils/fs';
 
 const activityPath = path.join(__dirname, '..', '..', '..', 'data', 'activity.json');
 
-type Res = CompletedScheduleEvent[];
+type Res = ({ _roomID?: string } & ActivityEvent)[];
 
 export class Activity {
     static template = {
-        title: '',
+        title: 'Untitled Conference',
         stack: '',
         salary: '',
         contacts: '',
         additional: '',
-        color: '',
+        color: EVENT_COLOR,
         time: 0,
         rating: 0,
         snippets: [],
@@ -23,54 +25,36 @@ export class Activity {
         return read(activityPath) as Promise<Res>;
     };
 
-    static create = async (time = 0) => {
+    static async create(date: number, time: number, _roomID: string) {
         const events = await Activity.fetch();
 
-        const newEvent = { ...Activity.template, id: Date.now(), date: Date.now(), time };
+        const index = events.findIndex((event) => event._roomID === _roomID);
 
-        events.push(newEvent);
+        const event = { ...Activity.template, date, time, id: Date.now(), _roomID };
 
-        write(activityPath, events) as Promise<Res>;
+        index >= 0 ? (events[index] = event) : events.push(event);
 
-        return newEvent;
-    };
+        return write(activityPath, events) as Promise<ScheduleEventStrict[]>;
+    }
 
-    static setTime = async (id: string | number, time: number) => {
-        return Activity.update({ id, time });
-    };
-
-    static updateTime = async (id: string | number, time: number) => {
+    static update = async (scheduleEvent: ScheduleEvent) => {
         let events = await Activity.fetch();
 
-        events = events.map((ev) => {
-            if (ev.id === id) {
-                ev.time = time - ev.time;
+        events = events.map((event) => {
+            if (event.id === scheduleEvent.id) {
+                return { ...event, ...scheduleEvent };
             }
 
-            return ev;
+            return event;
         });
 
         return write(activityPath, events) as Promise<Res>;
     };
 
-    static update = async (event: ScheduleEvent) => {
+    static async remove(eventID: string) {
         let events = await Activity.fetch();
 
-        events = events.map((ev) => {
-            if (ev.id === event.id) {
-                return { ...ev, ...event };
-            }
-
-            return ev;
-        });
-
-        return write(activityPath, events) as Promise<Res>;
-    };
-
-    static async remove(id: string) {
-        let events = await Activity.fetch();
-
-        events = events.filter((event) => event.id.toString() !== id);
+        events = events.filter((event) => event.id.toString() !== eventID);
 
         return write(activityPath, events) as Promise<Res>;
     }
