@@ -1,7 +1,7 @@
 import path from 'path';
 import { ActivityEvent, ScheduleEvent, ScheduleEventStrict } from 'types';
-/* todo path */
-import { EVENT_COLOR } from '../../shared/defaults';
+import { EVENT_COLOR } from 'defaults';
+import { mergeItem } from 'utils';
 import { read, write } from '../utils/fs';
 
 const activityPath = path.join(__dirname, '..', '..', '..', 'data', 'activity.json');
@@ -40,13 +40,7 @@ export class Activity {
     static update = async (scheduleEvent: ScheduleEvent) => {
         let events = await Activity.fetch();
 
-        events = events.map((event) => {
-            if (event.id === scheduleEvent.id) {
-                return { ...event, ...scheduleEvent };
-            }
-
-            return event;
-        });
+        events = mergeItem(events, scheduleEvent);
 
         return write(activityPath, events) as Promise<Res>;
     };

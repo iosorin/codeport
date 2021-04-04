@@ -71,7 +71,7 @@ class EditorStore {
     setSettings = async (settings: EditorOptions = {}, fromOrigin = true) => {
         const { theme } = settings;
 
-        if (theme && theme !== 'codeport') {
+        if (theme && !['default', 'codeport'].includes(theme)) {
             await import(`codemirror/theme/${theme}.css`);
         }
 

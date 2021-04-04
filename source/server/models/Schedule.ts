@@ -1,5 +1,6 @@
 import path from 'path';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
+import { mergeItem } from 'utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
 
@@ -35,13 +36,7 @@ export class Schedule {
     static async update(scheduleEvent: ScheduleEvent) {
         let schedule: ScheduleEventStrict[] = await Schedule.fetch();
 
-        schedule = schedule.map((event) => {
-            if (event.id === scheduleEvent.id) {
-                return { ...event, ...scheduleEvent };
-            }
-
-            return event;
-        });
+        schedule = mergeItem(schedule, scheduleEvent);
 
         return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
     }
