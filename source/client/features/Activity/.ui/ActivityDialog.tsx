@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { ActivityEvent, ScheduleEvent } from 'types';
 import { Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
 import { date } from '@/library/utils';
-import { mapList } from 'utils';
+import { mergeItem } from 'utils';
 
 type Props = {
     visible: boolean;
@@ -78,7 +78,7 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
                         loading={loading}
                         snippets={details.snippets}
                         onSave={(snippet) =>
-                            setDetails({ snippets: mapList(details.snippets, snippet) })
+                            setDetails({ snippets: mergeItem(details.snippets, snippet) })
                         }
                     />
                 </div>

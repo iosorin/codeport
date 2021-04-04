@@ -12,7 +12,6 @@ export const HOTKEYS = {
 
 export const EDITOR_THEMES = [
     'codeport',
-    'default',
     'darcula',
     'dracula',
     'shadowfox',
@@ -25,7 +24,7 @@ export type EditorOptions = CodeMirror.EditorConfiguration & {
     fontSize?: number;
     autoCloseTags?: boolean;
     autoCloseBrackets?: boolean;
-    theme?: typeof EDITOR_THEMES[number];
+    theme?: typeof EDITOR_THEMES[number] | 'default';
 };
 
 export const DEFAULT_EDITOR_OPTIONS: EditorOptions = {
