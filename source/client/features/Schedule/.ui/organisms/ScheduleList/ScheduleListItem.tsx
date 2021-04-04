@@ -30,7 +30,7 @@ export const ScheduleListItem: FC<Props> = observer(
                     trigger="line"
                 />
 
-                <Event details={details} date={false} showEmpty small />
+                <Event details={details} date={false} showEmpty />
             </Block>
         );
     }

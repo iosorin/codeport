@@ -23,31 +23,33 @@ export class Schedule {
     static async create(scheduleEvent: ScheduleEvent) {
         const schedule: ScheduleEventStrict[] = await Schedule.fetch();
 
-        if (scheduleEvent.date) Notification.toQueue('scheduled', scheduleEvent);
+        if (scheduleEvent.date) {
+            Notification.toQueue('scheduled', scheduleEvent);
+        }
 
         schedule.push({ ...Schedule.template, ...scheduleEvent, id: Date.now() });
 
         return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
     }
 
-    static async update(event: ScheduleEvent) {
+    static async update(scheduleEvent: ScheduleEvent) {
         let schedule: ScheduleEventStrict[] = await Schedule.fetch();
 
-        schedule = schedule.map((ev) => {
-            if (ev.id === event.id) {
-                return { ...ev, ...event };
+        schedule = schedule.map((event) => {
+            if (event.id === scheduleEvent.id) {
+                return { ...event, ...scheduleEvent };
             }
 
-            return ev;
+            return event;
         });
 
         return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
     }
 
-    static async remove(id: string) {
+    static async remove(eventID: string) {
         let schedule: ScheduleEventStrict[] = await Schedule.fetch();
 
-        schedule = schedule.filter((event) => event.id.toString() !== id);
+        schedule = schedule.filter((event) => event.id.toString() !== eventID);
 
         return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
     }

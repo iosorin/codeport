@@ -50,8 +50,9 @@ export const Block: FC<Props> = memo(
         ];
 
         if (flex) classlist.push(styles.flex);
-        if (hover || onClick) classlist.push(styles.hover);
+        if (hover) classlist.push(styles.hover);
         if (styled) classlist.push(styles.styled);
+        if (Boolean(onClick)) classlist.push('pointer');
 
         const controls = (
             <div className={styles.controls}>

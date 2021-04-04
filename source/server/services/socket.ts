@@ -2,10 +2,11 @@ import socketIO from 'socket.io';
 import http from 'http';
 import { ConferenceUser } from 'types';
 
-type Event = {
-    create: (time: number) => Promise<{ id: string | number }>;
-    updateTime: (id: string, time: number) => void;
+type SocketEventsRecorder = {
+    createCandidate: (roomId: string) => void;
+    fixCandidate: (roomId: string) => void;
 };
+
 export class SocketService {
     private io: socketIO.Server;
 
@@ -15,14 +16,8 @@ export class SocketService {
 
     private socketToRoom: { [key: string]: string } = {};
 
-    private Event: Event;
-
-    private eventId: string | number = '';
-
-    constructor(server: http.Server, EventModel: Event) {
+    constructor(server: http.Server, public recorder: SocketEventsRecorder) {
         this.io = new socketIO.Server(server);
-
-        this.Event = EventModel;
 
         this.connection();
     }
@@ -31,39 +26,39 @@ export class SocketService {
         this.io.on('connection', (socket: socketIO.Socket) => {
             this.connections.push(socket);
 
-            socket.on('check-room', (roomID) => {
-                roomIsFull(roomID);
+            socket.on('check-room', (roomID: string) => {
+                roomFull(roomID);
             });
 
-            socket.on('join-room', ({ roomID, constraints }) => {
-                if (roomIsFull(roomID)) {
-                    return;
+            socket.on(
+                'join-room',
+                ({ roomID, constraints }: { roomID: string; constraints: any }) => {
+                    if (roomFull(roomID)) {
+                        return;
+                    }
+
+                    const newUser: ConferenceUser = {
+                        id: socket.id,
+                        constraints,
+                    };
+
+                    if (this.users[roomID]) {
+                        this.users[roomID].push(newUser);
+
+                        this.recorder.createCandidate(roomID);
+                    } else {
+                        this.users[roomID] = [newUser];
+                    }
+
+                    this.socketToRoom[socket.id] = roomID;
+
+                    const filteredRoomUsers = this.users[roomID].filter(
+                        (user) => user.id !== socket.id
+                    );
+
+                    socket.emit('client:users-present-in-room', filteredRoomUsers);
                 }
-
-                const newUser: ConferenceUser = {
-                    id: socket.id,
-                    constraints,
-                };
-
-                if (this.users[roomID]) {
-                    this.users[roomID].push(newUser);
-
-                    this.Event.create(Date.now()).then((event) => {
-                        console.log('event', event);
-                        this.eventId = event.id;
-                    });
-                } else {
-                    this.users[roomID] = [newUser];
-                }
-
-                this.socketToRoom[socket.id] = roomID;
-
-                const filteredRoomUsers = this.users[roomID].filter(
-                    (user) => user.id !== socket.id
-                );
-
-                socket.emit('client:users-present-in-room', filteredRoomUsers);
-            });
+            );
 
             socket.on('sending-signal', (payload) => {
                 this.io.to(payload.userToSignal).emit('client:user-joined', payload);
@@ -84,19 +79,22 @@ export class SocketService {
                 share('client:editor-settings', payload);
             });
 
-            socket.on('constraints', (payload) => {
-                if (payload.roomID) {
-                    const user = this.users[payload.roomID].find((user) => user.id === socket.id);
+            socket.on(
+                'constraints',
+                ({ roomID, constraints }: { roomID: string; constraints: any }) => {
+                    if (roomID) {
+                        const user = this.users[roomID].find((user) => user.id === socket.id);
 
-                    if (user) {
-                        user.constraints = payload.constraints;
+                        if (user) {
+                            user.constraints = constraints;
 
-                        share('client:constraints', user);
+                            share('client:constraints', user);
+                        }
                     }
                 }
-            });
+            );
 
-            const roomIsFull = (roomID: string) => {
+            const roomFull = (roomID: string) => {
                 if (this.users[roomID]) {
                     if (this.users[roomID].length === 4) {
                         socket.emit('client:room-full');
@@ -139,10 +137,7 @@ export class SocketService {
                     socket.broadcast.emit('client:room-empty');
                 }
 
-                console.log('this.eventId', this.eventId);
-                if (this.eventId) {
-                    this.Event.updateTime(String(this.eventId), Date.now());
-                }
+                this.recorder.fixCandidate(roomID);
             };
 
             socket.on('disconnect-user', disconnect);

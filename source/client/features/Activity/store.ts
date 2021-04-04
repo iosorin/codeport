@@ -1,11 +1,11 @@
 import { makeAutoObservable } from 'mobx';
-import { CompletedScheduleEvent, ParamRequired, ScheduleEvent } from 'types';
+import { ActivityEvent, ScheduleEvent, ParamRequired } from 'types';
 import { api } from './api';
 
-type ActivityEventOrNull = CompletedScheduleEvent | null | undefined;
+type ActivityEventOrNull = ActivityEvent | null | undefined;
 
 class ActivityStore {
-    events: CompletedScheduleEvent[] = [];
+    events: ActivityEvent[] = [];
 
     dialogVisible = false;
 
@@ -13,7 +13,7 @@ class ActivityStore {
 
     loading = false;
 
-    dialogEvent: CompletedScheduleEvent | null = null;
+    dialogEvent: ActivityEvent | null = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -35,7 +35,7 @@ class ActivityStore {
         );
     }
 
-    setEvents = (events: CompletedScheduleEvent[]) => {
+    setEvents = (events: ActivityEvent[]) => {
         this.events = events;
     };
 
@@ -47,13 +47,13 @@ class ActivityStore {
         this.dialogEvent = dialogEvent;
     };
 
-    toggleDialog = (event?: CompletedScheduleEvent | null) => {
+    toggleDialog = (event?: ActivityEvent | null) => {
         this.setDialogEvent(event);
 
         this.dialogVisible = Boolean(event);
     };
 
-    toggleConfirmDialog = (event?: CompletedScheduleEvent | null) => {
+    toggleConfirmDialog = (event?: ActivityEvent | null) => {
         this.setDialogEvent(event);
 
         this.confirmDialogVisible = Boolean(event);
@@ -67,10 +67,10 @@ class ActivityStore {
         this.updateEvent(this.dialogEvent);
     };
 
-    call = (apiMethod: () => Promise<CompletedScheduleEvent[]>) => {
+    call = (method: () => Promise<ActivityEvent[]>) => {
         this.markLoading(true);
 
-        apiMethod()
+        method()
             .then((events) => {
                 this.setEvents(events);
             })

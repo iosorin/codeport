@@ -23,6 +23,7 @@ export const ResourcesView: FC = () => {
                             <Link to="/activity">Link</Link>
                         </p>
                     </Block>
+
                     <Block
                         background="yellow"
                         icon="#exercises"
@@ -35,6 +36,7 @@ export const ResourcesView: FC = () => {
                             <Link to="/activity">Link</Link>
                         </p>
                     </Block>
+
                     <Block
                         background="yellow"
                         icon="#exercises"
@@ -47,6 +49,7 @@ export const ResourcesView: FC = () => {
                             <Link to="/activity">Link</Link>
                         </p>
                     </Block>
+
                     <Block
                         background="yellow"
                         icon="#exercises"

@@ -37,7 +37,7 @@ module.exports = merge(common, {
                 ws: true,
             },
             '/api': {
-                target: 'http://[::1]:' + String(+process.env.SERVER_PORT + 1),
+                target: 'http://[::1]:' + process.env.SERVER_PORT,
             },
         },
     },

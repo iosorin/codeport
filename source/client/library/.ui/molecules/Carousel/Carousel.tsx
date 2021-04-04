@@ -51,19 +51,11 @@ export const Carousel: FC<Props> = ({
         return (
             <div className={styles.arrows}>
                 <div className={`${currentIndex === 0 ? 'disabled' : ''}`}>
-                    <ChevronLeft
-                        className="hover-opacity-up"
-                        size="17"
-                        onClick={() => move('backward')}
-                    />
+                    <ChevronLeft className="opacity" size="17" onClick={() => move('backward')} />
                 </div>
 
                 <div className={`ml-1 ${currentIndex === items.length - 1 ? 'disabled' : ''}`}>
-                    <ChevronRight
-                        className="hover-opacity-up"
-                        size="17"
-                        onClick={() => move('forward')}
-                    />
+                    <ChevronRight className="opacity" size="17" onClick={() => move('forward')} />
                 </div>
             </div>
         );

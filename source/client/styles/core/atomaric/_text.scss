@@ -19,6 +19,10 @@
         @include text-truncate;
     }
 
+    &-light {
+        font-weight: light;
+    }
+
     &-bold {
         font-weight: bold;
     }

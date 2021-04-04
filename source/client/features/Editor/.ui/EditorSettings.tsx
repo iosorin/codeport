@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { SupportedLanguages } from 'defaults';
+import { SUPPORTED_LANGUAGES } from 'defaults';
 import { Select, Input, Dialog } from '@ui';
 import { EditorOptions, EDITOR_THEMES } from '@/library/constants';
 
@@ -28,7 +28,7 @@ export const EditorSettings: FC<Props> = ({ settings, isOpen, toggleSettings, se
             <Select
                 label="Language"
                 onChange={(mode) => setSettings({ mode })}
-                options={[...SupportedLanguages]}
+                options={[...SUPPORTED_LANGUAGES]}
                 value={settings.mode}
             />
 

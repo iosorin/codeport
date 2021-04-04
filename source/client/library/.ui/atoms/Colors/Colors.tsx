@@ -9,7 +9,7 @@ import { EVENTS_COLORS } from '@/library/constants';
 type Props = {
     trigger?: 'button' | 'color' | 'line';
     size?: 'small' | 'medium' | 'large' | 'dot';
-    active?: string;
+    active: string;
     onChange: (color: string) => Promise<any> | void;
 };
 
@@ -41,7 +41,7 @@ export const Colors: FC<Props> = ({
     const openTrigger = () => {
         if (trigger === 'button') {
             return (
-                <div className="hover-opacity-up">
+                <div className="opacity">
                     <Droplet size="17" color="white" />
                 </div>
             );
@@ -52,7 +52,7 @@ export const Colors: FC<Props> = ({
         }
 
         return (
-            <div className="hover-opacity-up">
+            <div className="opacity">
                 <Color color={active} size={size} />
             </div>
         );

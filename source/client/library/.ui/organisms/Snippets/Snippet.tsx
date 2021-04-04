@@ -33,22 +33,12 @@ export const Snippet: FC<Props> = ({ snippet, loading, onSave }) => {
 
     const controls = (
         <div className={styles.controls}>
-            <Tooltip
-                text="Copy"
-                textDone="Copied"
-                className="hover-opacity-up"
-                onClick={handleCopy}
-            >
+            <Tooltip text="Copy" textDone="Copied" className="opacity" onClick={handleCopy}>
                 <Copy size="14" />
             </Tooltip>
 
             {showSave && (
-                <Tooltip
-                    text="Save"
-                    textDone="Saved"
-                    className="hover-opacity-up ml-2"
-                    onClick={handleSave}
-                >
+                <Tooltip text="Save" textDone="Saved" className="opacity ml-2" onClick={handleSave}>
                     <Save size="14" />
                 </Tooltip>
             )}
