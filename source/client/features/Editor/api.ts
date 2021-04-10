@@ -1,7 +1,8 @@
 import { debounce, ls } from '@/library/utils';
 import { EditorOptions } from '@/library/constants';
+import { CodeSnippet } from 'types';
 
-const dbLs = debounce(ls, 250);
+const write = debounce(ls, 250);
 const title = process.env.TITLE;
 
 export const api = {
@@ -10,7 +11,7 @@ export const api = {
     },
 
     set value(value: string) {
-        dbLs(`${title}-editor-value`, value);
+        write(`${title}-editor-value`, value);
     },
 
     get settings() {
@@ -18,6 +19,15 @@ export const api = {
     },
 
     set settings(settings: EditorOptions) {
-        dbLs(`${title}-editor-settings`, settings, true);
+        write(`${title}-editor-settings`, settings, true);
+    },
+
+    saveSnippet: (snippet: CodeSnippet) => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('snippet', snippet);
+                resolve(200);
+            }, 250);
+        });
     },
 };

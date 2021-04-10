@@ -6,9 +6,9 @@ import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
-    roomID = '';
-
     socket = SocketService.getInstance();
+
+    roomID = '';
 
     value = EDITOR_VALUE;
 
@@ -105,7 +105,6 @@ class EditorStore {
         });
     };
 
-    // todo - implement saveSnippet method
     saveSnippet = (content: string) => {
         const snippet: CodeSnippet = {
             id: Date.now().toString(),
@@ -113,7 +112,13 @@ class EditorStore {
             lang: this.settings.mode,
         };
 
-        console.log('snippet', snippet);
+        api.saveSnippet(snippet);
+        // .then(() => {
+        //     this.ui?.toast.success('Snippet saved');
+        // })
+        // .catch((err) => {
+        //     this.ui?.toast.error(err.message);
+        // });
     };
 }
 

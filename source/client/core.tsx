@@ -1,7 +1,7 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
 import { SocketService } from '@services';
-import { UiStore } from '@/stores/ui.store';
+import { UiStore } from './stores/ui.store';
 
 configure({
     enforceActions: 'observed',
@@ -12,8 +12,11 @@ configure({
 });
 
 /* Core */
+const ui = new UiStore();
+
 const Core = {
-    ui: new UiStore(),
+    ui,
+    toast: ui.toast,
     socket: SocketService.getInstance(),
 };
 
