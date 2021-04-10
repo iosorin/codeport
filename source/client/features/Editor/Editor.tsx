@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
 import { Codemirror } from '@ui';
