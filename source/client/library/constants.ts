@@ -1,12 +1,17 @@
 export const HOTKEYS = {
-    TOGGLE_EDITOR_SETTINGS: {
-        key: 'ctrl+p',
-        label: 'Settings [ctrl+p]',
+    EDITOR_TOGGLE_SETTINGS: {
+        key: 'Ctrl-P',
+        label: 'Settings [Ctrl+P]',
     },
 
-    TOGGLE_EDITOR_CONSOLE: {
-        key: 'ctrl+.',
-        label: 'Console [ctrl+.]',
+    EDITOR_TOGGLE_CONSOLE: {
+        key: 'Ctrl-.',
+        label: 'Console [Ctrl+.]',
+    },
+
+    EDITOR_SAVE_SNIPPET: {
+        key: 'Ctrl-S',
+        label: 'Save snippet',
     },
 };
 
@@ -27,7 +32,7 @@ export type EditorOptions = CodeMirror.EditorConfiguration & {
     theme?: typeof EDITOR_THEMES[number] | 'default';
 };
 
-export const DEFAULT_EDITOR_OPTIONS: EditorOptions = {
+export const EDITOR_OPTIONS: EditorOptions = {
     mode: 'javascript',
     theme: 'default',
     tabSize: 4,

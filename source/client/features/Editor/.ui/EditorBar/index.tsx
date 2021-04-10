@@ -22,11 +22,11 @@ export const EditorBar: FC<Props> = ({ store }) => {
             <span>{store.settings.fontSize}px</span>
             <span>{store.settings.tabSize}px</span>
 
-            <Tooltip text={HOTKEYS.TOGGLE_EDITOR_SETTINGS.label} className={styles.icon} center>
+            <Tooltip text={HOTKEYS.EDITOR_TOGGLE_SETTINGS.label} className={styles.icon} center>
                 <Settings size="15" onClick={() => store.toggleSettings(true)} />
             </Tooltip>
 
-            <Tooltip text={HOTKEYS.TOGGLE_EDITOR_CONSOLE.label} className={styles.icon} center>
+            <Tooltip text={HOTKEYS.EDITOR_TOGGLE_CONSOLE.label} className={styles.icon} center>
                 <ArrowUpLeft size="16" onClick={() => store.toggleConsole()} className="chevron" />
             </Tooltip>
         </div>

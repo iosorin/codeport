@@ -14,9 +14,8 @@ type Props = {
 };
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
-    useHotkey('ctrl+s', (e) => e.preventDefault());
-    useHotkey(HOTKEYS.TOGGLE_EDITOR_SETTINGS.key, () => store.toggleSettings());
-    useHotkey(HOTKEYS.TOGGLE_EDITOR_CONSOLE.key, () => store.toggleConsole(), true, true);
+    useHotkey(HOTKEYS.EDITOR_TOGGLE_SETTINGS.key, () => store.toggleSettings());
+    useHotkey(HOTKEYS.EDITOR_TOGGLE_CONSOLE.key, () => store.toggleConsole(), true, true);
 
     useEffect(() => {
         store.setRoomID(roomID);
@@ -33,7 +32,12 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 
     return (
         <div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
-            <Codemirror onChange={onChange} options={store.settings} value={store.value} />
+            <Codemirror
+                onChange={onChange}
+                onSave={store.saveSnippet}
+                options={store.settings}
+                value={store.value}
+            />
 
             <EditorSettings
                 isOpen={store.settingsVisible}
