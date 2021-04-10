@@ -4,7 +4,7 @@ import { ConferenceUser } from 'types';
 
 type SocketEventsRecorder = {
     createCandidate: (roomId: string) => void;
-    fixCandidate: (roomId: string) => void;
+    saveCandidate: (roomId: string) => void;
 };
 
 export class SocketService {
@@ -45,7 +45,11 @@ export class SocketService {
                     if (this.users[roomID]) {
                         this.users[roomID].push(newUser);
 
-                        this.recorder.createCandidate(roomID);
+                        setTimeout(() => {
+                            if (this.users[roomID].length) {
+                                this.recorder.createCandidate(roomID);
+                            }
+                        }, 60000);
                     } else {
                         this.users[roomID] = [newUser];
                     }
@@ -137,7 +141,7 @@ export class SocketService {
                     socket.broadcast.emit('client:room-empty');
                 }
 
-                this.recorder.fixCandidate(roomID);
+                this.recorder.saveCandidate(roomID);
             };
 
             socket.on('disconnect-user', disconnect);
