@@ -158,7 +158,7 @@ class ConferenceStore {
             this.setPeers(
                 users.map((user) => {
                     const peer = this.createPeer(user.id, {
-                        id: this.socket.socket!.id,
+                        id: this.socket.socketClient!.id,
                         constraints: this.constraints,
                     });
 

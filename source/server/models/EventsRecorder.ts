@@ -25,7 +25,7 @@ export class EventsRecorder {
         return candidate;
     };
 
-    fixCandidate = (roomID: string) => {
+    saveCandidate = (roomID: string) => {
         if (!roomID) return;
 
         const candidate = this.setEndDate(roomID);

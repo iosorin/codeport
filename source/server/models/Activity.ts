@@ -1,7 +1,7 @@
 import path from 'path';
 import { ActivityEvent, ScheduleEvent, ScheduleEventStrict } from 'types';
-import { EVENT_COLOR } from 'defaults';
-import { mergeItem } from 'utils';
+import { mergeItem } from '../../shared/utils';
+import { EVENT_COLOR } from '../../shared/defaults';
 import { read, write } from '../utils/fs';
 
 const activityPath = path.join(__dirname, '..', '..', '..', 'data', 'activity.json');

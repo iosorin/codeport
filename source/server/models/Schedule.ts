@@ -1,6 +1,6 @@
 import path from 'path';
 import { ScheduleEvent, ScheduleEventStrict } from 'types';
-import { mergeItem } from 'utils';
+import { mergeItem } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
 
