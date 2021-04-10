@@ -1,6 +1,8 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
-import { DEFAULT_EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
+import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
+import { CodeSnippet } from 'types';
+import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
@@ -8,9 +10,13 @@ class EditorStore {
 
     socket = SocketService.getInstance();
 
-    value = '';
+    value = EDITOR_VALUE;
 
-    settings: EditorOptions = { ...DEFAULT_EDITOR_OPTIONS, theme: 'codeport', fontSize: 18 };
+    settings: EditorOptions = {
+        ...EDITOR_OPTIONS,
+        theme: EDITOR_THEME,
+        fontSize: EDITOR_FONT_SIZE,
+    };
 
     settingsVisible = false;
 
@@ -40,6 +46,10 @@ class EditorStore {
         }
     }
 
+    setRoomID = (value: string) => {
+        this.roomID = value;
+    };
+
     setValue = (value: string, fromOrigin = false) => {
         this.value = value;
 
@@ -50,10 +60,6 @@ class EditorStore {
                 this.socket.emit('editor-value', value);
             }
         }
-    };
-
-    setRoomID = (value: string) => {
-        this.roomID = value;
     };
 
     toggleSettings = (visible = !this.settingsVisible) => {
@@ -97,6 +103,17 @@ class EditorStore {
         this.socket.on('client:editor-settings', (newSettings: EditorOptions) => {
             this.setSettings(newSettings, false);
         });
+    };
+
+    // todo - implement saveSnippet method
+    saveSnippet = (content: string) => {
+        const snippet: CodeSnippet = {
+            id: Date.now().toString(),
+            content,
+            lang: this.settings.mode,
+        };
+
+        console.log('snippet', snippet);
     };
 }
 

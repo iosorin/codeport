@@ -11,10 +11,10 @@ export const useHotkey = (
             const { altKey } = e;
             const ctrlKey = e.ctrlKey || e.metaKey;
 
-            const prefix = `${ctrlKey ? 'ctrl+' : ''}${altKey ? 'alt+' : ''}`;
-            const keyCode = `${prefix}${e.key.toLocaleLowerCase()}`;
+            const prefix = `${ctrlKey ? 'ctrl-' : ''}${altKey ? 'alt-' : ''}`;
+            const keyCode = `${prefix}${e.key}`;
 
-            if (keyCode === key) {
+            if (keyCode.toLowerCase() === key.toLowerCase()) {
                 e.preventDefault();
 
                 handler(e);
