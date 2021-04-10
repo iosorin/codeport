@@ -1,8 +1,11 @@
 import socketIO from 'socket.io';
 import http from 'http';
-import { ConferenceUser } from 'types';
 
-type SocketEventsRecorder = {
+import { ConferenceUser, SocketWrap } from 'types';
+
+type Instance = SocketWrap<socketIO.Socket> & socketIO.Socket;
+
+type Recorder = {
     createCandidate: (roomId: string) => void;
     saveCandidate: (roomId: string) => void;
 };
@@ -10,20 +13,20 @@ type SocketEventsRecorder = {
 export class SocketService {
     private io: socketIO.Server;
 
-    private connections: socketIO.Socket[] = [];
+    private connections: Instance[] = [];
 
     private users: { [key: string]: ConferenceUser[] } = {};
 
     private socketToRoom: { [key: string]: string } = {};
 
-    constructor(server: http.Server, public recorder: SocketEventsRecorder) {
+    constructor(server: http.Server, public recorder: Recorder) {
         this.io = new socketIO.Server(server);
 
         this.connection();
     }
 
     private connection() {
-        this.io.on('connection', (socket: socketIO.Socket) => {
+        this.io.on('connection', (socket: Instance) => {
             this.connections.push(socket);
 
             socket.on('check-room', (roomID: string) => {
