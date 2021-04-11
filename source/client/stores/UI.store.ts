@@ -1,10 +1,15 @@
 import { makeAutoObservable } from 'mobx';
+import { ToastStore } from './Toast.store';
 
 export class UiStore {
+    toast: ToastStore;
+
     conferencePanelVisible = false;
 
     constructor() {
         makeAutoObservable(this);
+
+        this.toast = new ToastStore();
     }
 
     get sidebarVisible() {

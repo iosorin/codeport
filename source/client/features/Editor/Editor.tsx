@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
 import { Codemirror } from '@ui';
-import { useToast } from '@/core';
+import { useUi } from '@/core';
 import { EditorSettings, EditorBar } from './.ui';
 import { Console } from './features/Console';
 import store from './store';
@@ -18,12 +18,13 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
     useHotkey(HOTKEYS.EDITOR_TOGGLE_SETTINGS.key, () => store.toggleSettings());
     useHotkey(HOTKEYS.EDITOR_TOGGLE_CONSOLE.key, () => store.toggleConsole(), true, true);
 
-    const toast = useToast();
+    const { toast } = useUi();
 
     const showToast = () => {
-        // toast.log('Lorem, ipsum dolor.');
+        console.log('ui', toast);
+        toast.log('Lorem, ipsum dolor.');
         // toast.error('Lorem ipsum dolor sit amet.');
-        toast.success('Snippet was saved');
+        // toast.success('Snippet was saved');
     };
 
     useEffect(() => {

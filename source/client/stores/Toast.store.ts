@@ -7,7 +7,7 @@ type Toast = { id: string; message: string; type: 'log' | 'success' | 'error'; d
 export class ToastStore {
     toasts: Toast[] = [];
 
-    constructor(public timeout = 2000) {
+    constructor() {
         makeAutoObservable(this);
     }
 
@@ -27,7 +27,7 @@ export class ToastStore {
         this.toasts = toasts;
     };
 
-    private create(message: string, timeout = this.timeout, type: Type) {
+    private create(message: string, timeout = 2000, type: Type) {
         return debounce(() => {
             const id = Math.random().toString();
 
