@@ -1,9 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { ToastManager } from './ToastManager';
 
 export class UiStore {
-    toast = new ToastManager();
-
     conferencePanelVisible = false;
 
     constructor() {

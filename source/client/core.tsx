@@ -1,8 +1,10 @@
 import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
 import { SocketService } from '@services';
-import { UiStore } from './stores/ui.store';
+import { UiStore } from './stores/Ui.store';
+import { ToastStore } from './stores/Toast.store';
 
+// global mobx configuration
 configure({
     enforceActions: 'observed',
     computedRequiresReaction: true,
@@ -11,24 +13,18 @@ configure({
     disableErrorBoundaries: false,
 });
 
-/* Core */
-const ui = new UiStore();
-
+// core
 const Core = {
-    ui,
-    toast: ui.toast,
+    ui: new UiStore(),
+    toast: new ToastStore(),
     socket: SocketService.getInstance(),
 };
 
 const CoreContext = createContext(Core);
 
-export const useCore = () => {
-    return useContext(CoreContext);
-};
-
-export const useUi = () => {
-    return useContext(CoreContext).ui;
-};
+export const useCore = () => useContext(CoreContext);
+export const useUi = () => useCore().ui;
+export const useToast = () => useCore().toast;
 
 export const CoreProvider: FC = ({ children }) => {
     return <CoreContext.Provider value={Core}>{children}</CoreContext.Provider>;

@@ -9,5 +9,6 @@ export { Range } from './Range';
 export { Select } from './Select';
 export { Tabs } from './Tabs';
 export { Textarea } from './Textarea';
+export { Toasts } from './Toasts';
 export { Tooltip } from './Tooltip';
 export { Transition } from './Transition';
