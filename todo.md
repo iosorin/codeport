@@ -18,3 +18,4 @@
 18. Вынести ts-utils из types в отдельный файл
 19. Переписать все даты на timeshtamp
 20. Типизация в сокетах
+21. Global overlay - ui store property

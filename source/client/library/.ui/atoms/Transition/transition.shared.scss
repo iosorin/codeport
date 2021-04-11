@@ -5,8 +5,8 @@ $fade-ease: $ease-3;
 $zoom-scale: 0.75;
 $zoom-ease: $ease-2;
 
-$sfu-translate: 15px;
-$sfu-ease: $ease-1;
+$sf-translate: 20px;
+$sf-ease: $ease-3;
 
 $drawer-translate: $drawer-width;
 $drawer-ease: $ease-3;
@@ -69,17 +69,20 @@ $drawer-ease: $ease-3;
     }
 }
 
-.slide-fade-up {
+// slide-fade
+@mixin slide-fade($transofrm, $transition: $d $sf-ease) {
+    transition-property: opacity transform;
+
     &-enter,
     &-appear {
-        transform: translateY($sfu-translate);
+        transform: $transofrm;
         pointer-events: none;
         opacity: 0;
     }
 
     &-enter-active,
     &-appear-active {
-        transition: all $d $sfu-ease;
+        transition: $transition;
         transition-delay: 0.1s;
         transform: translateY(0px);
         position: relative;
@@ -102,11 +105,18 @@ $drawer-ease: $ease-3;
     }
 
     &-exit-active {
-        transition: all $d $sfu-ease;
-        transform: translateY($sfu-translate);
+        transition: $transition;
+        transform: $transofrm;
         position: relative;
         opacity: 0;
     }
+}
+
+.slide-fade-up {
+    @include slide-fade(translateY($sf-translate));
+}
+.slide-fade-left {
+    @include slide-fade(translateX($sf-translate));
 }
 
 .slide-in-left {

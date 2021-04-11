@@ -1,0 +1,28 @@
+.toasts {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.toast {
+    font-size: 0.7rem;
+    line-height: 0;
+    font-family: $sans-accent;
+    font-weight: 600;
+    color: $black;
+    padding: $padding-l;
+    margin-bottom: 0.6rem;
+    border-radius: $radius;
+
+    &.log {
+        background: $light;
+    }
+
+    &.success {
+        background: $success;
+    }
+
+    &.error {
+        background: $error;
+    }
+}

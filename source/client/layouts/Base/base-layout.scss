@@ -1,4 +1,4 @@
-$pd: $padding-l * 2;
+$pd: $padding-xl * 2;
 .content {
     flex: 1;
     display: flex;
@@ -8,7 +8,7 @@ $pd: $padding-l * 2;
     @include scrollable(6px);
 
     &.wide {
-        padding: $padding-l;
+        padding: $padding-xl;
     }
 
     h1 {

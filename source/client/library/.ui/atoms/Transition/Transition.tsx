@@ -5,6 +5,14 @@ import './transition.shared.scss';
 
 export const DEFAULT_DURATION = 300;
 
+export type Transition =
+    | 'fade'
+    | 'zoom'
+    | 'slide-fade-up'
+    | 'slide-fade-left'
+    | 'slide-in-left'
+    | 'call-panel-slide';
+
 export type Props = {
     type?: Transition;
     in: boolean | undefined | number;
@@ -12,8 +20,6 @@ export type Props = {
     className?: string;
     children: ReactElement;
 };
-
-export type Transition = 'fade' | 'zoom' | 'slide-fade-up' | 'slide-in-left' | 'call-panel-slide';
 
 export const Transition: FC<Props> = ({
     type = 'fade',

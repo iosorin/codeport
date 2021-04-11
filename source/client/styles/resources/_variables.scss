@@ -8,7 +8,7 @@ $font-size: 14px;
 $black: #222;
 $black-lighten: lighten($black, 3.5%);
 $black-darken: darken($black, 4%);
-$light: #f6f6f6;
+$light: #fefefe;
 
 $yellow: #ffeb3b;
 $orange: #ff4d2c;
@@ -21,6 +21,7 @@ $grey: #ebebeb;
 $primary: $blue;
 $secondary: $yellow;
 $success: $green;
+$error: $red;
 
 $text: white;
 $text-grey: lighten($black, 20%);
@@ -29,7 +30,8 @@ $text-grey: lighten($black, 20%);
 $padding-x: 15px;
 $padding-y: 9px;
 $padding: $padding-y $padding-x;
-$padding-l: 20px;
+$padding-l: 16px 15px 15px;
+$padding-xl: 20px;
 $radius: 5px;
 $shadow: 0 3px 10px -3px rgba(black, 0.7);
 $shadow-light: 0 3px 8px 0px rgba(white, 0.3);
