@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useHistory, useParams } from 'react-router-dom';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 import { Editor } from '@/features/Editor';
 import { Conference } from '@/features/Conference';
 import { useCore } from '@/core';

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 import { Block } from '@ui';
 
 export const NotificationsView: FC = () => {

@@ -21,7 +21,6 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
     const { toast } = useUi();
 
     const showToast = () => {
-        console.log('ui', toast);
         toast.log('Lorem, ipsum dolor.');
         // toast.error('Lorem ipsum dolor sit amet.');
         // toast.success('Snippet was saved');

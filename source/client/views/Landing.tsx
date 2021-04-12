@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 import Human from '@resources/media/human.svg';
 import { Logo } from '@ui';
 
