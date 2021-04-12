@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 
 export const ExceptionView = (): JSX.Element => {
     return (

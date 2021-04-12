@@ -22,17 +22,14 @@
         "paths": {
             "@/*": ["source/client/*"],
 
-            "@media/*": ["source/client/media/*"],
-            "@styles/*": ["source/client/styles/*"],
-
             "@ui/*": ["source/client/library/.ui/*"],
             "@ui": ["source/client/library/.ui"],
 
             "@hooks": ["source/client/library/hooks"],
             "@services": ["source/client/services"],
 
-            "@layouts/*": ["source/client/layouts/*"],
-            "@layouts": ["source/client/layouts"],
+            "@media/*": ["source/client/media/*"],
+            "@styles/*": ["source/client/styles/*"],
 
             "types": ["source/shared/types"],
             "defaults": ["source/shared/defaults"],

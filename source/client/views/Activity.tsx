@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 import { Activity } from '@/features/Activity';
 
 export const ActivityView: FC = () => {

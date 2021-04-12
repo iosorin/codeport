@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseLayout } from '@layouts';
+import { BaseLayout } from '@ui/layouts';
 import { Schedule } from '@/features/Schedule';
 
 export const ScheduleView: FC = () => {

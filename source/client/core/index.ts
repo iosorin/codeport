@@ -1,7 +1,6 @@
-import React, { createContext, FC, useContext } from 'react';
 import { configure } from 'mobx';
 import { SocketService } from '@services';
-import { UiStore } from './stores/Ui.store';
+import { UiStore } from '../stores/Ui.store';
 
 // global mobx configuration
 configure({
@@ -12,21 +11,11 @@ configure({
     disableErrorBoundaries: false,
 });
 
-// core
-const Core = {
+export const Core = {
     ui: new UiStore(),
     socket: SocketService.getInstance(),
 };
 
-const CoreContext = createContext(Core);
-
-export const useCore = () => useContext(CoreContext);
-export const useUi = () => useCore().ui;
-
 export function createStore<T>(Store: { new (core: typeof Core): T }) {
     return new Store(Core);
 }
-
-export const CoreProvider: FC = ({ children }) => {
-    return <CoreContext.Provider value={Core}>{children}</CoreContext.Provider>;
-};

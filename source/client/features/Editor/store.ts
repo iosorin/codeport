@@ -2,6 +2,7 @@ import { autorun, makeAutoObservable } from 'mobx';
 import { SocketService } from '@services';
 import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
 import { CodeSnippet } from 'types';
+import { createStore } from '@/core';
 import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
@@ -22,7 +23,9 @@ class EditorStore {
 
     consoleVisible = false;
 
-    constructor() {
+    constructor(core) {
+        console.log('args', core);
+
         makeAutoObservable(this, { socket: false });
 
         autorun(() => {
@@ -122,4 +125,4 @@ class EditorStore {
     };
 }
 
-export default new EditorStore();
+export default createStore(EditorStore);
