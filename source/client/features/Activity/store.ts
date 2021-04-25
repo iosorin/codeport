@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ActivityEvent, ScheduleEvent, ParamRequired } from 'types';
+import { ActivityEvent, NewEvent } from 'types';
 import { api } from './api';
 
 type ActivityEventOrNull = ActivityEvent | null | undefined;
@@ -59,7 +59,7 @@ class ActivityStore {
         this.confirmDialogVisible = Boolean(event);
     };
 
-    updateDialogEvent = (updated: ScheduleEvent) => {
+    updateDialogEvent = (updated: Partial<ActivityEvent>) => {
         if (!this.dialogEvent) return;
 
         this.setDialogEvent({ ...this.dialogEvent, ...updated });
@@ -83,13 +83,9 @@ class ActivityStore {
         this.call(api.get);
     };
 
-    updateEvent = (event: ParamRequired<ScheduleEvent, 'id'>) => {
-        this.call(api.update.bind(null, event));
-    };
+    updateEvent = (event: NewEvent) => this.call(api.update.bind(null, event));
 
-    removeEvent = (id: string | number) => {
-        this.call(api.delete.bind(null, id));
-    };
+    removeEvent = (id: string | number) => this.call(api.delete.bind(null, id));
 }
 
 const store = new ActivityStore();

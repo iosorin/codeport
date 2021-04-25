@@ -1,5 +1,5 @@
 import path from 'path';
-import { ScheduleEvent, ScheduleEventStrict } from 'types';
+import { NewEvent, ScheduleEvent } from 'types';
 import { mergeItem } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
@@ -18,34 +18,34 @@ export class Schedule {
     };
 
     static async fetch() {
-        return read(schedulePath) as Promise<ScheduleEventStrict[]>;
+        return read(schedulePath) as Promise<ScheduleEvent[]>;
     }
 
-    static async create(scheduleEvent: ScheduleEvent) {
-        const schedule: ScheduleEventStrict[] = await Schedule.fetch();
+    static async create(scheduleEvent: NewEvent) {
+        const schedule: ScheduleEvent[] = await Schedule.fetch();
 
         if (scheduleEvent.date) {
-            Notification.toQueue('scheduled', scheduleEvent);
+            Notification.toQueue('scheduled', scheduleEvent as ScheduleEvent);
         }
 
         schedule.push({ ...Schedule.template, ...scheduleEvent, id: Date.now() });
 
-        return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
     }
 
-    static async update(scheduleEvent: ScheduleEvent) {
-        let schedule: ScheduleEventStrict[] = await Schedule.fetch();
+    static async update(scheduleEvent: NewEvent) {
+        let schedule: ScheduleEvent[] = await Schedule.fetch();
 
         schedule = mergeItem(schedule, scheduleEvent);
 
-        return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
     }
 
     static async remove(eventID: string) {
-        let schedule: ScheduleEventStrict[] = await Schedule.fetch();
+        let schedule: ScheduleEvent[] = await Schedule.fetch();
 
         schedule = schedule.filter((event) => event.id.toString() !== eventID);
 
-        return write(schedulePath, schedule) as Promise<ScheduleEventStrict[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
     }
 }

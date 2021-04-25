@@ -1,17 +1,18 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { ScheduleEvent } from 'types';
+import { ActivityEvent, NewEvent, ScheduleEvent } from 'types';
 import { EVENT_COLOR } from 'defaults';
 import { Input, Textarea, Colors, Button, Emojis } from '@ui';
 import { date } from '@/library/utils';
 
-type ScheduleEventOrNull = ScheduleEvent | null | undefined;
+type Event = Partial<ActivityEvent>;
+type EventOrNull = Event | null | undefined;
 
 type Props = {
-    details: ScheduleEventOrNull;
+    details: EventOrNull;
     completed?: boolean;
     align?: 'start' | 'center' | 'end';
     exclude?: ('title' | 'rating' | 'color' | 'date' | 'main')[];
-    onSubmit: (event: ScheduleEvent) => void | Promise<any>;
+    onSubmit: (event: Event) => void | Promise<any>;
     onCancel?: () => void;
 };
 
@@ -24,7 +25,7 @@ export const EventForm: FC<Props> = ({
     onCancel,
 }) => {
     const [loading, setLoading] = useState(false);
-    const [details, setDetails] = useState<ScheduleEventOrNull>({ ...source });
+    const [details, setDetails] = useState<EventOrNull>({ ...source });
 
     const showTitle = !exclude?.includes('title');
     const showColor = !exclude?.includes('color');
@@ -46,9 +47,10 @@ export const EventForm: FC<Props> = ({
         }
     };
 
-    const set = (updated: ScheduleEvent) => {
-        setDetails({ ...details, ...updated });
+    const set = (event: Event) => {
+        setDetails({ ...details, ...event });
     };
+
     return (
         <form onSubmit={submitHandler}>
             <div className="flex-col">

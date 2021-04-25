@@ -8,7 +8,7 @@ type Props = {
     visible: boolean;
     loading?: boolean;
     details: ActivityEvent | null;
-    setDetails: (details: ScheduleEvent) => void;
+    setDetails: (details: Partial<ActivityEvent>) => void;
     close: () => void;
 };
 

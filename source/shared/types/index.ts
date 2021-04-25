@@ -1,4 +1,5 @@
 import { SUPPORTED_LANGUAGES } from '../defaults';
+import { ParamRequired } from './utils';
 
 export * from './socket';
 export * from './utils';
@@ -20,21 +21,6 @@ export type ConferenceUser = {
 };
 
 export type ScheduleEvent = {
-    id?: string | number;
-    date?: number;
-    title?: string;
-    stack?: string;
-    salary?: string;
-    contacts?: string;
-    additional?: string;
-    color?: string;
-
-    rating?: number;
-    snippets?: CodeSnippet[];
-    time?: number;
-};
-
-export type ScheduleEventStrict = {
     id: string | number;
     date: number;
     title: string;
@@ -45,7 +31,20 @@ export type ScheduleEventStrict = {
     color: string;
 };
 
-export type ActivityEvent = ScheduleEventStrict & {
+export type NewEvent = ParamRequired<ScheduleEvent, 'id'>;
+
+// export type ScheduleEventStrict = {
+//     id: string | number;
+//     date: number;
+//     title: string;
+//     stack: string;
+//     salary: string;
+//     contacts: string;
+//     additional: string;
+//     color: string;
+// };
+
+export type ActivityEvent = ScheduleEvent & {
     rating: number;
     snippets: CodeSnippet[];
     time: number; // min.

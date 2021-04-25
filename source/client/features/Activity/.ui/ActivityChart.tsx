@@ -9,12 +9,12 @@ import {
     YAxis,
 } from 'recharts';
 import { date } from '@/library/utils';
-import { ScheduleEventStrict } from 'types';
+import { ActivityEvent } from 'types';
 import { observer } from 'mobx-react-lite';
 
 type Props = {
     size?: number;
-    events: ScheduleEventStrict[];
+    events: ActivityEvent[];
     height?: string | number;
 };
 

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Block, Colors, Event } from '@ui';
 import { observer } from 'mobx-react-lite';
-import { ParamRequired, ScheduleEvent, ScheduleEventStrict } from 'types';
+import { NewEvent, ScheduleEvent } from 'types';
 
 import { date } from '@/library/utils';
 
 type Props = {
-    details: ScheduleEventStrict;
-    updateEvent: (event: ParamRequired<ScheduleEvent, 'id'>) => void;
+    details: ScheduleEvent;
+    updateEvent: (event: NewEvent) => void;
     toggleDialog: (event: ScheduleEvent) => void;
     toggleConfirmDialog: (event: ScheduleEvent) => void;
 };

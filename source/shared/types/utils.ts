@@ -3,4 +3,4 @@ export type Merge<A, B> = {
 } &
     B;
 
-export type ParamRequired<T, P extends string> = T & { [key in P]: string | number };
+export type ParamRequired<T, P extends string> = Partial<T> & { [key in P]: string | number };
