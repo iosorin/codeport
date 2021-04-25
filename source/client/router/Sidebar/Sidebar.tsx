@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Activity, AtSign, Bell, Book, Calendar, LogIn, Video } from 'react-feather';
+
 import { Tooltip, Logo } from '@ui';
 import { ROUTES } from '@/router';
+import { Activity, AtSign, Bell, Book, Calendar, LogIn, Triangle, Video } from 'react-feather';
 import styles from './sidebar.scss';
 
 export type Props = {
@@ -43,23 +44,21 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     exact={ROUTES.SCHEDULE.exact}
                     to={ROUTES.SCHEDULE.path}
                 >
-                    <Tooltip text="Schedule">
+                    <Tooltip text={ROUTES.SCHEDULE.link}>
                         <Calendar />
                     </Tooltip>
                 </NavLink>
 
                 <NavLink
                     activeClassName={styles.active}
-                    exact={ROUTES.NOTIFICATIONS.exact}
-                    to={ROUTES.NOTIFICATIONS.path}
+                    exact={ROUTES.SNIPPETS.exact}
+                    to={ROUTES.SNIPPETS.path}
                 >
-                    <Tooltip text="Notifications">
-                        <Bell />
+                    <Tooltip text={ROUTES.SNIPPETS.link}>
+                        <Triangle />
                     </Tooltip>
                 </NavLink>
-            </div>
 
-            <div className={styles.ul}>
                 <NavLink
                     activeClassName={styles.active}
                     exact={ROUTES.RESOURCES.exact}
@@ -67,6 +66,18 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                 >
                     <Tooltip text={ROUTES.RESOURCES.title}>
                         <Book />
+                    </Tooltip>
+                </NavLink>
+            </div>
+
+            <div className={styles.ul}>
+                <NavLink
+                    activeClassName={styles.active}
+                    exact={ROUTES.NOTIFICATIONS.exact}
+                    to={ROUTES.NOTIFICATIONS.path}
+                >
+                    <Tooltip text={ROUTES.NOTIFICATIONS.link}>
+                        <Bell />
                     </Tooltip>
                 </NavLink>
 
