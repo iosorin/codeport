@@ -1,5 +1,5 @@
 import path from 'path';
-import { ActivityEvent, ScheduleEvent, ScheduleEventStrict } from 'types';
+import { ActivityEvent, NewEvent, ScheduleEvent } from 'types';
 import { mergeItem } from '../../shared/utils';
 import { EVENT_COLOR } from '../../shared/defaults';
 import { read, write } from '../utils/fs';
@@ -34,10 +34,10 @@ export class Activity {
 
         index >= 0 ? (events[index] = event) : events.push(event);
 
-        return write(activityPath, events) as Promise<ScheduleEventStrict[]>;
+        return write(activityPath, events) as Promise<ScheduleEvent[]>;
     }
 
-    static update = async (scheduleEvent: ScheduleEvent) => {
+    static update = async (scheduleEvent: NewEvent) => {
         let events = await Activity.fetch();
 
         events = mergeItem(events, scheduleEvent);

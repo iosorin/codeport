@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { ScheduleEvent, ScheduleEventStrict } from 'types';
+import { NewEvent } from 'types';
 import { Schedule } from '../models/Schedule';
 
 export const get = async (_: Request, res: Response) => {
@@ -8,13 +8,13 @@ export const get = async (_: Request, res: Response) => {
     return res.json(schedule);
 };
 
-export const create = async (req: Request<null, null, ScheduleEvent>, res: Response) => {
+export const create = async (req: Request<null, null, NewEvent>, res: Response) => {
     const schedule = await Schedule.create(req.body);
 
     return res.status(201).json(schedule);
 };
 
-export const update = async (req: Request<null, null, ScheduleEventStrict>, res: Response) => {
+export const update = async (req: Request<null, null, NewEvent>, res: Response) => {
     const schedule = await Schedule.update(req.body);
 
     return res.json(schedule);

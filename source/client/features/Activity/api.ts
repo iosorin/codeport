@@ -1,5 +1,5 @@
 import { http } from '@services';
-import { ScheduleEvent, ActivityEvent } from 'types';
+import { NewEvent, ActivityEvent } from 'types';
 
 type Res = ActivityEvent[];
 
@@ -8,7 +8,7 @@ export const api = {
         return http.get('/api/activity').then((res) => res.data);
     },
 
-    update: async (event: ScheduleEvent): Promise<Res> => {
+    update: async (event: NewEvent): Promise<Res> => {
         return http.put('/api/activity', event).then((res) => res.data);
     },
 

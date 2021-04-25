@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
-import { ScheduleEvent } from 'types';
+import { ActivityEvent } from 'types';
 import { date } from '@/library/utils';
 import styles from './event.scss';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 
+type Event = Partial<ActivityEvent>;
+
 type Props = {
-    details: ScheduleEvent;
+    details: Event;
     rating?: boolean;
     date?: boolean;
     showEmpty?: boolean;

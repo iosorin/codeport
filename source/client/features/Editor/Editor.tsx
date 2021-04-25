@@ -22,8 +22,8 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 
     const showToast = () => {
         toast.log('Lorem, ipsum dolor.');
-        // toast.error('Lorem ipsum dolor sit amet.');
-        // toast.success('Snippet was saved');
+        toast.error('Lorem ipsum dolor sit amet.');
+        toast.success('Snippet was saved');
     };
 
     useEffect(() => {
@@ -41,8 +41,9 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 
     return (
         <div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
-            {/* eslint-disable-next-line react/button-has-type */}
-            <button onClick={showToast}>show toast</button>
+            <button onClick={showToast} type="button">
+                SHOW TOAST
+            </button>
 
             <Codemirror
                 onChange={onChange}
@@ -50,12 +51,14 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
                 options={store.settings}
                 value={store.value}
             />
+
             <EditorSettings
                 isOpen={store.settingsVisible}
                 setSettings={store.setSettings}
                 settings={store.settings}
                 toggleSettings={store.toggleSettings}
             />
+
             <div
                 className={classNames(styles.Bar, {
                     [styles.active]: store.consoleVisible,

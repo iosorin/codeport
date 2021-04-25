@@ -1,6 +1,7 @@
 import { configure } from 'mobx';
-import { SocketService } from '@services';
-import { UiStore } from '../stores/Ui.store';
+
+export * from './context';
+export * from './core';
 
 // global mobx configuration
 configure({
@@ -10,12 +11,3 @@ configure({
     observableRequiresReaction: false,
     disableErrorBoundaries: false,
 });
-
-export const Core = {
-    ui: new UiStore(),
-    socket: SocketService.getInstance(),
-};
-
-export function createStore<T>(Store: { new (core: typeof Core): T }) {
-    return new Store(Core);
-}

@@ -1,5 +1,5 @@
 import React, { createContext, FC, useContext } from 'react';
-import { Core } from '.';
+import { Core } from './core';
 
 const CoreContext = createContext(Core);
 

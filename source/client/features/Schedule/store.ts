@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx';
-import { ScheduleEvent, ScheduleEventStrict, ParamRequired } from 'types';
+import { ScheduleEvent, NewEvent } from 'types';
 import { date, debounce, groupBy, randomEventColor } from '@/library/utils';
 import { api } from './api';
 
-type ScheduleEventOrNull = ScheduleEvent | null | undefined;
+type ScheduleEventOrNull = Partial<ScheduleEvent> | null | undefined;
 
 class ScheduleStore {
-    events: ScheduleEventStrict[] = [];
+    events: ScheduleEvent[] = [];
 
     dialogVisible = false;
 
@@ -42,8 +42,8 @@ class ScheduleStore {
         return this.active.get(date.when(Date.now(), false))?.length ?? 0;
     }
 
-    group = (events: ScheduleEventStrict[]) =>
-        groupBy<ScheduleEventStrict>(events, (event) => date.when(event.date, false));
+    group = (events: ScheduleEvent[]) =>
+        groupBy<ScheduleEvent>(events, (event) => date.when(event.date, false));
 
     toggleDialog = (event?: ScheduleEventOrNull, visible?: boolean) => {
         this.setDialogEvent(event);
@@ -67,7 +67,7 @@ class ScheduleStore {
         this.setDialogEvent({ ...this.dialogEvent, ...details });
     };
 
-    setEvents = (events: ScheduleEventStrict[]) => {
+    setEvents = (events: ScheduleEvent[]) => {
         this.events = events;
     };
 
@@ -80,16 +80,13 @@ class ScheduleStore {
         return api.create(event).then(debounce(this.setEvents));
     };
 
-    updateEvent = (event: ParamRequired<ScheduleEvent, 'id'>) =>
-        api.update(event).then(debounce(this.setEvents));
+    updateEvent = (event: NewEvent) => api.update(event).then(debounce(this.setEvents));
 
     removeEvent = (id: string | number) => api.delete(id).then(this.setEvents);
 }
 
 const store = new ScheduleStore();
 
-type ScheduleStoreType = typeof store;
-
-export { ScheduleStoreType };
+export type ScheduleStoreType = typeof store;
 
 export default store;

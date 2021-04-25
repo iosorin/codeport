@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import { Dialog, EventForm } from '@ui';
 import { ScheduleStoreType } from '../../store';
 import { observer } from 'mobx-react-lite';
-import { ScheduleEvent } from 'types';
+import { ActivityEvent } from 'types';
 
 type Props = {
     store: ScheduleStoreType;
 };
 
 export const ScheduleDialog: FC<Props> = observer(({ store }) => {
-    const submitHandler = async (details: ScheduleEvent) => {
+    const submitHandler = async (details: Partial<ActivityEvent>) => {
         const action = details.id ? store.updateEvent : store.createEvent;
 
         // @ts-ignore
