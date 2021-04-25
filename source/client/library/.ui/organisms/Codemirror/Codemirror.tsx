@@ -10,15 +10,15 @@ import { EDITOR_OPTIONS, EditorOptions, HOTKEYS } from '@/library/constants';
 type Props = {
     value: string;
     options?: EditorOptions;
+    allowEmptySave?: boolean;
     onChange: (editor: CodeMirror.Editor, change: any) => void;
     onSave?: (selected: string) => void;
-    emptySelectionOnSave?: boolean;
 };
 
 export const Codemirror: FC<Props> = ({
     value,
     options: optionsProp = {},
-    emptySelectionOnSave = false,
+    allowEmptySave,
     onChange,
     onSave,
 }) => {
@@ -31,11 +31,10 @@ export const Codemirror: FC<Props> = ({
 
                 let selection = editor.getSelection();
 
-                if (!selection.length && !emptySelectionOnSave) {
+                if (!selection.length && allowEmptySave) {
                     selection = editor.getValue();
                 }
-
-                onSave(selection);
+                return onSave(selection);
             },
         },
     };

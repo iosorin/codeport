@@ -1,13 +1,9 @@
 import React, { FC } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useDocumentTitle } from '@hooks';
-import { NestedRouteProps } from './routes';
+import { NestedRoute } from './routes';
 
-export const PrivateRoute: FC<NestedRouteProps> = ({
-    component: Component,
-    meta = {},
-    ...rest
-}) => {
+export const PrivateRoute: FC<NestedRoute> = ({ component: Component, meta = {}, ...rest }) => {
     const { requiresAuth, title } = meta;
 
     // todo - fix

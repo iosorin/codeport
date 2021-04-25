@@ -1,9 +1,13 @@
 import { SocketService } from '@services';
-import { UiStore } from '../stores/Ui.store';
+import { ToastStore } from '@/stores/Toast.store';
+import { UiStore } from '@/stores/Ui.store';
 
-export const Core = {
+export const core = {
     ui: new UiStore(),
+    toast: new ToastStore(),
     socket: SocketService.getInstance(),
 };
 
-// export const inject = (store:)
+export function dep<K extends keyof typeof core>(key: K) {
+    return core[key];
+}

@@ -1,10 +1,10 @@
 import socketIOClient from 'socket.io-client';
 import { SocketWrap } from 'types';
 
-type Instance = SocketWrap<SocketIOClient.Emitter> & typeof socketIOClient.Socket;
+type SocketInstance = SocketWrap<SocketIOClient.Emitter> & typeof socketIOClient.Socket;
 
 export class SocketService {
-    private static socket: Instance;
+    private static socket: SocketInstance;
 
     public static getInstance = () => {
         if (!SocketService.socket) {
