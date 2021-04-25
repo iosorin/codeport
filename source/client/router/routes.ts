@@ -6,6 +6,7 @@ import { ExceptionView } from '@/views/Exception';
 import { uuid } from '@/library/utils';
 import { NotificationsView } from '@/views/Notifications';
 import { ScheduleView } from '@/views/Schedule';
+import { SnippetsView } from '@/views/Snippets';
 
 /* types */
 type MetaProps = {
@@ -28,13 +29,29 @@ export const ROUTES = {
     HOME: { title: 'Home', link: 'Go Home', path: '/', exact: true },
     CONFERENCE: {
         title: 'Conference Room',
-        link: 'New Conference',
+        link: 'Conference',
         path: '/conference/:uuid',
         pathFn: () => `/conference/${uuid()}`,
         exact: true,
     },
-    ACTIVITY: { title: 'Activity', link: 'Activity', path: '/activity', exact: true },
-    SCHEDULE: { title: 'Schedule', link: 'Schedule', path: '/schedule', exact: true },
+    ACTIVITY: {
+        title: 'Activity',
+        link: 'Activity',
+        path: '/activity',
+        exact: true,
+    },
+    SCHEDULE: {
+        title: 'Schedule',
+        link: 'Schedule',
+        path: '/schedule',
+        exact: true,
+    },
+    SNIPPETS: {
+        title: 'Snippets',
+        link: 'Snippets',
+        path: '/snippets',
+        exact: false,
+    },
     NOTIFICATIONS: {
         title: 'Notifications',
         link: 'Notifications',
@@ -49,7 +66,6 @@ export const ROUTES = {
     },
     EXCEPTION: { title: 'Page Not Found', path: '*', exact: true },
 };
-
 /* paths */
 export const paths: NestedRoute[] = [
     {
@@ -84,6 +100,15 @@ export const paths: NestedRoute[] = [
         meta: {
             title: ROUTES.SCHEDULE.title,
             requiresAuth: true,
+        },
+    },
+
+    {
+        path: ROUTES.SNIPPETS.path,
+        component: SnippetsView,
+        exact: ROUTES.SNIPPETS.exact,
+        meta: {
+            title: ROUTES.SNIPPETS.title,
         },
     },
     {
