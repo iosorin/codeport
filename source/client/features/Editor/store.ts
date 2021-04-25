@@ -1,12 +1,14 @@
 import { autorun, makeAutoObservable } from 'mobx';
-import { SocketService } from '@services';
 import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
 import { CodeSnippet } from 'types';
+import { dep } from '@/core';
 import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
-    socket = SocketService.getInstance();
+    toast = dep('toast');
+
+    socket = dep('socket');
 
     roomID = '';
 
@@ -105,20 +107,20 @@ class EditorStore {
         });
     };
 
-    saveSnippet = (content: string) => {
+    saveSnippet = async (content: string) => {
         const snippet: CodeSnippet = {
             id: Date.now().toString(),
             content,
             lang: this.settings.mode,
         };
 
-        api.saveSnippet(snippet);
-        // .then(() => {
-        //     this.ui?.toast.success('Snippet saved');
-        // })
-        // .catch((err) => {
-        //     this.ui?.toast.error(err.message);
-        // });
+        try {
+            await api.saveSnippet(snippet);
+
+            this.toast.success('Snippet saved');
+        } catch (error) {
+            this.toast.error(error.message);
+        }
     };
 }
 

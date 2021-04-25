@@ -1,7 +1,7 @@
 import Peer from 'simple-peer';
 import { makeAutoObservable, reaction } from 'mobx';
 import { ConferenceUser } from 'types';
-import { SocketService } from '@services';
+import { dep } from '@/core';
 
 export type PeerItem = {
     peerID: string;
@@ -13,9 +13,9 @@ export type PeerItem = {
 };
 
 class ConferenceStore {
-    roomID = '';
+    socket = dep('socket');
 
-    socket = SocketService.getInstance();
+    roomID = '';
 
     stream: MediaStream | undefined = undefined;
 

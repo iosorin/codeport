@@ -1,8 +1,8 @@
+import { RouteComponentProps } from 'react-router-dom';
 import { HomeView } from '@/views/Home';
 import { ActivityView } from '@/views/Activity';
 import { ResourcesView } from '@/views/Resourses';
 import { ExceptionView } from '@/views/Exception';
-import { RouteComponentProps } from 'react-router-dom';
 import { uuid } from '@/library/utils';
 import { NotificationsView } from '@/views/Notifications';
 import { ScheduleView } from '@/views/Schedule';
@@ -11,17 +11,17 @@ import { ScheduleView } from '@/views/Schedule';
 type MetaProps = {
     title?: string;
     requiresAuth?: boolean;
-    isLoginToHome?: boolean;
+    redirectHome?: boolean;
 };
 
-export type PureRouteProps = {
+export type PureRoute = {
     path: string;
-    component: React.FC<RouteComponentProps>; // | JSX.Element
     exact?: boolean;
     meta?: MetaProps;
+    component: React.FC<RouteComponentProps>; // | JSX.Element
 };
 
-export type NestedRouteProps = PureRouteProps & { routes?: Array<PureRouteProps> };
+export type NestedRoute = PureRoute & { routes?: PureRoute[] };
 
 /* constants */
 export const ROUTES = {
@@ -51,7 +51,7 @@ export const ROUTES = {
 };
 
 /* paths */
-export const paths: Array<NestedRouteProps> = [
+export const paths: NestedRoute[] = [
     {
         path: ROUTES.HOME.path,
         component: HomeView,

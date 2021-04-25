@@ -4,6 +4,8 @@ import { debounce } from '@/library/utils';
 type Type = 'log' | 'success' | 'error';
 type Toast = { id: string; message: string; type: 'log' | 'success' | 'error'; display: boolean };
 
+const DEFAULT_TIMEOUT = 1500;
+
 export class ToastStore {
     toasts: Toast[] = [];
 
@@ -27,7 +29,7 @@ export class ToastStore {
         this.toasts = toasts;
     };
 
-    private create(message: string, timeout = 2000, type: Type) {
+    private create(message: string, timeout = DEFAULT_TIMEOUT, type: Type) {
         return debounce(() => {
             const id = Math.random().toString();
 

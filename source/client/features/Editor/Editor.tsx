@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite';
 import { HOTKEYS } from '@/library/constants';
 import { useHotkey } from '@/library/hooks';
 import { Codemirror } from '@ui';
-import { useUi } from '@/core';
 import { EditorSettings, EditorBar } from './.ui';
 import { Console } from './features/Console';
 import store from './store';
@@ -15,16 +14,9 @@ type Props = {
 };
 
 export const Editor: FC<Props> = observer(({ roomID }) => {
+    useHotkey(HOTKEYS.EDITOR_SAVE_SNIPPET.key, (e) => e.preventDefault());
     useHotkey(HOTKEYS.EDITOR_TOGGLE_SETTINGS.key, () => store.toggleSettings());
     useHotkey(HOTKEYS.EDITOR_TOGGLE_CONSOLE.key, () => store.toggleConsole(), true, true);
-
-    const { toast } = useUi();
-
-    const showToast = () => {
-        toast.log('Lorem, ipsum dolor.');
-        toast.error('Lorem ipsum dolor sit amet.');
-        toast.success('Snippet was saved');
-    };
 
     useEffect(() => {
         store.setRoomID(roomID);
@@ -41,10 +33,6 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 
     return (
         <div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
-            <button onClick={showToast} type="button">
-                SHOW TOAST
-            </button>
-
             <Codemirror
                 onChange={onChange}
                 onSave={store.saveSnippet}
