@@ -16,9 +16,7 @@ export type SnippetsContract = {
     };
 
     REMOVE: {
-        params: {
-            id: Snippet['id'];
-        };
+        params: { id: Snippet['id'] };
         response: Snippet[];
     };
 };
