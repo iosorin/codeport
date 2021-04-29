@@ -32,8 +32,9 @@
             "@styles/*": ["source/client/styles/*"],
 
             "types": ["source/shared/types"],
+            "utils": ["source/shared/utils"],
             "defaults": ["source/shared/defaults"],
-            "utils": ["source/shared/utils"]
+            "contracts/*": ["source/shared/contracts/*"]
         }
     },
     "include": ["./source/**/*"],

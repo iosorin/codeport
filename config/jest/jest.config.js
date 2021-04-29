@@ -37,8 +37,9 @@ module.exports = {
         '@services(.*)$': '<rootDir>/source/client/library/services',
         '@media/(.*)$': '<rootDir>/source/client/media/$1',
         '@styles/(.*)$': '<rootDir>/source/client/styles/$1',
+        'contracts/(.*)$': '<rootDir>/source/shared/contracts/$1',
         'types/(.*)$': '<rootDir>/source/shared/types/$1',
-        'constants/(.*)$': '<rootDir>/source/shared/defaults/$1',
+        'defaults/(.*)$': '<rootDir>/source/shared/defaults/$1',
         'utils/(.*)$': '<rootDir>/source/shared/utils/$1',
     },
 
