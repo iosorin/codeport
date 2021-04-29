@@ -3,4 +3,5 @@ export type Merge<A, B> = {
 } &
     B;
 
-export type ParamRequired<T, P extends string> = Partial<T> & { [key in P]: string | number };
+export type Required<T, P extends string> = Partial<T> & { [key in P]: string | number };
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;

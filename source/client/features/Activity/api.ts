@@ -12,7 +12,7 @@ export const api = {
         return http.put('/api/activity', event).then((res) => res.data);
     },
 
-    delete: async (id: string | number): Promise<Res> => {
+    delete: async (id: ActivityEvent['id']): Promise<Res> => {
         return http.delete(`/api/activity/${id}`).then((res) => res.data);
     },
 };

@@ -3,7 +3,7 @@ import { NewEvent } from 'types';
 import { Schedule } from '../models/Schedule';
 
 export const get = async (_: Request, res: Response) => {
-    const schedule = await Schedule.fetch();
+    const schedule = await Schedule.get();
 
     return res.json(schedule);
 };

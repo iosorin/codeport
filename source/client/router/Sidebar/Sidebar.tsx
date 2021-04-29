@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { Tooltip, Logo } from '@ui';
 import { ROUTES } from '@/router';
-import { Activity, AtSign, Bell, Book, Calendar, LogIn, Triangle, Video } from 'react-feather';
+import { Activity, AtSign, Bell, Book, Calendar, File, LogIn, Video } from 'react-feather';
 import styles from './sidebar.scss';
 
 export type Props = {
@@ -55,10 +54,12 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                     to={ROUTES.SNIPPETS.path}
                 >
                     <Tooltip text={ROUTES.SNIPPETS.link}>
-                        <Triangle />
+                        <File />
                     </Tooltip>
                 </NavLink>
+            </div>
 
+            <div className={styles.ul}>
                 <NavLink
                     activeClassName={styles.active}
                     exact={ROUTES.RESOURCES.exact}
@@ -68,9 +69,7 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
                         <Book />
                     </Tooltip>
                 </NavLink>
-            </div>
 
-            <div className={styles.ul}>
                 <NavLink
                     activeClassName={styles.active}
                     exact={ROUTES.NOTIFICATIONS.exact}

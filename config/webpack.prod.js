@@ -32,6 +32,7 @@ module.exports = merge(common, {
     plugins: plugins(),
     optimization: {
         minimizer: [new TerserPlugin({ extractComments: false }), new OptimizeCssAssetsPlugin()],
+        sideEffects: false,
         splitChunks: {
             cacheGroups: {
                 commons: {
@@ -43,7 +44,6 @@ module.exports = merge(common, {
         },
         runtimeChunk: 'single',
     },
-
     performance: {
         hints: false,
         maxEntrypointSize: 512000,

@@ -2,7 +2,7 @@ import { ScheduleEvent } from 'types';
 
 export class Notification {
     public static toQueue(type: 'scheduled' | 'expired', event: ScheduleEvent) {
-        console.log(event.date);
+        console.log('Notification toQueue', event.date);
 
         if (type === 'scheduled') {
             console.log('for a schedules event');

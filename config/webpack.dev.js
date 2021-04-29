@@ -49,6 +49,9 @@ module.exports = merge(common, {
             favicon: paths.public + '/favicon.ico',
         }),
     ],
+    optimization: {
+        sideEffects: false,
+    },
 });
 
 function devCssLoaders(useModules) {

@@ -3,7 +3,7 @@ import { ScheduleEvent } from 'types';
 import { Activity } from '../models/Activity';
 
 export const get = async (_: Request, res: Response) => {
-    const activity = await Activity.fetch();
+    const activity = await Activity.get();
 
     return res.json(activity);
 };

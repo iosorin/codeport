@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { CodeSnippet } from 'types';
+import { Snippet as TSnippet } from 'types';
 import { Carousel, Block } from '@ui';
 import { Snippet } from './Snippet';
 
 type Props = {
-    snippets: CodeSnippet[];
+    snippets: TSnippet[];
     loading?: boolean;
-    onSave?: (snippet: CodeSnippet) => void | Promise<void>;
+    onSave?: (snippet: TSnippet) => void | Promise<void>;
 };
 
 export const Snippets: FC<Props> = ({ snippets, loading, onSave }) => {
