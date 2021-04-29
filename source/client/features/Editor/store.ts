@@ -1,6 +1,6 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
-import { CodeSnippet } from 'types';
+import { Snippet } from 'types';
 import { dep } from '@/core';
 import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
@@ -108,7 +108,7 @@ class EditorStore {
     };
 
     saveSnippet = async (content: string) => {
-        const snippet: CodeSnippet = {
+        const snippet: Snippet = {
             id: Date.now().toString(),
             content,
             lang: this.settings.mode,

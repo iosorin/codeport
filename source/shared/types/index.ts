@@ -1,12 +1,12 @@
 import { SUPPORTED_LANGUAGES } from '../defaults';
-import { ParamRequired } from './utils';
+import { Required } from './utils';
 
 export * from './socket';
 export * from './utils';
 
 export type Language = typeof SUPPORTED_LANGUAGES[number];
 
-export type CodeSnippet = {
+export type Snippet = {
     id: string;
     lang: Language;
     content: string;
@@ -31,7 +31,7 @@ export type ScheduleEvent = {
     color: string;
 };
 
-export type NewEvent = ParamRequired<ScheduleEvent, 'id'>;
+export type NewEvent = Required<ScheduleEvent, 'id'>;
 
 // export type ScheduleEventStrict = {
 //     id: string | number;
@@ -46,6 +46,6 @@ export type NewEvent = ParamRequired<ScheduleEvent, 'id'>;
 
 export type ActivityEvent = ScheduleEvent & {
     rating: number;
-    snippets: CodeSnippet[];
+    snippets: Snippet[];
     time: number; // min.
 };

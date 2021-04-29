@@ -1,15 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Copy, Save } from 'react-feather';
-import { CodeSnippet } from 'types';
-import { Tooltip, Codemirror } from '@ui';
-import styles from './snippet.scss';
-import { copy } from '@/library/utils';
 import classNames from 'classnames';
+import { Copy, Save } from 'react-feather';
+import { Snippet as TSnippet } from 'types';
+import { Tooltip, Codemirror } from '@ui';
+import { copy } from '@/library/utils';
+import styles from './snippet.scss';
 
 type Props = {
-    snippet: CodeSnippet;
+    snippet: TSnippet;
     loading?: boolean;
-    onSave?: (snippet: CodeSnippet) => void | Promise<void>;
+    onSave?: (snippet: TSnippet) => void | Promise<void>;
 };
 
 const toCompare = (str: string) => JSON.stringify(str.trim());

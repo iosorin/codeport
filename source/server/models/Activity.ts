@@ -1,6 +1,6 @@
 import path from 'path';
 import { ActivityEvent, NewEvent, ScheduleEvent } from 'types';
-import { mergeItem } from '../../shared/utils';
+import { update } from '../../shared/utils';
 import { EVENT_COLOR } from '../../shared/defaults';
 import { read, write } from '../utils/fs';
 
@@ -21,12 +21,10 @@ export class Activity {
         snippets: [],
     };
 
-    static fetch = () => {
-        return read(activityPath) as Promise<Res>;
-    };
+    static get = () => read(activityPath) as Promise<Res>;
 
-    static async create(date: number, time: number, _roomID: string) {
-        const events = await Activity.fetch();
+    static create = async (date: number, time: number, _roomID: string) => {
+        const events = await Activity.get();
 
         const index = events.findIndex((event) => event._roomID === _roomID);
 
@@ -35,21 +33,21 @@ export class Activity {
         index >= 0 ? (events[index] = event) : events.push(event);
 
         return write(activityPath, events) as Promise<ScheduleEvent[]>;
-    }
+    };
 
-    static update = async (scheduleEvent: NewEvent) => {
-        let events = await Activity.fetch();
+    static update = async (event: NewEvent) => {
+        let events = await Activity.get();
 
-        events = mergeItem(events, scheduleEvent);
+        events = update(events, event);
 
         return write(activityPath, events) as Promise<Res>;
     };
 
-    static async remove(eventID: string) {
-        let events = await Activity.fetch();
+    static remove = async (id: ActivityEvent['id']) => {
+        let events = await Activity.get();
 
-        events = events.filter((event) => event.id.toString() !== eventID);
+        events = events.filter((event) => event.id.toString() !== id.toString());
 
         return write(activityPath, events) as Promise<Res>;
-    }
+    };
 }

@@ -1,6 +1,6 @@
 import path from 'path';
 import { NewEvent, ScheduleEvent } from 'types';
-import { mergeItem } from '../../shared/utils';
+import { update } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
 
@@ -17,35 +17,33 @@ export class Schedule {
         color: '',
     };
 
-    static async fetch() {
-        return read(schedulePath) as Promise<ScheduleEvent[]>;
-    }
+    static get = () => read(schedulePath) as Promise<ScheduleEvent[]>;
 
-    static async create(scheduleEvent: NewEvent) {
-        const schedule: ScheduleEvent[] = await Schedule.fetch();
+    static create = async (event: NewEvent) => {
+        const schedule: ScheduleEvent[] = await Schedule.get();
 
-        if (scheduleEvent.date) {
-            Notification.toQueue('scheduled', scheduleEvent as ScheduleEvent);
+        if (event.date) {
+            Notification.toQueue('scheduled', event as ScheduleEvent);
         }
 
-        schedule.push({ ...Schedule.template, ...scheduleEvent, id: Date.now() });
+        schedule.push({ ...Schedule.template, ...event, id: Date.now() });
 
         return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
-    }
+    };
 
-    static async update(scheduleEvent: NewEvent) {
-        let schedule: ScheduleEvent[] = await Schedule.fetch();
+    static update = async (event: NewEvent) => {
+        let schedule: ScheduleEvent[] = await Schedule.get();
 
-        schedule = mergeItem(schedule, scheduleEvent);
-
-        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
-    }
-
-    static async remove(eventID: string) {
-        let schedule: ScheduleEvent[] = await Schedule.fetch();
-
-        schedule = schedule.filter((event) => event.id.toString() !== eventID);
+        schedule = update(schedule, event);
 
         return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
-    }
+    };
+
+    static remove = async (id: ScheduleEvent['id']) => {
+        let schedule: ScheduleEvent[] = await Schedule.get();
+
+        schedule = schedule.filter((event) => event.id.toString() !== id.toString());
+
+        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
+    };
 }

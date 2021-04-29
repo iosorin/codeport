@@ -1,6 +1,6 @@
 import { debounce, ls } from '@/library/utils';
 import { EditorOptions } from '@/library/constants';
-import { CodeSnippet } from 'types';
+import { Snippet } from 'types';
 
 const write = debounce(ls, 250);
 const title = process.env.TITLE;
@@ -22,7 +22,7 @@ export const api = {
         write(`${title}-editor-settings`, settings, true);
     },
 
-    saveSnippet: (snippet: CodeSnippet) => {
+    saveSnippet: (snippet: Snippet) => {
         return new Promise((resolve) => {
             setTimeout(() => {
                 console.log('snippet', snippet);
