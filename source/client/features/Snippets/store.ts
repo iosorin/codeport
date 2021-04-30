@@ -13,10 +13,6 @@ export class SnippetsStore {
         return !this.snippets.length;
     }
 
-    get total() {
-        return 0;
-    }
-
     setSnippets = (snippets: Snippet[]) => {
         this.snippets = snippets;
     };

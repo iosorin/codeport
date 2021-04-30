@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import type { ActivityEvent } from 'types';
-import { Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
+import { Dialog, EventForm, Event, Block, Colors } from '@ui';
 import { date } from '@/library/utils';
 import { update } from 'utils';
+import { SnippetsCarousel } from '@/features/Snippets';
 
 type Props = {
     visible: boolean;
@@ -74,7 +75,7 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
                 <div className="flex-1 mr-1">{body}</div>
 
                 <div className="flex-1 ml-1">
-                    <Snippets
+                    <SnippetsCarousel
                         loading={loading}
                         snippets={details.snippets}
                         onSave={(snippet) =>
