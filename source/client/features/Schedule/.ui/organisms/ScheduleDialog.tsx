@@ -10,10 +10,12 @@ type Props = {
 
 export const ScheduleDialog: FC<Props> = observer(({ store }) => {
     const submitHandler = async (details: Partial<ActivityEvent>) => {
-        const action = details.id ? store.updateEvent : store.createEvent;
-
-        // @ts-ignore
-        await action(details);
+        if (details.id) {
+            // @ts-ignore
+            await store.update(details);
+        } else {
+            await store.create(details);
+        }
 
         store.toggleDialog();
     };

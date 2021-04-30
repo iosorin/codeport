@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Copy, Save } from 'react-feather';
-import { Snippet as TSnippet } from 'types';
+import type { Snippet as TSnippet } from 'types';
 import { Tooltip, Codemirror } from '@ui';
 import { copy } from '@/library/utils';
 import styles from './snippet.scss';

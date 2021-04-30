@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { http } from '@services';
+import type { Language } from 'types';
 import { languages } from './languages';
 
 type CompileResponse = {
@@ -13,8 +14,8 @@ type CompileResponse = {
 
 // https://www.hackerearth.com/ru/docs/wiki/developers/v3/
 export const api = {
-    compile: async (Program: string, language: string): Promise<CompileResponse> => {
-        const choice = languages[language as keyof typeof languages];
+    compile: async (Program: string, language: Language): Promise<CompileResponse> => {
+        const choice = languages[language];
 
         if (!choice) throw new Error('language invalid');
 

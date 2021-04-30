@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Block, Colors, Event } from '@ui';
 import { observer } from 'mobx-react-lite';
-import { NewEvent, ScheduleEvent } from 'types';
+import type { ScheduleEvent } from 'types';
 
 import { date } from '@/library/utils';
 
 type Props = {
     details: ScheduleEvent;
-    updateEvent: (event: NewEvent) => void;
+    updateEvent: (event: ScheduleEvent) => void;
     toggleDialog: (event: ScheduleEvent) => void;
     toggleConfirmDialog: (event: ScheduleEvent) => void;
 };
@@ -26,7 +26,7 @@ export const ScheduleListItem: FC<Props> = observer(
             >
                 <Colors
                     active={details.color}
-                    onChange={(color) => updateEvent({ id: details.id, color })}
+                    onChange={(color) => updateEvent({ ...details, color })}
                     trigger="line"
                 />
 

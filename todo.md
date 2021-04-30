@@ -19,3 +19,4 @@
 19. Переписать все даты на timeshtamp
 20. Типизация в сокетах
 21. Global overlay - ui store property
+22. вынесли global.d.ts наверх
