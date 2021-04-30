@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Language } from 'types';
+import type { Language } from 'types';
 import { api } from './api';
 import { languages } from './languages';
 
@@ -65,7 +65,7 @@ class CompilerStore {
         return this.languageInfo;
     };
 
-    execute = (code: string, language: string) => {
+    execute = (code: string, language: Language) => {
         if (!this.languageIsSupported) return;
 
         if (this.isJS) {

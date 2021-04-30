@@ -39,7 +39,7 @@ class ActivityStore {
         this.events = events;
     };
 
-    markLoading = (loading: boolean) => {
+    setLoading = (loading: boolean) => {
         this.loading = loading;
     };
 
@@ -64,28 +64,26 @@ class ActivityStore {
 
         this.setDialogEvent({ ...this.dialogEvent, ...updated });
 
-        this.updateEvent(this.dialogEvent);
+        this.update(this.dialogEvent);
     };
 
     call = (method: () => Promise<ActivityEvent[]>) => {
-        this.markLoading(true);
+        this.setLoading(true);
 
         method()
             .then((events) => {
                 this.setEvents(events);
             })
             .finally(() => {
-                this.markLoading(false);
+                this.setLoading(false);
             });
     };
 
-    fetchEvents = () => {
-        this.call(api.get);
-    };
+    fetch = () => this.call(api.get);
 
-    updateEvent = (event: NewEvent) => this.call(api.update.bind(null, event));
+    update = (event: NewEvent) => this.call(api.update.bind(null, event));
 
-    removeEvent = (id: string | number) => this.call(api.delete.bind(null, id));
+    remove = (id: NewEvent['id']) => this.call(api.remove.bind(null, id));
 }
 
 const store = new ActivityStore();

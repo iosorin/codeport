@@ -48,6 +48,7 @@ export const Table: FC<Props> = ({
 
     useEffect(() => {
         if (!originLabels) {
+            // @ts-ignore
             setLabels(origin.length ? Object.keys(origin[0]) : []);
         }
 

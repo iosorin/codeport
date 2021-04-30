@@ -1,23 +1,27 @@
 import { http } from '@services';
-import { ScheduleEvent } from 'types';
-
-type Res = ScheduleEvent[];
+import type { ScheduleContract } from 'contracts/schedule.contract';
 
 export const api = {
-    get: async (): Promise<Res> => {
+    get: async (): Promise<ScheduleContract['GET']['response']> => {
         return http.get('/api/schedule').then((res) => res.data);
     },
 
-    create: async (event: Partial<ScheduleEvent>): Promise<Res> => {
-        return http.post('/api/schedule', event).then((res) => res.data);
+    create: async (
+        data: ScheduleContract['CREATE']['request']
+    ): Promise<ScheduleContract['CREATE']['response']> => {
+        return http.post('/api/schedule', data).then((res) => res.data);
     },
 
-    update: async (event: Partial<ScheduleEvent>): Promise<Res> => {
+    update: async (
+        data: ScheduleContract['UPDATE']['request']
+    ): Promise<ScheduleContract['UPDATE']['response']> => {
         // todo - сравнить с тем, что ожидает сервер
-        return http.put('/api/schedule', event).then((res) => res.data);
+        return http.put('/api/schedule', data).then((res) => res.data);
     },
 
-    delete: async (id: ScheduleEvent['id']): Promise<Res> => {
+    remove: async (
+        id: ScheduleContract['REMOVE']['params']['id']
+    ): Promise<ScheduleContract['REMOVE']['response']> => {
         return http.delete(`/api/schedule/${id}`).then((res) => res.data);
     },
 };

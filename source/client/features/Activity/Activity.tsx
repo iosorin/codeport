@@ -7,7 +7,7 @@ import store from './store';
 
 export const Activity = observer(() => {
     useEffect(() => {
-        store.fetchEvents();
+        store.fetch();
     }, []);
 
     return (
@@ -52,7 +52,7 @@ export const Activity = observer(() => {
                             <ConfirmDialog
                                 close={() => store.toggleConfirmDialog()}
                                 confirm={() =>
-                                    store.dialogEvent && store.removeEvent(store.dialogEvent.id)
+                                    store.dialogEvent && store.remove(store.dialogEvent.id)
                                 }
                                 visible={store.confirmDialogVisible}
                             >

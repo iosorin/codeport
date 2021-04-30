@@ -1,5 +1,6 @@
 import path from 'path';
-import { NewEvent, ScheduleEvent } from 'types';
+import type { ScheduleContract } from 'contracts/schedule.contract';
+import type { NewEvent, ScheduleEvent } from 'types';
 import { update } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
@@ -17,33 +18,33 @@ export class Schedule {
         color: '',
     };
 
-    static get = () => read(schedulePath) as Promise<ScheduleEvent[]>;
+    static get = () => read(schedulePath) as Promise<ScheduleContract['GET']['response']>;
 
-    static create = async (event: NewEvent) => {
+    static create = async (data: ScheduleContract['CREATE']['request']) => {
         const schedule: ScheduleEvent[] = await Schedule.get();
 
-        if (event.date) {
-            Notification.toQueue('scheduled', event as ScheduleEvent);
+        if (data.date) {
+            Notification.toQueue('scheduled', data as ScheduleEvent);
         }
 
-        schedule.push({ ...Schedule.template, ...event, id: Date.now() });
+        schedule.push({ ...Schedule.template, ...data, id: Date.now() });
 
-        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleContract['CREATE']['response']>;
     };
 
-    static update = async (event: NewEvent) => {
+    static update = async (data: ScheduleContract['UPDATE']['request']) => {
         let schedule: ScheduleEvent[] = await Schedule.get();
 
-        schedule = update(schedule, event);
+        schedule = update(schedule, data);
 
-        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleContract['UPDATE']['response']>;
     };
 
-    static remove = async (id: ScheduleEvent['id']) => {
+    static remove = async (id: ScheduleContract['REMOVE']['params']['id']) => {
         let schedule: ScheduleEvent[] = await Schedule.get();
 
         schedule = schedule.filter((event) => event.id.toString() !== id.toString());
 
-        return write(schedulePath, schedule) as Promise<ScheduleEvent[]>;
+        return write(schedulePath, schedule) as Promise<ScheduleContract['REMOVE']['response']>;
     };
 }

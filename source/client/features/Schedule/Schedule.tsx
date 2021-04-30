@@ -7,11 +7,11 @@ import store from './store';
 
 export const Schedule: FC = observer(() => {
     useEffect(() => {
-        store.fetchEvents();
+        store.fetch();
     }, []);
 
     const closeConfirm = () => store.toggleConfirmDialog();
-    const handleConfirm = () => store.dialogEvent?.id && store.removeEvent(store.dialogEvent.id);
+    const handleConfirm = () => store.dialogEvent?.id && store.remove(store.dialogEvent.id);
 
     return (
         <>

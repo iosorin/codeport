@@ -18,7 +18,7 @@ export const api = {
         return http.put('/api/snippets', data).then((res) => res.data);
     },
 
-    delete: async (
+    remove: async (
         id: Contract['REMOVE']['params']['id']
     ): Promise<Contract['REMOVE']['response']> => {
         return http.delete(`/api/snippets/${id}`).then((res) => res.data);

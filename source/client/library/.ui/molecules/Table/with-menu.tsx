@@ -209,14 +209,14 @@ export const Table: FC<Props> = ({
 
             return (
                 <tbody>
-                    {items.map((item, itemIndex) => {
+                    {items.map((item, index) => {
                         return (
                             <tr
-                                key={(item.id as string) || itemIndex}
+                                key={(item.id as string) || index}
                                 onClick={() => onTrClick?.(item)}
                             >
                                 {labels?.map((label, index) => {
-                                    const renderLabel = label === groupBy ? itemIndex === 0 : true;
+                                    const renderLabel = label === groupBy ? index === 0 : true;
 
                                     return renderTd(renderLabel && label, item, index);
                                 })}

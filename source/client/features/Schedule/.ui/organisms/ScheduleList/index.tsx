@@ -29,7 +29,7 @@ export const ScheduleList: FC<Props> = observer(({ store, expired }) => {
                             <div className="mb-2" key={event.id}>
                                 <ScheduleListItem
                                     details={event}
-                                    updateEvent={store.updateEvent}
+                                    updateEvent={store.update}
                                     toggleDialog={store.toggleDialog}
                                     toggleConfirmDialog={store.toggleConfirmDialog}
                                 />

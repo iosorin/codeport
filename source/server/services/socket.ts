@@ -1,7 +1,7 @@
 import socketIO from 'socket.io';
 import http from 'http';
 
-import { ConferenceUser, SocketWrap } from 'types';
+import type { ConferenceUser, SocketWrap } from 'types';
 
 type Instance = SocketWrap<socketIO.Socket> & socketIO.Socket;
 

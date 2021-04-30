@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ScheduleEvent, NewEvent } from 'types';
+import type { ScheduleEvent } from 'types';
 import { date, debounce, groupBy, randomEventColor } from '@/library/utils';
 import { api } from './api';
 
@@ -71,18 +71,19 @@ class ScheduleStore {
         this.events = events;
     };
 
-    fetchEvents = () => api.get().then(this.setEvents);
+    fetch = () => api.get().then(this.setEvents);
 
-    createEvent = (event: ScheduleEvent) => {
+    create = (event: Partial<ScheduleEvent>) => {
+        // date problem
         if (!event.date) event.date = date.addDays(1);
         if (!event.color) event.color = randomEventColor();
 
         return api.create(event).then(debounce(this.setEvents));
     };
 
-    updateEvent = (event: NewEvent) => api.update(event).then(debounce(this.setEvents));
+    update = (event: ScheduleEvent) => api.update(event).then(debounce(this.setEvents));
 
-    removeEvent = (id: string | number) => api.delete(id).then(this.setEvents);
+    remove = (id: string | number) => api.remove(id).then(this.setEvents);
 }
 
 const store = new ScheduleStore();
