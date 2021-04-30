@@ -1,12 +1,10 @@
 import path from 'path';
-import { ActivityEvent, NewEvent, ScheduleEvent } from 'types';
+import type { ActivityContract } from 'contracts/activity.contract';
 import { update } from '../../shared/utils';
 import { EVENT_COLOR } from '../../shared/defaults';
 import { read, write } from '../utils/fs';
 
 const activityPath = path.join(__dirname, '..', '..', '..', 'data', 'activity.json');
-
-type Res = ({ _roomID?: string } & ActivityEvent)[];
 
 export class Activity {
     static template = {
@@ -21,7 +19,7 @@ export class Activity {
         snippets: [],
     };
 
-    static get = () => read(activityPath) as Promise<Res>;
+    static get = () => read(activityPath) as Promise<ActivityContract['GET']['response']>;
 
     static create = async (date: number, time: number, _roomID: string) => {
         const events = await Activity.get();
@@ -32,22 +30,22 @@ export class Activity {
 
         index >= 0 ? (events[index] = event) : events.push(event);
 
-        return write(activityPath, events) as Promise<ScheduleEvent[]>;
+        return write(activityPath, events) as Promise<ActivityContract['CREATE']['response']>;
     };
 
-    static update = async (event: NewEvent) => {
+    static update = async (data: ActivityContract['UPDATE']['request']) => {
         let events = await Activity.get();
 
-        events = update(events, event);
+        events = update(events, data);
 
-        return write(activityPath, events) as Promise<Res>;
+        return write(activityPath, events) as Promise<ActivityContract['UPDATE']['response']>;
     };
 
-    static remove = async (id: ActivityEvent['id']) => {
+    static remove = async (id: ActivityContract['REMOVE']['params']['id']) => {
         let events = await Activity.get();
 
         events = events.filter((event) => event.id.toString() !== id.toString());
 
-        return write(activityPath, events) as Promise<Res>;
+        return write(activityPath, events) as Promise<ActivityContract['REMOVE']['response']>;
     };
 }

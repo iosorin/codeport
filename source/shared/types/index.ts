@@ -33,19 +33,9 @@ export type ScheduleEvent = {
 
 export type NewEvent = Required<ScheduleEvent, 'id'>;
 
-// export type ScheduleEventStrict = {
-//     id: string | number;
-//     date: number;
-//     title: string;
-//     stack: string;
-//     salary: string;
-//     contacts: string;
-//     additional: string;
-//     color: string;
-// };
-
 export type ActivityEvent = ScheduleEvent & {
     rating: number;
     snippets: Snippet[];
     time: number; // min.
+    _roomID?: string;
 };
