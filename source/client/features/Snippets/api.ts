@@ -1,26 +1,26 @@
 import { http } from '@services';
-import type { SnippetsContract as Contract } from 'contracts/snippets.contract';
+import type { SnippetsContract } from 'contracts/snippets.contract';
 
 export const api = {
-    get: async (): Promise<Contract['GET']['response']> => {
+    get: async (): Promise<SnippetsContract['GET']['response']> => {
         return http.get('/api/snippets').then((res) => res.data);
     },
 
     create: async (
-        data: Contract['CREATE']['request']
-    ): Promise<Contract['CREATE']['response']> => {
+        data: SnippetsContract['CREATE']['request']
+    ): Promise<SnippetsContract['CREATE']['response']> => {
         return http.post('/api/snippets', data).then((res) => res.data);
     },
 
     update: async (
-        data: Contract['UPDATE']['request']
-    ): Promise<Contract['UPDATE']['response']> => {
+        data: SnippetsContract['UPDATE']['request']
+    ): Promise<SnippetsContract['UPDATE']['response']> => {
         return http.put('/api/snippets', data).then((res) => res.data);
     },
 
     remove: async (
-        id: Contract['REMOVE']['params']['id']
-    ): Promise<Contract['REMOVE']['response']> => {
+        id: SnippetsContract['REMOVE']['params']['id']
+    ): Promise<SnippetsContract['REMOVE']['response']> => {
         return http.delete(`/api/snippets/${id}`).then((res) => res.data);
     },
 };
