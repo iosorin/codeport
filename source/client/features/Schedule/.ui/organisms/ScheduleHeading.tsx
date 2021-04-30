@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button } from '@/library/.ui';
+import { Button } from '@ui';
 import { ScheduleStoreType } from '../../store';
 import { observer } from 'mobx-react-lite';
 

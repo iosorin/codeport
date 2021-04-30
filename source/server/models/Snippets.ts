@@ -4,17 +4,17 @@ import type { SnippetsContract as Contract } from 'contracts/snippets.contract';
 import { update } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 
-const snippetsPath = path.join(__dirname, '..', '..', '..', 'data', 'snippets.json');
+const source = path.join(__dirname, '..', '..', '..', 'data', 'snippets.json');
 
 export class Snippets {
-    static get = () => read(snippetsPath) as Promise<Contract['GET']['response']>;
+    static get = () => read(source) as Promise<Contract['GET']['response']>;
 
     static create = async (data: Contract['CREATE']['request']) => {
         const snippets: Snippet[] = await Snippets.get();
 
         snippets.push({ ...data, id: Date.now().toString() });
 
-        return write(snippetsPath, snippets) as Promise<Contract['CREATE']['response']>;
+        return write(source, snippets) as Promise<Contract['CREATE']['response']>;
     };
 
     static update = async (data: Contract['UPDATE']['request']) => {
@@ -22,7 +22,7 @@ export class Snippets {
 
         snippets = update(snippets, data);
 
-        return write(snippetsPath, snippets) as Promise<Contract['UPDATE']['response']>;
+        return write(source, snippets) as Promise<Contract['UPDATE']['response']>;
     };
 
     static remove = async (id: Contract['REMOVE']['params']['id']) => {
@@ -30,6 +30,6 @@ export class Snippets {
 
         snippets = snippets.filter((event) => event.id.toString() !== id.toString());
 
-        return write(snippetsPath, snippets) as Promise<Contract['REMOVE']['response']>;
+        return write(source, snippets) as Promise<Contract['REMOVE']['response']>;
     };
 }

@@ -1,7 +1,7 @@
-import Peer from 'simple-peer';
 import { makeAutoObservable, reaction } from 'mobx';
-import { ConferenceUser } from 'types';
-import { dep } from '@/core';
+import Peer from 'simple-peer';
+import type { ConferenceUser } from 'types';
+import { inject } from '@core';
 
 export type PeerItem = {
     peerID: string;
@@ -13,7 +13,7 @@ export type PeerItem = {
 };
 
 class ConferenceStore {
-    socket = dep('socket');
+    socket = inject('socket');
 
     roomID = '';
 

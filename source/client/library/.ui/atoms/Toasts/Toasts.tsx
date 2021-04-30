@@ -2,7 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
-import { useToast } from '@/core';
+import { useToast } from '@core';
 import { Transition } from '..';
 import { TransitionGroup } from 'react-transition-group';
 import styles from './toasts.scss';

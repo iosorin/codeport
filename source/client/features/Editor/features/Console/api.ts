@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { http } from '@services';
+import { http } from '@core';
 import type { Language } from 'types';
 import { languages } from './languages';
 

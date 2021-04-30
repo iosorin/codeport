@@ -1,4 +1,4 @@
-import { http } from '@services';
+import { http } from '@core';
 import type { ScheduleContract } from 'contracts/schedule.contract';
 
 export const api = {

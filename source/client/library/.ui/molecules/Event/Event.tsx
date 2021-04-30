@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ActivityEvent } from 'types';
+import type { ActivityEvent } from 'types';
 import { date } from '@/library/utils';
 import styles from './event.scss';
 import { observer } from 'mobx-react-lite';

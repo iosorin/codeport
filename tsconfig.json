@@ -21,6 +21,7 @@
         "typeRoots": ["node_modules/@types"],
         "paths": {
             "@/*": ["source/client/*"],
+            "@core": ["source/client/core"],
 
             "@ui/*": ["source/client/library/.ui/*"],
             "@ui": ["source/client/library/.ui"],

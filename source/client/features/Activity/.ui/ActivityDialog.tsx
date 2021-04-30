@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ActivityEvent, ScheduleEvent } from 'types';
+import type { ActivityEvent } from 'types';
 import { Dialog, Snippets, EventForm, Event, Block, Colors } from '@ui';
 import { date } from '@/library/utils';
 import { update } from 'utils';

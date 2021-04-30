@@ -1,4 +1,4 @@
-import { http } from '@services';
+import { http } from '@core';
 import type { SnippetsContract } from 'contracts/snippets.contract';
 
 export const api = {

@@ -12,11 +12,7 @@ export const Activity = observer(() => {
 
     return (
         <>
-            <div
-                className={classNames('flex-col', {
-                    disabled: store.empty,
-                })}
-            >
+            <div className={classNames('flex-col', { disabled: store.empty })}>
                 <ActivityStats store={store} />
 
                 <div className="flex-col-reverse mt-2">

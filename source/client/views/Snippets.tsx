@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseLayout } from '@/library/.ui/layouts';
+import { BaseLayout } from '@ui/layouts';
 import { Snippets } from '@/features/Snippets';
 
 export const SnippetsView: FC = () => {

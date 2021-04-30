@@ -1,16 +1,16 @@
 import socketIOClient from 'socket.io-client';
-import { SocketWrap } from 'types';
+import type { SocketWrap } from 'types';
 
 type SocketInstance = SocketWrap<SocketIOClient.Emitter> & typeof socketIOClient.Socket;
 
-export class SocketService {
+export class SocketStore {
     private static socket: SocketInstance;
 
     public static getInstance = () => {
-        if (!SocketService.socket) {
-            SocketService.socket = socketIOClient();
+        if (!SocketStore.socket) {
+            SocketStore.socket = socketIOClient();
         }
 
-        return SocketService.socket;
+        return SocketStore.socket;
     };
 }
