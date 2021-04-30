@@ -1,4 +1,4 @@
-import { Optional, Snippet } from 'types';
+import type { Optional, Snippet } from 'types';
 
 export type SnippetsContract = {
     GET: {

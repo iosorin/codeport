@@ -1,4 +1,4 @@
-import { http } from '@services';
+import { http } from '@core';
 import type { ActivityContract } from 'contracts/activity.contract';
 
 export const api = {

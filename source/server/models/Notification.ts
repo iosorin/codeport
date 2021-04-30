@@ -1,4 +1,4 @@
-import { ScheduleEvent } from 'types';
+import type { ScheduleEvent } from 'types';
 
 export class Notification {
     public static toQueue(type: 'scheduled' | 'expired', event: ScheduleEvent) {

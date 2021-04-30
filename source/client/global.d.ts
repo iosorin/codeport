@@ -9,6 +9,7 @@ declare namespace NodeJS {
         readonly TITLE: string;
         readonly BASE_URL: string;
         readonly MAX_PEERS: string;
+        readonly SERVER_PORT: string;
     }
 }
 

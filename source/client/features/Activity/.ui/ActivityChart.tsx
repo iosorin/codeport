@@ -9,7 +9,7 @@ import {
     YAxis,
 } from 'recharts';
 import { date } from '@/library/utils';
-import { ActivityEvent } from 'types';
+import type { ActivityEvent } from 'types';
 import { observer } from 'mobx-react-lite';
 
 type Props = {

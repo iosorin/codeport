@@ -1,11 +1,11 @@
 import path from 'path';
 import type { ScheduleContract } from 'contracts/schedule.contract';
-import type { NewEvent, ScheduleEvent } from 'types';
+import type { ScheduleEvent } from 'types';
 import { update } from '../../shared/utils';
 import { read, write } from '../utils/fs';
 import { Notification } from './Notification';
 
-const schedulePath = path.join(__dirname, '..', '..', '..', 'data', 'schedule.json');
+const source = path.join(__dirname, '..', '..', '..', 'data', 'schedule.json');
 
 export class Schedule {
     static template = {
@@ -18,7 +18,7 @@ export class Schedule {
         color: '',
     };
 
-    static get = () => read(schedulePath) as Promise<ScheduleContract['GET']['response']>;
+    static get = () => read(source) as Promise<ScheduleContract['GET']['response']>;
 
     static create = async (data: ScheduleContract['CREATE']['request']) => {
         const schedule: ScheduleEvent[] = await Schedule.get();
@@ -29,7 +29,7 @@ export class Schedule {
 
         schedule.push({ ...Schedule.template, ...data, id: Date.now() });
 
-        return write(schedulePath, schedule) as Promise<ScheduleContract['CREATE']['response']>;
+        return write(source, schedule) as Promise<ScheduleContract['CREATE']['response']>;
     };
 
     static update = async (data: ScheduleContract['UPDATE']['request']) => {
@@ -37,7 +37,7 @@ export class Schedule {
 
         schedule = update(schedule, data);
 
-        return write(schedulePath, schedule) as Promise<ScheduleContract['UPDATE']['response']>;
+        return write(source, schedule) as Promise<ScheduleContract['UPDATE']['response']>;
     };
 
     static remove = async (id: ScheduleContract['REMOVE']['params']['id']) => {
@@ -45,6 +45,6 @@ export class Schedule {
 
         schedule = schedule.filter((event) => event.id.toString() !== id.toString());
 
-        return write(schedulePath, schedule) as Promise<ScheduleContract['REMOVE']['response']>;
+        return write(source, schedule) as Promise<ScheduleContract['REMOVE']['response']>;
     };
 }

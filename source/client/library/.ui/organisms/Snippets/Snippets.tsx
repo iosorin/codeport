@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Snippet as TSnippet } from 'types';
+import type { Snippet as TSnippet } from 'types';
 import { Carousel, Block } from '@ui';
 import { Snippet } from './Snippet';
 

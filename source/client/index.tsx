@@ -1,18 +1,18 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Router as AppRouter } from '@/router';
-import { CoreProvider } from '@/core';
+import { Provider } from '@core';
 import { Toasts } from '@ui';
+import { Router as AppRouter } from '@/router';
 import './styles/app.scss';
 
 ReactDOM.render(
     <StrictMode>
         <BrowserRouter>
-            <CoreProvider>
+            <Provider>
                 <AppRouter />
                 <Toasts />
-            </CoreProvider>
+            </Provider>
         </BrowserRouter>
     </StrictMode>,
     document.getElementById('root')

@@ -1,4 +1,4 @@
-import { ActivityEvent, NewEvent } from 'types';
+import type { ActivityEvent, NewEvent } from 'types';
 
 export type ActivityContract = {
     GET: { response: ActivityEvent[] };
