@@ -9,7 +9,7 @@ type Props = {
     onSave?: (snippet: TSnippet) => void | Promise<void>;
 };
 
-export const Snippets: FC<Props> = ({ snippets, loading, onSave }) => {
+export const SnippetsCarousel: FC<Props> = ({ snippets, loading, onSave }) => {
     return (
         <div className="flex-col fill">
             <Block background="light" flex size="small">
