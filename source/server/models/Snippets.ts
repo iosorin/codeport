@@ -7,12 +7,25 @@ import { read, write } from '../utils/fs';
 const source = path.join(__dirname, '..', '..', '..', 'data', 'snippets.json');
 
 export class Snippets {
+    static template: Snippet = {
+        lang: 'javascript',
+        content: '',
+        title: '',
+        date: 0,
+        id: '0',
+    };
+
     static get = () => read(source) as Promise<Contract['GET']['response']>;
 
     static create = async (data: Contract['CREATE']['request']) => {
         const snippets: Snippet[] = await Snippets.get();
 
-        snippets.push({ ...data, id: Date.now().toString() });
+        snippets.push({
+            ...Snippets.template,
+            ...data,
+            id: Date.now().toString(),
+            date: Date.now(),
+        });
 
         return write(source, snippets) as Promise<Contract['CREATE']['response']>;
     };

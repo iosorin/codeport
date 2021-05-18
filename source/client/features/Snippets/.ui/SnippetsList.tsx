@@ -12,7 +12,7 @@ export const SnippetsList: FC<Props> = ({ snippets }) => {
         <div className="flex-col fill">
             {snippets.length ? (
                 snippets.map((snippet) => (
-                    <Block className="mb-2" background="light" flex size="small">
+                    <Block key={snippet.id} className="mb-2" background="light" flex size="small">
                         <Snippet key={snippet.id} snippet={snippet} />
                     </Block>
                 ))

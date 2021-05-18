@@ -8,6 +8,8 @@ export type Language = typeof SUPPORTED_LANGUAGES[number];
 
 export type Snippet = {
     id: string;
+    title?: string;
+    date: number;
     lang: Language;
     content: string;
 };

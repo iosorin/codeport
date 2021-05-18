@@ -1,4 +1,4 @@
-import type { Optional, Snippet } from 'types';
+import type { Snippet } from 'types';
 
 export type SnippetsContract = {
     GET: {
@@ -6,7 +6,7 @@ export type SnippetsContract = {
     };
 
     CREATE: {
-        request: Optional<Snippet, 'id'>;
+        request: Partial<Snippet>;
         response: Snippet[];
     };
 

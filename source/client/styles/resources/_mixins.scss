@@ -45,13 +45,13 @@
     cursor: pointer;
     transition: opacity $tr;
     @if $direction == 'up' {
-        opacity: 0.7;
+        opacity: 0.6;
         &:hover {
             opacity: 1;
         }
     } @else {
         &:hover {
-            opacity: 0.7;
+            opacity: 0.6;
         }
     }
 }

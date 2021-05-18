@@ -7,8 +7,8 @@ export const Provider: FC = ({ children }) => (
     <Context.Provider value={store}>{children}</Context.Provider>
 );
 
-export const useRoot = () => useContext(Context);
+export const useCore = () => useContext(Context);
 
-export const useUi = () => useRoot().ui;
-export const useToast = () => useRoot().toast;
-export const useSnippets = () => useRoot().snippets;
+export const useUi = () => useCore().ui;
+export const useToast = () => useCore().toast;
+export const useSnippets = () => useCore().snippets;

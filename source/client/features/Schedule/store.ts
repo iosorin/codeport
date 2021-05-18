@@ -39,7 +39,11 @@ class ScheduleStore {
     }
 
     get today() {
-        return this.active.get(date.when(Date.now(), false))?.length ?? 0;
+        return this.events.filter((event) => date.match(event.date));
+    }
+
+    get week() {
+        return this.events.filter((event) => date.match(event.date));
     }
 
     group = (events: ScheduleEvent[]) =>

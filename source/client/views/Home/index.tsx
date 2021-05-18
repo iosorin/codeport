@@ -4,14 +4,14 @@ import { useHistory, useParams } from 'react-router-dom';
 import { BaseLayout } from '@ui/layouts';
 import { Editor } from '@/features/Editor';
 import { Conference } from '@/features/Conference';
-import { useRoot } from '@core';
+import { useCore } from '@core';
 import styles from './home.scss';
 
 export const HomeView: FC = observer((props) => {
     const history = useHistory();
     const { uuid } = useParams<{ uuid: string }>();
 
-    const { ui, socket } = useRoot();
+    const { ui, socket } = useCore();
 
     useEffect(() => {
         ui.toggleConferencePanel(Boolean(uuid));
