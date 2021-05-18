@@ -2,15 +2,15 @@ import React, { FC } from 'react';
 import { Calendar } from '@ui';
 import { observer } from 'mobx-react-lite';
 import { date } from '@/library/utils';
-import { ScheduleStoreType } from '../../store';
+import { ScheduleStoreType } from '../store';
 
 type Props = {
     store: ScheduleStoreType;
 };
 
-export const ScheduleCalendar: FC<Props> = observer(({ store }) => {
-    const isPastDay = (day: number) => date.fixed(day) < date.fixed();
+const isPastDay = (day: number) => date.fixed(day) < date.fixed();
 
+export const ScheduleCalendar: FC<Props> = observer(({ store }) => {
     const markedDays = store.events.map((event) => ({
         date: event.date,
         style: {

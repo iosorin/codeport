@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { ConfirmDialog } from '@ui';
-import { ScheduleHeading, ScheduleList, ScheduleDialog, ScheduleCalendar } from './.ui/organisms';
+import { ScheduleHeading, ScheduleList, ScheduleDialog, ScheduleCalendar } from './.ui';
 import store from './store';
 
 export const Schedule: FC = observer(() => {

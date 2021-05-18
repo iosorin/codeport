@@ -1,16 +1,15 @@
 import { autorun, makeAutoObservable } from 'mobx';
-import { inject } from '@core';
+import { dep } from '@core';
 import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
-import type { Snippet } from 'types';
 import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
-    toast = inject('toast');
+    toast = dep('toast');
 
-    socket = inject('socket');
+    socket = dep('socket');
 
-    snippets = inject('snippets');
+    snippets = dep('snippets');
 
     roomID = '';
 
@@ -110,14 +109,12 @@ class EditorStore {
     };
 
     saveSnippet = async (content: string) => {
-        const snippet: Snippet = {
-            id: Date.now().toString(),
-            lang: this.settings.mode,
-            content,
-        };
-
         try {
-            this.snippets.create(snippet);
+            this.snippets.create({
+                content,
+                lang: this.settings.mode,
+            });
+
             this.toast.success('Snippet saved');
         } catch (error) {
             this.toast.error(error.message);

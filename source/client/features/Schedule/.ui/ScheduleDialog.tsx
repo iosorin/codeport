@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { Dialog, EventForm } from '@ui';
-import { ScheduleStoreType } from '../../store';
-import { observer } from 'mobx-react-lite';
 import type { ActivityEvent } from 'types';
+import { Dialog, EventForm } from '@ui';
+import { ScheduleStoreType } from '../store';
+import { observer } from 'mobx-react-lite';
 
 type Props = {
     store: ScheduleStoreType;
