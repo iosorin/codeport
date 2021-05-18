@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { ActivityEvent, NewEvent } from 'types';
-import { api } from './api';
+import { api, Contract } from './api';
 
 type ActivityEventOrNull = ActivityEvent | null | undefined;
 
@@ -81,9 +81,9 @@ class ActivityStore {
 
     fetch = () => this.call(api.get);
 
-    update = (event: NewEvent) => this.call(api.update.bind(null, event));
+    update = (data: Contract['update']) => this.call(api.update.bind(null, data));
 
-    remove = (id: NewEvent['id']) => this.call(api.remove.bind(null, id));
+    remove = (id: Contract['id']) => this.call(api.remove.bind(null, id));
 }
 
 const store = new ActivityStore();
