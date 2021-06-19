@@ -15,6 +15,6 @@ class RootStore {
 
 export const store = new RootStore();
 
-export function dep<K extends keyof typeof store>(key: K) {
+export function always<K extends keyof typeof store>(key: K) {
     return store[key];
 }

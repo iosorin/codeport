@@ -1,15 +1,15 @@
 import { autorun, makeAutoObservable } from 'mobx';
-import { dep } from '@core';
+import { always } from '@core';
 import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
 import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
-    toast = dep('toast');
+    toast = always('toast');
 
-    socket = dep('socket');
+    socket = always('socket');
 
-    snippets = dep('snippets');
+    snippets = always('snippets');
 
     roomID = '';
 

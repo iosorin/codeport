@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { ActivityEvent, NewEvent } from 'types';
+import { ActivityEvent } from 'types';
 import { api, Contract } from './api';
 
 type ActivityEventOrNull = ActivityEvent | null | undefined;

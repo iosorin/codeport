@@ -42,10 +42,6 @@ class ScheduleStore {
         return this.events.filter((event) => date.match(event.date));
     }
 
-    get week() {
-        return this.events.filter((event) => date.match(event.date));
-    }
-
     group = (events: ScheduleEvent[]) =>
         groupBy<ScheduleEvent>(events, (event) => date.when(event.date, false));
 

@@ -6,7 +6,7 @@ import styles from './block.scss';
 export type Props = {
     title?: string;
     icon?: string | JSX.Element;
-    small?: string | number | JSX.Element;
+    small?: string | number | JSX.Element | null;
     size?: 'small' | 'medium' | 'large';
     background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
     color?: 'black' | 'white';

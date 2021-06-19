@@ -13,6 +13,9 @@ type Props = {
 
 export const ScheduleListItem: FC<Props> = observer(
     ({ details, updateEvent, toggleDialog, toggleConfirmDialog }) => {
+        const startsIn = date.diff(details.date);
+        const when = date.when(details.date, true, false);
+
         return (
             <Block
                 key={details.id}
@@ -21,7 +24,10 @@ export const ScheduleListItem: FC<Props> = observer(
                 background="dark"
                 onEdit={() => toggleDialog(details)}
                 onRemove={() => toggleConfirmDialog(details)}
-                small={<div className="h4 mt-xs">{date.when(details.date, true, false)}</div>}
+                small={
+                    startsIn ? <div className="h5 mt-xs text-grey">Starts in {startsIn}</div> : null
+                }
+                icon={<div className="h4 mt-xs">{when}</div>}
             >
                 <Colors
                     trigger="line"

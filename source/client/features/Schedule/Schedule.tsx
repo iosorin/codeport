@@ -41,7 +41,7 @@ export const Schedule: FC = observer(() => {
                 visible={store.confirmDialogVisible}
             >
                 <div className="h3 mb-1">
-                    Remove event &quot;{store.dialogEvent?.title}&quot; <br /> from your schedule?
+                    Remove meeting &quot;{store.dialogEvent?.title}&quot; <br /> from your schedule?
                 </div>
             </ConfirmDialog>
         </>
