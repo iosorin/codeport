@@ -169,7 +169,7 @@ export const date = {
         if (!d) return '';
 
         const options: Intl.DateTimeFormatOptions = {
-            hour12: true,
+            // hour12: true,
         };
 
         if (showDay) {
