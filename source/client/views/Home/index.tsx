@@ -8,48 +8,46 @@ import { useCore } from '@core';
 import styles from './home.scss';
 
 export const HomeView: FC = observer((props) => {
-    const history = useHistory();
-    const { uuid } = useParams<{ uuid: string }>();
+	const history = useHistory();
+	const { uuid } = useParams<{ uuid: string }>();
 
-    const { ui, socket } = useCore();
+	const { ui, socket } = useCore();
 
-    useEffect(() => {
-        ui.toggleConferencePanel(Boolean(uuid));
+	useEffect(() => {
+		ui.toggleConferencePanel(Boolean(uuid));
 
-        if (uuid) {
-            socket.emit('check-room', uuid);
+		if (uuid) {
+			socket.emit('check-room', uuid);
 
-            const leaveRoom = () => {
-                ui.toggleConferencePanel();
+			const leaveRoom = () => {
+				ui.toggleConferencePanel();
 
-                socket.emit('disconnect-user');
-            };
+				socket.emit('disconnect-user');
+			};
 
-            history.listen(() => {
-                if (!props) leaveRoom();
-            });
+			history.listen(() => {
+				if (!props) leaveRoom();
+			});
 
-            return leaveRoom;
-        }
+			return leaveRoom;
+		}
+	}, [socket, ui, uuid, history, props]);
 
-        return () => {};
-    }, [socket, ui, uuid, history, props]);
+	return (
+		<BaseLayout wide>
+			<div className={styles.container}>
+				<div className={styles.editor}>
+					<Editor roomID={uuid} />
+				</div>
 
-    return (
-        <BaseLayout wide>
-            <div className={styles.container}>
-                <div className={styles.editor}>
-                    <Editor roomID={uuid} />
-                </div>
-
-                <div
-                    className={`${styles.conference} ${
-                        ui.conferencePanelVisible ? styles.visible : ''
-                    }`}
-                >
-                    <Conference roomID={uuid} />
-                </div>
-            </div>
-        </BaseLayout>
-    );
+				<div
+					className={`${styles.conference} ${
+						ui.conferencePanelVisible ? styles.visible : ''
+					}`}
+				>
+					<Conference roomID={uuid} />
+				</div>
+			</div>
+		</BaseLayout>
+	);
 });

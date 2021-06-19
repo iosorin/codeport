@@ -12,12 +12,12 @@ export const ScheduleHeading: FC<Props> = observer(({ store }) => {
         const today = store.today.length;
 
         if (store.empty) {
-            return 'List of scheduled meetings is empty';
+            return "List of scheduled meetings is empty";
         }
 
         if (today) {
             if (today > 1) {
-                return `Today you have ${today} scheduled meetings ${today >= 3 ? '🔥' : '🤞'}`;
+            return `Today you have ${today} scheduled meetings ${today >= 3 ? '🔥' : '🤞'}`;
             }
 
             return (
@@ -34,6 +34,7 @@ export const ScheduleHeading: FC<Props> = observer(({ store }) => {
 
         return (
             <div className={`${store.empty ? 'text-center' : 'flex-between'}`}>
+
             <p className={`text-grey text-accent ${store.empty ? 'mb-2' : ''}`}>{text()}</p>
 
             <Button
@@ -42,7 +43,7 @@ export const ScheduleHeading: FC<Props> = observer(({ store }) => {
                 size={store.empty ? 'large' : 'medium'}
                 zoom
                 >
-                Schedule a new event
+                    Schedule a new event
                 </Button>
             </div>
             );
