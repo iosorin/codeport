@@ -4,27 +4,27 @@ import { Button } from '@ui';
 import styles from './footer.scss';
 
 type Props = {
-    length: number;
-    leave: () => void;
-    refresh: () => void;
+	length: number;
+	leave: () => void;
+	refresh: () => void;
 };
 
 export const Footer: FC<Props> = ({ length, leave, refresh }) => {
-    const max = process.env.MAX_PEERS || 4;
+	const max = process.env.MAX_PEERS || 4;
 
-    return (
-        <div className={styles.footer}>
-            <div className={`h4 flex-auto ${styles.participants}`}>
-                Participants: {length}/{max}
-            </div>
+	return (
+		<div className={styles.footer}>
+			<div className={`h4 flex-auto ${styles.participants}`}>
+				Participants: {length}/{max}
+			</div>
 
-            <div className="flex-end">
-                <Button size="small" onClick={leave} hover background="grey">
-                    Leave
-                </Button>
+			<div className='flex-end'>
+				<Button size='small' onClick={leave} hover background='grey'>
+					Leave
+				</Button>
 
-                <RefreshCcw onClick={refresh} size="14" className={styles.refresh} />
-            </div>
-        </div>
-    );
+				<RefreshCcw onClick={refresh} size='14' className={styles.refresh} />
+			</div>
+		</div>
+	);
 };
