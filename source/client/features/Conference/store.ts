@@ -106,7 +106,7 @@ class ConferenceStore {
 	toggleConstraint = (kind: 'audio' | 'video') => {
 		this.constraints[kind] = !this.constraints[kind];
 
-		this.stream?.getTracks().find((track) => {
+		this.stream?.getTracks().forEach((track) => {
 			if (track.kind === kind) {
 				track.enabled = this.constraints[kind];
 			}

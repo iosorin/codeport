@@ -14,8 +14,8 @@
 		"test:watch": "jest --watch --config config/jest/jest.config.js",
 		"storybook": "start-storybook -p 6006",
 		"build-storybook": "build-storybook",
-		"eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",
-		"eslint:dump": "eslint --print-config ./.eslintrc.json",
+		"lint": "eslint --cache --ext .js,.jsx,.ts,.tsx source",
+		"lint:dump": "eslint --print-config ./.eslintrc",
 		"format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,scss,md}\""
 	},
 	"husky": {

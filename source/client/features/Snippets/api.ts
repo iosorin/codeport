@@ -8,25 +8,17 @@ export type Contract = {
 };
 
 export const api = {
-	get: async (): Promise<SnippetsContract['GET']['response']> => {
-		return http.get('/api/snippets').then((res) => res.data);
-	},
+	get: async (): Promise<SnippetsContract['GET']['response']> => http.get('/api/snippets').then((res) => res.data),
 
 	create: async (
 		data: Contract['create']
-	): Promise<SnippetsContract['CREATE']['response']> => {
-		return http.post('/api/snippets', data).then((res) => res.data);
-	},
+	): Promise<SnippetsContract['CREATE']['response']> => http.post('/api/snippets', data).then((res) => res.data),
 
 	update: async (
 		data: Contract['update']
-	): Promise<SnippetsContract['UPDATE']['response']> => {
-		return http.put('/api/snippets', data).then((res) => res.data);
-	},
+	): Promise<SnippetsContract['UPDATE']['response']> => http.put('/api/snippets', data).then((res) => res.data),
 
 	remove: async (
 		id: Contract['id']
-	): Promise<SnippetsContract['REMOVE']['response']> => {
-		return http.delete(`/api/snippets/${id}`).then((res) => res.data);
-	},
+	): Promise<SnippetsContract['REMOVE']['response']> => http.delete(`/api/snippets/${id}`).then((res) => res.data),
 };
