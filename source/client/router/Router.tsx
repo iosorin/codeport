@@ -9,12 +9,10 @@ const flatRoutes = (list: NestedRoute[]): any[] =>
 		.map((route) => [route.routes ? flatRoutes(route.routes) : [], route])
 		.flat(Infinity);
 
-export const Router: FC = () => {
-	return (
+export const Router: FC = () => (
 		<Switch>
 			{flatRoutes(paths).map((route) => (
 				<PrivateRoute {...route} key={route.path} />
 			))}
 		</Switch>
 	);
-};

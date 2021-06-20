@@ -11,4 +11,3 @@ export const useCore = () => useContext(Context);
 
 export const useUi = () => useCore().ui;
 export const useToast = () => useCore().toast;
-export const useSnippets = () => useCore().snippets;

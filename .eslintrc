@@ -46,13 +46,14 @@
 			}
 		],
 		"import/prefer-default-export": 0,
-		"no-param-reassign": [
-			2,
-			{
-				"props": true,
-				"ignorePropertyModificationsFor": ["acc", "total", "result"]
-			}
-		],
+		// "no-param-reassign": [
+		// 	1,
+		// 	{
+		// 		"props": true,
+		// 		"ignorePropertyModificationsFor": ["acc", "total", "result"]
+		// 	}
+		// ],
+		"no-param-reassign": 0,
 		"no-unused-expressions": [
 			2,
 			{
@@ -60,17 +61,26 @@
 				"allowTernary": true
 			}
 		],
+		"import/no-extraneous-dependencies": [
+			2,
+			{
+				"devDependencies": [".storybook/**", "**/*.story.tsx", "**/*.test.tsx"]
+			}
+		],
 
 		// ts
 		"no-shadow": 0,
-		"@typescript-eslint/no-shadow": [1],
+		"@typescript-eslint/no-shadow": [0],
 
-		"no-unused-vars": [1, { "varsIgnorePattern": "^_" }],
-		"@typescript-eslint/no-unused-vars": [1, { "varsIgnorePattern": "^_" }],
+		// "no-unused-vars": [1, { "varsIgnorePattern": "^_" }],
+		// "@typescript-eslint/no-unused-vars": [1, { "varsIgnorePattern": "^_" }],
 		"no-underscore-dangle": 0,
 
+		"no-useless-constructor": 0,
+		"@typescript-eslint/no-useless-constructor": [2],
+
 		"no-use-before-define": [0],
-		"@typescript-eslint/no-use-before-define": 2,
+		"@typescript-eslint/no-use-before-define": 1,
 
 		"@typescript-eslint/no-empty-function": [0],
 		"@typescript-eslint/explicit-module-boundary-types": 0,
@@ -80,6 +90,7 @@
 		"@typescript-eslint/member-delimiter-style": 0,
 		"@typescript-eslint/no-var-requires": 0,
 		"@typescript-eslint/no-explicit-any": 0,
+		"@typescript-eslint/ban-ts-comment": 1,
 
 		// react
 		"react/prop-types": 0,
@@ -101,7 +112,10 @@
 			}
 		],
 		"react-hooks/rules-of-hooks": 2,
-		"react-hooks/exhaustive-deps": 1
+		"react-hooks/exhaustive-deps": 1,
+
+		"jsx-a11y/no-static-element-interactions": 0,
+		"jsx-a11y/click-events-have-key-events": 0
 	},
 	"settings": {
 		"import/resolver": {

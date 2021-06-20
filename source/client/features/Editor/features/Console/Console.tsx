@@ -55,17 +55,15 @@ export const Console: FC<Props> = observer(
 							)}
 
 							{store.results.length
-								? store.results.map((res, i) => {
-										return (
-											<div
-												// eslint-disable-next-line react/no-array-index-key
-												key={i}
-												className={res.error ? styles.Error : styles.Result}
-											>
-												{res.value}
-											</div>
-										);
-								  })
+								? store.results.map((res, i) => (
+										<div
+											// eslint-disable-next-line react/no-array-index-key
+											key={i}
+											className={res.error ? styles.Error : styles.Result}
+										>
+											{res.value}
+										</div>
+								  ))
 								: null}
 						</>
 					) : (

@@ -10,9 +10,7 @@ export const emojiHero = () => {
 	return emojis[Math.floor(Math.random() * emojis.length)];
 };
 
-export const randomEventColor = () => {
-	return EVENTS_COLORS[Math.floor(Math.random() * EVENTS_COLORS.length)];
-};
+export const randomEventColor = () => EVENTS_COLORS[Math.floor(Math.random() * EVENTS_COLORS.length)];
 
 export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
 	const memory = new Map<string, R>();
@@ -32,9 +30,7 @@ export const copy = (text: string) => {
 	navigator.clipboard.writeText(text);
 };
 
-export const uuid = () => {
-	return Date.now().toString(36) + Math.random().toString(36).substring(10);
-};
+export const uuid = () => Date.now().toString(36) + Math.random().toString(36).substring(10);
 
 export const ls = (key: string, payload?: any, merge?: boolean) => {
 	// @ts-ignore
@@ -68,16 +64,13 @@ export const debounce = <F extends (...args: any[]) => any>(
 };
 
 // todo - memoize
-export const sortBy = (source: any[], prop: string, up = false) => {
-	return source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
-};
+export const sortBy = (source: any[], prop: string, up = false) => source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
 
 // todo - memoize
 export const reduceBy = <T>(
 	source: T[],
 	get: string | ((item: T) => string)
-) => {
-	return source.reduce((total: { [key: string]: T[] }, item) => {
+) => source.reduce((total: { [key: string]: T[] }, item) => {
 		const prop = typeof get === 'string' ? get : get(item);
 
 		if (total[prop]) {
@@ -88,7 +81,6 @@ export const reduceBy = <T>(
 
 		return total;
 	}, {});
-};
 
 // todo - memoize
 export const groupBy = <T>(
