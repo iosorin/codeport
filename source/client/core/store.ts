@@ -4,17 +4,17 @@ import { SocketStore } from '@/stores/socket.store';
 import { SnippetsStore } from '@/features/Snippets';
 
 class RootStore {
-    ui = new UiStore();
+	ui = new UiStore();
 
-    toast = new ToastStore();
+	toast = new ToastStore();
 
-    socket = SocketStore.getInstance();
+	socket = SocketStore.getInstance();
 
-    snippets = new SnippetsStore();
+	snippets = new SnippetsStore();
 }
 
 export const store = new RootStore();
 
 export function always<K extends keyof typeof store>(key: K) {
-    return store[key];
+	return store[key];
 }

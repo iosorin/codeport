@@ -8,27 +8,39 @@ import styles from './editor-bar.scss';
 /* TODO - STORE TYPE */
 
 type Props = {
-    store: any;
+	store: any;
 };
 
 export const EditorBar: FC<Props> = ({ store }) => {
-    return (
-        <div
-            className={classNames(styles.container, {
-                [styles.active]: store.visible,
-            })}
-        >
-            <span>{store.settings.mode}</span>
-            <span>{store.settings.fontSize}px</span>
-            <span>{store.settings.tabSize}px</span>
+	return (
+		<div
+			className={classNames(styles.container, {
+				[styles.active]: store.visible,
+			})}
+		>
+			<span>{store.settings.mode}</span>
+			<span>{store.settings.fontSize}px</span>
+			<span>{store.settings.tabSize}px</span>
 
-            <Tooltip text={HOTKEYS.EDITOR_TOGGLE_SETTINGS.label} className={styles.icon} center>
-                <Settings size="15" onClick={() => store.toggleSettings(true)} />
-            </Tooltip>
+			<Tooltip
+				text={HOTKEYS.EDITOR_TOGGLE_SETTINGS.label}
+				className={styles.icon}
+				center
+			>
+				<Settings size='15' onClick={() => store.toggleSettings(true)} />
+			</Tooltip>
 
-            <Tooltip text={HOTKEYS.EDITOR_TOGGLE_CONSOLE.label} className={styles.icon} center>
-                <ArrowUpLeft size="16" onClick={() => store.toggleConsole()} className="chevron" />
-            </Tooltip>
-        </div>
-    );
+			<Tooltip
+				text={HOTKEYS.EDITOR_TOGGLE_CONSOLE.label}
+				className={styles.icon}
+				center
+			>
+				<ArrowUpLeft
+					size='16'
+					onClick={() => store.toggleConsole()}
+					className='chevron'
+				/>
+			</Tooltip>
+		</div>
+	);
 };

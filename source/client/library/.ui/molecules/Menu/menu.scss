@@ -1,62 +1,62 @@
 .container {
-    &.hover {
-        &:hover {
-            .content {
-                @include invisible(1);
-            }
-        }
-    }
+	&.hover {
+		&:hover {
+			.content {
+				@include invisible(1);
+			}
+		}
+	}
 }
 
 .trigger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	cursor: pointer;
 }
 
 .content {
-    z-index: 99;
-    position: fixed;
-    border-radius: $radius;
-    // overflow: hidden;
-    @include invisible;
+	z-index: 99;
+	position: fixed;
+	border-radius: $radius;
+	// overflow: hidden;
+	@include invisible;
 
-    &.center {
-        left: 50%;
-        transform: translateX(-50%);
-    }
+	&.center {
+		left: 50%;
+		transform: translateX(-50%);
+	}
 
-    &.visible {
-        @include invisible(1);
-    }
+	&.visible {
+		@include invisible(1);
+	}
 }
 
 .option {
-    $hover: $light;
+	$hover: $light;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.8rem;
-    letter-spacing: 0.2px;
-    line-height: 1.5;
-    color: black;
-    background: #fff;
-    padding: $padding;
-    transition: background $tr;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.8rem;
+	letter-spacing: 0.2px;
+	line-height: 1.5;
+	color: black;
+	background: #fff;
+	padding: $padding;
+	transition: background $tr;
+	cursor: pointer;
 
-    &:not(:last-child) {
-        border-bottom: 1px solid $hover;
-    }
+	&:not(:last-child) {
+		border-bottom: 1px solid $hover;
+	}
 
-    &:hover {
-        background: $hover;
-    }
+	&:hover {
+		background: $hover;
+	}
 
-    svg {
-        margin-left: 18px;
-    }
+	svg {
+		margin-left: 18px;
+	}
 }

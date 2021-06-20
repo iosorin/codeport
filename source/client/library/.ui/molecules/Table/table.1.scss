@@ -1,131 +1,131 @@
 .table {
-    text-align: left;
-    border-radius: $radius;
-    overflow: hidden;
-    border-collapse: separate;
-    border-spacing: 0 0.8rem;
+	text-align: left;
+	border-radius: $radius;
+	overflow: hidden;
+	border-collapse: separate;
+	border-spacing: 0 0.8rem;
 
-    &.none {
-        background: none;
-    }
+	&.none {
+		background: none;
+	}
 
-    &.light {
-        td {
-            background: $black-lighten;
-        }
-    }
+	&.light {
+		td {
+			background: $black-lighten;
+		}
+	}
 
-    &.dark {
-        color: white;
+	&.dark {
+		color: white;
 
-        td {
-            background: $black-darken;
-        }
-    }
+		td {
+			background: $black-darken;
+		}
+	}
 
-    &.clickable {
-        tbody {
-            tr {
-                cursor: pointer;
-                transition: $tr;
-            }
-        }
+	&.clickable {
+		tbody {
+			tr {
+				cursor: pointer;
+				transition: $tr;
+			}
+		}
 
-        &.light,
-        &.none {
-            tbody {
-                tr {
-                    &:hover {
-                        background: lighten($black-lighten, 2%);
-                    }
-                }
-            }
-        }
+		&.light,
+		&.none {
+			tbody {
+				tr {
+					&:hover {
+						background: lighten($black-lighten, 2%);
+					}
+				}
+			}
+		}
 
-        &.dark {
-            tbody {
-                tr {
-                    &:hover {
-                        background: $black-darken;
-                    }
-                }
-            }
-        }
-    }
+		&.dark {
+			tbody {
+				tr {
+					&:hover {
+						background: $black-darken;
+					}
+				}
+			}
+		}
+	}
 
-    caption {
-        text-align: left;
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-    }
+	caption {
+		text-align: left;
+		margin-bottom: 10px;
+		font-size: 1.2rem;
+	}
 
-    th,
-    td {
-        position: relative;
-        padding: 0 $padding-x * 2;
-        &:first-child,
-        &:last-child {
-            border-radius: $radius * 1.5;
-            overflow: hidden;
-        }
-        &:first-child {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
+	th,
+	td {
+		position: relative;
+		padding: 0 $padding-x * 2;
+		&:first-child,
+		&:last-child {
+			border-radius: $radius * 1.5;
+			overflow: hidden;
+		}
+		&:first-child {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
 
-        &:last-child {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-    }
+		&:last-child {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
 
-    td {
-        max-width: 200px;
-        vertical-align: middle;
-        line-height: 0;
-        height: 50px;
-        line-height: 50px;
-        @include text-truncate;
-    }
+	td {
+		max-width: 200px;
+		vertical-align: middle;
+		line-height: 0;
+		height: 50px;
+		line-height: 50px;
+		@include text-truncate;
+	}
 
-    th {
-        color: $text-grey;
-        letter-spacing: 0.5px;
-        text-transform: capitalize;
-        padding-bottom: $padding-y;
-    }
+	th {
+		color: $text-grey;
+		letter-spacing: 0.5px;
+		text-transform: capitalize;
+		padding-bottom: $padding-y;
+	}
 
-    .num,
-    .color {
-        width: 40px;
-        text-align: right;
-        padding-right: 0;
-        padding-left: 0;
-        border-right: none !important;
-        + * {
-            border-left: none !important;
-        }
-    }
+	.num,
+	.color {
+		width: 40px;
+		text-align: right;
+		padding-right: 0;
+		padding-left: 0;
+		border-right: none !important;
+		+ * {
+			border-left: none !important;
+		}
+	}
 
-    .sort {
-        cursor: pointer;
-        display: inline;
-        margin-left: 6px;
-        opacity: 0.5;
-        transition: opacity $tr;
-        position: absolute;
-        right: $padding-x * 2;
-        top: 35%;
-        transform: translateY(-50%);
-        line-height: 0;
+	.sort {
+		cursor: pointer;
+		display: inline;
+		margin-left: 6px;
+		opacity: 0.5;
+		transition: opacity $tr;
+		position: absolute;
+		right: $padding-x * 2;
+		top: 35%;
+		transform: translateY(-50%);
+		line-height: 0;
 
-        &:hover:not(:active),
-        &.current {
-            opacity: 1;
-        }
+		&:hover:not(:active),
+		&.current {
+			opacity: 1;
+		}
 
-        &.up {
-            transform: translateY(-50%) rotate(180deg);
-        }
-    }
+		&.up {
+			transform: translateY(-50%) rotate(180deg);
+		}
+	}
 }

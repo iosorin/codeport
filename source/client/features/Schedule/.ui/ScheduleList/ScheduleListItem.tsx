@@ -5,38 +5,40 @@ import type { ScheduleEvent } from 'types';
 import { date } from '@/library/utils';
 
 type Props = {
-    details: ScheduleEvent;
-    updateEvent: (event: ScheduleEvent) => void;
-    toggleDialog: (event: ScheduleEvent) => void;
-    toggleConfirmDialog: (event: ScheduleEvent) => void;
+	details: ScheduleEvent;
+	updateEvent: (event: ScheduleEvent) => void;
+	toggleDialog: (event: ScheduleEvent) => void;
+	toggleConfirmDialog: (event: ScheduleEvent) => void;
 };
 
 export const ScheduleListItem: FC<Props> = observer(
-    ({ details, updateEvent, toggleDialog, toggleConfirmDialog }) => {
-        const startsIn = date.diff(details.date);
-        const when = date.when(details.date, true, false);
+	({ details, updateEvent, toggleDialog, toggleConfirmDialog }) => {
+		const startsIn = date.diff(details.date);
+		const when = date.when(details.date, true, false);
 
-        return (
-            <Block
-                key={details.id}
-                size="large"
-                title={details.title}
-                background="dark"
-                onEdit={() => toggleDialog(details)}
-                onRemove={() => toggleConfirmDialog(details)}
-                small={
-                    startsIn ? <div className="h5 mt-xs text-grey">Starts in {startsIn}</div> : null
-                }
-                icon={<div className="h4 mt-xs">{when}</div>}
-            >
-                <Colors
-                    trigger="line"
-                    active={details.color}
-                    onChange={(color) => updateEvent({ ...details, color })}
-                />
+		return (
+			<Block
+				key={details.id}
+				size='large'
+				title={details.title}
+				background='dark'
+				onEdit={() => toggleDialog(details)}
+				onRemove={() => toggleConfirmDialog(details)}
+				small={
+					startsIn ? (
+						<div className='h5 mt-xs text-grey'>Starts in {startsIn}</div>
+					) : null
+				}
+				icon={<div className='h4 mt-xs'>{when}</div>}
+			>
+				<Colors
+					trigger='line'
+					active={details.color}
+					onChange={(color) => updateEvent({ ...details, color })}
+				/>
 
-                <Event details={details} date={false} showEmpty />
-            </Block>
-        );
-    }
+				<Event details={details} date={false} showEmpty />
+			</Block>
+		);
+	}
 );

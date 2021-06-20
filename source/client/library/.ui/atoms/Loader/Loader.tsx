@@ -1,69 +1,69 @@
 import React, { FC } from 'react';
 
 export type Props = {
-    dur?: string;
-    size?: string | number;
-    color?: string;
-    type?: 'dots' | 'spinner';
+	dur?: string;
+	size?: string | number;
+	color?: string;
+	type?: 'dots' | 'spinner';
 };
 
 export const Loader: FC<Props> = ({
-    type = 'dots',
-    size: s = 40,
-    color = 'white',
-    dur = '1.5s',
+	type = 'dots',
+	size: s = 40,
+	color = 'white',
+	dur = '1.5s',
 }) => {
-    const size = s + 'px';
+	const size = s + 'px';
 
-    const dots = (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 100"
-            width={size}
-            height={size}
-            enableBackground="new 0 0 0 0"
-        >
-            <circle fill={color} stroke="none" cx="30" cy="50" r="6">
-                <animate
-                    attributeName="opacity"
-                    dur={dur}
-                    values="0;1;0"
-                    repeatCount="indefinite"
-                    begin="0.1"
-                />
-            </circle>
-            <circle fill={color} stroke="none" cx="50" cy="50" r="6">
-                <animate
-                    attributeName="opacity"
-                    dur={dur}
-                    values="0;1;0"
-                    repeatCount="indefinite"
-                    begin="0.2"
-                />
-            </circle>
-            <circle fill={color} stroke="none" cx="70" cy="50" r="6">
-                <animate
-                    attributeName="opacity"
-                    dur={dur}
-                    values="0;1;0"
-                    repeatCount="indefinite"
-                    begin="0.3"
-                />
-            </circle>
-        </svg>
-    );
+	const dots = (
+		<svg
+			xmlns='http://www.w3.org/2000/svg'
+			viewBox='0 0 100 100'
+			width={size}
+			height={size}
+			enableBackground='new 0 0 0 0'
+		>
+			<circle fill={color} stroke='none' cx='30' cy='50' r='6'>
+				<animate
+					attributeName='opacity'
+					dur={dur}
+					values='0;1;0'
+					repeatCount='indefinite'
+					begin='0.1'
+				/>
+			</circle>
+			<circle fill={color} stroke='none' cx='50' cy='50' r='6'>
+				<animate
+					attributeName='opacity'
+					dur={dur}
+					values='0;1;0'
+					repeatCount='indefinite'
+					begin='0.2'
+				/>
+			</circle>
+			<circle fill={color} stroke='none' cx='70' cy='50' r='6'>
+				<animate
+					attributeName='opacity'
+					dur={dur}
+					values='0;1;0'
+					repeatCount='indefinite'
+					begin='0.3'
+				/>
+			</circle>
+		</svg>
+	);
 
-    const spinner = (
-        <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            width={size}
-            height={size}
-            viewBox="0 0 80 80"
-        >
-            <path
-                fill={color}
-                d="M10,40c0,0,0-0.4,0-1.1c0-0.3,0-0.8,0-1.3c0-0.3,0-0.5,0-0.8c0-0.3,0.1-0.6,0.1-0.9c0.1-0.6,0.1-1.4,0.2-2.1
+	const spinner = (
+		<svg
+			version='1.1'
+			xmlns='http://www.w3.org/2000/svg'
+			width={size}
+			height={size}
+			viewBox='0 0 80 80'
+		>
+			<path
+				fill={color}
+				d='M10,40c0,0,0-0.4,0-1.1c0-0.3,0-0.8,0-1.3c0-0.3,0-0.5,0-0.8c0-0.3,0.1-0.6,0.1-0.9c0.1-0.6,0.1-1.4,0.2-2.1
 	c0.2-0.8,0.3-1.6,0.5-2.5c0.2-0.9,0.6-1.8,0.8-2.8c0.3-1,0.8-1.9,1.2-3c0.5-1,1.1-2,1.7-3.1c0.7-1,1.4-2.1,2.2-3.1
 	c1.6-2.1,3.7-3.9,6-5.6c2.3-1.7,5-3,7.9-4.1c0.7-0.2,1.5-0.4,2.2-0.7c0.7-0.3,1.5-0.3,2.3-0.5c0.8-0.2,1.5-0.3,2.3-0.4l1.2-0.1
 	l0.6-0.1l0.3,0l0.1,0l0.1,0l0,0c0.1,0-0.1,0,0.1,0c1.5,0,2.9-0.1,4.5,0.2c0.8,0.1,1.6,0.1,2.4,0.3c0.8,0.2,1.5,0.3,2.3,0.5
@@ -75,20 +75,20 @@ export const Loader: FC<Props> = ({
 	c-2-1.5-4.4-2.7-6.9-3.6c-0.6-0.2-1.3-0.4-1.9-0.6c-0.7-0.2-1.3-0.3-1.9-0.4c-1.2-0.3-2.8-0.4-4.2-0.5l-2,0c-0.7,0-1.4,0.1-2.1,0.1
 	c-0.7,0.1-1.4,0.1-2,0.3c-0.7,0.1-1.3,0.3-2,0.4c-2.6,0.7-5.2,1.7-7.5,3.1c-2.2,1.4-4.3,2.9-6,4.7c-0.9,0.8-1.6,1.8-2.4,2.7
 	c-0.7,0.9-1.3,1.9-1.9,2.8c-0.5,1-1,1.9-1.4,2.8c-0.4,0.9-0.8,1.8-1,2.6c-0.3,0.9-0.5,1.6-0.7,2.4c-0.2,0.7-0.3,1.4-0.4,2.1
-	c-0.1,0.3-0.1,0.6-0.2,0.9c0,0.3-0.1,0.6-0.1,0.8c0,0.5-0.1,0.9-0.1,1.3C10,39.6,10,40,10,40z"
-            >
-                <animateTransform
-                    attributeType="xml"
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 40 40"
-                    to="360 40 40"
-                    dur={dur}
-                    repeatCount="indefinite"
-                />
-            </path>
-        </svg>
-    );
+	c-0.1,0.3-0.1,0.6-0.2,0.9c0,0.3-0.1,0.6-0.1,0.8c0,0.5-0.1,0.9-0.1,1.3C10,39.6,10,40,10,40z'
+			>
+				<animateTransform
+					attributeType='xml'
+					attributeName='transform'
+					type='rotate'
+					from='0 40 40'
+					to='360 40 40'
+					dur={dur}
+					repeatCount='indefinite'
+				/>
+			</path>
+		</svg>
+	);
 
-    return type === 'dots' ? dots : spinner;
+	return type === 'dots' ? dots : spinner;
 };

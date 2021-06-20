@@ -1,33 +1,33 @@
 import { useEffect } from 'react';
 
 export const useHotkey = (
-    key = 'escape',
-    handler: (e: KeyboardEvent) => void,
-    when = true,
-    useKeyup = false
+	key = 'escape',
+	handler: (e: KeyboardEvent) => void,
+	when = true,
+	useKeyup = false
 ): void => {
-    useEffect(() => {
-        const handle = (e: KeyboardEvent) => {
-            const { altKey } = e;
-            const ctrlKey = e.ctrlKey || e.metaKey;
+	useEffect(() => {
+		const handle = (e: KeyboardEvent) => {
+			const { altKey } = e;
+			const ctrlKey = e.ctrlKey || e.metaKey;
 
-            const prefix = `${ctrlKey ? 'ctrl-' : ''}${altKey ? 'alt-' : ''}`;
-            const keyCode = `${prefix}${e.key}`;
+			const prefix = `${ctrlKey ? 'ctrl-' : ''}${altKey ? 'alt-' : ''}`;
+			const keyCode = `${prefix}${e.key}`;
 
-            if (keyCode.toLowerCase() === key.toLowerCase()) {
-                e.preventDefault();
+			if (keyCode.toLowerCase() === key.toLowerCase()) {
+				e.preventDefault();
 
-                handler(e);
-            }
-        };
+				handler(e);
+			}
+		};
 
-        const type = useKeyup ? 'keyup' : 'keydown';
+		const type = useKeyup ? 'keyup' : 'keydown';
 
-        const listen = () => document.addEventListener(type, handle);
-        const clear = () => document.removeEventListener(type, handle);
+		const listen = () => document.addEventListener(type, handle);
+		const clear = () => document.removeEventListener(type, handle);
 
-        (when ? listen : clear)();
+		(when ? listen : clear)();
 
-        return clear;
-    }, [handler, key, when, useKeyup]);
+		return clear;
+	}, [handler, key, when, useKeyup]);
 };

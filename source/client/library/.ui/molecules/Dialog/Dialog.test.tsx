@@ -6,39 +6,39 @@ const text = 'dialog content';
 const title = 'dialog title';
 
 jest.mock('react-transition-group/CSSTransition', () => {
-    const FakeTransition = jest.fn(({ children }) => children);
-    const FakeCSSTransition = jest.fn((props) =>
-        props.in ? <FakeTransition>{props.children}</FakeTransition> : null
-    );
+	const FakeTransition = jest.fn(({ children }) => children);
+	const FakeCSSTransition = jest.fn((props) =>
+		props.in ? <FakeTransition>{props.children}</FakeTransition> : null
+	);
 
-    return FakeCSSTransition;
+	return FakeCSSTransition;
 });
 
 const dialog = (visible: boolean) => {
-    return (
-        <Dialog close={() => {}} visible={visible} persistent title={title}>
-            {text}
-        </Dialog>
-    );
+	return (
+		<Dialog close={() => {}} visible={visible} persistent title={title}>
+			{text}
+		</Dialog>
+	);
 };
 
 afterEach(cleanup);
 
 describe('<Dialog />', () => {
-    it('renders children and title prop', () => {
-        const { getByText } = render(dialog(true));
+	it('renders children and title prop', () => {
+		const { getByText } = render(dialog(true));
 
-        expect(getByText(text)).toBeInTheDocument();
-        expect(getByText(title)).toBeInTheDocument();
-    });
+		expect(getByText(text)).toBeInTheDocument();
+		expect(getByText(title)).toBeInTheDocument();
+	});
 
-    it('dialog toggle', () => {
-        const { rerender, queryByText } = render(dialog(true));
+	it('dialog toggle', () => {
+		const { rerender, queryByText } = render(dialog(true));
 
-        expect(queryByText(text)).not.toBeNull();
+		expect(queryByText(text)).not.toBeNull();
 
-        rerender(dialog(false));
+		rerender(dialog(false));
 
-        expect(queryByText(text)).toBeNull();
-    });
+		expect(queryByText(text)).toBeNull();
+	});
 });

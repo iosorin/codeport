@@ -8,15 +8,15 @@ export type Contract = {
 
 export const api = {
 	get: async (): Promise<ActivityContract['GET']['response']> =>
-		http.get('/api/activity').then(res => res.data),
+		http.get('/api/activity').then((res) => res.data),
 
 	update: async (
 		data: Contract['update']
 	): Promise<ActivityContract['UPDATE']['response']> =>
-		http.put('/api/activity', data).then(res => res.data),
+		http.put('/api/activity', data).then((res) => res.data),
 
 	remove: async (
 		id: Contract['id']
 	): Promise<ActivityContract['REMOVE']['response']> =>
-		http.delete(`/api/activity/${id}`).then(res => res.data),
+		http.delete(`/api/activity/${id}`).then((res) => res.data),
 };

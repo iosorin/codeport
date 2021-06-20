@@ -5,31 +5,33 @@ import { date } from '@/library/utils';
 import { ScheduleStoreType } from '../store';
 
 type Props = {
-    store: ScheduleStoreType;
+	store: ScheduleStoreType;
 };
 
 const isPastDay = (day: number) => date.fixed(day) < date.fixed();
 
 export const ScheduleCalendar: FC<Props> = observer(({ store }) => {
-    const markedDays = store.events.map((event) => ({
-        date: event.date,
-        style: {
-            background: event.color,
-        },
-    }));
+	const markedDays = store.events.map((event) => ({
+		date: event.date,
+		style: {
+			background: event.color,
+		},
+	}));
 
-    const openMarkedDay = (day: number) => {
-        const target = store.events.find((event) => date.match(event.date, day)) ?? { date: day };
+	const openMarkedDay = (day: number) => {
+		const target = store.events.find((event) =>
+			date.match(event.date, day)
+		) ?? { date: day };
 
-        store.toggleDialog(target, true);
-    };
+		store.toggleDialog(target, true);
+	};
 
-    return (
-        <Calendar
-            dark
-            disableDates={isPastDay}
-            onClickDate={openMarkedDay}
-            markedDays={markedDays}
-        />
-    );
+	return (
+		<Calendar
+			dark
+			disableDates={isPastDay}
+			onClickDate={openMarkedDay}
+			markedDays={markedDays}
+		/>
+	);
 });

@@ -1,17 +1,17 @@
 import { makeAutoObservable } from 'mobx';
 
 export class UiStore {
-    conferencePanelVisible = false;
+	conferencePanelVisible = false;
 
-    constructor() {
-        makeAutoObservable(this);
-    }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-    get sidebarVisible() {
-        return !this.conferencePanelVisible;
-    }
+	get sidebarVisible() {
+		return !this.conferencePanelVisible;
+	}
 
-    toggleConferencePanel = (show = !this.conferencePanelVisible) => {
-        this.conferencePanelVisible = show;
-    };
+	toggleConferencePanel = (show = !this.conferencePanelVisible) => {
+		this.conferencePanelVisible = show;
+	};
 }

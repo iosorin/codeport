@@ -5,14 +5,16 @@ import { NestedRoute, paths } from './routes';
 import { PrivateRoute } from './PrivateRoute';
 
 const flatRoutes = (list: NestedRoute[]): any[] =>
-    list.map((route) => [route.routes ? flatRoutes(route.routes) : [], route]).flat(Infinity);
+	list
+		.map((route) => [route.routes ? flatRoutes(route.routes) : [], route])
+		.flat(Infinity);
 
 export const Router: FC = () => {
-    return (
-        <Switch>
-            {flatRoutes(paths).map((route) => (
-                <PrivateRoute {...route} key={route.path} />
-            ))}
-        </Switch>
-    );
+	return (
+		<Switch>
+			{flatRoutes(paths).map((route) => (
+				<PrivateRoute {...route} key={route.path} />
+			))}
+		</Switch>
+	);
 };

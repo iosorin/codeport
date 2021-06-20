@@ -3,13 +3,13 @@ import React from 'react';
 import { Sidebar } from 'react-feather';
 
 afterEach(() => {
-    cleanup();
+	cleanup();
 });
 
 describe('<Sidebar />', () => {
-    it('renders without crashing', () => {
-        const { container } = render(<Sidebar />);
+	it('renders without crashing', () => {
+		const { container } = render(<Sidebar />);
 
-        expect(container.firstChild).toBeInTheDocument();
-    });
+		expect(container.firstChild).toBeInTheDocument();
+	});
 });

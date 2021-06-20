@@ -18,8 +18,8 @@ export const NotificationsView: FC = () => (
 					title='Hurray! The project has been launched'
 				>
 					<p>
-						All basic information about project goals and usage tips
-						you can find <Link to='/activity'>here</Link>
+						All basic information about project goals and usage tips you can
+						find <Link to='/activity'>here</Link>
 					</p>
 				</Block>
 

@@ -1,18 +1,18 @@
 $pd: $padding-xl * 2;
 .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: $pd;
-    @include scrollable(6px);
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: $pd;
+	@include scrollable(6px);
 
-    &.wide {
-        padding: $padding-xl;
-    }
+	&.wide {
+		padding: $padding-xl;
+	}
 
-    h1 {
-        width: 100%;
-        text-transform: uppercase;
-    }
+	h1 {
+		width: 100%;
+		text-transform: uppercase;
+	}
 }

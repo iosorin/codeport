@@ -7,99 +7,99 @@ $trackHeight: 6px;
 $progressPercent: 50%;
 
 .container {
-    width: 100%;
-    position: relative;
+	width: 100%;
+	position: relative;
 
-    &.dark {
-        .range {
-            @include dark;
-        }
-    }
+	&.dark {
+		.range {
+			@include dark;
+		}
+	}
 }
 
 .value {
-    font-size: $input-fz;
-    width: 60px;
-    text-align: right;
+	font-size: $input-fz;
+	width: 60px;
+	text-align: right;
 }
 
 @mixin thumb {
-    appearance: none;
-    width: $thumbHeight;
-    height: $thumbHeight;
-    background-color: $thumbColor;
-    border-radius: $thumbHeight / 2;
-    border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    margin-top: (($thumbHeight - $trackHeight) / 2) * -1;
-    position: relative;
-    cursor: pointer;
+	appearance: none;
+	width: $thumbHeight;
+	height: $thumbHeight;
+	background-color: $thumbColor;
+	border-radius: $thumbHeight / 2;
+	border: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+	margin-top: (($thumbHeight - $trackHeight) / 2) * -1;
+	position: relative;
+	cursor: pointer;
 }
 
 @mixin track {
-    height: $trackHeight;
-    background: $color; /* fallback */
-    background: linear-gradient(
-        90deg,
-        $activeColor var(--progressPercent, 0%),
-        $trackColor var(--progressPercent, 0%)
-    );
-    border-radius: $trackHeight / 2;
+	height: $trackHeight;
+	background: $color; /* fallback */
+	background: linear-gradient(
+		90deg,
+		$activeColor var(--progressPercent, 0%),
+		$trackColor var(--progressPercent, 0%)
+	);
+	border-radius: $trackHeight / 2;
 }
 
 @mixin progress {
-    height: $trackHeight;
-    background-color: $activeColor;
-    border-radius: (($trackHeight / 2) 0 0 $trackHeight) / 2;
+	height: $trackHeight;
+	background-color: $activeColor;
+	border-radius: (($trackHeight / 2) 0 0 $trackHeight) / 2;
 }
 
 .range {
-    height: $thumbHeight + 2px;
-    border: $input-border;
-    border-radius: $input-radius;
-    transition: $input-tr;
-    padding: $padding-y * 2 0;
-    background: transparent;
+	height: $thumbHeight + 2px;
+	border: $input-border;
+	border-radius: $input-radius;
+	transition: $input-tr;
+	padding: $padding-y * 2 0;
+	background: transparent;
 
-    &:focus {
-        outline: none;
-    }
+	&:focus {
+		outline: none;
+	}
 
-    &:disabled {
-        @include disabled;
-    }
+	&:disabled {
+		@include disabled;
+	}
 
-    /* Thumb */
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        @include thumb;
-    }
-    &::-moz-range-thumb {
-        -moz-appearance: none;
+	/* Thumb */
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		@include thumb;
+	}
+	&::-moz-range-thumb {
+		-moz-appearance: none;
 
-        @include thumb;
-    }
-    &::-ms-thumb {
-        -ms-appearance: none;
-        @include thumb;
-    }
+		@include thumb;
+	}
+	&::-ms-thumb {
+		-ms-appearance: none;
+		@include thumb;
+	}
 
-    /* Track */
-    &::-webkit-slider-runnable-track {
-        @include track;
-    }
-    &::-moz-range-track {
-        @include track;
-    }
-    &::-ms-track {
-        @include track;
-    }
+	/* Track */
+	&::-webkit-slider-runnable-track {
+		@include track;
+	}
+	&::-moz-range-track {
+		@include track;
+	}
+	&::-ms-track {
+		@include track;
+	}
 
-    /* Progress */
-    &::-moz-range-progress {
-        @include progress;
-    }
-    &::-ms-fill-lower {
-        @include progress;
-    }
+	/* Progress */
+	&::-moz-range-progress {
+		@include progress;
+	}
+	&::-ms-fill-lower {
+		@include progress;
+	}
 }

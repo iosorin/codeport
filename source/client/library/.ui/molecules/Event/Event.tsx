@@ -8,74 +8,74 @@ import classNames from 'classnames';
 type Event = Partial<ActivityEvent>;
 
 type Props = {
-    details: Event;
-    rating?: boolean;
-    date?: boolean;
-    showEmpty?: boolean;
-    accent?: boolean;
-    small?: boolean;
+	details: Event;
+	rating?: boolean;
+	date?: boolean;
+	showEmpty?: boolean;
+	accent?: boolean;
+	small?: boolean;
 };
 
 export const Event: FC<Props> = observer(
-    ({ details, date: showDate = true, rating, showEmpty, accent, small }) => {
-        const displayMap = [
-            {
-                label: 'Stack',
-                value: details.stack,
-            },
-            {
-                label: 'Salary',
-                value: details.salary,
-            },
-            {
-                label: 'Contacts',
-                value: details.contacts,
-            },
+	({ details, date: showDate = true, rating, showEmpty, accent, small }) => {
+		const displayMap = [
+			{
+				label: 'Stack',
+				value: details.stack,
+			},
+			{
+				label: 'Salary',
+				value: details.salary,
+			},
+			{
+				label: 'Contacts',
+				value: details.contacts,
+			},
 
-            {
-                label: 'Additional',
-                value: details.additional,
-            },
-        ];
+			{
+				label: 'Additional',
+				value: details.additional,
+			},
+		];
 
-        if (rating && typeof details.rating === 'number') {
-            displayMap.push({
-                label: 'Rating',
-                value: details.rating.toString() + ' / 10',
-            });
-        }
+		if (rating && typeof details.rating === 'number') {
+			displayMap.push({
+				label: 'Rating',
+				value: details.rating.toString() + ' / 10',
+			});
+		}
 
-        if (showDate) {
-            displayMap.unshift({
-                label: 'Date',
-                value: date.when(details.date),
-            });
-        }
+		if (showDate) {
+			displayMap.unshift({
+				label: 'Date',
+				value: date.when(details.date),
+			});
+		}
 
-        return (
-            <div
-                className={classNames({
-                    'text-accent': accent,
-                    [styles.small]: small,
-                    [styles.normal]: !small,
-                })}
-            >
-                {displayMap.map((detail, index) => {
-                    const empty = showEmpty && !detail.value;
-                    const Label = empty ? 'span' : 'b';
-                    const color = empty ? 'text-grey' : '';
+		return (
+			<div
+				className={classNames({
+					'text-accent': accent,
+					[styles.small]: small,
+					[styles.normal]: !small,
+				})}
+			>
+				{displayMap.map((detail, index) => {
+					const empty = showEmpty && !detail.value;
+					const Label = empty ? 'span' : 'b';
+					const color = empty ? 'text-grey' : '';
 
-                    return (
-                        (showEmpty || detail.value) && (
-                            <p key={index} className={color}>
-                                <Label>{detail.label}</Label>
+					return (
+						(showEmpty || detail.value) && (
+							<p key={index} className={color}>
+								<Label>{detail.label}</Label>
 
-                                <span>:&nbsp;{detail.value || 'not specified'}</span>
-                            </p>
-                        )
-                    );
-                })}
-            </div>
-        );
-    }
+								<span>:&nbsp;{detail.value || 'not specified'}</span>
+							</p>
+						)
+					);
+				})}
+			</div>
+		);
+	}
 );

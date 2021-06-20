@@ -4,7 +4,7 @@ import { store } from './store';
 const Context = createContext(store);
 
 export const Provider: FC = ({ children }) => (
-    <Context.Provider value={store}>{children}</Context.Provider>
+	<Context.Provider value={store}>{children}</Context.Provider>
 );
 
 export const useCore = () => useContext(Context);
