@@ -7,37 +7,37 @@ export * from './utils';
 export type Language = typeof SUPPORTED_LANGUAGES[number];
 
 export type Snippet = {
-    id: string;
-    title?: string;
-    date: number;
-    lang: Language;
-    content: string;
+	id: string;
+	title?: string;
+	date: number;
+	lang: Language;
+	content: string;
 };
 
 export type ConferenceUser = {
-    id: string;
-    constraints: {
-        audio: boolean;
-        video: boolean;
-    };
+	id: string;
+	constraints: {
+		audio: boolean;
+		video: boolean;
+	};
 };
 
 export type ScheduleEvent = {
-    id: string | number;
-    date: number;
-    title: string;
-    stack: string;
-    salary: string;
-    contacts: string;
-    additional: string;
-    color: string;
+	id: string | number;
+	date: number;
+	title: string;
+	stack: string;
+	salary: string;
+	contacts: string;
+	additional: string;
+	color: string;
 };
 
 export type NewEvent = Required<ScheduleEvent, 'id'>;
 
 export type ActivityEvent = ScheduleEvent & {
-    rating: number;
-    snippets: Snippet[];
-    time: number; // min.
-    _roomID?: string;
+	rating: number;
+	snippets: Snippet[];
+	time: number; // min.
+	_roomID?: string;
 };

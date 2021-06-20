@@ -4,11 +4,11 @@ import '@lls/react-light-calendar/dist/index.css';
 import './calendar.shared.scss';
 
 const Calendar = () => {
-    return (
-        <div>
-            <ReactLightCalendar onChange={console.log} />
-        </div>
-    );
+	return (
+		<div>
+			<ReactLightCalendar onChange={console.log} />
+		</div>
+	);
 };
 
 export default Calendar;

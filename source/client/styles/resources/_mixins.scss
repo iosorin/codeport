@@ -14,146 +14,146 @@
 
 // css modules 14.8 KiB
 @mixin input {
-    color: $input-color;
-    font-size: $input-fz;
-    font-weight: $input-weight;
-    background: $input-background;
-    padding: $input-padding;
-    border: $input-border;
-    border-radius: $input-radius;
-    transition: $input-tr;
+	color: $input-color;
+	font-size: $input-fz;
+	font-weight: $input-weight;
+	background: $input-background;
+	padding: $input-padding;
+	border: $input-border;
+	border-radius: $input-radius;
+	transition: $input-tr;
 
-    &:hover:not(:focus) {
-        background: $input-hover-background;
-    }
-    &::selection {
-        background: darken($input-background, 5);
-        color: $input-color;
-    }
+	&:hover:not(:focus) {
+		background: $input-hover-background;
+	}
+	&::selection {
+		background: darken($input-background, 5);
+		color: $input-color;
+	}
 }
 
 @mixin dark {
-    color: white;
-    background: $black;
+	color: white;
+	background: $black;
 
-    &:hover {
-        background: $black-lighten;
-    }
+	&:hover {
+		background: $black-lighten;
+	}
 }
 
 @mixin opacity($direction: 'up') {
-    cursor: pointer;
-    transition: opacity $tr;
-    @if $direction == 'up' {
-        opacity: 0.6;
-        &:hover {
-            opacity: 1;
-        }
-    } @else {
-        &:hover {
-            opacity: 0.6;
-        }
-    }
+	cursor: pointer;
+	transition: opacity $tr;
+	@if $direction == 'up' {
+		opacity: 0.6;
+		&:hover {
+			opacity: 1;
+		}
+	} @else {
+		&:hover {
+			opacity: 0.6;
+		}
+	}
 }
 
 @mixin invisible($opacity: 0) {
-    transition: opacity $tr;
-    @if $opacity == 0 {
-        opacity: 0;
-        visibility: hidden;
-    } @else {
-        opacity: 1;
-        visibility: visible;
-    }
+	transition: opacity $tr;
+	@if $opacity == 0 {
+		opacity: 0;
+		visibility: hidden;
+	} @else {
+		opacity: 1;
+		visibility: visible;
+	}
 }
 
 @mixin svg {
-    fill: currentColor;
-    fill-rule: evenodd;
-    will-change: opacity;
-    width: 100%;
-    height: 100%;
+	fill: currentColor;
+	fill-rule: evenodd;
+	will-change: opacity;
+	width: 100%;
+	height: 100%;
 }
 
 @mixin cover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 @mixin center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 @mixin unselectable {
-    cursor: default;
-    pointer-events: none;
-    user-select: none;
+	cursor: default;
+	pointer-events: none;
+	user-select: none;
 }
 
 @mixin disabled {
-    opacity: 0.5;
-    @include unselectable;
+	opacity: 0.5;
+	@include unselectable;
 }
 
 @mixin text-truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
-    &:after {
-        /* Safari cuts the end of the text hack */
-        @media not all and (min-resolution: 0.001dpcm) {
-            @supports (-webkit-appearance: none) {
-                content: '\0000a0';
-                display: inline-block;
-                width: 0;
-                height: 0;
-            }
-        }
-    }
+	&:after {
+		/* Safari cuts the end of the text hack */
+		@media not all and (min-resolution: 0.001dpcm) {
+			@supports (-webkit-appearance: none) {
+				content: '\0000a0';
+				display: inline-block;
+				width: 0;
+				height: 0;
+			}
+		}
+	}
 }
 
 @mixin scrollable($width: 4px, $color: rgba(90, 90, 90, 0.2), $offset: 0) {
-    overflow-x: hidden;
+	overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-        width: $width;
-        height: $width;
-        background-color: transparent;
-        border-radius: 100px;
-    }
+	&::-webkit-scrollbar {
+		width: $width;
+		height: $width;
+		background-color: transparent;
+		border-radius: 100px;
+	}
 
-    &::-webkit-scrollbar:hover {
-        background-color: lighten($color, 10);
-    }
+	&::-webkit-scrollbar:hover {
+		background-color: lighten($color, 10);
+	}
 
-    &::-webkit-scrollbar-thumb {
-        background: $color;
-        border-radius: 100px;
-    }
-    &::-webkit-scrollbar-thumb:active {
-        background: darken($color, 10);
-        border-radius: 100px;
-    }
+	&::-webkit-scrollbar-thumb {
+		background: $color;
+		border-radius: 100px;
+	}
+	&::-webkit-scrollbar-thumb:active {
+		background: darken($color, 10);
+		border-radius: 100px;
+	}
 
-    &::-webkit-scrollbar-thumb:vertical {
-        min-height: 10px;
-    }
-    &::-webkit-scrollbar-thumb:horizontal {
-        min-width: 10px;
-    }
+	&::-webkit-scrollbar-thumb:vertical {
+		min-height: 10px;
+	}
+	&::-webkit-scrollbar-thumb:horizontal {
+		min-width: 10px;
+	}
 
-    &::-webkit-scrollbar-track-piece:end {
-        margin-bottom: $offset;
-    }
+	&::-webkit-scrollbar-track-piece:end {
+		margin-bottom: $offset;
+	}
 
-    &::-webkit-scrollbar-track-piece:start {
-        margin-top: $offset;
-    }
+	&::-webkit-scrollbar-track-piece:start {
+		margin-top: $offset;
+	}
 }

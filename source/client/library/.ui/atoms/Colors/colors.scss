@@ -1,63 +1,63 @@
 $margin: 0.5rem;
 
 .colors {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: $input-margin;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin: $input-margin;
 
-    &.outer {
-        padding: $margin / 2;
-        background: white;
-        border-radius: $radius;
-        box-shadow: $shadow-2;
-        justify-content: space-between;
-        margin-top: 0.5rem;
-        max-width: 268px;
-        &::after {
-            content: '';
-            flex: 1;
-            order: 2;
-        }
-    }
+	&.outer {
+		padding: $margin / 2;
+		background: white;
+		border-radius: $radius;
+		box-shadow: $shadow-2;
+		justify-content: space-between;
+		margin-top: 0.5rem;
+		max-width: 268px;
+		&::after {
+			content: '';
+			flex: 1;
+			order: 2;
+		}
+	}
 
-    .color {
-        cursor: pointer;
-        margin: $margin;
-        transition: transform $tr;
+	.color {
+		cursor: pointer;
+		margin: $margin;
+		transition: transform $tr;
 
-        &:hover {
-            transform: scale(1.1);
-        }
-        &.active {
-            transform: scale(1.2);
-        }
-    }
+		&:hover {
+			transform: scale(1.1);
+		}
+		&.active {
+			transform: scale(1.2);
+		}
+	}
 }
 
 .color {
-    position: relative;
-    display: inline-block;
-    border: $border;
-    border-radius: 50%;
+	position: relative;
+	display: inline-block;
+	border: $border;
+	border-radius: 50%;
 
-    &.dot {
-        width: 8px;
-        height: 8px;
-    }
+	&.dot {
+		width: 8px;
+		height: 8px;
+	}
 
-    &.small {
-        width: 16px;
-        height: 16px;
-    }
+	&.small {
+		width: 16px;
+		height: 16px;
+	}
 
-    &.medium {
-        width: 20px;
-        height: 20px;
-    }
+	&.medium {
+		width: 20px;
+		height: 20px;
+	}
 
-    &.large {
-        width: 24px;
-        height: 24px;
-    }
+	&.large {
+		width: 24px;
+		height: 24px;
+	}
 }

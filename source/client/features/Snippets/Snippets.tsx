@@ -4,17 +4,17 @@ import React, { FC, useEffect } from 'react';
 import { SnippetsList } from './.ui';
 
 export const Snippets: FC = observer(() => {
-    const store = useSnippets();
+	const store = useSnippets();
 
-    useEffect(() => {
-        store.fetch();
-    }, [store]);
+	useEffect(() => {
+		store.fetch();
+	}, [store]);
 
-    return (
-        <div>
-            <div className="h3">Total: {store.snippets.length}</div>
+	return (
+		<div>
+			<div className='h3'>Total: {store.snippets.length}</div>
 
-            <SnippetsList snippets={store.snippets} />
-        </div>
-    );
+			<SnippetsList snippets={store.snippets} />
+		</div>
+	);
 });

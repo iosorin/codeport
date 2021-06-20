@@ -79,45 +79,45 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
 }
 
 html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
 }
 
 img,
 fieldset,
 a img {
-    border: none;
+	border: none;
 }
 
 img {
-    display: block;
-    max-width: 100%;
-    user-select: none;
+	display: block;
+	max-width: 100%;
+	user-select: none;
 }
 
 input,
 button,
 textarea,
 select {
-    font: inherit;
+	font: inherit;
 
-    &:focus {
-        outline: none;
-    }
+	&:focus {
+		outline: none;
+	}
 }
 
 input,
 textarea,
 select {
-    display: block;
-    width: 100%;
+	display: block;
+	width: 100%;
 }
 
 input[type='text'],
@@ -125,35 +125,35 @@ input[type='email'],
 input[type='tel'],
 input[type='range'],
 textarea {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 input[type='submit'],
 button {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 input[type='submit']::-moz-focus-inner,
 button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+	padding: 0;
+	border: 0;
 }
 
 textarea {
-    overflow: auto;
+	overflow: auto;
 }
 
 input,
 button {
-    margin: 0;
-    padding: 0;
-    border: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 button {
-    svg {
-        pointer-events: none;
-    }
+	svg {
+		pointer-events: none;
+	}
 }
 
 div,
@@ -170,32 +170,32 @@ h6,
 a,
 span,
 a:focus {
-    outline: none;
+	outline: none;
 }
 
 ul,
 ol {
-    list-style-type: none;
+	list-style-type: none;
 }
 
 table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 html {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-    }
+	* {
+		transition: none !important;
+	}
 }

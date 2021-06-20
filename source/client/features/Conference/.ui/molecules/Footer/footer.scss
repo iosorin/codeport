@@ -1,41 +1,41 @@
 .footer {
-    position: absolute;
-    width: 100%;
-    min-width: 300px;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: $call-panel-footer-padding;
-    z-index: 1;
+	position: absolute;
+	width: 100%;
+	min-width: 300px;
+	bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: $call-panel-footer-padding;
+	z-index: 1;
 
-    .refresh {
-        cursor: pointer;
-        margin: 0 12px;
-        transition: $tr;
+	.refresh {
+		cursor: pointer;
+		margin: 0 12px;
+		transition: $tr;
 
-        &:not(:hover) {
-            opacity: 0.7;
-        }
-    }
+		&:not(:hover) {
+			opacity: 0.7;
+		}
+	}
 
-    .participants {
-        margin-bottom: 5px;
-        letter-spacing: 0.5px;
-        font-weight: normal;
-        font-size: 0.8rem;
-        font-weight: 600;
-        cursor: default;
-    }
+	.participants {
+		margin-bottom: 5px;
+		letter-spacing: 0.5px;
+		font-weight: normal;
+		font-size: 0.8rem;
+		font-weight: 600;
+		cursor: default;
+	}
 }
 
 .help {
-    position: fixed;
-    right: 25px;
-    bottom: 20px;
-    cursor: pointer;
+	position: fixed;
+	right: 25px;
+	bottom: 20px;
+	cursor: pointer;
 
-    &:not(:hover) {
-        opacity: 0.6;
-    }
+	&:not(:hover) {
+		opacity: 0.6;
+	}
 }

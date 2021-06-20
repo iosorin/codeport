@@ -3,137 +3,137 @@
 $size: 33px;
 
 .rlc-calendar {
-    width: 300px + $padding-x;
-    padding: $padding;
-    border-radius: $radius;
+	width: 300px + $padding-x;
+	padding: $padding;
+	border-radius: $radius;
 }
 
 .rlc-month-and-year-wrapper {
-    border-top: none;
+	border-top: none;
 }
 
 .rlc-day {
-    color: white;
-    transition: $tr;
-    width: $size;
-    height: $size;
-    margin: (40px - $size) / 2;
-    position: relative;
-    border-radius: 50%;
+	color: white;
+	transition: $tr;
+	width: $size;
+	height: $size;
+	margin: (40px - $size) / 2;
+	position: relative;
+	border-radius: 50%;
 
-    &:hover,
-    &.rlc-day-today {
-        background: rgba(white, 0.1);
-    }
+	&:hover,
+	&.rlc-day-today {
+		background: rgba(white, 0.1);
+	}
 
-    &.rlc-day-out-of-month {
-        &:not(:hover) {
-            opacity: 0.6;
-        }
-    }
+	&.rlc-day-out-of-month {
+		&:not(:hover) {
+			opacity: 0.6;
+		}
+	}
 
-    &.rlc-day-marked {
-        color: black;
-        cursor: pointer !important;
+	&.rlc-day-marked {
+		color: black;
+		cursor: pointer !important;
 
-        &::after {
-            content: none;
-        }
-    }
+		&::after {
+			content: none;
+		}
+	}
 
-    &.rlc-day-disabled {
-        background: none;
-        pointer-events: none;
-        opacity: 0.4;
+	&.rlc-day-disabled {
+		background: none;
+		pointer-events: none;
+		opacity: 0.4;
 
-        &.rlc-day-marked {
-            pointer-events: all;
-            opacity: 0.5;
+		&.rlc-day-marked {
+			pointer-events: all;
+			opacity: 0.5;
 
-            &:hover {
-                opacity: 1;
-            }
-        }
-    }
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
 }
 
 .rlc-month-and-year,
 .rlc-date-details {
-    font-weight: 500;
-    font-size: 1rem;
-    color: $light;
+	font-weight: 500;
+	font-size: 1rem;
+	color: $light;
 }
 
 .rlc-navigation-button-wrapper {
-    flex-grow: 0;
+	flex-grow: 0;
 }
 
 .rlc-prev-year,
 .rlc-next-year {
-    display: none;
+	display: none;
 }
 
 .rlc-prev-month,
 .rlc-next-month {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @include opacity('up');
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	@include opacity('up');
 }
 
 .rlc-date-details-wrapper {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .rlc-date-time-selects {
-    display: flex;
+	display: flex;
 
-    .rlc-time-separator {
-        display: none;
-    }
+	.rlc-time-separator {
+		display: none;
+	}
 
-    select {
-        color: white;
-        background: transparent;
-        @include scrollable;
-        padding: 8px 0 8px 15px;
-        border-radius: 2px;
-        appearance: none;
+	select {
+		color: white;
+		background: transparent;
+		@include scrollable;
+		padding: 8px 0 8px 15px;
+		border-radius: 2px;
+		appearance: none;
 
-        & + select {
-            margin-left: 10px;
-        }
+		& + select {
+			margin-left: 10px;
+		}
 
-        option {
-            color: $black;
-        }
-    }
+		option {
+			color: $black;
+		}
+	}
 }
 
 // dark
 .rlc-dark {
-    .rlc-calendar {
-        background: $black;
+	.rlc-calendar {
+		background: $black;
 
-        select {
-            border-color: $black-lighten;
-        }
-    }
-    .rlc-calendar,
-    .rlc-month-and-year-wrapper {
-        border-color: $black-lighten;
-    }
+		select {
+			border-color: $black-lighten;
+		}
+	}
+	.rlc-calendar,
+	.rlc-month-and-year-wrapper {
+		border-color: $black-lighten;
+	}
 
-    .rlc-prev-month,
-    .rlc-next-month {
-        transition: $tr;
-        &:hover:not(:active) {
-            background: $black-lighten;
-            color: $light;
-        }
-    }
+	.rlc-prev-month,
+	.rlc-next-month {
+		transition: $tr;
+		&:hover:not(:active) {
+			background: $black-lighten;
+			color: $light;
+		}
+	}
 }

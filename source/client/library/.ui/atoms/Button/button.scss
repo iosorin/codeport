@@ -1,196 +1,196 @@
 .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 0;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    border-radius: $button-radius;
-    font-family: $button-font-family;
-    transition: box-shadow $tr;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 0;
+	font-weight: 500;
+	letter-spacing: 0.3px;
+	border-radius: $button-radius;
+	font-family: $button-font-family;
+	transition: box-shadow $tr;
 
-    // state ------------------------------------------------------------
-    &.loading {
-        @include unselectable;
+	// state ------------------------------------------------------------
+	&.loading {
+		@include unselectable;
 
-        svg {
-            @include center;
-        }
-    }
+		svg {
+			@include center;
+		}
+	}
 
-    &:disabled {
-        @include disabled;
-    }
+	&:disabled {
+		@include disabled;
+	}
 
-    // color, hover -----------------------------------------------------
-    &.white {
-        color: white;
-    }
+	// color, hover -----------------------------------------------------
+	&.white {
+		color: white;
+	}
 
-    &.black {
-        color: $black;
-    }
+	&.black {
+		color: $black;
+	}
 
-    // background -------------------------------------------------------
-    &.primary {
-        background-color: $button-primary-background;
-    }
+	// background -------------------------------------------------------
+	&.primary {
+		background-color: $button-primary-background;
+	}
 
-    &.secondary {
-        background-color: $button-secondary-background;
-    }
+	&.secondary {
+		background-color: $button-secondary-background;
+	}
 
-    &.success {
-        background-color: $success;
-    }
+	&.success {
+		background-color: $success;
+	}
 
-    &.light {
-        color: $black;
-        background-color: $light;
-    }
+	&.light {
+		color: $black;
+		background-color: $light;
+	}
 
-    &.grey {
-        background: $grey;
-        &.hover:hover {
-            color: $black;
-        }
-    }
+	&.grey {
+		background: $grey;
+		&.hover:hover {
+			color: $black;
+		}
+	}
 
-    &.dark {
-        background: $black-darken;
-    }
+	&.dark {
+		background: $black-darken;
+	}
 
-    // size -------------------------------------------------------------
-    &.small {
-        font-size: 0.8rem;
-        letter-spacing: 0.1px;
-        height: 1.8rem;
-        padding: 0 1.2rem 0.5px;
-        font-weight: 600;
+	// size -------------------------------------------------------------
+	&.small {
+		font-size: 0.8rem;
+		letter-spacing: 0.1px;
+		height: 1.8rem;
+		padding: 0 1.2rem 0.5px;
+		font-weight: 600;
 
-        &.rounded {
-            width: 30px;
-            height: 30px;
-            padding: 0;
-        }
+		&.rounded {
+			width: 30px;
+			height: 30px;
+			padding: 0;
+		}
 
-        svg {
-            max-width: 1rem;
-            max-height: 1rem;
-        }
-    }
+		svg {
+			max-width: 1rem;
+			max-height: 1rem;
+		}
+	}
 
-    &.medium {
-        font-size: 0.85rem;
-        height: 2.1rem;
-        padding: 0 1.6rem 0;
-        font-weight: 600;
+	&.medium {
+		font-size: 0.85rem;
+		height: 2.1rem;
+		padding: 0 1.6rem 0;
+		font-weight: 600;
 
-        &.rounded {
-            width: 34px;
-            height: 34px;
-            padding: 8px;
-        }
-    }
+		&.rounded {
+			width: 34px;
+			height: 34px;
+			padding: 8px;
+		}
+	}
 
-    &.large {
-        font-size: 1rem;
-        height: 2.9rem;
-        padding: 0 2rem 2px;
+	&.large {
+		font-size: 1rem;
+		height: 2.9rem;
+		padding: 0 2rem 2px;
 
-        &.rounded {
-            width: 50px;
-            height: 50px;
-            padding: 0;
-        }
-    }
+		&.rounded {
+			width: 50px;
+			height: 50px;
+			padding: 0;
+		}
+	}
 
-    // rounded ----------------------------------------------------------
-    &.rounded {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
+	// rounded ----------------------------------------------------------
+	&.rounded {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
 
-        // svg {
-        //     circle {
-        //         display: none;
-        //     }
-        // }
-    }
+		// svg {
+		//     circle {
+		//         display: none;
+		//     }
+		// }
+	}
 
-    &:not(.rounded) {
-        svg {
-            margin-top: 1px;
+	&:not(.rounded) {
+		svg {
+			margin-top: 1px;
 
-            & + span {
-                margin-right: 9px;
-            }
-        }
-    }
+			& + span {
+				margin-right: 9px;
+			}
+		}
+	}
 
-    // hover ------------------------------------------------------------
-    &.zoom {
-        &.medium,
-        &.large,
-        &.rounded {
-            &:not(.hover) {
-                transition: transform 0.35s ease;
-                backface-visibility: hidden;
-            }
-        }
+	// hover ------------------------------------------------------------
+	&.zoom {
+		&.medium,
+		&.large,
+		&.rounded {
+			&:not(.hover) {
+				transition: transform 0.35s ease;
+				backface-visibility: hidden;
+			}
+		}
 
-        &.large {
-            &:not(.hover) {
-                &:hover:not(:active) {
-                    transform: scale(1.02);
-                }
-            }
-        }
+		&.large {
+			&:not(.hover) {
+				&:hover:not(:active) {
+					transform: scale(1.02);
+				}
+			}
+		}
 
-        &.rounded,
-        &.medium {
-            &:not(.hover) {
-                &:hover:not(:active) {
-                    transform: scale(1.055);
-                }
-            }
-        }
-    }
+		&.rounded,
+		&.medium {
+			&:not(.hover) {
+				&:hover:not(:active) {
+					transform: scale(1.055);
+				}
+			}
+		}
+	}
 
-    &.rounded {
-        &.outline {
-            transition: $tr;
-            border: 2px solid transparent;
-            &:not(:hover) {
-                background: transparent !important;
-            }
+	&.rounded {
+		&.outline {
+			transition: $tr;
+			border: 2px solid transparent;
+			&:not(:hover) {
+				background: transparent !important;
+			}
 
-            &:hover:not(:active) {
-                border: 2px solid;
-            }
-        }
-    }
+			&:hover:not(:active) {
+				border: 2px solid;
+			}
+		}
+	}
 
-    &.hover {
-        transition: background-color $tr;
+	&.hover {
+		transition: background-color $tr;
 
-        &:not(:hover) {
-            background-color: transparent;
-        }
-    }
+		&:not(:hover) {
+			background-color: transparent;
+		}
+	}
 
-    &.shadow-light {
-        transition: box-shadow $tr;
-        &:hover:not(:active) {
-            box-shadow: $shadow-light;
-        }
-    }
+	&.shadow-light {
+		transition: box-shadow $tr;
+		&:hover:not(:active) {
+			box-shadow: $shadow-light;
+		}
+	}
 
-    &.shadow-dark {
-        transition: box-shadow $tr;
-        &:hover:not(:active) {
-            box-shadow: $shadow-2;
-        }
-    }
+	&.shadow-dark {
+		transition: box-shadow $tr;
+		&:hover:not(:active) {
+			box-shadow: $shadow-2;
+		}
+	}
 }

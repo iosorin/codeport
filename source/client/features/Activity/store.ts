@@ -71,7 +71,7 @@ class ActivityStore {
 		this.setLoading(true);
 
 		method()
-			.then(events => {
+			.then((events) => {
 				this.setEvents(events);
 			})
 			.finally(() => {

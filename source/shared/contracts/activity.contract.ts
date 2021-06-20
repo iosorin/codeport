@@ -1,19 +1,19 @@
 import type { ActivityEvent, NewEvent } from 'types';
 
 export type ActivityContract = {
-    GET: { response: ActivityEvent[] };
+	GET: { response: ActivityEvent[] };
 
-    CREATE: {
-        response: ActivityEvent[];
-    };
+	CREATE: {
+		response: ActivityEvent[];
+	};
 
-    UPDATE: {
-        request: NewEvent;
-        response: ActivityEvent[];
-    };
+	UPDATE: {
+		request: NewEvent;
+		response: ActivityEvent[];
+	};
 
-    REMOVE: {
-        params: { id: ActivityEvent['id'] };
-        response: ActivityEvent[];
-    };
+	REMOVE: {
+		params: { id: ActivityEvent['id'] };
+		response: ActivityEvent[];
+	};
 };

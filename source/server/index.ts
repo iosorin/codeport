@@ -12,31 +12,34 @@ import paths from '../../config/paths';
 dotenv.config();
 
 class App {
-    private server: http.Server;
+	private server: http.Server;
 
-    private socket: SocketService;
+	private socket: SocketService;
 
-    constructor(public port: string | number = 5000) {
-        const app = express();
+	constructor(public port: string | number = 5000) {
+		const app = express();
 
-        app.use(express.static(paths.dist));
+		app.use(express.static(paths.dist));
 
-        app.use(express.urlencoded({ extended: true }));
-        app.use(express.json());
+		app.use(express.urlencoded({ extended: true }));
+		app.use(express.json());
 
-        app.use('/api', router);
+		app.use('/api', router);
 
-        this.server = new http.Server(app);
+		this.server = new http.Server(app);
 
-        this.socket = new SocketService(this.server, new EventsRecorder(Activity.create));
-    }
+		this.socket = new SocketService(
+			this.server,
+			new EventsRecorder(Activity.create)
+		);
+	}
 
-    public start() {
-        this.server.listen(this.port);
+	public start() {
+		this.server.listen(this.port);
 
-        // eslint-disable-next-line no-console
-        console.log(`Server listening on port ${this.port}.`);
-    }
+		// eslint-disable-next-line no-console
+		console.log(`Server listening on port ${this.port}.`);
+	}
 }
 
 new App(process.env.SERVER_PORT).start();

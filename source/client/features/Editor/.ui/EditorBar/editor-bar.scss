@@ -1,42 +1,42 @@
 .container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: $editor-status-bar-justify;
-    // background: $editor-status-bar-background;
-    padding: $editor-status-bar-padding;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: $editor-status-bar-justify;
+	// background: $editor-status-bar-background;
+	padding: $editor-status-bar-padding;
 
-    span {
-        font-size: 0.75rem;
-        line-height: 1;
-        margin-right: 15px;
-        letter-spacing: 0.4px;
-        opacity: $editor-status-bar-opacity;
-        font-family: $editor-status-bar-ff;
-    }
+	span {
+		font-size: 0.75rem;
+		line-height: 1;
+		margin-right: 15px;
+		letter-spacing: 0.4px;
+		opacity: $editor-status-bar-opacity;
+		font-family: $editor-status-bar-ff;
+	}
 
-    .icon {
-        cursor: pointer;
-        margin-left: 4px;
-        line-height: 0;
+	.icon {
+		cursor: pointer;
+		margin-left: 4px;
+		line-height: 0;
 
-        svg {
-            transition: $tr;
+		svg {
+			transition: $tr;
 
-            &:not(:hover) {
-                opacity: $editor-status-bar-opacity;
-            }
-        }
+			&:not(:hover) {
+				opacity: $editor-status-bar-opacity;
+			}
+		}
 
-        // chevron
-        &:last-child {
-            margin-left: auto;
-        }
-    }
+		// chevron
+		&:last-child {
+			margin-left: auto;
+		}
+	}
 
-    &.active {
-        .icon:last-child svg {
-            opacity: 1;
-        }
-    }
+	&.active {
+		.icon:last-child svg {
+			opacity: 1;
+		}
+	}
 }

@@ -4,90 +4,91 @@ import { api } from './api';
 import { languages } from './languages';
 
 type ContentItem = {
-    value: string;
-    error?: boolean;
+	value: string;
+	error?: boolean;
 };
 
 class CompilerStore {
-    languageInfo: {
-        key?: number;
-        code?: string;
-        version?: string;
-    } = {};
+	languageInfo: {
+		key?: number;
+		code?: string;
+		version?: string;
+	} = {};
 
-    results: ContentItem[] = [];
+	results: ContentItem[] = [];
 
-    script = '';
+	script = '';
 
-    loading = false;
+	loading = false;
 
-    scriptCache = 0; // script exec flag
+	scriptCache = 0; // script exec flag
 
-    get isJS() {
-        return this.languageInfo.key === 0;
-    }
+	get isJS() {
+		return this.languageInfo.key === 0;
+	}
 
-    get languageIsSupported() {
-        return Boolean(this.languageInfo.version || this.isJS);
-    }
+	get languageIsSupported() {
+		return Boolean(this.languageInfo.version || this.isJS);
+	}
 
-    constructor() {
-        makeAutoObservable(this);
-    }
+	constructor() {
+		makeAutoObservable(this);
+	}
 
-    setResults = (content: ContentItem[]) => {
-        this.results = content;
-    };
+	setResults = (content: ContentItem[]) => {
+		this.results = content;
+	};
 
-    addResult = (value = '', error = false) => {
-        this.setResults([...this.results, { value, error }]);
-    };
+	addResult = (value = '', error = false) => {
+		this.setResults([...this.results, { value, error }]);
+	};
 
-    setLoading = (loading = false) => {
-        this.loading = loading;
-    };
+	setLoading = (loading = false) => {
+		this.loading = loading;
+	};
 
-    setScript = (script: string) => {
-        this.script = script;
-    };
+	setScript = (script: string) => {
+		this.script = script;
+	};
 
-    incrScriptCache = () => {
-        this.scriptCache += 1;
-    };
+	incrScriptCache = () => {
+		this.scriptCache += 1;
+	};
 
-    setLanguageInfo = (language: Language) => {
-        if (languages[language]?.version !== this.languageInfo?.version) {
-            this.setResults([]);
-        }
+	setLanguageInfo = (language: Language) => {
+		if (languages[language]?.version !== this.languageInfo?.version) {
+			this.setResults([]);
+		}
 
-        this.languageInfo = languages[language] || {};
+		this.languageInfo = languages[language] || {};
 
-        return this.languageInfo;
-    };
+		return this.languageInfo;
+	};
 
-    execute = (code: string, language: Language) => {
-        if (!this.languageIsSupported) return;
+	execute = (code: string, language: Language) => {
+		if (!this.languageIsSupported) return;
 
-        if (this.isJS) {
-            this.setScript(code);
-            this.incrScriptCache();
-        } else {
-            this.setLoading(true);
+		if (this.isJS) {
+			this.setScript(code);
+			this.incrScriptCache();
+		} else {
+			this.setLoading(true);
 
-            api.compile(code, language)
-                .then((data) => {
-                    if (data.Result) {
-                        this.addResult(data.Result);
-                    }
+			api
+				.compile(code, language)
+				.then((data) => {
+					if (data.Result) {
+						this.addResult(data.Result);
+					}
 
-                    if (data.Errors) {
-                        this.addResult(data.Errors, true);
-                    }
-                })
-                .catch(() => this.addResult('unknown error try again later', true))
-                .finally(this.setLoading);
-        }
-    };
+					if (data.Errors) {
+						this.addResult(data.Errors, true);
+					}
+				})
+				.catch(() => this.addResult('unknown error try again later', true))
+				.finally(this.setLoading);
+		}
+	};
 }
 
 export default new CompilerStore();

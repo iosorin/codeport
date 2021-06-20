@@ -1,41 +1,41 @@
 .text {
-    &-justify {
-        text-align: justify !important;
-    }
+	&-justify {
+		text-align: justify !important;
+	}
 
-    &-left {
-        text-align: left !important;
-    }
+	&-left {
+		text-align: left !important;
+	}
 
-    &-right {
-        text-align: right !important;
-    }
+	&-right {
+		text-align: right !important;
+	}
 
-    &-center {
-        text-align: center !important;
-    }
+	&-center {
+		text-align: center !important;
+	}
 
-    &-truncate {
-        @include text-truncate;
-    }
+	&-truncate {
+		@include text-truncate;
+	}
 
-    &-light {
-        font-weight: light;
-    }
+	&-light {
+		font-weight: light;
+	}
 
-    &-bold {
-        font-weight: bold;
-    }
+	&-bold {
+		font-weight: bold;
+	}
 
-    &-grey {
-        color: $text-grey;
-    }
+	&-grey {
+		color: $text-grey;
+	}
 
-    &-primary {
-        color: $text-primary;
-    }
+	&-primary {
+		color: $text-primary;
+	}
 
-    &-accent {
-        font-family: $sans-accent;
-    }
+	&-accent {
+		font-family: $sans-accent;
+	}
 }

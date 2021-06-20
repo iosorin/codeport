@@ -13,7 +13,7 @@ export const ParticipantsList: FC<Props> = observer(({ peers = [] }) => {
 		<>
 			{peers.length ? (
 				<div className={styles.list}>
-					{peers.map(peer => (
+					{peers.map((peer) => (
 						<ParticipantStream
 							key={peer.peerID}
 							peer={peer}

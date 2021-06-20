@@ -27,9 +27,10 @@ export const ActivityChart: FC<Props> = observer(
 			const start = new Date(date.addDays(-size, new Date(end)));
 			const chartDays = date.getDates(start, end);
 
-			return chartDays?.map(chartday => ({
+			return chartDays?.map((chartday) => ({
 				Date: date.when(chartday, false),
-				Events: events.filter(event => date.match(event.date, chartday)).length,
+				Events: events.filter((event) => date.match(event.date, chartday))
+					.length,
 			}));
 		}, [size, events]);
 

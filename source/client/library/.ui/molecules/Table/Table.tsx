@@ -5,247 +5,249 @@ import styles from './table.scss';
 import { Color } from '../..';
 
 type Item = {
-    id: string | number;
-    [key: string]: string | number | Date | JSX.Element | any[];
+	id: string | number;
+	[key: string]: string | number | Date | JSX.Element | any[];
 };
 
 type Props = {
-    caption?: string;
-    num?: string;
-    color?: string;
-    source: Item[];
-    labels?: string[];
-    sortable?: string[];
-    prefixes?: { [key: string]: string };
-    background?: 'light' | 'dark' | 'none';
-    groupBy?: string;
-    onTrClick?: (item?: any) => void;
-    onDelete?: (item?: any) => void;
+	caption?: string;
+	num?: string;
+	color?: string;
+	source: Item[];
+	labels?: string[];
+	sortable?: string[];
+	prefixes?: { [key: string]: string };
+	background?: 'light' | 'dark' | 'none';
+	groupBy?: string;
+	onTrClick?: (item?: any) => void;
+	onDelete?: (item?: any) => void;
 };
 
 export const Table: FC<Props> = ({
-    num,
-    color,
-    caption,
-    source: origin,
-    labels: originLabels,
-    sortable,
-    background = 'none',
-    groupBy: groupProp,
-    onTrClick,
-    onDelete,
-    prefixes,
+	num,
+	color,
+	caption,
+	source: origin,
+	labels: originLabels,
+	sortable,
+	background = 'none',
+	groupBy: groupProp,
+	onTrClick,
+	onDelete,
+	prefixes,
 }) => {
-    const [source, setSource] = useState(origin);
-    const [labels, setLabels] = useState(originLabels);
-    const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
+	const [source, setSource] = useState(origin);
+	const [labels, setLabels] = useState(originLabels);
+	const sortedMap = useRef<Map<string, 'up' | 'down' | 'inactive'>>(new Map());
 
-    const showDeleteIcon = Boolean(onDelete);
+	const showDeleteIcon = Boolean(onDelete);
 
-    useEffect(() => {
-        setSource(origin);
-    }, [origin]);
+	useEffect(() => {
+		setSource(origin);
+	}, [origin]);
 
-    useEffect(() => {
-        if (!originLabels) {
-            // @ts-ignore
-            setLabels(origin.length ? Object.keys(origin[0]) : []);
-        }
+	useEffect(() => {
+		if (!originLabels) {
+			// @ts-ignore
+			setLabels(origin.length ? Object.keys(origin[0]) : []);
+		}
 
-        sortable?.forEach((label) => {
-            sortedMap.current.set(label, 'inactive');
-        });
+		sortable?.forEach((label) => {
+			sortedMap.current.set(label, 'inactive');
+		});
 
-        if (groupProp) {
-            groupSource();
-        }
-    }, []);
+		if (groupProp) {
+			groupSource();
+		}
+	}, []);
 
-    const sortSource = (prop: string) => {
-        if (groupProp) {
-            if (process.env.NODE_ENV === 'development') {
-                console.warn('@ui/Table - unable to sort grouped source');
-            }
+	const sortSource = (prop: string) => {
+		if (groupProp) {
+			if (process.env.NODE_ENV === 'development') {
+				console.warn('@ui/Table - unable to sort grouped source');
+			}
 
-            return;
-        }
+			return;
+		}
 
-        const toggled = !(sortedMap.current.get(prop) === 'up');
+		const toggled = !(sortedMap.current.get(prop) === 'up');
 
-        sortedMap.current.forEach((_, key, map) => {
-            if (key === prop) map.set(prop, toggled ? 'up' : 'down');
-            else map.set(key, 'inactive');
-        });
+		sortedMap.current.forEach((_, key, map) => {
+			if (key === prop) map.set(prop, toggled ? 'up' : 'down');
+			else map.set(key, 'inactive');
+		});
 
-        setSource([...sortBy(source, prop, toggled)]);
-    };
+		setSource([...sortBy(source, prop, toggled)]);
+	};
 
-    const groupSource = () => {
-        if (!groupProp || !source.length) return;
+	const groupSource = () => {
+		if (!groupProp || !source.length) return;
 
-        const map = groupBy<typeof source[0]>(source, groupProp);
-        console.error('TODO: handle groupBy map result');
+		const map = groupBy<typeof source[0]>(source, groupProp);
+		console.error('TODO: handle groupBy map result');
 
-        // setSource(map.values());
-    };
+		// setSource(map.values());
+	};
 
-    const renderSortIcon = (label: string) => {
-        const classlist = [styles.sort];
+	const renderSortIcon = (label: string) => {
+		const classlist = [styles.sort];
 
-        const value = sortedMap.current.get(label);
+		const value = sortedMap.current.get(label);
 
-        if (value === 'up' || value === 'down') {
-            classlist.push(styles.current);
+		if (value === 'up' || value === 'down') {
+			classlist.push(styles.current);
 
-            if (value === 'up') {
-                classlist.push(styles.up);
-            }
-        }
+			if (value === 'up') {
+				classlist.push(styles.up);
+			}
+		}
 
-        return (
-            sortable?.includes(label) && (
-                <div className={classlist.join(' ')} onClick={() => sortSource(label)}>
-                    <ChevronDown size="17" />
-                </div>
-            )
-        );
-    };
+		return (
+			sortable?.includes(label) && (
+				<div className={classlist.join(' ')} onClick={() => sortSource(label)}>
+					<ChevronDown size='17' />
+				</div>
+			)
+		);
+	};
 
-    const renderDeleteIcon = (item: Item) => {
-        return (
-            showDeleteIcon && (
-                <td
-                    className="text-center"
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        onDelete!(item);
-                    }}
-                >
-                    <Trash className="opacity" size="15" />
-                </td>
-            )
-        );
-    };
+	const renderDeleteIcon = (item: Item) => {
+		return (
+			showDeleteIcon && (
+				<td
+					className='text-center'
+					onClick={(event) => {
+						event.stopPropagation();
+						onDelete!(item);
+					}}
+				>
+					<Trash className='opacity' size='15' />
+				</td>
+			)
+		);
+	};
 
-    const renderThead = () => {
-        return (
-            <thead>
-                <tr>
-                    {num && <th className={styles.num}>{num}</th>}
-                    {color && <th className={styles.color}></th>}
+	const renderThead = () => {
+		return (
+			<thead>
+				<tr>
+					{num && <th className={styles.num}>{num}</th>}
+					{color && <th className={styles.color}></th>}
 
-                    {labels?.map((label) => {
-                        if (label === 'id') return;
+					{labels?.map((label) => {
+						if (label === 'id') return;
 
-                        return (
-                            <th key={label}>
-                                {label}
+						return (
+							<th key={label}>
+								{label}
 
-                                {renderSortIcon(label)}
-                            </th>
-                        );
-                    })}
+								{renderSortIcon(label)}
+							</th>
+						);
+					})}
 
-                    {showDeleteIcon && <th></th>}
-                </tr>
-            </thead>
-        );
-    };
+					{showDeleteIcon && <th></th>}
+				</tr>
+			</thead>
+		);
+	};
 
-    const renderTd = (key: string | boolean, item: Item, index: number) => {
-        let value = item[key as string];
+	const renderTd = (key: string | boolean, item: Item, index: number) => {
+		let value = item[key as string];
 
-        if (!key || typeof value === 'undefined' || key === 'id' || !item) {
-            return <td key={index}></td>;
-        }
+		if (!key || typeof value === 'undefined' || key === 'id' || !item) {
+			return <td key={index}></td>;
+		}
 
-        const prefix = prefixes?.[key as keyof typeof prefixes];
+		const prefix = prefixes?.[key as keyof typeof prefixes];
 
-        if (Array.isArray(value)) {
-            value = value.length;
-        }
+		if (Array.isArray(value)) {
+			value = value.length;
+		}
 
-        if (value instanceof Date || key === 'date') {
-            //@ts-ignore
-            value = date.when(value);
-        }
+		if (value instanceof Date || key === 'date') {
+			//@ts-ignore
+			value = date.when(value);
+		}
 
-        if (prefix) {
-            value += prefix;
-        }
+		if (prefix) {
+			value += prefix;
+		}
 
-        return <td key={`${item.id}-${key}`}>{value}</td>;
-    };
+		return <td key={`${item.id}-${key}`}>{value}</td>;
+	};
 
-    const renderTbody = () => {
-        return (
-            <tbody>
-                {source.map((item, itemIndex) => {
-                    return (
-                        <tr
-                            key={(item.id as string) || itemIndex}
-                            onClick={() => onTrClick?.(item)}
-                        >
-                            {num && <td className={styles.num}>{itemIndex + 1}</td>}
+	const renderTbody = () => {
+		return (
+			<tbody>
+				{source.map((item, itemIndex) => {
+					return (
+						<tr
+							key={(item.id as string) || itemIndex}
+							onClick={() => onTrClick?.(item)}
+						>
+							{num && <td className={styles.num}>{itemIndex + 1}</td>}
 
-                            {color && (
-                                <td className={styles.color}>
-                                    <Color color={item[color] as string} size="dot" />
-                                </td>
-                            )}
+							{color && (
+								<td className={styles.color}>
+									<Color color={item[color] as string} size='dot' />
+								</td>
+							)}
 
-                            {labels?.map((label, index) => {
-                                return renderTd(label, item, index);
-                            })}
+							{labels?.map((label, index) => {
+								return renderTd(label, item, index);
+							})}
 
-                            {renderDeleteIcon(item)}
-                        </tr>
-                    );
-                })}
-            </tbody>
-        );
-    };
+							{renderDeleteIcon(item)}
+						</tr>
+					);
+				})}
+			</tbody>
+		);
+	};
 
-    const renderGroupedTbody = () => {
-        return Object.keys(source).map((groupByValue) => {
-            // @ts-ignore
-            const items: Item[] = source[groupByValue as keyof typeof source];
+	const renderGroupedTbody = () => {
+		return Object.keys(source).map((groupByValue) => {
+			// @ts-ignore
+			const items: Item[] = source[groupByValue as keyof typeof source];
 
-            if (!items.length) return;
+			if (!items.length) return;
 
-            return (
-                <tbody>
-                    {items.map((item, itemIndex) => {
-                        return (
-                            <tr
-                                key={(item.id as string) || itemIndex}
-                                onClick={() => onTrClick?.(item)}
-                            >
-                                {labels?.map((label, index) => {
-                                    const renderLabel =
-                                        label === groupProp ? itemIndex === 0 : true;
+			return (
+				<tbody>
+					{items.map((item, itemIndex) => {
+						return (
+							<tr
+								key={(item.id as string) || itemIndex}
+								onClick={() => onTrClick?.(item)}
+							>
+								{labels?.map((label, index) => {
+									const renderLabel =
+										label === groupProp ? itemIndex === 0 : true;
 
-                                    return renderTd(renderLabel && label, item, index);
-                                })}
+									return renderTd(renderLabel && label, item, index);
+								})}
 
-                                {renderDeleteIcon(item)}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            );
-        });
-    };
+								{renderDeleteIcon(item)}
+							</tr>
+						);
+					})}
+				</tbody>
+			);
+		});
+	};
 
-    return (
-        <table
-            className={`${styles.table} ${styles[background]} ${onTrClick ? styles.clickable : ''}`}
-        >
-            {caption && <caption>{caption}</caption>}
+	return (
+		<table
+			className={`${styles.table} ${styles[background]} ${
+				onTrClick ? styles.clickable : ''
+			}`}
+		>
+			{caption && <caption>{caption}</caption>}
 
-            {renderThead()}
+			{renderThead()}
 
-            {groupProp ? renderGroupedTbody() : renderTbody()}
-        </table>
-    );
+			{groupProp ? renderGroupedTbody() : renderTbody()}
+		</table>
+	);
 };

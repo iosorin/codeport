@@ -12,137 +12,137 @@ $drawer-translate: $drawer-width;
 $drawer-ease: $ease-3;
 
 .fade {
-    &-exit {
-        opacity: 1;
-    }
+	&-exit {
+		opacity: 1;
+	}
 
-    &-exit-done {
-        opacity: 0;
-    }
+	&-exit-done {
+		opacity: 0;
+	}
 
-    // /* fires as element leaves the DOM*/
-    &-exit-active {
-        opacity: 0;
-        transition: opacity $d $fade-ease;
-    }
+	// /* fires as element leaves the DOM*/
+	&-exit-active {
+		opacity: 0;
+		transition: opacity $d $fade-ease;
+	}
 
-    &-enter,
-    &-appear {
-        opacity: 0;
-    }
+	&-enter,
+	&-appear {
+		opacity: 0;
+	}
 
-    &-enter-active,
-    &-appear-active {
-        opacity: 1;
-        transition: opacity $d $fade-ease;
-    }
+	&-enter-active,
+	&-appear-active {
+		opacity: 1;
+		transition: opacity $d $fade-ease;
+	}
 }
 
 .zoom {
-    &-exit {
-        opacity: 1;
-        transform: perspective(1000px) translate3d(0, 0, 0px);
-    }
+	&-exit {
+		opacity: 1;
+		transform: perspective(1000px) translate3d(0, 0, 0px);
+	}
 
-    &-exit-done {
-        opacity: 0;
-        transform: perspective(1000px) translate3d(0, 0, -200px);
-    }
+	&-exit-done {
+		opacity: 0;
+		transform: perspective(1000px) translate3d(0, 0, -200px);
+	}
 
-    // /* fires as element leaves the DOM*/
-    &-exit-active {
-        opacity: 0;
-        transform: perspective(1000px) translate3d(0, 0, -200px);
-        transition: all $d $zoom-ease;
-    }
-    &-enter,
-    &-appear {
-        opacity: 0;
-        transform: perspective(1000px) translate3d(0, 0, -200px);
-    }
+	// /* fires as element leaves the DOM*/
+	&-exit-active {
+		opacity: 0;
+		transform: perspective(1000px) translate3d(0, 0, -200px);
+		transition: all $d $zoom-ease;
+	}
+	&-enter,
+	&-appear {
+		opacity: 0;
+		transform: perspective(1000px) translate3d(0, 0, -200px);
+	}
 
-    &-enter-active,
-    &-appear-active {
-        opacity: 1;
-        transform: perspective(1000px) translate3d(0, 0, 0px);
-        transition: all $d $zoom-ease;
-    }
+	&-enter-active,
+	&-appear-active {
+		opacity: 1;
+		transform: perspective(1000px) translate3d(0, 0, 0px);
+		transition: all $d $zoom-ease;
+	}
 }
 
 // slide-fade
 @mixin slide-fade($transofrm, $transition: $d $sf-ease) {
-    transition-property: opacity transform;
+	transition-property: opacity transform;
 
-    &-enter,
-    &-appear {
-        transform: $transofrm;
-        pointer-events: none;
-        opacity: 0;
-    }
+	&-enter,
+	&-appear {
+		transform: $transofrm;
+		pointer-events: none;
+		opacity: 0;
+	}
 
-    &-enter-active,
-    &-appear-active {
-        transition: $transition;
-        transition-delay: 0.1s;
-        transform: translateY(0px);
-        position: relative;
-        opacity: 1;
-    }
+	&-enter-active,
+	&-appear-active {
+		transition: $transition;
+		transition-delay: 0.1s;
+		transform: translateY(0px);
+		position: relative;
+		opacity: 1;
+	}
 
-    &-enter-done {
-        transform: translateY(0px);
-        opacity: 1;
-    }
+	&-enter-done {
+		transform: translateY(0px);
+		opacity: 1;
+	}
 
-    &-exit {
-        transform: translateY(0px);
-        pointer-events: none;
-        opacity: 1;
-    }
+	&-exit {
+		transform: translateY(0px);
+		pointer-events: none;
+		opacity: 1;
+	}
 
-    &-exit-done {
-        opacity: 0;
-    }
+	&-exit-done {
+		opacity: 0;
+	}
 
-    &-exit-active {
-        transition: $transition;
-        transform: $transofrm;
-        position: relative;
-        opacity: 0;
-    }
+	&-exit-active {
+		transition: $transition;
+		transform: $transofrm;
+		position: relative;
+		opacity: 0;
+	}
 }
 
 .slide-fade-up {
-    @include slide-fade(translateY($sf-translate));
+	@include slide-fade(translateY($sf-translate));
 }
 .slide-fade-left {
-    @include slide-fade(translateX($sf-translate));
+	@include slide-fade(translateX($sf-translate));
 }
 
 .slide-in-left {
-    &-enter,
-    &-appear {
-        transform: translateX($drawer-translate);
-        opacity: 0;
-    }
+	&-enter,
+	&-appear {
+		transform: translateX($drawer-translate);
+		opacity: 0;
+	}
 
-    &-enter-active,
-    &-appear-active,
-    &-enter-done,
-    &-exit {
-        transition: all $d $drawer-ease;
-        transition-delay: 0.1s;
-        transform: translateX(0px);
-        opacity: 1;
-    }
+	&-enter-active,
+	&-appear-active,
+	&-enter-done,
+	&-exit {
+		transition: all $d $drawer-ease;
+		transition-delay: 0.1s;
+		transform: translateX(0px);
+		opacity: 1;
+	}
 
-    &-exit-done {
-        opacity: 0;
-    }
+	&-exit-done {
+		opacity: 0;
+	}
 
-    &-exit-active {
-        transition: all $d $drawer-ease;
-        transform: translateX($drawer-translate);
-        opacity: 0;
-    }
+	&-exit-active {
+		transition: all $d $drawer-ease;
+		transform: translateX($drawer-translate);
+		opacity: 0;
+	}
 }

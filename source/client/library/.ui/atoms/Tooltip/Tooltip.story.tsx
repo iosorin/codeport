@@ -4,8 +4,8 @@ import React from 'react';
 import { Tooltip, Props } from '.';
 
 export default {
-    title: 'Atoms/Tooltip',
-    component: Tooltip,
+	title: 'Atoms/Tooltip',
+	component: Tooltip,
 } as Meta;
 
 const Template: Story<Props> = (args) => <Tooltip {...args}>activator</Tooltip>;
@@ -15,6 +15,6 @@ Basic.args = { content: 'Tooltip content' };
 
 export const Error = Template.bind({});
 Error.args = {
-    content: 'Error Tooltip',
-    error: true,
+	content: 'Error Tooltip',
+	error: true,
 };

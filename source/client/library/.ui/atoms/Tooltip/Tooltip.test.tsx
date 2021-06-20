@@ -9,23 +9,29 @@ const tooltipText = 'Tooltip';
 afterEach(cleanup);
 
 describe('<Tooltip />', () => {
-    it('renders without crashing', () => {
-        const { container } = render(<Tooltip content={tooltipText}>{innerText}</Tooltip>);
+	it('renders without crashing', () => {
+		const { container } = render(
+			<Tooltip content={tooltipText}>{innerText}</Tooltip>
+		);
 
-        expect(container.firstChild).toBeInTheDocument();
-    });
+		expect(container.firstChild).toBeInTheDocument();
+	});
 
-    it('renders children', () => {
-        const { getByText } = render(<Tooltip content={tooltipText}>{innerText}</Tooltip>);
+	it('renders children', () => {
+		const { getByText } = render(
+			<Tooltip content={tooltipText}>{innerText}</Tooltip>
+		);
 
-        const node = getByText(innerText);
+		const node = getByText(innerText);
 
-        expect(node).toBeInTheDocument();
-    });
+		expect(node).toBeInTheDocument();
+	});
 
-    it('inserts "content" prop at html markup', () => {
-        const { container } = render(<Tooltip content={tooltipText}>{innerText}</Tooltip>);
+	it('inserts "content" prop at html markup', () => {
+		const { container } = render(
+			<Tooltip content={tooltipText}>{innerText}</Tooltip>
+		);
 
-        expect(container.outerHTML.includes(tooltipText)).toBeTruthy();
-    });
+		expect(container.outerHTML.includes(tooltipText)).toBeTruthy();
+	});
 });

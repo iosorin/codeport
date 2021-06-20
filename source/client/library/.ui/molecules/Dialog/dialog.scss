@@ -1,103 +1,103 @@
 .wrapper {
-    @include center;
+	@include center;
 }
 
 .dialog {
-    display: flex;
-    flex-direction: column;
-    padding: $dialog-padding;
-    border-radius: $dialog-radius;
-    background: $dialog-background;
-    box-shadow: $dialog-shadow;
+	display: flex;
+	flex-direction: column;
+	padding: $dialog-padding;
+	border-radius: $dialog-radius;
+	background: $dialog-background;
+	box-shadow: $dialog-shadow;
 
-    &.dark {
-        color: white;
-        background: $black-darken;
-        border: $border;
+	&.dark {
+		color: white;
+		background: $black-darken;
+		border: $border;
 
-        svg {
-            color: white;
-        }
-    }
+		svg {
+			color: white;
+		}
+	}
 
-    &.small {
-        width: $dialog-width / 1.2;
+	&.small {
+		width: $dialog-width / 1.2;
 
-        .title {
-            font-size: 1rem;
-        }
-    }
+		.title {
+			font-size: 1rem;
+		}
+	}
 
-    &.normal {
-        width: $dialog-width;
-        padding: $dialog-padding;
+	&.normal {
+		width: $dialog-width;
+		padding: $dialog-padding;
 
-        .title {
-            font-size: 1.1rem;
-        }
-    }
+		.title {
+			font-size: 1.1rem;
+		}
+	}
 
-    &.large {
-        padding: $dialog-padding * 1.2;
-        width: $dialog-width * 1.2;
+	&.large {
+		padding: $dialog-padding * 1.2;
+		width: $dialog-width * 1.2;
 
-        .title {
-            font-size: 19px;
-        }
-    }
+		.title {
+			font-size: 19px;
+		}
+	}
 
-    &.fullscreen {
-        width: 75vw;
-        padding: 2rem 2rem 1.3rem;
+	&.fullscreen {
+		width: 75vw;
+		padding: 2rem 2rem 1.3rem;
 
-        .header {
-            padding-bottom: 20px;
-        }
-        .title {
-            font-size: 1.3rem;
-        }
+		.header {
+			padding-bottom: 20px;
+		}
+		.title {
+			font-size: 1.3rem;
+		}
 
-        hr {
-            margin-left: -2rem;
-            width: calc(100% + 4rem);
-        }
-    }
+		hr {
+			margin-left: -2rem;
+			width: calc(100% + 4rem);
+		}
+	}
 
-    &.centered {
-        .header {
-            text-align: center;
-            justify-content: center;
-        }
+	&.centered {
+		.header {
+			text-align: center;
+			justify-content: center;
+		}
 
-        .content {
-            text-align: center;
-        }
-    }
+		.content {
+			text-align: center;
+		}
+	}
 }
 
 .title {
-    margin-top: -3px;
-    font-weight: 600;
+	margin-top: -3px;
+	font-weight: 600;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    position: relative;
-    line-height: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	position: relative;
+	line-height: 1;
 }
 
 .close {
-    background: none;
-    padding: 10px;
-    margin-left: auto;
-    margin-right: -10px;
-    margin-top: -10px;
+	background: none;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: -10px;
+	margin-top: -10px;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }

@@ -4,20 +4,20 @@ import logo from '@media/logo/9.svg';
 import styles from './logo.scss';
 
 export type Props = {
-    short?: boolean;
-    className?: string;
+	short?: boolean;
+	className?: string;
 };
 
 export const Logo: FC<Props> = ({ className = '', short }) => {
-    const classname = [styles.logo, className];
+	const classname = [styles.logo, className];
 
-    return (
-        <div className={classname.join(' ')}>
-            <svg>
-                <use href={`${logo}#logo-short`} />
-            </svg>
+	return (
+		<div className={classname.join(' ')}>
+			<svg>
+				<use href={`${logo}#logo-short`} />
+			</svg>
 
-            {!short && <span>{process.env.TITLE}</span>}
-        </div>
-    );
+			{!short && <span>{process.env.TITLE}</span>}
+		</div>
+	);
 };

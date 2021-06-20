@@ -6,25 +6,27 @@ import { useUi } from '@core';
 import styles from './base-layout.scss';
 
 type Props = {
-    wide?: boolean;
-    centered?: boolean;
+	wide?: boolean;
+	centered?: boolean;
 };
 
 export const BaseLayout: FC<Props> = ({ wide, centered, children }) => {
-    const classlist = [styles.content];
+	const classlist = [styles.content];
 
-    if (wide) classlist.push(styles.wide);
-    if (centered) classlist.push(styles.centered);
+	if (wide) classlist.push(styles.wide);
+	if (centered) classlist.push(styles.centered);
 
-    const ui = useUi();
+	const ui = useUi();
 
-    return (
-        <BlankLayout>
-            <Observer>
-                {() => <Sidebar className={styles.sidebar} visible={ui.sidebarVisible} />}
-            </Observer>
+	return (
+		<BlankLayout>
+			<Observer>
+				{() => (
+					<Sidebar className={styles.sidebar} visible={ui.sidebarVisible} />
+				)}
+			</Observer>
 
-            <div className={classlist.join(' ')}>{children}</div>
-        </BlankLayout>
-    );
+			<div className={classlist.join(' ')}>{children}</div>
+		</BlankLayout>
+	);
 };
