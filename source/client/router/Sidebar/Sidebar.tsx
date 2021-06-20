@@ -19,8 +19,7 @@ export type Props = {
 	visible: boolean;
 };
 
-export const Sidebar: FC<Props> = ({ className = '', visible }) => {
-	return (
+export const Sidebar: FC<Props> = ({ className = '', visible }) => (
 		<div
 			className={`${styles.sidebar} ${
 				visible ? '' : styles.hidden
@@ -109,4 +108,3 @@ export const Sidebar: FC<Props> = ({ className = '', visible }) => {
 			</div>
 		</div>
 	);
-};

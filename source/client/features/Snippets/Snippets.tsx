@@ -1,10 +1,10 @@
-import { useSnippets } from '@core';
-import { observer } from 'mobx-react-lite';
 import React, { FC, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { always } from '@core';
 import { SnippetsList } from './.ui';
 
 export const Snippets: FC = observer(() => {
-	const store = useSnippets();
+	const store = always('snippets');
 
 	useEffect(() => {
 		store.fetch();
