@@ -31,6 +31,8 @@
     "rules": {
         /* js */
         "eqeqeq": "warn",
+        "no-shadow": "warn",
+        "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
         "no-unused-vars": "warn",
         "newline-before-return": "error",
         "no-useless-return": "error",
@@ -106,7 +108,6 @@
         "@typescript-eslint/ban-ts-comment": "warn",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/brace-style": ["error"],
-        "no-unused-expressions": "off",
         "@typescript-eslint/no-unused-expressions": ["off"]
     },
     "settings": {
