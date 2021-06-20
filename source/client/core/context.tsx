@@ -9,5 +9,6 @@ export const Provider: FC = ({ children }) => (
 
 export const useCore = () => useContext(Context);
 
-export const useUi = () => useCore().ui;
-export const useToast = () => useCore().toast;
+export function always<K extends keyof typeof store>(key: K) {
+	return store[key];
+}

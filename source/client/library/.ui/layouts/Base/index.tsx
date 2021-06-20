@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Observer } from 'mobx-react-lite';
 import { Sidebar } from '@/router/Sidebar';
 import { BlankLayout } from '@ui/layouts';
-import { useUi } from '@core';
+import { always } from '@core';
 import styles from './base-layout.scss';
 
 type Props = {
@@ -11,12 +11,12 @@ type Props = {
 };
 
 export const BaseLayout: FC<Props> = ({ wide, centered, children }) => {
+	const ui = always('ui');
+
 	const classlist = [styles.content];
 
 	if (wide) classlist.push(styles.wide);
 	if (centered) classlist.push(styles.centered);
-
-	const ui = useUi();
 
 	return (
 		<BlankLayout>
