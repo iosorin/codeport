@@ -7,6 +7,9 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const paths = require('../config/paths');
 
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const coreCssRegex = [paths.styles, /\.shared.(css|scss)$/, /node_modules/];
+
 module.exports = ({ config }) => {
 	config.module.rules.push(
 		{
@@ -20,21 +23,19 @@ module.exports = ({ config }) => {
 		},
 		{
 			test: /\.(scss|css)$/,
-			include: [/resources/, /\.shared.(css|scss)$/],
+			include: coreCssRegex,
 			use: devCssLoaders(),
 		},
 		{
 			test: /\.(scss|css)$/,
-			exclude: [/\.shared.(css|scss)$/],
+			exclude: coreCssRegex,
 			use: devCssLoaders(true),
 		}
 	);
 
-	config.resolve.extensions.push('.ts', '.tsx');
+	config.resolve.extensions = extensions;
 
-	config.resolve.plugins.push(
-		new TsconfigPathsPlugin({ configFile: './tsconfig.json' })
-	);
+	config.resolve.plugins.push(new TsconfigPathsPlugin({ configFile: './tsconfig.json' }));
 
 	return config;
 };
@@ -67,8 +68,8 @@ function devCssLoaders(useModules) {
 			options: {
 				sourceMap: true,
 				resources: [
-					paths.scss + '/_variables.scss',
-					paths.scss + '/_mixins.scss',
+					paths.styles + '/resources/_variables.scss',
+					paths.styles + '/resources/_mixins.scss',
 				],
 			},
 		},
