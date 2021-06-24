@@ -12,8 +12,8 @@
 		"build:analyze": "cross-env NODE_ENV=production analyze=true webpack --progress --config config/webpack.prod.js",
 		"test": "jest --config config/jest/jest.config.js",
 		"test:watch": "jest --watch --config config/jest/jest.config.js",
-		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook",
+		"sb": "start-storybook -p 6006",
+		"sb-build": "build-storybook",
 		"lint": "eslint --cache --ext .js,.jsx,.ts,.tsx source",
 		"lint:dump": "eslint --print-config ./.eslintrc",
 		"format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,scss,md}\""
@@ -24,11 +24,11 @@
 		}
 	},
 	"lint-staged": {
-		"src/**/*.{js,jsx,ts,tsx}": [
+		"source/**/*.{ts,tsx}": [
 			"npm run eslint",
 			"git add"
 		],
-		"src/**/*.{json,css,scss,md}": [
+		"source/**/*.{ts,tsx, json,css,scss,md}": [
 			"npm run format",
 			"git add"
 		]
@@ -55,10 +55,10 @@
 	},
 	"devDependencies": {
 		"@babel/runtime": "^7.12.5",
-		"@storybook/addon-actions": "^6.1.0-beta.2",
-		"@storybook/addon-essentials": "^6.1.0-beta.2",
-		"@storybook/addon-links": "^6.1.0-beta.2",
-		"@storybook/react": "^6.1.0-beta.2",
+		"@storybook/addon-actions": "^6.3.0",
+		"@storybook/addon-essentials": "^6.3.0",
+		"@storybook/addon-links": "^6.3.0",
+		"@storybook/react": "^6.3.0",
 		"@testing-library/jest-dom": "^5.11.5",
 		"@testing-library/react": "^11.1.1",
 		"@types/classnames": "^2.2.11",
