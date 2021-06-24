@@ -1,7 +1,7 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { always } from '@core';
-import { EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
-import { EDITOR_FONT_SIZE, EDITOR_THEME, EDITOR_VALUE } from './constants';
+import { EDITOR_OPTIONS as DEFAULT_EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
+import { EDITOR_OPTIONS, EDITOR_VALUE } from './constants';
 import { api } from './api';
 
 class EditorStore {
@@ -16,9 +16,8 @@ class EditorStore {
 	value = EDITOR_VALUE;
 
 	settings: EditorOptions = {
+		...DEFAULT_EDITOR_OPTIONS,
 		...EDITOR_OPTIONS,
-		theme: EDITOR_THEME,
-		fontSize: EDITOR_FONT_SIZE,
 	};
 
 	settingsVisible = false;

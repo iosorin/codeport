@@ -32,9 +32,11 @@ export type EditorOptions = CodeMirror.EditorConfiguration & {
 	theme?: typeof EDITOR_THEMES[number] | 'default';
 };
 
+export const EDITOR_THEME: EditorOptions['theme'] = 'darcula';
+
 export const EDITOR_OPTIONS: EditorOptions = {
 	mode: 'javascript',
-	theme: 'default',
+	theme: EDITOR_THEME,
 	tabSize: 4,
 	fontSize: 14,
 	indentUnit: 4,
