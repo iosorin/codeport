@@ -1,6 +1,6 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { Sidebar, Props } from '.';
 
@@ -10,4 +10,4 @@ export default {
 	decorators: [(story) => <MemoryRouter>{story()}</MemoryRouter>],
 } as Meta;
 
-export const Basic: Story<Props> = (args) => <Sidebar {...args} />;
+export const Template: Story<Props> = (args) => <Sidebar {...args} />;

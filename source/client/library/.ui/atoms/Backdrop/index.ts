@@ -1,1 +1,1 @@
-export { Backdrop, Props, DEFAULT_MS } from './Backdrop';
+export { Backdrop, Props } from './Backdrop';

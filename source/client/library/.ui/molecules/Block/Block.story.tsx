@@ -1,58 +1,24 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-
 import { Block, Props } from '.';
-// title
-// icon
-// small
+
 export default {
-	title: 'Atoms/Block',
+	title: 'Molecules/Block',
 	component: Block,
-	argTypes: {
-		size: {
-			control: {
-				type: 'inline-radio',
-				options: ['small', 'medium', 'large'],
-			},
-		},
-
-		background: {
-			control: {
-				type: 'inline-radio',
-				options: ['light', 'dark', 'primary', 'success'],
-			},
-		},
-
-		stretch: {
-			control: {
-				type: 'boolean',
-			},
-		},
-	},
 } as Meta;
 
-const Template: Story<Props> = (args) => <Block {...args} />;
+export const Template: Story<Props> = (args) => (
+	<Block {...args}>
+		<h3>Header</h3>
 
-export const Dark = Template.bind({});
-Dark.args = {
-	background: 'primary',
-	title: 'Block',
-};
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, consectetur natus
+			maxime magni animi eum dolore sit pariatur atque nihil est! Obcaecati, expedita consequuntur
+			laudantium consequatur aliquid ipsa eum, consectetur adipisci iusto molestiae possimus
+			perferendis reiciendis rem itaque cum totam minus nam maiores dicta! Quidem obcaecati
+			molestiae a sapiente quae?
+		</p>
+	</Block>
+);
 
-export const Success = Template.bind({});
-Success.args = {
-	background: 'success',
-	title: 'Block',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-	size: 'large',
-	title: 'Block',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-	size: 'small',
-	title: 'Block',
-};
+/* todo */

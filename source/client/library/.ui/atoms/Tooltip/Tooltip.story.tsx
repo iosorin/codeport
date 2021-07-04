@@ -1,6 +1,5 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-
+import { Meta, Story } from '@storybook/react/types-6-0';
 import { Tooltip, Props } from '.';
 
 export default {
@@ -8,13 +7,4 @@ export default {
 	component: Tooltip,
 } as Meta;
 
-const Template: Story<Props> = (args) => <Tooltip {...args}>activator</Tooltip>;
-
-export const Basic = Template.bind({});
-Basic.args = { content: 'Tooltip content' };
-
-export const Error = Template.bind({});
-Error.args = {
-	content: 'Error Tooltip',
-	error: true,
-};
+export const Template: Story<Props> = (args) => <Tooltip {...args}>activator</Tooltip>;

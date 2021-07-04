@@ -10,17 +10,13 @@ afterEach(cleanup);
 
 describe('<Tooltip />', () => {
 	it('renders without crashing', () => {
-		const { container } = render(
-			<Tooltip content={tooltipText}>{innerText}</Tooltip>
-		);
+		const { container } = render(<Tooltip text={tooltipText}>{innerText}</Tooltip>);
 
 		expect(container.firstChild).toBeInTheDocument();
 	});
 
 	it('renders children', () => {
-		const { getByText } = render(
-			<Tooltip content={tooltipText}>{innerText}</Tooltip>
-		);
+		const { getByText } = render(<Tooltip text={tooltipText}>{innerText}</Tooltip>);
 
 		const node = getByText(innerText);
 
@@ -28,9 +24,7 @@ describe('<Tooltip />', () => {
 	});
 
 	it('inserts "content" prop at html markup', () => {
-		const { container } = render(
-			<Tooltip content={tooltipText}>{innerText}</Tooltip>
-		);
+		const { container } = render(<Tooltip text={tooltipText}>{innerText}</Tooltip>);
 
 		expect(container.outerHTML.includes(tooltipText)).toBeTruthy();
 	});

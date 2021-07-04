@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC, memo } from 'react';
 import { Edit, X } from 'react-feather';
 import { Button } from '../../atoms';
@@ -8,15 +9,7 @@ export type Props = {
 	icon?: string | JSX.Element;
 	small?: string | number | JSX.Element | null;
 	size?: 'small' | 'medium' | 'large';
-	background?:
-		| 'light'
-		| 'grey'
-		| 'dark'
-		| 'black'
-		| 'primary'
-		| 'success'
-		| 'yellow'
-		| 'none';
+	background?: 'light' | 'grey' | 'dark' | 'black' | 'primary' | 'success' | 'yellow' | 'none';
 	color?: 'black' | 'white';
 	customBackground?: string;
 	flex?: boolean;
@@ -49,19 +42,6 @@ export const Block: FC<Props> = memo(
 		onClick,
 		children,
 	}) => {
-		const classlist = [
-			className,
-			styles.block,
-			styles[size],
-			styles[`color-${color}`],
-			styles[background],
-		];
-
-		if (flex) classlist.push(styles.flex);
-		if (hover) classlist.push(styles.hover);
-		if (styled) classlist.push(styles.styled);
-		if (Boolean(onClick)) classlist.push('pointer');
-
 		const controls = (
 			<div className={styles.controls}>
 				{onEdit && (
@@ -71,13 +51,7 @@ export const Block: FC<Props> = memo(
 				)}
 
 				{onRemove && (
-					<Button
-						rounded
-						hover
-						background='grey'
-						size='small'
-						onClick={onRemove}
-					>
+					<Button rounded hover background='grey' size='small' onClick={onRemove}>
 						<X size='17' />
 					</Button>
 				)}
@@ -86,7 +60,20 @@ export const Block: FC<Props> = memo(
 
 		return (
 			<div
-				className={classlist.join(' ')}
+				className={classNames(
+					className,
+					styles.block,
+					styles[size],
+					styles[`color-${color}`],
+					styles[background],
+					{
+						className,
+						pointer: Boolean(onClick),
+						[styles.flex]: flex,
+						[styles.hover]: hover,
+						[styles.styled]: styled,
+					}
+				)}
 				style={{ minHeight }}
 				onClick={onClick}
 			>

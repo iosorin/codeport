@@ -2,8 +2,6 @@ import React, { CSSProperties, FC, MouseEvent } from 'react';
 import { Transition } from '../Transition';
 import styles from './backdrop.scss';
 
-export const DEFAULT_MS = 380;
-
 export type Props = {
 	style?: CSSProperties;
 	visible?: boolean;
@@ -15,7 +13,7 @@ export const Backdrop: FC<Props> = ({
 	style = {},
 	visible = true,
 	children,
-	msToShow = DEFAULT_MS,
+	msToShow = 380,
 	onClick = () => {},
 }) => {
 	return (

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown } from 'react-feather';
 import { useOutsideClick } from '@hooks';
 
@@ -32,17 +32,11 @@ export const Select = <T,>({
 
 	const [ref] = useOutsideClick(() => setOpen(false));
 
-	const getValue = (option: T) =>
-		valueKey ? option[valueKey as keyof T] : option;
-	const getTitle = (option: T) =>
-		titleKey ? option[titleKey as keyof T] : option;
+	const getValue = (option: T) => (valueKey ? option[valueKey as keyof T] : option);
+	const getTitle = (option: T) => (titleKey ? option[titleKey as keyof T] : option);
 
 	return (
-		<div
-			ref={ref}
-			className={`${styles.select} ${open ? styles.isOpen : ''}`}
-			tabIndex={tabIndex}
-		>
+		<div ref={ref} className={`${styles.select} ${open ? styles.isOpen : ''}`} tabIndex={tabIndex}>
 			{label ? <div className='label'>{label}</div> : null}
 
 			<div className={styles.value} onClick={() => setOpen(!open)}>
