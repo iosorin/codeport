@@ -1,14 +1,10 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-
+import { Meta, Story } from '@storybook/react/types-6-0';
 import { Logo, Props } from '.';
 
 export default {
 	title: 'Atoms/Logo',
 	component: Logo,
-	argTypes: {
-		short: { control: 'boolean' },
-	},
 	parameters: {
 		backgrounds: {
 			default: 'dark',
@@ -17,4 +13,4 @@ export default {
 	},
 } as Meta;
 
-export const Basic: Story<Props> = (args) => <Logo {...args} />;
+export const Template: Story<Props> = (args) => <Logo {...args} />;

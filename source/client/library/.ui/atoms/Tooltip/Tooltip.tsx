@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
-
+import classNames from 'classnames';
 import styles from './tooltip.scss';
 
 export type Props = {
-	text: string | [string, string];
+	text: string;
 	textDone?: string;
 	left?: boolean;
 	center?: boolean;
@@ -28,14 +28,6 @@ export const Tooltip: FC<Props> = ({
 }) => {
 	const [content, setContent] = useState(text);
 
-	let classlist = [styles.tooltip, className];
-
-	if (left) classlist.push(styles.left);
-	if (center) classlist.push(styles.center);
-	if (bottom) classlist.push(styles.bottom);
-	if (error) classlist.push(styles.error);
-	if (disabled) classlist.push('disabled');
-
 	const handleClick = () => {
 		if (!onClick) return;
 
@@ -52,7 +44,14 @@ export const Tooltip: FC<Props> = ({
 
 	return (
 		<div
-			className={classlist.join(' ')}
+			className={classNames(styles.tooltip, {
+				className,
+				disabled,
+				[styles.error]: error,
+				[styles.left]: left,
+				[styles.center]: center,
+				[styles.bottom]: bottom,
+			})}
 			data-tooltip={content}
 			onClick={handleClick}
 		>

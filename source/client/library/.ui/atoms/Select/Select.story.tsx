@@ -1,37 +1,17 @@
-import { Meta, Story } from '@storybook/react/types-6-0';
 import React from 'react';
-
+import { Meta, Story } from '@storybook/react/types-6-0';
+import { EDITOR_THEMES } from '@/library/constants';
 import { Select, Props } from '.';
 
-const options = [
-	{ value: 'Option One' },
-	{ value: 'Option Two' },
-	{ value: 'Option Three' },
-];
-let selected = options[0].value;
-
-/* broken */
 export default {
 	title: 'Atoms/Select',
 	component: Select,
-	parameters: { actions: { argTypesRegex: '^on.*' } },
-	argTypes: {
-		options: {
-			defaultValue: options,
-			control: {
-				type: 'select',
-				options,
-			},
-		},
-		value: {
-			defaultValue: selected,
-		},
-	},
 } as Meta;
 
-export const Basic: Story<Props> = (args) => <Select {...args} />;
-Basic.args = {
-	onChange: (value) => {
-		selected = value;
-	},
+export const Template: Story<Props<string>> = (args) => <Select {...args} />;
+Template.args = {
+	label: 'THEME',
+	value: 'default',
+	options: EDITOR_THEMES,
+	onChange: (selected) => (Template.args.value = selected),
 };
