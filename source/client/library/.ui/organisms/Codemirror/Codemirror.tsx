@@ -5,7 +5,7 @@ import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/comment/comment';
 import 'codemirror/keymap/sublime';
 import './styles/index.shared.scss';
-import { EDITOR_OPTIONS, EditorOptions, HOTKEYS } from '@/library/constants';
+import { EDITOR_OPTIONS, EditorOptions, HOTKEYS } from '@constants';
 
 type Props = {
 	value: string;

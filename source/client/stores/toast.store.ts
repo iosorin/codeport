@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { debounce } from '@/library/utils';
+import { debounce } from '@utils';
 
 type Type = 'log' | 'success' | 'error';
 type Toast = {

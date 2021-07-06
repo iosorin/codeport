@@ -3,7 +3,7 @@ import { HomeView } from '@/views/Home';
 import { ActivityView } from '@/views/Activity';
 import { ResourcesView } from '@/views/Resourses';
 import { ExceptionView } from '@/views/Exception';
-import { uuid } from '@/library/utils';
+import { uuid } from '@utils';
 import { NotificationsView } from '@/views/Notifications';
 import { ScheduleView } from '@/views/Schedule';
 import { SnippetsView } from '@/views/Snippets';

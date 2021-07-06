@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import { EDITOR_THEMES } from '@/library/constants';
+import { EDITOR_THEMES } from '@constants';
 import { Select, Props } from '.';
 
 export default {
@@ -8,10 +8,25 @@ export default {
 	component: Select,
 } as Meta;
 
-export const Template: Story<Props<string>> = (args) => <Select {...args} />;
-Template.args = {
-	label: 'THEME',
-	value: 'default',
+export const Simple: Story<Props<string>> = (args) => <Select {...args} />;
+
+Simple.args = {
+	label: 'Options String',
 	options: EDITOR_THEMES,
-	onChange: (selected) => (Template.args.value = selected),
+	value: EDITOR_THEMES[0],
+};
+
+export const Advanced: Story<Props<typeof advancedOptions[0]>> = (args) => <Select {...args} />;
+
+let advancedOptions = [
+	{ name: 'bla 1', value: 1 },
+	{ name: 'bla 2', value: 2 },
+];
+
+Advanced.args = {
+	label: 'Options Objects',
+	titleKey: 'name',
+	valueKey: 'value',
+	value: advancedOptions[0],
+	options: [...advancedOptions],
 };

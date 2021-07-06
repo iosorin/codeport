@@ -15,7 +15,7 @@ export const HOTKEYS = {
 	},
 };
 
-export const EDITOR_THEMES = [
+const themes = [
 	'codeport',
 	'darcula',
 	'dracula',
@@ -24,6 +24,8 @@ export const EDITOR_THEMES = [
 	'monokai',
 	'material',
 ] as const;
+
+export const EDITOR_THEMES = [...themes];
 
 export type EditorOptions = CodeMirror.EditorConfiguration & {
 	fontSize?: number;
@@ -52,11 +54,4 @@ export const EDITOR_OPTIONS: EditorOptions = {
 	autocapitalize: true,
 };
 
-export const EVENTS_COLORS = [
-	'#ef476f',
-	'#ee7d62',
-	'#ffd166',
-	'#69fa8f',
-	'#7190ff',
-	'#a986ff',
-];
+export const EVENTS_COLORS = ['#ef476f', '#ee7d62', '#ffd166', '#69fa8f', '#7190ff', '#a986ff'];

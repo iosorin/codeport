@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { HOTKEYS } from '@/library/constants';
-import { useHotkey } from '@/library/hooks';
+import { HOTKEYS } from '@constants';
+import { useHotkey } from '@hooks';
 import { Codemirror } from '@ui';
 import { EditorSettings, EditorBar } from './.ui';
 import { Console } from './features/Console';
@@ -16,12 +16,7 @@ type Props = {
 export const Editor: FC<Props> = observer(({ roomID }) => {
 	useHotkey(HOTKEYS.EDITOR_SAVE_SNIPPET.key, (e) => e.preventDefault());
 	useHotkey(HOTKEYS.EDITOR_TOGGLE_SETTINGS.key, () => store.toggleSettings());
-	useHotkey(
-		HOTKEYS.EDITOR_TOGGLE_CONSOLE.key,
-		() => store.toggleConsole(),
-		true,
-		true
-	);
+	useHotkey(HOTKEYS.EDITOR_TOGGLE_CONSOLE.key, () => store.toggleConsole(), true, true);
 
 	useEffect(() => {
 		store.setRoomID(roomID);
@@ -29,9 +24,7 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 
 	const onChange = (editor: CodeMirror.Editor, change: any) => {
 		const newValue = editor.getValue();
-		const isKeydownEvent = /input|undo|redo|paste|delete|drag|compose|cut/.test(
-			change?.origin
-		);
+		const isKeydownEvent = /input|undo|redo|paste|delete|drag|compose|cut/.test(change?.origin);
 
 		if (isKeydownEvent) {
 			store.setValue(newValue, true);
@@ -39,10 +32,7 @@ export const Editor: FC<Props> = observer(({ roomID }) => {
 	};
 
 	return (
-		<div
-			className={styles.Editor}
-			style={{ fontSize: store.settings.fontSize }}
-		>
+		<div className={styles.Editor} style={{ fontSize: store.settings.fontSize }}>
 			<Codemirror
 				onChange={onChange}
 				onSave={store.saveSnippet}

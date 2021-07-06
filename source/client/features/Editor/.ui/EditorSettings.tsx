@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { SUPPORTED_LANGUAGES } from 'defaults';
 import { Select, Input, Dialog } from '@ui';
-import { EditorOptions, EDITOR_THEMES } from '@/library/constants';
+import { EditorOptions, EDITOR_THEMES } from '@constants';
 
 type Props = {
 	isOpen: boolean;
@@ -10,12 +10,7 @@ type Props = {
 	setSettings: (settings: EditorOptions) => void;
 };
 
-export const EditorSettings: FC<Props> = ({
-	settings,
-	isOpen,
-	toggleSettings,
-	setSettings,
-}) => {
+export const EditorSettings: FC<Props> = ({ settings, isOpen, toggleSettings, setSettings }) => {
 	return (
 		<Dialog
 			close={() => toggleSettings(false)}

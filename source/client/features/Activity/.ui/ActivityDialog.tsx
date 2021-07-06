@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import type { ActivityEvent } from 'types';
 import { Dialog, EventForm, Event, Block, Colors } from '@ui';
-import { date } from '@/library/utils';
+import { date } from '@utils';
 import { update } from 'utils';
 import { SnippetsCarousel } from '@/features/Snippets';
 
@@ -13,13 +13,7 @@ type Props = {
 	close: () => void;
 };
 
-export const ActivityDialog: FC<Props> = ({
-	visible,
-	loading,
-	details,
-	setDetails,
-	close,
-}) => {
+export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetails, close }) => {
 	const [editing, setEditing] = useState(false);
 
 	useEffect(() => {
@@ -84,9 +78,7 @@ export const ActivityDialog: FC<Props> = ({
 					<SnippetsCarousel
 						loading={loading}
 						snippets={details.snippets}
-						onSave={(snippet) =>
-							setDetails({ snippets: update(details.snippets, snippet) })
-						}
+						onSave={(snippet) => setDetails({ snippets: update(details.snippets, snippet) })}
 					/>
 				</div>
 			</div>

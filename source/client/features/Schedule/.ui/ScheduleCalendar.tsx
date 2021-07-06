@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Calendar } from '@ui';
 import { observer } from 'mobx-react-lite';
-import { date } from '@/library/utils';
+import { date } from '@utils';
 import { ScheduleStoreType } from '../store';
 
 type Props = {
@@ -19,19 +19,12 @@ export const ScheduleCalendar: FC<Props> = observer(({ store }) => {
 	}));
 
 	const openMarkedDay = (day: number) => {
-		const target = store.events.find((event) =>
-			date.match(event.date, day)
-		) ?? { date: day };
+		const target = store.events.find((event) => date.match(event.date, day)) ?? { date: day };
 
 		store.toggleDialog(target, true);
 	};
 
 	return (
-		<Calendar
-			dark
-			disableDates={isPastDay}
-			onClickDate={openMarkedDay}
-			markedDays={markedDays}
-		/>
+		<Calendar dark disableDates={isPastDay} onClickDate={openMarkedDay} markedDays={markedDays} />
 	);
 });

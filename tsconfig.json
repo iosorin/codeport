@@ -22,12 +22,13 @@
 		"paths": {
 			"@/*": ["source/client/*"],
 			"@core": ["source/client/core"],
-
-			"@ui/*": ["source/client/library/.ui/*"],
-			"@ui": ["source/client/library/.ui"],
-
-			"@hooks": ["source/client/library/hooks"],
 			"@services": ["source/client/services"],
+
+			"@ui": ["source/client/library/.ui"],
+			"@ui/*": ["source/client/library/.ui/*"],
+			"@hooks": ["source/client/library/hooks"],
+			"@utils": ["source/client/library/utils"],
+			"@constants": ["source/client/library/constants"],
 
 			"@media/*": ["source/client/media/*"],
 			"@styles/*": ["source/client/styles/*"],

@@ -4,7 +4,7 @@ import { Menu } from '../..';
 import { Color } from './Color';
 import { ColorLine } from './ColorLine';
 import styles from './colors.scss';
-import { EVENTS_COLORS } from '@/library/constants';
+import { EVENTS_COLORS } from '@constants';
 
 type Props = {
 	trigger?: 'button' | 'color' | 'line';
@@ -20,8 +20,7 @@ export const Colors: FC<Props> = ({
 	onChange,
 }) => {
 	const isSingle = Boolean(trigger);
-	const isActive = (color: string) =>
-		color.toLowerCase() === active.toLowerCase();
+	const isActive = (color: string) => color.toLowerCase() === active.toLowerCase();
 
 	const palette = () => {
 		return (
@@ -59,9 +58,5 @@ export const Colors: FC<Props> = ({
 		);
 	};
 
-	return isSingle ? (
-		<Menu trigger={openTrigger()}>{palette()}</Menu>
-	) : (
-		palette()
-	);
+	return isSingle ? <Menu trigger={openTrigger()}>{palette()}</Menu> : palette();
 };

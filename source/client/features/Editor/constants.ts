@@ -1,4 +1,4 @@
-import { EditorOptions } from '@/library/constants';
+import { EditorOptions } from '@constants';
 
 export const EDITOR_VALUE = `// 1. Implement a binary search algorithm.
 class BinarySearch {
