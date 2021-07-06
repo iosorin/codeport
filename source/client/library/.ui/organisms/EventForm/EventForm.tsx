@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useState } from 'react';
 import type { ActivityEvent } from 'types';
 import { EVENT_COLOR } from 'defaults';
 import { Input, Textarea, Colors, Button, Emojis } from '@ui';
-import { date } from '@/library/utils';
+import { date } from '@utils';
 
 type Event = Partial<ActivityEvent>;
 type EventOrNull = Event | null | undefined;

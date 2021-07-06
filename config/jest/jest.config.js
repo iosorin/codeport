@@ -13,8 +13,7 @@ module.exports = {
 	// using ts-jest
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
-		'^(?!.*\\.(js|jsx|ts|tsx|css|json)$)':
-			'<rootDir>/config/jest/fileTransform.js',
+		'^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest/fileTransform.js',
 	},
 
 	transformIgnorePatterns: [
@@ -32,12 +31,18 @@ module.exports = {
 
 	moduleNameMapper: {
 		'@/(.*)$': '<rootDir>/source/client/$1',
-		'@ui/(.*)$': '<rootDir>/source/client/library/.ui/$1',
-		'@ui(.*)$': '<rootDir>/source/client/library/.ui',
-		'@hooks(.*)$': '<rootDir>/source/client/library/hooks',
+		'@core(.*)$': '<rootDir>/source/client/core',
 		'@services(.*)$': '<rootDir>/source/client/library/services',
+
+		'@ui(.*)$': '<rootDir>/source/client/library/.ui',
+		'@ui/(.*)$': '<rootDir>/source/client/library/.ui/$1',
+		'@hooks(.*)$': '<rootDir>/source/client/library/hooks',
+		'@utils(.*)$': '<rootDir>/source/client/library/utils',
+		'@constants(.*)$': '<rootDir>/source/client/library/constants',
+
 		'@media/(.*)$': '<rootDir>/source/client/media/$1',
 		'@styles/(.*)$': '<rootDir>/source/client/styles/$1',
+
 		'contracts/(.*)$': '<rootDir>/source/shared/contracts/$1',
 		'types/(.*)$': '<rootDir>/source/shared/types/$1',
 		'defaults/(.*)$': '<rootDir>/source/shared/defaults/$1',

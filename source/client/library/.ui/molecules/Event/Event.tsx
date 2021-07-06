@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import type { ActivityEvent } from 'types';
-import { date } from '@/library/utils';
+import { date } from '@utils';
 import styles from './event.scss';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';

@@ -1,5 +1,5 @@
-import { debounce, ls } from '@/library/utils';
-import { EditorOptions } from '@/library/constants';
+import { debounce, ls } from '@utils';
+import { EditorOptions } from '@constants';
 
 const write = debounce(ls, 250);
 const title = process.env.TITLE;

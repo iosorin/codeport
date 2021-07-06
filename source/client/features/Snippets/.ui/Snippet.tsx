@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { Copy, Save } from 'react-feather';
 import type { Snippet as TSnippet } from 'types';
 import { Tooltip, Codemirror } from '@ui';
-import { copy } from '@/library/utils';
+import { copy } from '@utils';
 import styles from './snippet.scss';
-import { EditorOptions, EDITOR_THEME } from '@/library/constants';
+import { EditorOptions, EDITOR_THEME } from '@constants';
 
 type Props = {
 	snippet: TSnippet;
@@ -16,12 +16,7 @@ type Props = {
 
 const toCompare = (str: string) => JSON.stringify(str.trim());
 
-export const Snippet: FC<Props> = ({
-	snippet,
-	loading,
-	theme = EDITOR_THEME,
-	onSave,
-}) => {
+export const Snippet: FC<Props> = ({ snippet, loading, theme = EDITOR_THEME, onSave }) => {
 	const [content, setContent] = useState(snippet?.content || '');
 	const [contentTouched, setContentTouched] = useState(false);
 
@@ -40,22 +35,12 @@ export const Snippet: FC<Props> = ({
 
 	const controls = (
 		<div className={styles.controls}>
-			<Tooltip
-				text='Copy'
-				textDone='Copied'
-				className='opacity'
-				onClick={handleCopy}
-			>
+			<Tooltip text='Copy' textDone='Copied' className='opacity' onClick={handleCopy}>
 				<Copy size='14' />
 			</Tooltip>
 
 			{showSave && (
-				<Tooltip
-					text='Save'
-					textDone='Saved'
-					className='opacity ml-2'
-					onClick={handleSave}
-				>
+				<Tooltip text='Save' textDone='Saved' className='opacity ml-2' onClick={handleSave}>
 					<Save size='14' />
 				</Tooltip>
 			)}

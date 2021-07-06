@@ -1,4 +1,4 @@
-import { date, groupByProp, sortByProp } from '@/library/utils';
+import { date, groupByProp, sortByProp } from '@utils';
 import { ChevronDown, Edit3, Eye, MoreHorizontal, Trash } from 'react-feather';
 import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react';
 import styles from './table.scss';
@@ -176,10 +176,7 @@ export const Table: FC<Props> = ({
 			<tbody>
 				{source.map((item, itemIndex) => {
 					return (
-						<tr
-							key={(item.id as string) || itemIndex}
-							onClick={() => onTrClick?.(item)}
-						>
+						<tr key={(item.id as string) || itemIndex} onClick={() => onTrClick?.(item)}>
 							{num && <td className={styles.num}>{itemIndex + 1}</td>}
 
 							{color && (
@@ -211,10 +208,7 @@ export const Table: FC<Props> = ({
 				<tbody>
 					{items.map((item, index) => {
 						return (
-							<tr
-								key={(item.id as string) || index}
-								onClick={() => onTrClick?.(item)}
-							>
+							<tr key={(item.id as string) || index} onClick={() => onTrClick?.(item)}>
 								{labels?.map((label, index) => {
 									const renderLabel = label === groupBy ? index === 0 : true;
 
@@ -231,11 +225,7 @@ export const Table: FC<Props> = ({
 	};
 
 	return (
-		<table
-			className={`${styles.table} ${styles[background]} ${
-				onTrClick ? styles.clickable : ''
-			}`}
-		>
+		<table className={`${styles.table} ${styles[background]} ${onTrClick ? styles.clickable : ''}`}>
 			{caption && <caption>{caption}</caption>}
 
 			{renderThead()}

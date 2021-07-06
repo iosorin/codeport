@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { ChevronDown } from 'react-feather';
 import { useOutsideClick } from '@hooks';
-
 import styles from './select.scss';
-import classNames from 'classnames';
 
 export type Props<T> = {
 	label?: string;
-	value?: T;
-	valueKey?: string;
-	titleKey?: string;
+	value: T;
+	valueKey?: keyof T & string;
+	titleKey?: keyof T & string;
 	options: T[];
 	tabIndex?: number | undefined;
 	onChange: (value: T) => void;
@@ -20,27 +19,25 @@ export const Select = <T,>({
 	valueKey,
 	titleKey,
 	options = [],
-	tabIndex,
+	tabIndex = 1,
 	onChange,
 }: Props<T>): JSX.Element => {
 	const [open, setOpen] = useState(false);
+	const [ref] = useOutsideClick(() => setOpen(false));
+
+	const pick = (option: T, key?: keyof T) => (key ? option[key] : option);
 
 	const selectHandler = (option: T) => {
 		onChange(option);
 		setOpen(false);
 	};
 
-	const [ref] = useOutsideClick(() => setOpen(false));
-
-	const getValue = (option: T) => (valueKey ? option[valueKey as keyof T] : option);
-	const getTitle = (option: T) => (titleKey ? option[titleKey as keyof T] : option);
-
 	return (
 		<div ref={ref} className={`${styles.select} ${open ? styles.isOpen : ''}`} tabIndex={tabIndex}>
 			{label ? <div className='label'>{label}</div> : null}
 
 			<div className={styles.value} onClick={() => setOpen(!open)}>
-				<span>{value}</span>
+				<span>{pick(value, titleKey)}</span>
 
 				<span className='append'>
 					<ChevronDown size='16' />
@@ -53,8 +50,8 @@ export const Select = <T,>({
 				})}
 			>
 				{options.map((option, index) => {
-					const title = getTitle(option);
-					const selected = getValue(option) === value;
+					const title = pick(option, titleKey);
+					const selected = pick(option, valueKey) === pick(value, valueKey);
 
 					return (
 						<li

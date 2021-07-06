@@ -11,8 +11,8 @@ export default {
 
 export const Template: Story<Props> = (args) => <Button label='label' {...args} />;
 
-export const WithIcon: Story<Props> = () => (
-	<Button>
+export const WithIcon: Story<Props> = (args) => (
+	<Button {...args}>
 		<Home />
 	</Button>
 );

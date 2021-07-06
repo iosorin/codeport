@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import type { ScheduleEvent } from 'types';
-import { date, debounce, groupBy, randomEventColor } from '@/library/utils';
+import { date, debounce, groupBy, randomEventColor } from '@utils';
 import { api, Contract } from './api';
 
 type ScheduleEventOrNull = Partial<ScheduleEvent> | null | undefined;
@@ -24,17 +24,13 @@ class ScheduleStore {
 
 	get active() {
 		return this.group(
-			[...this.events]
-				.sort((a, b) => a.date - b.date)
-				.filter((event) => event.date >= Date.now())
+			[...this.events].sort((a, b) => a.date - b.date).filter((event) => event.date >= Date.now())
 		);
 	}
 
 	get expired() {
 		return this.group(
-			[...this.events]
-				.sort((a, b) => b.date - a.date)
-				.filter((event) => event.date < Date.now())
+			[...this.events].sort((a, b) => b.date - a.date).filter((event) => event.date < Date.now())
 		);
 	}
 
@@ -48,8 +44,7 @@ class ScheduleStore {
 	toggleDialog = (event?: ScheduleEventOrNull, visible?: boolean) => {
 		this.setDialogEvent(event);
 
-		this.dialogVisible =
-			typeof visible === 'boolean' ? visible : Boolean(event);
+		this.dialogVisible = typeof visible === 'boolean' ? visible : Boolean(event);
 	};
 
 	openDialog = () => this.toggleDialog(null, true);
@@ -82,8 +77,7 @@ class ScheduleStore {
 		return api.create(data).then(debounce(this.setEvents));
 	};
 
-	update = (data: Contract['update']) =>
-		api.update(data).then(debounce(this.setEvents));
+	update = (data: Contract['update']) => api.update(data).then(debounce(this.setEvents));
 
 	remove = (id: Contract['id']) => api.remove(id).then(this.setEvents);
 }

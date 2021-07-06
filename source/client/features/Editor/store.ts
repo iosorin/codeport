@@ -1,6 +1,6 @@
 import { autorun, makeAutoObservable } from 'mobx';
 import { always } from '@core';
-import { EDITOR_OPTIONS as DEFAULT_EDITOR_OPTIONS, EditorOptions } from '@/library/constants';
+import { EDITOR_OPTIONS as DEFAULT_EDITOR_OPTIONS, EditorOptions } from '@constants';
 import { EDITOR_OPTIONS, EDITOR_VALUE } from './constants';
 import { api } from './api';
 

@@ -10,7 +10,8 @@ export const emojiHero = () => {
 	return emojis[Math.floor(Math.random() * emojis.length)];
 };
 
-export const randomEventColor = () => EVENTS_COLORS[Math.floor(Math.random() * EVENTS_COLORS.length)];
+export const randomEventColor = () =>
+	EVENTS_COLORS[Math.floor(Math.random() * EVENTS_COLORS.length)];
 
 export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
 	const memory = new Map<string, R>();
@@ -20,7 +21,14 @@ export const memoize = <R, T extends (...args: any[]) => R>(f: T): T => {
 			memory.set(args.join(), f(...args));
 		}
 
-		return memory.get(args.join());
+		const memoized = memory.get(args.join());
+
+		if (process.env.NODE_ENV === 'development') {
+			// eslint-disable-next-line no-console
+			console.log('memoized value', memoized);
+		}
+
+		return memoized;
 	};
 
 	return g as T;
@@ -47,10 +55,7 @@ export const ls = (key: string, payload?: any, merge?: boolean) => {
 	return data;
 };
 
-export const debounce = <F extends (...args: any[]) => any>(
-	func: F,
-	wait = 300
-) => {
+export const debounce = <F extends (...args: any[]) => any>(func: F, wait = 300) => {
 	let timeout = 0;
 
 	return (...args: Parameters<F>): Promise<ReturnType<F>> =>
@@ -64,13 +69,12 @@ export const debounce = <F extends (...args: any[]) => any>(
 };
 
 // todo - memoize
-export const sortBy = (source: any[], prop: string, up = false) => source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
+export const sortBy = (source: any[], prop: string, up = false) =>
+	source.sort((a, b) => (up ? b[prop] - a[prop] : a[prop] - b[prop]));
 
 // todo - memoize
-export const reduceBy = <T>(
-	source: T[],
-	get: string | ((item: T) => string)
-) => source.reduce((total: { [key: string]: T[] }, item) => {
+export const reduceBy = <T>(source: T[], get: string | ((item: T) => string)) =>
+	source.reduce((total: { [key: string]: T[] }, item) => {
 		const prop = typeof get === 'string' ? get : get(item);
 
 		if (total[prop]) {
@@ -83,10 +87,7 @@ export const reduceBy = <T>(
 	}, {});
 
 // todo - memoize
-export const groupBy = <T>(
-	source: T[],
-	get: string | ((item: T) => string)
-) => {
+export const groupBy = <T>(source: T[], get: string | ((item: T) => string)) => {
 	const map: Map<string, T[]> = new Map();
 
 	source.forEach((item) => {
@@ -104,68 +105,54 @@ export const groupBy = <T>(
 };
 
 export const date = {
-	input: memoize(
-		(
-			d: Date | number | undefined,
-			type = 'datetime-local'
-		): string | number => {
-			if (!d) return '';
+	input: memoize((d: Date | number | undefined, type = 'datetime-local'): string | number => {
+		if (!d) return '';
 
-			const date = new Date(d);
+		const date = new Date(d);
 
-			date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
 
-			const lastChar = type === 'datetime-local' ? 16 : 10;
+		const lastChar = type === 'datetime-local' ? 16 : 10;
 
-			return date.toISOString().substring(0, lastChar);
-		}
-	),
+		return date.toISOString().substring(0, lastChar);
+	}),
 
 	fixed: memoize(
 		(date: Date | number = Date.now(), hours = 0) =>
 			new Date(new Date(date).setHours(hours, 0, 0, 0))
 	),
 
-	withoutTime: memoize(
-		(date: Date | number | string = Date.now(), join?: boolean) => {
-			date = new Date(date);
+	withoutTime: memoize((date: Date | number | string = Date.now(), join?: boolean) => {
+		date = new Date(date);
 
-			const arr = [date.getDate(), date.getMonth(), date.getFullYear()];
+		const arr = [date.getDate(), date.getMonth(), date.getFullYear()];
 
-			return join ? arr.join('-') : arr;
-		}
-	),
+		return join ? arr.join('-') : arr;
+	}),
 
 	match: memoize(
-		(
-			date1: Date | number | string,
-			date2: Date | number | string = Date.now()
-		): boolean =>
+		(date1: Date | number | string, date2: Date | number | string = Date.now()): boolean =>
 			date.withoutTime(date1, true) === date.withoutTime(date2, true)
 	),
 
-	diff: memoize(
-		(start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
-			const diff = start - end;
-			const date = new Date(diff);
+	diff: memoize((start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
+		const diff = start - end;
+		const date = new Date(diff);
 
-			const months = { value: date.getUTCMonth(), prefix: 'm' };
-			const days = { value: date.getUTCDate() - 1, prefix: 'd' };
-			const hours = { value: date.getUTCHours(), prefix: 'hr' };
-			const minutes = { value: date.getUTCMinutes(), prefix: 'min' };
+		const months = { value: date.getUTCMonth(), prefix: 'm' };
+		const days = { value: date.getUTCDate() - 1, prefix: 'd' };
+		const hours = { value: date.getUTCHours(), prefix: 'hr' };
+		const minutes = { value: date.getUTCMinutes(), prefix: 'min' };
 
-			if (diff < 0 || days.value > maxNearestDays) return 0;
+		if (diff < 0 || days.value > maxNearestDays) return 0;
 
-			return [months, days, hours, minutes]
-				.map((d) => (d.value ? `${d.value} ${d.prefix}` : null))
-				.filter((d) => d)
-				.join(', ');
-		}
-	),
+		return [months, days, hours, minutes]
+			.map((d) => (d.value ? `${d.value} ${d.prefix}` : null))
+			.filter((d) => d)
+			.join(', ');
+	}),
 
-	addDays: memoize((days: number, date = Date.now()) =>
-		date.setDate(date.getDate() + days)
-	),
+	addDays: memoize((days: number, date = Date.now()) => date.setDate(date.getDate() + days)),
 
 	getDates: memoize((start: Date, end: Date) => {
 		const dates = [];
@@ -180,25 +167,23 @@ export const date = {
 		return dates;
 	}),
 
-	when: memoize(
-		(d: Date | number | undefined, showTime = true, showDay = true) => {
-			if (!d) return '';
+	when: memoize((d: Date | number | undefined, showTime = true, showDay = true) => {
+		if (!d) return '';
 
-			const options: Intl.DateTimeFormatOptions = {
-				// hour12: true,
-			};
+		const options: Intl.DateTimeFormatOptions = {
+			// hour12: true,
+		};
 
-			if (showDay) {
-				options.month = 'long';
-				options.day = 'numeric';
-			}
-
-			if (showTime || !showDay) {
-				options.hour = 'numeric';
-				options.minute = 'numeric';
-			}
-
-			return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
+		if (showDay) {
+			options.month = 'long';
+			options.day = 'numeric';
 		}
-	),
+
+		if (showTime || !showDay) {
+			options.hour = 'numeric';
+			options.minute = 'numeric';
+		}
+
+		return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
+	}),
 };

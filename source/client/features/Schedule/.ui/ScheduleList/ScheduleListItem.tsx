@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Block, Colors, Event } from '@ui';
 import { observer } from 'mobx-react-lite';
 import type { ScheduleEvent } from 'types';
-import { date } from '@/library/utils';
+import { date } from '@utils';
 
 type Props = {
 	details: ScheduleEvent;
@@ -24,11 +24,7 @@ export const ScheduleListItem: FC<Props> = observer(
 				background='dark'
 				onEdit={() => toggleDialog(details)}
 				onRemove={() => toggleConfirmDialog(details)}
-				small={
-					startsIn ? (
-						<div className='h5 mt-xs text-grey'>Starts in {startsIn}</div>
-					) : null
-				}
+				small={startsIn ? <div className='h5 mt-xs text-grey'>Starts in {startsIn}</div> : null}
 				icon={<div className='h4 mt-xs'>{when}</div>}
 			>
 				<Colors
