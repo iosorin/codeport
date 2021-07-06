@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import classNames from 'classnames';
 import styles from './tooltip.scss';
 
-export type Props = {
+type Props = {
 	text: string;
 	textDone?: string;
 	left?: boolean;

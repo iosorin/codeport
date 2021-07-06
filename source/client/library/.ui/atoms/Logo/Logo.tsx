@@ -3,7 +3,7 @@ import logo from '@media/logo/9.svg';
 
 import styles from './logo.scss';
 
-export type Props = {
+type Props = {
 	short?: boolean;
 	className?: string;
 };

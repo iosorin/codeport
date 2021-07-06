@@ -1,10 +1,13 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react/types-6-0';
-import { Tooltip, Props } from '.';
+import { Tooltip as TooltipComponent } from '.';
 
 export default {
 	title: 'Atoms/Tooltip',
-	component: Tooltip,
-} as Meta;
+	component: TooltipComponent,
+};
 
-export const Template: Story<Props> = (args) => <Tooltip {...args}>activator</Tooltip>;
+export const Tooltip = (args) => <TooltipComponent {...args}>activator</TooltipComponent>;
+
+Tooltip.args = {
+	text: 'text',
+};

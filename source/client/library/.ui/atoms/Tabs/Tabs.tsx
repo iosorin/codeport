@@ -4,7 +4,7 @@ import styles from './tabs.scss';
 type Props<T> = {
 	active: T;
 	list: T[];
-	align: 'left' | 'center' | 'right';
+	align?: 'left' | 'center' | 'right';
 	bordered?: boolean;
 	dark?: boolean;
 	onChange: (tab: T) => void;

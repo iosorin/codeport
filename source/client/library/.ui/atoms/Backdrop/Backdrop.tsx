@@ -2,7 +2,7 @@ import React, { CSSProperties, FC, MouseEvent } from 'react';
 import { Transition } from '../Transition';
 import styles from './backdrop.scss';
 
-export type Props = {
+type Props = {
 	style?: CSSProperties;
 	visible?: boolean;
 	onClick?: (e: MouseEvent) => void;

@@ -1,8 +1,7 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
 import CSSTransition from 'react-transition-group/CSSTransition';
-
-import { Transition, DEFAULT_DURATION } from '.';
+import { cleanup, render } from '@testing-library/react';
+import { Transition } from '.';
 
 jest.mock('react-transition-group/CSSTransition', () => {
 	return jest.fn(() => null);
@@ -11,7 +10,7 @@ jest.mock('react-transition-group/CSSTransition', () => {
 afterEach(cleanup);
 
 const expectedCSSTransitionProps = {
-	timeout: DEFAULT_DURATION,
+	timeout: 400,
 	classNames: 'fade',
 	appear: true,
 	unmountOnExit: true,

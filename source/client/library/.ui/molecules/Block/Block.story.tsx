@@ -1,14 +1,13 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { Block, Props } from '.';
+import { Block as BlockComponent } from '.';
 
 export default {
 	title: 'Molecules/Block',
-	component: Block,
-} as Meta;
+	component: BlockComponent,
+};
 
-export const Template: Story<Props> = (args) => (
-	<Block {...args}>
+export const Block = (args) => (
+	<BlockComponent {...args}>
 		<h3>Header</h3>
 
 		<p>
@@ -18,7 +17,5 @@ export const Template: Story<Props> = (args) => (
 			perferendis reiciendis rem itaque cum totam minus nam maiores dicta! Quidem obcaecati
 			molestiae a sapiente quae?
 		</p>
-	</Block>
+	</BlockComponent>
 );
-
-/* todo */

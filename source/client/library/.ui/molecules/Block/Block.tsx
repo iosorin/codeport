@@ -4,7 +4,7 @@ import { Edit, X } from 'react-feather';
 import { Button } from '../../atoms';
 import styles from './block.scss';
 
-export type Props = {
+type Props = {
 	title?: string;
 	icon?: string | JSX.Element;
 	small?: string | number | JSX.Element | null;

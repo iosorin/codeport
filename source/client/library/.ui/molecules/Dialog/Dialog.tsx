@@ -5,7 +5,7 @@ import { useHotkey } from '@hooks';
 import { Backdrop, Transition } from '@ui';
 import styles from './dialog.scss';
 
-export type Props = {
+type Props = {
 	visible: boolean;
 	title?: string | boolean | JSX.Element | null;
 	closeIcon?: boolean;
@@ -36,11 +36,7 @@ export const Dialog: FC<Props> = ({
 	const dialog = () => {
 		return (
 			<>
-				<Backdrop
-					visible={visible}
-					onClick={() => !persistent && close()}
-					style={{ zIndex: 10 }}
-				/>
+				<Backdrop visible={visible} onClick={() => !persistent && close()} style={{ zIndex: 10 }} />
 
 				<div
 					aria-hidden

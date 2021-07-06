@@ -2,7 +2,8 @@ import { makeAutoObservable } from 'mobx';
 import { debounce } from '@utils';
 
 type Type = 'log' | 'success' | 'error';
-type Toast = {
+
+export type Toast = {
 	id: string;
 	message: string;
 	type: 'log' | 'success' | 'error';
@@ -12,7 +13,7 @@ type Toast = {
 const DEFAULT_TIMEOUT = 1500;
 
 export class ToastStore {
-	toasts: Toast[] = [];
+	list: Toast[] = [];
 
 	constructor() {
 		makeAutoObservable(this);
@@ -31,14 +32,14 @@ export class ToastStore {
 	};
 
 	private setToasts = (toasts: Toast[]) => {
-		this.toasts = toasts;
+		this.list = toasts;
 	};
 
 	private create(message: string, timeout = DEFAULT_TIMEOUT, type: Type) {
 		return debounce(() => {
 			const id = Math.random().toString();
 
-			this.toasts.push({ id, message, type, display: true });
+			this.list.push({ id, message, type, display: true });
 
 			setTimeout(() => {
 				this.destroy(id);
@@ -47,14 +48,14 @@ export class ToastStore {
 	}
 
 	private destroy(id: string) {
-		const toast = this.toasts.find((toast) => toast.id === id);
+		const toast = this.list.find((toast) => toast.id === id);
 
 		if (!toast) return;
 
 		toast.display = false;
 
 		setTimeout(() => {
-			this.setToasts(this.toasts.filter((toast) => toast.id !== id));
+			this.setToasts(this.list.filter((toast) => toast.id !== id));
 		}, 3000);
 	}
 }

@@ -1,1 +1,1 @@
-export { Loader, Props } from './Loader';
+export { Loader } from './Loader';

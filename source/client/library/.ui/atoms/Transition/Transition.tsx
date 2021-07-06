@@ -1,9 +1,6 @@
 import React, { cloneElement, useRef, FC, ReactElement } from 'react';
 import CSSTransition from 'react-transition-group/CSSTransition';
-
 import './transition.shared.scss';
-
-export const DEFAULT_DURATION = 300;
 
 export type Transition =
 	| 'fade'
@@ -13,17 +10,17 @@ export type Transition =
 	| 'slide-in-left'
 	| 'call-panel-slide';
 
-export type Props = {
+type Props = {
 	type?: Transition;
-	in: boolean | undefined | number;
-	duration?: number | string;
+	in: boolean;
+	duration?: number;
 	className?: string;
 	children: ReactElement;
 };
 
 export const Transition: FC<Props> = ({
 	type = 'fade',
-	duration = DEFAULT_DURATION,
+	duration = 300,
 	in: inProp,
 	children,
 	...props
@@ -34,10 +31,10 @@ export const Transition: FC<Props> = ({
 		<CSSTransition
 			appear
 			classNames={type}
-			in={Boolean(inProp)}
+			in={inProp}
 			mountOnEnter
 			nodeRef={ref}
-			timeout={+duration}
+			timeout={duration}
 			unmountOnExit
 			{...props}
 		>

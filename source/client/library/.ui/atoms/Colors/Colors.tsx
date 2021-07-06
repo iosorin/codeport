@@ -7,7 +7,7 @@ import styles from './colors.scss';
 import { EVENTS_COLORS } from '@constants';
 
 type Props = {
-	trigger?: 'button' | 'color' | 'line';
+	trigger?: 'button' | 'color' | 'line' | false;
 	size?: 'small' | 'medium' | 'large' | 'dot';
 	active: string;
 	onChange: (color: string) => Promise<any> | void;
