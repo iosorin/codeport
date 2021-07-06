@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-export type Props = {
+type Props = {
 	dur?: string;
 	size?: string | number;
 	color?: string;

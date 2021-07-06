@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useEffect, useRef } from 'react';
 
 import styles from './range.scss';
 
-export type Props = {
+type Props = {
 	value: number | undefined;
 	min?: string | number;
 	max?: string | number;

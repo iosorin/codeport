@@ -1,1 +1,1 @@
-export { Block, Props } from './Block';
+export { Block } from './Block';

@@ -2,7 +2,7 @@ export { Backdrop } from './Backdrop';
 export { Button } from './Button';
 export * from './Colors';
 export * from './Emojis';
-export { Input } from './Input/Input';
+export { Input } from './Input';
 export { Loader } from './Loader';
 export { Logo } from './Logo';
 export { Range } from './Range';

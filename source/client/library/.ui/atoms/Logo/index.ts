@@ -1,1 +1,1 @@
-export { Logo, Props } from './Logo';
+export { Logo } from './Logo';

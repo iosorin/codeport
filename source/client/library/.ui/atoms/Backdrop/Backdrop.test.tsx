@@ -28,9 +28,7 @@ describe('<Backdrop />', () => {
 	it('applies style prop', () => {
 		const color = 'red';
 
-		const { container } = render(
-			<Backdrop style={{ backgroundColor: color }} />
-		);
+		const { container } = render(<Backdrop style={{ backgroundColor: color }} />);
 
 		expect(container.firstChild).toHaveStyle(`background-color: ${color}`);
 	});

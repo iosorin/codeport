@@ -1,7 +1,7 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from '@core';
+import { Provider, always } from '@core';
 import { Toasts } from '@ui';
 import { Router } from '@/router';
 import './styles/app.scss';
@@ -11,7 +11,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Provider>
 				<Router />
-				<Toasts />
+				<Toasts toasts={always('toast').list} />
 			</Provider>
 		</BrowserRouter>
 	</StrictMode>,

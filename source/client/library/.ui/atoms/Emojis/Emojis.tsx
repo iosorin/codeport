@@ -9,12 +9,7 @@ type Props = {
 	onChange: (e: number) => void;
 };
 
-export const Emojis: FC<Props> = ({
-	value,
-	label,
-	size = 'small',
-	onChange,
-}) => {
+export const Emojis: FC<Props> = ({ value, label, size = 'small', onChange }) => {
 	return (
 		<div className={styles.container}>
 			{label ? <div className='label mb-xs'>{label}</div> : null}

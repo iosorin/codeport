@@ -1,8 +1,8 @@
-import { Loader } from '.';
+import { Colors } from '.';
 
 export default {
-	title: 'Atoms/Loader',
-	component: Loader,
+	title: 'Atoms/Colors',
+	component: Colors,
 	parameters: {
 		backgrounds: {
 			default: 'dark',
@@ -11,4 +11,4 @@ export default {
 	},
 };
 
-export { Loader };
+export { Colors };

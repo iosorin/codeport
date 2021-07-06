@@ -4,7 +4,7 @@ import { X } from 'react-feather';
 import { Backdrop, Transition } from '@ui';
 import styles from './drawer.scss';
 
-export type Props = {
+type Props = {
 	visible: boolean;
 	title?: string | boolean;
 	closeIcon?: boolean;
@@ -23,11 +23,7 @@ export const Drawer: FC<Props> = ({
 	const drawer = () => {
 		return (
 			<>
-				<Backdrop
-					visible={visible}
-					onClick={() => !persistent && hide()}
-					style={{ zIndex: 10 }}
-				/>
+				<Backdrop visible={visible} onClick={() => !persistent && hide()} style={{ zIndex: 10 }} />
 
 				<div
 					aria-hidden

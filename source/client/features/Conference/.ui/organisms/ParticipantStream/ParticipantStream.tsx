@@ -83,16 +83,9 @@ export const ParticipantStream: FC<Props> = observer(
 				</div>
 
 				{/* preview */}
-				<Transition
-					in={!streamID || loading || !constraints.video}
-					duration='400'
-				>
+				<Transition in={!streamID || loading || !constraints.video} duration={400}>
 					<div className={styles.preview}>
-						{!constraints.video ? (
-							<span className='slide-in-blurred-top'>👨‍🚀</span>
-						) : (
-							<Loader />
-						)}
+						{!constraints.video ? <span className='slide-in-blurred-top'>👨‍🚀</span> : <Loader />}
 					</div>
 				</Transition>
 

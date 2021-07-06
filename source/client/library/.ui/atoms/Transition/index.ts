@@ -1,1 +1,1 @@
-export { Transition, Props, DEFAULT_DURATION } from './Transition';
+export { Transition } from './Transition';
