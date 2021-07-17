@@ -3,7 +3,8 @@
 	width: 100%;
 	height: 100%;
 	font-size: inherit;
-	border-radius: $radius;
+	border-radius: $editor-radius;
+	padding: $editor-padding;
 
 	&-gutters {
 		border-right: 0px !important;

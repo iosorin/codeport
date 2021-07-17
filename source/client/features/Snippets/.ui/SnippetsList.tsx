@@ -8,23 +8,13 @@ type Props = {
 };
 
 export const SnippetsList: FC<Props> = ({ snippets }) => {
+	if (!snippets.length) return <div className='text-grey'>No snippets was saved</div>;
+
 	return (
-		<div className='flex-col fill'>
-			{snippets.length ? (
-				snippets.map((snippet) => (
-					<Block
-						key={snippet.id}
-						className='mb-2'
-						background='light'
-						flex
-						size='small'
-					>
-						<Snippet key={snippet.id} snippet={snippet} />
-					</Block>
-				))
-			) : (
-				<div className='text-grey'>No snippets was saved</div>
-			)}
+		<div className='flex flex-wrap fill'>
+			{snippets.map((snippet) => (
+				<Snippet key={snippet.id} className='my-2' snippet={snippet} />
+			))}
 		</div>
 	);
 };

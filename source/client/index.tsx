@@ -2,6 +2,7 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider, always } from '@core';
+import { Observer } from 'mobx-react-lite';
 import { Toasts } from '@ui';
 import { Router } from '@/router';
 import './styles/app.scss';
@@ -11,7 +12,8 @@ ReactDOM.render(
 		<BrowserRouter>
 			<Provider>
 				<Router />
-				<Toasts toasts={always('toast').list} />
+
+				<Observer>{() => <Toasts toasts={always('toast').list} />}</Observer>
 			</Provider>
 		</BrowserRouter>
 	</StrictMode>,

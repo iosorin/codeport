@@ -76,8 +76,9 @@ export const ActivityDialog: FC<Props> = ({ visible, loading, details, setDetail
 
 				<div className='flex-1 ml-1'>
 					<SnippetsCarousel
-						loading={loading}
 						snippets={details.snippets}
+						loading={loading}
+						light
 						onSave={(snippet) => setDetails({ snippets: update(details.snippets, snippet) })}
 					/>
 				</div>

@@ -14,9 +14,7 @@ export const create = async (
 ) => {
 	const snippets = await Snippets.create(req.body);
 
-	return res.status(201).json(snippets) as Response<
-		Contract['CREATE']['response']
-	>;
+	return res.status(201).json(snippets) as Response<Contract['CREATE']['response']>;
 };
 
 export const update = async (
@@ -28,10 +26,7 @@ export const update = async (
 	return res.json(snippets) as Response<Contract['UPDATE']['response']>;
 };
 
-export const remove = async (
-	req: Request<Contract['REMOVE']['params']>,
-	res: Response
-) => {
+export const remove = async (req: Request<Contract['REMOVE']['params']>, res: Response) => {
 	const snippets = await Snippets.remove(req.params.id);
 
 	return res.json(snippets) as Response<Contract['REMOVE']['response']>;
