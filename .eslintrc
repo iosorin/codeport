@@ -33,6 +33,8 @@
 		"arrow-body-style": [2, "as-needed"],
 		"prefer-const": 1,
 		"prefer-spread": 1,
+		"prefer-template": 2,
+		"no-template-curly-in-string": 2,
 
 		"import/order": 2,
 		"import/extensions": [

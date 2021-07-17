@@ -11,6 +11,7 @@ type Props = {
 	value: string;
 	options?: EditorOptions;
 	allowEmptySave?: boolean;
+	className?: string;
 	onChange: (editor: CodeMirror.Editor, change: any) => void;
 	onSave?: (selected: string) => void;
 };
@@ -19,6 +20,7 @@ export const Codemirror: FC<Props> = ({
 	value,
 	options: optionsProp = {},
 	allowEmptySave,
+	className,
 	onChange,
 	onSave,
 }) => {
@@ -40,7 +42,7 @@ export const Codemirror: FC<Props> = ({
 	};
 
 	return (
-		<div className='fill' style={{ fontSize: options.fontSize }}>
+		<div className={`fill ${className}`} style={{ fontSize: options.fontSize }}>
 			<ReactCodemirror value={value} options={options} onChange={onChange} />
 		</div>
 	);

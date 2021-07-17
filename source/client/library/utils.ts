@@ -122,17 +122,19 @@ export const date = {
 			new Date(new Date(date).setHours(hours, 0, 0, 0))
 	),
 
-	withoutTime: memoize((date: Date | number | string = Date.now(), join?: boolean) => {
+	withoutTime: memoize((date: Date | number | string = Date.now(), join = '.') => {
 		date = new Date(date);
+
+		if (join === '.') return date.toLocaleDateString();
 
 		const arr = [date.getDate(), date.getMonth(), date.getFullYear()];
 
-		return join ? arr.join('-') : arr;
+		return join ? arr.join(join) : arr;
 	}),
 
 	match: memoize(
 		(date1: Date | number | string, date2: Date | number | string = Date.now()): boolean =>
-			date.withoutTime(date1, true) === date.withoutTime(date2, true)
+			date.withoutTime(date1) === date.withoutTime(date2)
 	),
 
 	diff: memoize((start: number, maxNearestDays = 1, end = Date.now()): string | 0 => {
@@ -167,23 +169,29 @@ export const date = {
 		return dates;
 	}),
 
-	when: memoize((d: Date | number | undefined, showTime = true, showDay = true) => {
-		if (!d) return '';
+	when: memoize(
+		(d: Date | number | undefined, showTime = true, showDay = true, showYear = false) => {
+			if (!d) return '';
 
-		const options: Intl.DateTimeFormatOptions = {
-			// hour12: true,
-		};
+			const options: Intl.DateTimeFormatOptions = {
+				// hour12: true,
+			};
 
-		if (showDay) {
-			options.month = 'long';
-			options.day = 'numeric';
+			if (showDay) {
+				options.month = 'long';
+				options.day = 'numeric';
+			}
+
+			if (showTime || !showDay) {
+				options.hour = 'numeric';
+				options.minute = 'numeric';
+			}
+
+			if (showYear) {
+				options.year = 'numeric';
+			}
+
+			return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
 		}
-
-		if (showTime || !showDay) {
-			options.hour = 'numeric';
-			options.minute = 'numeric';
-		}
-
-		return new Intl.DateTimeFormat(undefined, options).format(new Date(d));
-	}),
+	),
 };

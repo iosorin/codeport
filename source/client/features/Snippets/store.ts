@@ -19,11 +19,9 @@ export class SnippetsStore {
 
 	fetch = () => api.get().then(this.setSnippets);
 
-	create = (data: Contract['create']) =>
-		api.create(data).then(this.setSnippets);
+	create = (data: Contract['create']) => api.create(data).then(this.setSnippets);
 
-	update = (data: Contract['update']) =>
-		api.update(data).then(this.setSnippets);
+	update = (data: Contract['update']) => api.update(data).then(this.setSnippets);
 
 	remove = (id: Contract['id']) => api.remove(id).then(this.setSnippets);
 }
