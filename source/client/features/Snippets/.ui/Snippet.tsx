@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Copy, Save } from 'react-feather';
 import type { Snippet as TSnippet } from 'types';
 import { Tooltip, Codemirror } from '@ui';
-import { copy, date } from '@utils';
+import { copy, date, isEqual } from '@utils';
 import styles from './snippet.scss';
 import { EditorOptions, EDITOR_THEME } from '@constants';
 
@@ -14,10 +14,9 @@ type Props = {
 	theme?: EditorOptions['theme'];
 	className?: string;
 	style?: CSSProperties;
+	copyable?: boolean;
 	onSave?: (snippet: TSnippet) => void | Promise<void>;
 };
-
-const toCompare = (str: string) => JSON.stringify(str.trim());
 
 export const Snippet: FC<Props> = ({
 	snippet,
@@ -26,43 +25,58 @@ export const Snippet: FC<Props> = ({
 	theme = light ? 'default' : EDITOR_THEME,
 	className = '',
 	style,
+	copyable: showCopy = true,
 	onSave,
 }) => {
-	const [content, setContent] = useState(snippet?.content || '');
+	const [content, setContent] = useState(snippet.content);
 	const [contentTouched, setContentTouched] = useState(false);
 
 	const showSave = Boolean(onSave) && (contentTouched || loading);
 
 	useEffect(() => {
-		setContentTouched(toCompare(content) !== toCompare(snippet.content));
+		setContentTouched(!isEqual(content, snippet.content));
 	}, [content]);
 
 	const handleSave = () => {
-		onSave?.({ ...snippet, content });
-		setContentTouched(false);
+		onSave!({ ...snippet, content });
+
+		setTimeout(() => {
+			setContentTouched(false);
+		}, 300);
 	};
 
 	const handleCopy = () => copy(snippet.content);
 
-	const header = (
-		<div className={styles.header}>
+	const name = (
+		<div>
 			{snippet.title || 'Untitled'} / {date.withoutTime(snippet.date)}
 		</div>
 	);
 
-	const footer = (
-		<div className={styles.footer}>
-			<Tooltip text='Copy' textDone='Copied' className='opacity' onClick={handleCopy}>
-				<Copy size='14' />
-			</Tooltip>
-
+	const actions = (
+		<div className={styles.actions}>
 			{showSave && (
-				<Tooltip text='Save' textDone='Saved' className='opacity ml-2' onClick={handleSave}>
-					<Save size='14' />
+				<Tooltip text='Save' textDone='Saved' className='mr-2' center onClick={handleSave}>
+					<Save size='16' />
+				</Tooltip>
+			)}
+
+			{showCopy && (
+				<Tooltip text='Copy' textDone='Copied' center onClick={handleCopy}>
+					<Copy size='16' />
 				</Tooltip>
 			)}
 		</div>
 	);
+
+	const header = (
+		<div className={styles.header}>
+			{name}
+			{actions}
+		</div>
+	);
+
+	if (!content) return null;
 
 	return (
 		<div
@@ -83,8 +97,6 @@ export const Snippet: FC<Props> = ({
 						theme,
 					}}
 				/>
-
-				{/* {footer} */}
 			</div>
 		</div>
 	);

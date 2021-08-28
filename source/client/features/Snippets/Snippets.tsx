@@ -12,7 +12,7 @@ export const Snippets: FC = observer(() => {
 
 	return (
 		<div>
-			<div className='h3'>Total: {store.snippets.length}</div>
+			{/* <div className='h3'>Total: {store.snippets.length}</div> */}
 
 			<SnippetsList snippets={store.snippets} />
 		</div>

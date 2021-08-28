@@ -195,3 +195,11 @@ export const date = {
 		}
 	),
 };
+
+export const isEqual = (a: any, b: any) => {
+	if (typeof a === 'object' && b === 'object') {
+		return JSON.stringify(a) === JSON.stringify(b);
+	}
+
+	return a === b;
+};

@@ -44,14 +44,16 @@ export const Tooltip: FC<Props> = ({
 
 	return (
 		<div
-			className={classNames(styles.tooltip, {
-				className,
-				disabled,
-				[styles.error]: error,
-				[styles.left]: left,
-				[styles.center]: center,
-				[styles.bottom]: bottom,
-			})}
+			className={classNames(
+				styles.tooltip,
+				`${{
+					disabled,
+					[styles.error]: error,
+					[styles.left]: left,
+					[styles.center]: center,
+					[styles.bottom]: bottom,
+				}} ${className}`
+			)}
 			data-tooltip={content}
 			onClick={handleClick}
 		>
