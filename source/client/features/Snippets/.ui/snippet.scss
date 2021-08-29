@@ -16,8 +16,6 @@
 		right: 0;
 		z-index: 1;
 
-		display: flex;
-		align-items: center;
 		justify-content: space-between;
 
 		background: rgba(white, 0.03);
@@ -31,11 +29,19 @@
 		line-height: 0;
 	}
 
+	.header,
+	.name,
 	.actions {
 		display: flex;
 		align-items: center;
 	}
 
+	// .name {
+	// 	span {
+	// 		max-width: 100px;
+	// 		@include text-truncate;
+	// 	}
+	// }
 	.editor {
 		textarea + div {
 			border: 1px solid $black-lighten;

@@ -1,8 +1,8 @@
 import React, { CSSProperties, FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Copy, Save } from 'react-feather';
+import { Check, Copy, Edit3, Save } from 'react-feather';
 import type { Snippet as TSnippet } from 'types';
-import { Tooltip, Codemirror } from '@ui';
+import { Tooltip, Codemirror, Input } from '@ui';
 import { copy, date, isEqual } from '@utils';
 import styles from './snippet.scss';
 import { EditorOptions, EDITOR_THEME } from '@constants';
@@ -30,6 +30,8 @@ export const Snippet: FC<Props> = ({
 }) => {
 	const [content, setContent] = useState(snippet.content);
 	const [contentTouched, setContentTouched] = useState(false);
+	const [isNameEditing, setIsNameEditing] = useState(false);
+	const [title, setTitle] = useState(snippet.title || 'Untitled');
 
 	const showSave = Boolean(onSave) && (contentTouched || loading);
 
@@ -47,22 +49,42 @@ export const Snippet: FC<Props> = ({
 
 	const handleCopy = () => copy(snippet.content);
 
+	// todo - stay
 	const name = (
-		<div>
-			{snippet.title || 'Untitled'} / {date.withoutTime(snippet.date)}
+		<div className={`hover ${styles.name}`}>
+			{isNameEditing ? (
+				<>
+					<Input value={title} inline onChange={(e) => setTitle(e.currentTarget.value)} />
+					<Check size='16' className='ml-2 pointer' onClick={() => setIsNameEditing(false)} />
+				</>
+			) : (
+				<span className='text-truncate'>{title} / </span>
+			)}
+
+			{date.withoutTime(snippet.date)}
+
+			{isNameEditing ? (
+				<Check size='16' className='ml-2 pointer' onClick={() => setIsNameEditing(false)} />
+			) : (
+				<Edit3
+					size='16'
+					className='hover-target ml-2 pointer'
+					onClick={() => setIsNameEditing(true)}
+				/>
+			)}
 		</div>
 	);
 
 	const actions = (
 		<div className={styles.actions}>
 			{showSave && (
-				<Tooltip text='Save' textDone='Saved' className='mr-2' center onClick={handleSave}>
+				<Tooltip text='Save' textDone='Saved' className='opacity mr-2' center onClick={handleSave}>
 					<Save size='16' />
 				</Tooltip>
 			)}
 
 			{showCopy && (
-				<Tooltip text='Copy' textDone='Copied' center onClick={handleCopy}>
+				<Tooltip text='Copy' textDone='Copied' className='opacity' center onClick={handleCopy}>
 					<Copy size='16' />
 				</Tooltip>
 			)}
