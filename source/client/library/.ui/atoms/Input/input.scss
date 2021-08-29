@@ -24,4 +24,16 @@
 			@include dark;
 		}
 	}
+
+	&.inline {
+		margin: 0;
+		width: auto;
+
+		input {
+			padding: 0;
+			background: none !important;
+			color: inherit;
+			width: auto;
+		}
+	}
 }
